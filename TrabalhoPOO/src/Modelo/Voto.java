@@ -3,25 +3,21 @@ package Modelo;
 import java.util.Date;
 
 public class Voto {
-	private Eleitor Eleitor;
-	private Candidato Candidato;
-	private Date Data;
+	private Eleitor eleitor;
+	private Candidato candidato;
+	private Date data;
 	private int NumeroUrna;
 
 	public Eleitor getEleitor() {
-		return Eleitor;
+		return eleitor;
 	}
-	private void setEleitor(Eleitor eleitor) {
-		Eleitor = eleitor;
-	}
+
 	public Candidato getCandidato() {
-		return Candidato;
+		return candidato;
 	}
-	private void setCandidato(Candidato candidato) {
-		Candidato = candidato;
-	}
+	
 	public Date getData() {
-		return Data;
+		return data;
 	}
 
 	public int getNumeroUrna() {
@@ -32,11 +28,7 @@ public class Voto {
 	}
 	
 	public Voto(Eleitor Eleitor,Candidato Candidato,int NumeroUrna) {
-		Data=new Date();
-	}
-	public Voto() {
-		Data=new Date();
-		
+		data=new Date();
 	}
 	
 }
