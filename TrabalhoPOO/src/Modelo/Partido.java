@@ -3,20 +3,24 @@ package Modelo;
 import java.util.Date;
 
 public class Partido {
+	private static int TotalPartidos=0;
 	private String Nome;
 	private int Numero;
 	private Date DataCadastro;
 	
 	public Partido() {
-		Partido("Não cadastrado",-1);
+		this("Não cadastrado",-1);
 	}
-
 	public Partido(String nome,int numero) {
 		setNome(nome);
 		setNumero(numero);
 		DataCadastro=new Date();
+		TotalPartidos++;
 		
 	}
+	
+	
+
 	
 	public Date getDataCadastro() {
 		return DataCadastro;
