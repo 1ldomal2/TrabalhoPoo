@@ -29,7 +29,7 @@ public class Eleitor {
 		Documentos c=new Documentos();
 		c.validaCpf(cpf);
 		if(c.getValidCpf()==true) {
-			Cpf = c;
+			this.Cpf = c;
 		}
 	}
 	
@@ -52,6 +52,46 @@ public class Eleitor {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public Eleitor(String TituloEleitor,String Nome, Documentos Cpf,int UrnaVotacao,Senha ImagemSenha) {
+		this.TituloEleitor=TituloEleitor;
+		this.Nome=Nome;
+		this.Cpf=Cpf;
+		this.UrnaVotacao=UrnaVotacao;
+		this.ImagemSenha=ImagemSenha;
+	}
+	public Eleitor(String TituloEleitor,String Nome, String Cpf,int UrnaVotacao,Senha ImagemSenha) {
+		this.TituloEleitor=TituloEleitor;
+		this.Nome=Nome;
+		this.Cpf=new Documentos(Cpf);
+		this.UrnaVotacao=UrnaVotacao;
+		this.ImagemSenha=ImagemSenha;
+	}
+	public Eleitor(String TituloEleitor,String Nome, String Cpf,int UrnaVotacao,String ImagemSenha) throws NoSuchAlgorithmException, IOException {
+		this.TituloEleitor=TituloEleitor;
+		this.Nome=Nome;
+		this.Cpf=new Documentos(Cpf);
+		this.UrnaVotacao=UrnaVotacao;
+		this.ImagemSenha=new Senha(ImagemSenha);
+	}
+	public Eleitor(String TituloEleitor,String Nome, Documentos Cpf,int UrnaVotacao,String ImagemSenha) throws NoSuchAlgorithmException, IOException {
+		this.TituloEleitor=TituloEleitor;
+		this.Nome=Nome;
+		this.Cpf=Cpf;
+		this.UrnaVotacao=UrnaVotacao;
+		this.ImagemSenha=new Senha(ImagemSenha);
+	}
 	
 	
 }
