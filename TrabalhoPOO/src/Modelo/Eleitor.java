@@ -53,17 +53,7 @@ public class Eleitor {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 	public Eleitor(String TituloEleitor,String Nome, Documentos Cpf,int UrnaVotacao,Senha ImagemSenha) {
 		this.TituloEleitor=TituloEleitor;
 		this.Nome=Nome;
