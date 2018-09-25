@@ -3,17 +3,15 @@ package Modelo;
 public class Candidato {
 	private String Nome;
 	private int Numero;
-	private String Cpf;
+	private Documentos Cpf;
 	private Partido Partido;
 	
 	public Candidato(String Nome,int Numero,String Cpf,Partido partido){
-		this.Nome=Nome;
-		this.Numero=Numero;
-		this.Partido=partido;
-		Documentos cpf=new Documentos(Cpf);
-		this.Cpf=cpf.toString();
-		
-		
+		if(setCpf(Cpf)) {
+			this.Nome=Nome;
+			this.Numero=Numero;
+			this.Partido=partido;
+		}
 	}
 	
 	public String getNome() {
@@ -28,12 +26,16 @@ public class Candidato {
 	public void setNumero(int numero) {
 		Numero = numero;
 	}
-	public String getCpf() {
-		return Cpf;
+	public boolean setCpf(String cpf) {
+		Documentos doc=new Documentos();
+		if(doc.validaCpf(cpf)) {//So muda se o cpf passado for valido
+			this.Cpf = doc;
+			return true;
+		}
+		return false;
 	}
-	public void setCpf(String cpf) {
-		Documentos doc=new Documentos(Cpf);
-		this.Cpf=doc.toString();
+	public Documentos getCpf() {
+		return Cpf;
 	}
 	public Partido getPartido() {
 		return Partido;

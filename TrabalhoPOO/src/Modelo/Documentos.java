@@ -248,4 +248,11 @@ public class Documentos {
 	public String toStringPonto(){
 		return noFormated;		
 	}
+	public boolean equals(String cpf){//Verifica se é igual formatado ou não
+		if(cpf.equals(formated)||cpf.equals(noFormated)) {
+			return true;	
+		}
+		return false;
+	}
+	
 }

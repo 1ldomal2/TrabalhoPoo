@@ -30,10 +30,5 @@ public class Voto {
 	public Voto(Eleitor Eleitor,Candidato Candidato,int NumeroUrna) {
 		data=new Date();
 	}
-	public Voto(String Eleitor,String Candidato,int NumeroUrna) {//Como Fazer para buscar ?
-		this.Eleitor;
-		this.Canddato;
-		data=new Date();
-	}
 	
 }

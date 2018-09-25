@@ -26,9 +26,9 @@ public class Eleitor {
 	}
 	
 	public void setCpf(String cpf) {
-		Documentos c=new Documentos();
-		if(c.validaCpf(cpf)) {//So muda se o cpf passado for valido
-			this.Cpf = c;
+		Documentos doc=new Documentos();
+		if(doc.validaCpf(cpf)) {//So muda se o cpf passado for valido
+			this.Cpf = doc;
 		}
 	}
 	

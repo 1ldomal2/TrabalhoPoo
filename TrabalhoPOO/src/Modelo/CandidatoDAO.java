@@ -29,7 +29,9 @@ public class CandidatoDAO {
 	}
 
 	public void DeletaCandidato(Candidato candidato) {
-
+		if(candidato ==null) {//evita erro
+			return;
+		}
 		if (TotalCandidatos != 0) {
 			for (int i = 0; i < TotalCandidatos; i++) {
 				if (CandidatoArray[i] == candidato) {
@@ -74,7 +76,7 @@ public class CandidatoDAO {
 	public Candidato ObjectNumero(int numero) {
 		for (int i = 0; i < TotalCandidatos; i++) {
 			if (CandidatoArray[i].getNumero() == numero) {
-				return CandidatoArray[i];// Retorna o indice do candidato com Numero procurado
+				return CandidatoArray[i];// Retorna o candidato com Numero procurado
 			}
 		}
 		return null;// Não achou
@@ -91,7 +93,7 @@ public class CandidatoDAO {
 
 		for (int i = 0; i < TotalCandidatos; i++) {
 			if (CandidatoArray[i].getCpf().equals(cpf)) {
-				return CandidatoArray[i];// Retorna o indice do candidato com Numero procurado
+				return CandidatoArray[i];// Retorna o candidato com Numero procurado
 			}
 		}
 		return null;// Não achou

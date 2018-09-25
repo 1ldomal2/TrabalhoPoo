@@ -32,7 +32,9 @@ public class EleitorDAO {
 	}
 
 	public void DeletaEleitor(Eleitor eleitor) {
-
+		if(eleitor==null) {//Evita erro 
+			return;
+		}
 		if (TotalEleitores != 0) {
 			for (int i = 0; i < TotalEleitores; i++) {
 				if (EleitorArray[i] == eleitor) {
@@ -46,5 +48,26 @@ public class EleitorDAO {
 		}
 
 	}
+	//Buscar por titulo e por cpf
+	public Eleitor ObjectTitulo(String titulo) {
+		for (int i = 0; i < TotalEleitores; i++) {
+			if (EleitorArray[i].getTituloEleitor().equals(titulo)) {
+				return EleitorArray[i];// Retorna o eleitor com Numero Titulo de eleitor procurado
+			}
+		}
+		return null;// Não achou
+
+	}
+	
+	public Eleitor ObjectCpf(String cpf) {
+		for (int i = 0; i < TotalEleitores; i++) {
+			if (EleitorArray[i].getCpf().equals(cpf)) {
+				return EleitorArray[i];// Retorna o eleitor com cpf procurado
+			}
+		}
+		return null;// Não achou
+
+	}
+
 
 }
