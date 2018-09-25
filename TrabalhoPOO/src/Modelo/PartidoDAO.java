@@ -7,25 +7,27 @@ public class PartidoDAO {
 	private Partido[] Array = new Partido[TAMANHO];
 	private Partido celulaVetor = null;
 
-	public void CriarPartido(String Nome, int Numero) {
+	public boolean CriarPartido(String Nome, int Numero) {
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Partido(Nome, Numero ) ;
 			if (celulaVetor != null) {//Evita "lixo" no array
 				Array[Total] = this.celulaVetor;
 				Total++;
+				return true;
 			}
 		}
-		return;
+		return false;
 
 	}
 
-	public void CriarPartido(Partido partido) {
+	public boolean CriarPartido(Partido partido) {
 		if (Total <= TAMANHO && partido != null) {//Evita estourar Array e "lixo" no array
 			this.celulaVetor = partido;
 			Array[Total] = this.celulaVetor;
 			Total++;
+			return true;
 		}
-		return;
+		return false;
 
 	}
 
@@ -71,6 +73,6 @@ public class PartidoDAO {
 			}
 		}
 		return null;// Não achou
-
 	}
+	
 }

@@ -42,8 +42,8 @@ public class Eleitor {
 	public int getUrnaVotacao() {
 		return UrnaVotacao;
 	}
-	//Provavelmente cancelar esse metodo pois deixa vuneravel
-	public void setImagemSenha(Senha imagemSenha) {//Ja passa a senha para a pessoa
+	
+	public void setImagemSenha(Senha imagemSenha){//Provavelmente cancelar esse metodo pois deixa vuneravel
 		this.ImagemSenha = imagemSenha;
 	}
 	public void setImagemSenha(String Path) throws NoSuchAlgorithmException, IOException {//Passa o caminho do arquivo
@@ -52,7 +52,10 @@ public class Eleitor {
 	
 	
 	
-		
+	
+	
+	
+	//Depois tem que apagar alguns desses construtores
 	public Eleitor(String TituloEleitor,String Nome, Documentos Cpf,int UrnaVotacao,Senha ImagemSenha) {
 		this.TituloEleitor=TituloEleitor;
 		this.Nome=Nome;
@@ -80,6 +83,9 @@ public class Eleitor {
 		this.Cpf=Cpf;
 		this.UrnaVotacao=UrnaVotacao;
 		this.ImagemSenha=new Senha(ImagemSenha);
+	}
+	public Eleitor() {
+		// TODO Auto-generated constructor stub
 	}
 	
 }

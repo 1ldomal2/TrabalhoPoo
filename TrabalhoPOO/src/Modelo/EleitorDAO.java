@@ -9,25 +9,27 @@ public class EleitorDAO {
 	private Eleitor[] EleitorArray = new Eleitor[TAMANHO];
 	private Eleitor celulaVetor = null;
 
-	public void CriarEleitor(String TituloEleitor, String Nome, String Cpf, int UrnaVotacao, String Path) throws NoSuchAlgorithmException, IOException {
+	public boolean CriarEleitor(String TituloEleitor, String Nome, String Cpf, int UrnaVotacao, String Path) throws NoSuchAlgorithmException, IOException {
 		if (TotalEleitores <= TAMANHO) {// Evita estourar Array
 			this.celulaVetor = new Eleitor(TituloEleitor, Nome, Cpf, UrnaVotacao, Path);
 			if (celulaVetor != null) {// Evita "lixo" no array
 				EleitorArray[TotalEleitores] = this.celulaVetor;
 				TotalEleitores++;
+				return true;
 			}
 		}
-		return;
+		return false;
 
 	}
 
-	public void CriarEleitor(Eleitor eleitor) {
+	public boolean CriarEleitor(Eleitor eleitor) {
 		if (TotalEleitores <= TAMANHO && eleitor != null) {// Evita estourar Array e "lixo" no array
 			this.celulaVetor = eleitor;
 			EleitorArray[TotalEleitores] = this.celulaVetor;
 			TotalEleitores++;
+			return true;
 		}
-		return;
+		return false;
 
 	}
 

@@ -8,9 +8,7 @@ public class Partido {
 	private int Numero;
 	private Date DataCadastro;
 	
-	public Partido() {
-		this("Não cadastrado",-1);
-	}
+	
 	public Partido(String nome,int numero) {//Neste caso chamar funçoes gera uma sobrecarga mas é possivel
 		setNome(nome);
 		setNumero(numero);
@@ -18,14 +16,9 @@ public class Partido {
 		TotalPartidos++;
 		
 	}
-	public Partido(String nome) {//palavra this não é necessária
-		Nome=nome;
-		DataCadastro=new Date();
-		TotalPartidos++;
-		Numero=TotalPartidos;
-		
+	public Partido() {
+	
 	}
-	//Tenho que evitar que N partidos tenham o mesmo numero
 	
 
 	
@@ -39,6 +32,16 @@ public class Partido {
 	
 	public String getNome() {
 		return Nome;
+	}
+	public String getNOME() {//ESTA FUNCIONANDO ?????????????
+		String aux=this.Nome.toUpperCase();//Transforma tudo em caixa alta
+		String[] parts = aux.split(" ");//Separa em espaços
+		String retorno ="";
+		for (int i = 0; i < parts.length; i++) {//Junta tudo ignorando espaço
+			retorno+=parts[i];
+		}
+				
+		return retorno;
 	}
 	
 	public void setNumero(int numero) {

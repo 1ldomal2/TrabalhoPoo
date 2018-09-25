@@ -6,6 +6,10 @@ public class Candidato {
 	private Documentos Cpf;
 	private Partido Partido;
 	
+	public Candidato() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Candidato(String Nome,int Numero,String Cpf,Partido partido){
 		if(setCpf(Cpf)) {
 			this.Nome=Nome;
