@@ -27,8 +27,7 @@ public class Eleitor {
 	
 	public void setCpf(String cpf) {
 		Documentos c=new Documentos();
-		c.validaCpf(cpf);
-		if(c.getValidCpf()==true) {
+		if(c.validaCpf(cpf)) {//So muda se o cpf passado for valido
 			this.Cpf = c;
 		}
 	}
@@ -82,6 +81,5 @@ public class Eleitor {
 		this.UrnaVotacao=UrnaVotacao;
 		this.ImagemSenha=new Senha(ImagemSenha);
 	}
-	
 	
 }
