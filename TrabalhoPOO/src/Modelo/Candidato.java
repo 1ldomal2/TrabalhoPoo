@@ -6,6 +6,16 @@ public class Candidato {
 	private String Cpf;
 	private Partido Partido;
 	
+	public Candidato(String Nome,int Numero,String Cpf,Partido partido){
+		this.Nome=Nome;
+		this.Numero=Numero;
+		this.Partido=partido;
+		Documentos cpf=new Documentos(Cpf);
+		this.Cpf=cpf.toString();
+		
+		
+	}
+	
 	public String getNome() {
 		return Nome;
 	}
@@ -22,7 +32,8 @@ public class Candidato {
 		return Cpf;
 	}
 	public void setCpf(String cpf) {
-		Cpf = cpf;
+		Documentos doc=new Documentos(Cpf);
+		this.Cpf=doc.toString();
 	}
 	public Partido getPartido() {
 		return Partido;
