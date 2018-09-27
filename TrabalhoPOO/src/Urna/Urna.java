@@ -1,4 +1,6 @@
-package Modelo;
+package Urna;
+
+import Modelo.Voto;
 
 public class Urna {
 	private static int TotalUrnas=0;

@@ -1,5 +1,7 @@
-package Modelo;
+package DAO;
 
+import Modelo.Documentos;
+import Modelo.Partido;
 
 public class PartidoDAO {
 	private final int TAMANHO = 50;

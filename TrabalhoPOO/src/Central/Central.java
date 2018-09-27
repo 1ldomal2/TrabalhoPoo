@@ -1,7 +1,15 @@
-package Modelo;
+package Central;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+
+import DAO.CandidatoDAO;
+import DAO.EleitorDAO;
+import DAO.PartidoDAO;
+import DAO.VotoDAO;
+import Modelo.Candidato;
+import Modelo.Eleitor;
+import Modelo.Partido;
 
 public class Central {
 

@@ -1,4 +1,8 @@
-package Modelo;
+package DAO;
+
+import Modelo.Candidato;
+import Modelo.Eleitor;
+import Modelo.Voto;
 
 public class VotoDAO {
 	private final int TAMANHO = 50;

@@ -1,7 +1,9 @@
-package Modelo;
+package DAO;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+
+import Modelo.Eleitor;
 
 public class EleitorDAO {
 	private final int TAMANHO = 50;
