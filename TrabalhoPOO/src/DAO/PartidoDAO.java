@@ -53,8 +53,10 @@ public class PartidoDAO {
 
 	public Partido ObjectNumero(int numero) {
 		for (int i = 0; i < Total; i++) {
-			if (Array[i].getNumero() == numero) {
-				return Array[i];// Retorna o candidato com Numero procurado
+			if(Array[i]!=null) {
+				if (Array[i].getNumero() == numero) {
+					return Array[i];// Retorna o candidato com Numero procurado
+				}
 			}
 		}
 		return null;// Não achou
@@ -70,8 +72,10 @@ public class PartidoDAO {
 		nome = doc.toString();// pega o sem pontuação pois em candidato fica salvo o sem pontuação
 
 		for (int i = 0; i < Total; i++) {
-			if (Array[i].getNome().equals(nome)) {
-				return Array[i];// Retorna o candidato com Numero procurado
+			if(Array[i]!=null) {
+				if (Array[i].getNome().equals(nome)) {
+					return Array[i];// Retorna o candidato com Numero procurado
+				}
 			}
 		}
 		return null;// Não achou

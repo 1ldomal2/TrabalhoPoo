@@ -7,16 +7,16 @@ import Modelo.Eleitor;
 
 public class EleitorDAO {
 	private final int TAMANHO = 50;
-	private static int TotalEleitores = 0;
-	private Eleitor[] EleitorArray = new Eleitor[TAMANHO];
+	private static int Total = 0;
+	private Eleitor[] Array = new Eleitor[TAMANHO];
 	private Eleitor celulaVetor = null;
 
 	public boolean CriarEleitor(String TituloEleitor, String Nome, String Cpf, int UrnaVotacao, String Path) throws NoSuchAlgorithmException, IOException {
-		if (TotalEleitores <= TAMANHO) {// Evita estourar Array
+		if (Total <= TAMANHO) {// Evita estourar Array
 			this.celulaVetor = new Eleitor(TituloEleitor, Nome, Cpf, UrnaVotacao, Path);
 			if (celulaVetor != null) {// Evita "lixo" no array
-				EleitorArray[TotalEleitores] = this.celulaVetor;
-				TotalEleitores++;
+				Array[Total] = this.celulaVetor;
+				Total++;
 				return true;
 			}
 		}
@@ -25,10 +25,10 @@ public class EleitorDAO {
 	}
 
 	public boolean CriarEleitor(Eleitor eleitor) {
-		if (TotalEleitores <= TAMANHO && eleitor != null) {// Evita estourar Array e "lixo" no array
+		if (Total <= TAMANHO && eleitor != null) {// Evita estourar Array e "lixo" no array
 			this.celulaVetor = eleitor;
-			EleitorArray[TotalEleitores] = this.celulaVetor;
-			TotalEleitores++;
+			Array[Total] = this.celulaVetor;
+			Total++;
 			return true;
 		}
 		return false;
@@ -39,14 +39,16 @@ public class EleitorDAO {
 		if(eleitor==null) {//Evita erro 
 			return;
 		}
-		if (TotalEleitores != 0) {
-			for (int i = 0; i < TotalEleitores; i++) {
-				if (EleitorArray[i] == eleitor) {
-					EleitorArray[i] = null;
-					EleitorArray[i] = EleitorArray[TotalEleitores];
-					EleitorArray[TotalEleitores] = null;
-					TotalEleitores--;
-					return;
+		if (Total != 0) {
+			for (int i = 0; i < Total; i++) {
+				if(Array[i]!=null) {
+					if (Array[i] == eleitor) {
+						Array[i] = null;
+						Array[i] = Array[Total];
+						Array[Total] = null;
+						Total--;
+						return;
+					}
 				}
 			}
 		}
@@ -54,9 +56,11 @@ public class EleitorDAO {
 	}
 	//Buscar por titulo e por cpf
 	public Eleitor ObjectTitulo(String titulo) {
-		for (int i = 0; i < TotalEleitores; i++) {
-			if (EleitorArray[i].getTituloEleitor().equals(titulo)) {
-				return EleitorArray[i];// Retorna o eleitor com Numero Titulo de eleitor procurado
+		for (int i = 0; i < Total; i++) {
+			if(Array[i]!=null) {
+				if (Array[i].getTituloEleitor().equals(titulo)) {
+					return Array[i];// Retorna o eleitor com Numero Titulo de eleitor procurado
+				}
 			}
 		}
 		return null;// Não achou
@@ -64,9 +68,11 @@ public class EleitorDAO {
 	}
 	
 	public Eleitor ObjectCpf(String cpf) {
-		for (int i = 0; i < TotalEleitores; i++) {
-			if (EleitorArray[i].getCpf().equals(cpf)) {
-				return EleitorArray[i];// Retorna o eleitor com cpf procurado
+		for (int i = 0; i < Total; i++) {
+			if(Array[i]!=null) {
+				if (Array[i].getCpf().equals(cpf)) {
+					return Array[i];// Retorna o eleitor com cpf procurado
+				}
 			}
 		}
 		return null;// Não achou
