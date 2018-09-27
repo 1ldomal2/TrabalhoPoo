@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
-import DAO.CandidatoDAO;
-import DAO.EleitorDAO;
-import DAO.VotoDAO;
+import DAO.*;
 import Modelo.*;
 
 public class Urna {

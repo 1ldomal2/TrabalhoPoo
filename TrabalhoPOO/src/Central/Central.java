@@ -3,13 +3,8 @@ package Central;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
-import DAO.CandidatoDAO;
-import DAO.EleitorDAO;
-import DAO.PartidoDAO;
-import DAO.VotoDAO;
-import Modelo.Candidato;
-import Modelo.Eleitor;
-import Modelo.Partido;
+import DAO.*;
+import Modelo.*;
 
 public class Central {
 
@@ -18,33 +13,14 @@ public class Central {
 	private PartidoDAO partido = new PartidoDAO();
 	private VotoDAO voto = new VotoDAO();
 
-	public boolean Start() {
-		Receive();
-	}
-
-	public boolean Stop() {
-		Send();
-	}
 
 	public boolean Send() {
 		// Envia todos os Sends
 	}
 
-	public boolean SendCandidatos() {
-
-	}
-
-	public boolean SendEleitores() {
-
-	}
-
 	public boolean Receive() {
 		// Chama todos os Receives
 		// Por enquanto tem so um receive mesmo
-	}
-
-	public boolean ReceiveVotos() {
-
 	}
 
 	public boolean Resultado() {
@@ -91,7 +67,7 @@ public class Central {
 		if (partido == null) {
 			return false;
 		}
-		Candidato candidato = new Candidato();
+		Candidato candidato = new Candidato();//Cria o objeto para colocar no Array
 
 		// int Numero Pesquisar e ver se mais alguem tem o mesmo Numero
 		if (this.candidato.ObjectNumero(numero) != null)// se diferente de null é porque ja existe esse cpf cadastrado
@@ -118,7 +94,7 @@ public class Central {
 	}
 
 	public boolean CadastroPartidos(String nome,int numero) {
-		Partido partido=new Partido();
+		Partido partido=new Partido();//Cria o objeto para colocar no Array
 
 		// String Nome, Pesquisar se mais alguem tem o mesmo nome (Colocando em caixa alta e tirando espaço)
 		if(this.partido.ObjectNome(nome)!=null)//verifica se não existe nimguem com o mesmo nome
@@ -136,5 +112,5 @@ public class Central {
 						// precisa de chave
 		return false;
 	}
-
+	
 }
