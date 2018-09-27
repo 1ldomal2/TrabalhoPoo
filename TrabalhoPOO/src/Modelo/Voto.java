@@ -27,7 +27,10 @@ public class Voto {
 		NumeroUrna = numeroUrna;
 	}
 	
-	public Voto(Eleitor Eleitor,Candidato Candidato,int NumeroUrna) {
+	public Voto(Eleitor eleitor,Candidato candidato,int NumeroUrna) {
+		this.eleitor=eleitor;
+		this.candidato=candidato;
+		this.NumeroUrna=NumeroUrna;
 		data=new Date();
 	}
 	

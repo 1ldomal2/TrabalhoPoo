@@ -50,7 +50,21 @@ public class VotoDAO {
 				}
 			}
 		}
-
 	}
-
+	public int NVotosCandidato(Candidato candidato) {
+		int nVotos=0;//Variavel a ser retornada
+		if(candidato == null) {//evita erro
+			return nVotos;
+		}
+		for (int i = 0; i < Total; i++) {
+			if(Array[i] != null) {//evita erro
+				if(Array[i].getCandidato()==candidato) {
+					nVotos++;// Conta Numero de votos no candidato "x"
+				}
+			}
+		}
+		return nVotos;
+	}
 }
+
+
