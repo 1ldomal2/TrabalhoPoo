@@ -76,8 +76,18 @@ public class EleitorDAO {
 			}
 		}
 		return null;// Não achou
-
 	}
+	public Eleitor ObjectHash(String hash) {//SeRetorna algo diferente de null é pq Senha deu Match
+		for (int i = 0; i < Total; i++) {
+			if(Array[i]!=null) {
+				if (Array[i].getHash().equals(hash)) {
+					return Array[i];// Retorna o eleitor com cpf procurado
+				}
+			}
+		}
+		return null;// Não achou
+	}
+	
 
 
 }

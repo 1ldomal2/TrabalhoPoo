@@ -62,8 +62,11 @@ public class Senha {
 		return Hash;
 	}
 	
-	public boolean equal(Senha senha) {//Verifica se o Hash de ambas senhas são iguais
+	public boolean equals(Senha senha) {//Verifica se o Hash de ambas senhas são iguais
 		return this.Hash.equals(senha.Hash);
+	}
+	public boolean equals(String senha) {//Verifica se o Hash de ambas senhas são iguais
+		return this.Hash.equals(senha);
 	}
 	
 }

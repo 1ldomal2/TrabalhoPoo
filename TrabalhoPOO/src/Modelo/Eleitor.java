@@ -49,6 +49,9 @@ public class Eleitor {
 	public void setImagemSenha(String Path) throws NoSuchAlgorithmException, IOException {//Passa o caminho do arquivo
 		this.ImagemSenha = new Senha(Path);
 	}
+	public String getHash() {//Retorna o Hash da senha
+		return ImagemSenha.getHash();
+	}
 	
 	
 	
