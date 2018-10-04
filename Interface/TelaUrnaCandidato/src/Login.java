@@ -87,7 +87,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Texto)
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TextoCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(AbrirCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
@@ -109,6 +109,7 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         Caminho AbrirCaminho = new Caminho();
         AbrirCaminho.setVisible(true);
+        
     }//GEN-LAST:event_AbrirCaminhoActionPerformed
 
     private void ConfirmarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarLoginActionPerformed
