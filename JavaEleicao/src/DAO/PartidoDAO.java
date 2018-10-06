@@ -33,6 +33,22 @@ public class PartidoDAO {
 		}
 	}
 	
+
+	public String makeJson() {
+		JSONObject json=new JSONObject();//Superior
+		JSONArray partidos=new JSONArray();
+		JSONObject partido=new JSONObject();//Superior
+		for (int i = 0; i < Total; i++) {
+			//Cria Objetos Json
+			partido.put("Nome", Array[i].getNome());
+			partido.put("Numero", Array[i].getNumero());
+			//Adicionao Objeto Json em um vetor de Jsons
+			partidos.put(partido);
+		}
+		json.put("Partido",partidos);
+		return json.toString();
+	}
+	
 	public boolean CriarPartido(String Nome, int Numero) {
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Partido(Nome, Numero ) ;

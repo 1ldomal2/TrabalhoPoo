@@ -1,5 +1,12 @@
 package DAO;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import Modelo.Candidato;
 import Modelo.Eleitor;
 import Modelo.Voto;
@@ -11,8 +18,6 @@ public class VotoDAO {
 	private Voto celulaVetor = null;
 	
 
-
-	
 	
 	public void CriarVoto(Eleitor eleitor,Candidato candidato,int numero) {
 		if (Total <= TAMANHO) {//Evita estourar Array

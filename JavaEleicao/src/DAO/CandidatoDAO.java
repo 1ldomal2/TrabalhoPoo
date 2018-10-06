@@ -51,7 +51,7 @@ public class CandidatoDAO {
 	}
 	
 	public boolean CriarCandidato(String Nome, int Numero, String Cpf, Partido partido) {
-		if (Total <= TAMANHO) {//Evita estourar Array
+		if (Total < TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Candidato(Nome, Numero, Cpf, partido);
 			if (celulaVetor != null) {//Evita "lixo" no array
 				Array[Total] = this.celulaVetor;
@@ -62,7 +62,7 @@ public class CandidatoDAO {
 		return false;
 	}
 	public boolean CriarCandidato(String Nome, String Numero, String Cpf, String NomePartido,String NumeroPartido) {
-		if (Total <= TAMANHO) {//Evita estourar Array
+		if (Total < TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Candidato(Nome, Numero, Cpf, NomePartido, NumeroPartido);
 			if (celulaVetor != null) {//Evita "lixo" no array
 				Array[Total] = this.celulaVetor;

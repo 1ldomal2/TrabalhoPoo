@@ -34,6 +34,24 @@ public class EleitorDAO {
 		}
 	}
 	
+	public String makeJson() {
+		JSONObject json=new JSONObject();//Superior
+		JSONArray eleitores=new JSONArray();
+		JSONObject eleitor=new JSONObject();//Superior
+		for (int i = 0; i < Total; i++) {
+			//Cria Objetos Json
+			eleitor.put("Nome", Array[i].getNome());
+			eleitor.put("Cpf", Array[i].getCpfString());
+			eleitor.put("TituloEleitor", Array[i].getTituloEleitor());
+			eleitor.put("UrnaVotacao", Array[i].getUrnaVotacao());
+			eleitor.put("Senha", Array[i].getHash());
+			//Adicionao Objeto Json em um vetor de Jsons
+			eleitores.put(eleitor);
+		}
+		json.put("Eleitor",eleitores);
+		return json.toString();
+	}
+	
 	
 	public boolean CriarEleitor(String TituloEleitor, String Nome, String Cpf, String UrnaVotacao, String Senha) throws NoSuchAlgorithmException, IOException {
 		if (Total <= TAMANHO) {// Evita estourar Array
