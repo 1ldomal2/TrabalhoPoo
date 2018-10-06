@@ -16,7 +16,12 @@ public class Main {
 		System.out.println(str);*/
 
 		Documentos doc =new Documentos();
-		System.out.println(doc.validaCpf("06680923603"));
+		
+		System.out.println(doc.validaCpf("759.613.040-27"));
+		System.out.println(doc.validaCpf("12341233123"));
+		System.out.println(doc.validaCpf("01232701033"));
+		System.out.println(doc.validaCpf("23519440032"));
+		
 	}
 
 }

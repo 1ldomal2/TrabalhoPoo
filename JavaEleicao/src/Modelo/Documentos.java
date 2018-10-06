@@ -25,7 +25,8 @@ public class Documentos {
 		int[] dv1 = new int[11];//coloco 11 mas na vdd usa so 9
 		int[] dv2 = new int[11];//assim fica mais facil de fazer o for
 		int tamanho=cpf.length();
-		//Quantidade de caracteres
+
+		//Verifica a quantidade de caracteres
 		int indice=0;
 		if(!(tamanho==14 || tamanho==11)) {
 			validCpf=false;
@@ -33,7 +34,8 @@ public class Documentos {
 			//Sem pontuação tamanho é 11 digitos
 			//Com pontuação tamanho é 14 = 11 digitos  2 '.' 1'-'
 		}
-		if(tamanho==14){//Verifica se os pontos estao nos lugares certos
+		//Se tiver pontuação Verifica se esta correta
+		if(tamanho==14){
 			if(cpf.charAt(3)!='.') {
 				validCpf=false;
 				return false;
@@ -89,9 +91,9 @@ public class Documentos {
 							}
 						}
 					}
-					dv1[(indice-(nhifen+nponto))-1]=( cpf.charAt(indice)-'0')*(10-(indice-(nhifen+nponto)));
+					dv1[(indice-(nhifen+nponto))]=( cpf.charAt(indice)-'0')*(10-(indice-(nhifen+nponto)));
 					//Primeiramente multiplica-se os 9 primeiros dígitos pela sequência decrescente de números de 10 à 2 e soma os resultados
-					dv2[(indice-(nhifen+nponto))-1]=( cpf.charAt(indice)-'0')*(11-(indice-(nhifen+nponto)));
+					dv2[(indice-(nhifen+nponto))]=( cpf.charAt(indice)-'0')*(11-(indice-(nhifen+nponto)));
 					//Primeiramente multiplica-se os 9 primeiros dígitos pela sequência decrescente de números de 10 à 2 e soma os resultados
 				}
 			}
@@ -120,33 +122,38 @@ public class Documentos {
 							}
 						}
 					}
-				}
-			}
-			for (int i = 0; i < indice; i++) {	
+				}	
 				//OBS:AscII 0 é o primeiro digito e 9 o ultimo
-				dv1[i]=(cpf.charAt(i)-'0')*(10-i);
+				dv1[indice]=(cpf.charAt(indice)-'0')*(10-indice);
 				//Primeiramente multiplica-se os 9 primeiros dígitos pela sequência decrescente de números de 10 à 2 e soma os resultados
-				dv2[i]=(cpf.charAt(i)-'0')*(11-i);
-				//Primeiramente multiplica-se os 9 primeiros dígitos pela sequência decrescente de números de 10 à 2 e soma os resultados
+				dv2[indice]=(cpf.charAt(indice)-'0')*(11-indice);
+				//Primeiramente multiplica-se os 10 primeiros dígitos pela sequência decrescente de números de 11 à 2 e soma os resultados
 			}
 		}
 
+		//Evita lixo
 		int total1=0;
 		int total2=0;
-		for (int i = 0; i < 9; i++) {//Somatorio 
+
+		//Somatorio
+		for (int i = 0; i < 9; i++) { 
 			total1+=dv1[i];
 			total2+=dv2[i];
 		}
+		total2+=dv2[9];
 
+		
 		if(tamanho==11) {//Verifica se os digitos batem "opção sem formataçao"
-			if((cpf.charAt(9)-'0')!=((total1*10)%11)){
-				if(!((cpf.charAt(9)-'0')==0 && 10==((total1*10)%11))){
+			if((cpf.charAt(9)-'0')!=(11-(total1)%11)){
+				if(!((cpf.charAt(9)-'0')==0 && (11-(total1)%11)>9)){
+					
+
 					validCpf=false;
 					return false;
 				}
 			}
-			if((cpf.charAt(10)-'0')!=((total2*10)%11)) {
-				if(!((cpf.charAt(10)-'0')==0 && 10==((total1*10)%11))){
+			if((cpf.charAt(10)-'0')!=(11-(total2)%11)) {
+				if(!((cpf.charAt(10)-'0')==0 && (11-(total2)%11)>9)){
 					validCpf=false;
 					return false;
 				}
@@ -155,14 +162,14 @@ public class Documentos {
 			noFormated=cpf;//Seta as variaveis
 		}else {//Verifica se os digitos batem "opçao com formatação"s
 			if(tamanho==14) {
-				if((cpf.charAt(12)-'0')!=((total1*10)%11)) {
-					if(!((cpf.charAt(12)-'0')==0 && 10==((total1*10)%11))){
+				if((cpf.charAt(12)-'0')!=(11-(total1)%11)) {
+					if(!((cpf.charAt(12)-'0')==0 && (11-(total1)%11)>9)){
 						validCpf=false;
 						return false;
 					}
 				}
-				if((cpf.charAt(13)-'0')!=((total2*10)%11)) {
-					if(!((cpf.charAt(13)-'0')==0 && 10==((total1*10)%11))){
+				if((cpf.charAt(13)-'0')!=(11-(total2)%11)) {
+				if(!((cpf.charAt(13)-'0')==0 && (11-(total2)%11)>9)){
 						validCpf=false;
 						return false;
 					}
@@ -266,3 +273,15 @@ public class Documentos {
 	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
