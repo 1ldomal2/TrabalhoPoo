@@ -1,5 +1,12 @@
 package DAO;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import Modelo.Documentos;
 import Modelo.Partido;
 
@@ -9,6 +16,23 @@ public class PartidoDAO {
 	private Partido[] Array = new Partido[TAMANHO];
 	private Partido celulaVetor = null;
 
+	public void ReadJson(String Sjson) throws NoSuchAlgorithmException, JSONException, IOException {//Acho que não precisa mas é para futuras Modificações
+		//Cria um Objeto Json com a String passada como parametro
+		JSONObject json=new JSONObject(Sjson);
+		
+		//Quebra o Json no Vetor
+		JSONArray jsonPartido = json.getJSONArray("Partido");
+		
+		//Le o json  Candidato por Candidato
+		for (int i = 0; i < jsonPartido.length(); i++) {
+			//recupera candidato de índice "i" no array 
+            JSONObject p = jsonPartido.getJSONObject(i);
+			//Adiciona ao Vetor
+            this.CriarPartido(p.getString("NomePartido"),Integer.parseInt(p.getString("NumeroPartido")));
+			
+		}
+	}
+	
 	public boolean CriarPartido(String Nome, int Numero) {
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Partido(Nome, Numero ) ;

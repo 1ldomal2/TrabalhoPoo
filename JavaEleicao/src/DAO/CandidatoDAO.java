@@ -1,5 +1,8 @@
 package DAO;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import Modelo.Candidato;
 import Modelo.Documentos;
 import Modelo.Partido;
@@ -9,7 +12,44 @@ public class CandidatoDAO {
 	private static int Total = 0;
 	private Candidato[] Array = new Candidato[TAMANHO];
 	private Candidato celulaVetor = null;
-
+	
+	
+	public void ReadJson(String Sjson) {
+		//Cria um Objeto Json com a String passada como parametro
+		JSONObject json=new JSONObject(Sjson);
+		
+		//Quebra o Json no Vetor
+		JSONArray jsonCandidatos = json.getJSONArray("Candidato");
+		
+		//Le o json  Candidato por Candidato
+		for (int i = 0; i < jsonCandidatos.length(); i++) {
+			//recupera candidato de índice "i" no array 
+            JSONObject c = jsonCandidatos.getJSONObject(i);
+			//Adiciona ao Vetor
+            this.CriarCandidato(c.getString("Nome"), c.getString("Numero"),c.getString("Cpf"),c.getString("NomePartido"),c.getString("NumeroPartido"));
+			
+		}
+		
+		
+	}
+	public String makeJson() {
+		JSONObject json=new JSONObject();//Superior
+		JSONArray candidatos=new JSONArray();
+		JSONObject candidato=new JSONObject();//Superior
+		for (int i = 0; i < Total; i++) {
+			//Cria Objetos Json
+			candidato.put("Nome", Array[i].getNome());
+			candidato.put("Numero", Array[i].getNumero());
+			candidato.put("Cpf", Array[i].getCpf());
+			candidato.put("NomePartido", Array[i].getPartido().getNome());
+			candidato.put("NumeroPartido", Array[i].getPartido().getNumero());
+			//Adicionao Objeto Json em um vetor de Jsons
+			candidatos.put(candidato);
+		}
+		json.put("Candidato",candidatos);
+		return json.toString();
+	}
+	
 	public boolean CriarCandidato(String Nome, int Numero, String Cpf, Partido partido) {
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Candidato(Nome, Numero, Cpf, partido);
@@ -20,7 +60,17 @@ public class CandidatoDAO {
 			}
 		}
 		return false;
-
+	}
+	public boolean CriarCandidato(String Nome, String Numero, String Cpf, String NomePartido,String NumeroPartido) {
+		if (Total <= TAMANHO) {//Evita estourar Array
+			this.celulaVetor = new Candidato(Nome, Numero, Cpf, NomePartido, NumeroPartido);
+			if (celulaVetor != null) {//Evita "lixo" no array
+				Array[Total] = this.celulaVetor;
+				Total++;
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean CriarCandidato(Candidato candidato) {

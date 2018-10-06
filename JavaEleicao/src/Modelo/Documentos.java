@@ -89,9 +89,9 @@ public class Documentos {
 							}
 						}
 					}
-					dv1[(indice-(nhifen+nponto))]=( cpf.charAt(indice)-'0')*(10-(indice-(nhifen+nponto)));
+					dv1[(indice-(nhifen+nponto))-1]=( cpf.charAt(indice)-'0')*(10-(indice-(nhifen+nponto)));
 					//Primeiramente multiplica-se os 9 primeiros dígitos pela sequência decrescente de números de 10 à 2 e soma os resultados
-					dv2[(indice-(nhifen+nponto))]=( cpf.charAt(indice)-'0')*(11-(indice-(nhifen+nponto)));
+					dv2[(indice-(nhifen+nponto))-1]=( cpf.charAt(indice)-'0')*(11-(indice-(nhifen+nponto)));
 					//Primeiramente multiplica-se os 9 primeiros dígitos pela sequência decrescente de números de 10 à 2 e soma os resultados
 				}
 			}
@@ -122,13 +122,15 @@ public class Documentos {
 					}
 				}
 			}
-			//OBS:AscII 0 é o primeiro digito e 9 o ultimo
-			dv1[indice]=(cpf.charAt(indice)-'0')*(10-indice);
-			//Primeiramente multiplica-se os 9 primeiros dígitos pela sequência decrescente de números de 10 à 2 e soma os resultados
-			dv2[indice]=(cpf.charAt(indice)-'0')*(11-indice);
-			//Primeiramente multiplica-se os 9 primeiros dígitos pela sequência decrescente de números de 10 à 2 e soma os resultados
-		
+			for (int i = 0; i < indice; i++) {	
+				//OBS:AscII 0 é o primeiro digito e 9 o ultimo
+				dv1[i]=(cpf.charAt(i)-'0')*(10-i);
+				//Primeiramente multiplica-se os 9 primeiros dígitos pela sequência decrescente de números de 10 à 2 e soma os resultados
+				dv2[i]=(cpf.charAt(i)-'0')*(11-i);
+				//Primeiramente multiplica-se os 9 primeiros dígitos pela sequência decrescente de números de 10 à 2 e soma os resultados
+			}
 		}
+
 		int total1=0;
 		int total2=0;
 		for (int i = 0; i < 9; i++) {//Somatorio 
@@ -137,25 +139,33 @@ public class Documentos {
 		}
 
 		if(tamanho==11) {//Verifica se os digitos batem "opção sem formataçao"
-			if((cpf.charAt(9)-'0')!=((total1*10)%11)) {
-				validCpf=false;
-				return false;
+			if((cpf.charAt(9)-'0')!=((total1*10)%11)){
+				if(!((cpf.charAt(9)-'0')==0 && 10==((total1*10)%11))){
+					validCpf=false;
+					return false;
+				}
 			}
 			if((cpf.charAt(10)-'0')!=((total2*10)%11)) {
-				validCpf=false;
-				return false;
+				if(!((cpf.charAt(10)-'0')==0 && 10==((total1*10)%11))){
+					validCpf=false;
+					return false;
+				}
 			}
 			fomatedCpf=false;//Seta as variaveis
 			noFormated=cpf;//Seta as variaveis
 		}else {//Verifica se os digitos batem "opçao com formatação"s
 			if(tamanho==14) {
 				if((cpf.charAt(12)-'0')!=((total1*10)%11)) {
-					validCpf=false;
-					return false;
+					if(!((cpf.charAt(12)-'0')==0 && 10==((total1*10)%11))){
+						validCpf=false;
+						return false;
+					}
 				}
 				if((cpf.charAt(13)-'0')!=((total2*10)%11)) {
-					validCpf=false;
-					return false;
+					if(!((cpf.charAt(13)-'0')==0 && 10==((total1*10)%11))){
+						validCpf=false;
+						return false;
+					}
 				}
 				fomatedCpf=true;//Seta as variaveis
 				formated=cpf;
@@ -222,22 +232,22 @@ public class Documentos {
 			
 			this.noFormated=cpf;
 		}else {
-			cpf+=formated.charAt(0);
-			cpf+=formated.charAt(1);
-			cpf+=formated.charAt(2);
+			cpf+=noFormated.charAt(0);
+			cpf+=noFormated.charAt(1);
+			cpf+=noFormated.charAt(2);
 			cpf+='.';//.
-			cpf+=formated.charAt(3);
-			cpf+=formated.charAt(4);
-			cpf+=formated.charAt(5);
+			cpf+=noFormated.charAt(3);
+			cpf+=noFormated.charAt(4);
+			cpf+=noFormated.charAt(5);
 			cpf+='.';//.
-			cpf+=formated.charAt(6);
-			cpf+=formated.charAt(7);
-			cpf+=formated.charAt(8);
+			cpf+=noFormated.charAt(6);
+			cpf+=noFormated.charAt(7);
+			cpf+=noFormated.charAt(8);
 			cpf+='-';//-
-			cpf+=formated.charAt(9);
-			cpf+=formated.charAt(10);
+			cpf+=noFormated.charAt(9);
+			cpf+=noFormated.charAt(10);
 			
-			this.noFormated=cpf;
+			this.formated=cpf;
 		}
 		return;
 		

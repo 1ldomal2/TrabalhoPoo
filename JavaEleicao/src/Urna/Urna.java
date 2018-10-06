@@ -35,9 +35,13 @@ public class Urna {
 	}
 	public void Receive() {//Não sei o que tem que retorna
 		//Pega DO GOOGLE dRIVE
+		
+		//Cria um Objeto Json
 		String JsonCru;
 		JSONObject json=new JSONObject();
 		
+		//cria um JSONArray e preenche com valores string
+        JSONArray jsonArray = new JSONArray();
 		
 		
 	}

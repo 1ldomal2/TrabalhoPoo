@@ -9,6 +9,7 @@ public class VotoDAO {
 	private static int Total = 0;
 	private Voto[] Array = new Voto[TAMANHO];
 	private Voto celulaVetor = null;
+	
 
 
 	

@@ -14,9 +14,23 @@ public class Senha {
 	//private int[][] Imagem;
 	private String senha;
 	private String Hash;
-
+	private Boolean Inconsistencia=false;
+	//Se o Hash foi setado na mão, o dado é inconsistente 
+	//Todo dado que sai do google e vai para urna será inconsistente
+	//Se o dado for incosistente não sera possivel passar da central para o google
+	
 	public Senha(String path) throws NoSuchAlgorithmException, IOException {
 		this.setImagem(path);
+	}
+	public Senha(String Inconsistente,String Hash) {
+		if(Inconsistente.equals("INCONSISTENTE")) {
+			this.Hash=Hash;
+			this.Inconsistencia=true;
+		}
+	}
+	
+	public void setHash(String Hash) {//So é possivel setar o hash na hora de importar o json
+		this.Hash=Hash;
 	}
 
 	public void setImagem(String path) throws IOException, NoSuchAlgorithmException{

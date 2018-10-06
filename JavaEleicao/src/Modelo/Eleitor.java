@@ -1,9 +1,7 @@
 package Modelo;
-
+import org.json.*;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-
-import org.json.JSONObject;
 
 public class Eleitor {
 	private String Nome;
@@ -107,8 +105,19 @@ public class Eleitor {
 		this.UrnaVotacao=UrnaVotacao;
 		this.ImagemSenha=new Senha(ImagemSenha);
 	}
+	public Eleitor(String TituloEleitor,String Nome, String Cpf,String UrnaVotacao,String Hash) throws NoSuchAlgorithmException, IOException {////Import do Json
+		Documentos cpf=new Documentos(Cpf);
+		if (cpf.getValidCpf()) {		
+			this.TituloEleitor=TituloEleitor;
+			this.Nome=Nome;
+			this.Cpf=cpf;
+			this.UrnaVotacao=Integer.parseInt(UrnaVotacao);
+			this.ImagemSenha=new Senha("INCONSISTENTE",Hash);//So será permitido setar o Hash por conta do Json
+		}
+	}
 	public Eleitor() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 }

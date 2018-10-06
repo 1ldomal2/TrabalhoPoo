@@ -1,8 +1,6 @@
 package Modelo;
-
+import org.json.*;
 import java.util.Date;
-
-import org.json.JSONObject;
 
 public class Partido {
 	private String Nome;
@@ -10,17 +8,18 @@ public class Partido {
 	private Date DataCadastro;
 	
 	
-	public Partido(String nome,int numero) {//Neste caso chamar funçoes gera uma sobrecarga mas é possivel
+	//Neste caso chamar funçoes gera uma sobrecarga ou seja é possivel fazer mas não é viavel
+	public Partido(String nome,int numero) {
 		setNome(nome);
 		setNumero(numero);
 		DataCadastro=new Date();		
 	}
-	public Partido() {
-	
+	public Partido(String nome,String numero) {//Import do Json
+		this.Numero=Integer.parseInt(numero);
+		this.Nome=nome;
+		DataCadastro=null;//So é relevante para a Central		
 	}
-	
-
-	
+		
 	public Date getDataCadastro() {
 		return DataCadastro;
 	}

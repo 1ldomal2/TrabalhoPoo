@@ -1,6 +1,5 @@
 package Modelo;
-
-import org.json.JSONObject;
+import org.json.*;
 
 public class Candidato {
 	private String Nome;
@@ -9,14 +8,23 @@ public class Candidato {
 	private Partido Partido;
 	
 	public Candidato() {
-		// TODO Auto-generated constructor stub
+		
 	}
-	
 	public Candidato(String Nome,int Numero,String Cpf,Partido partido){
 		if(setCpf(Cpf)) {
 			this.Nome=Nome;
 			this.Numero=Numero;
 			this.Partido=partido;
+		}
+	}
+	
+	public Candidato(String Nome,String Numero,String Cpf,String NumeroPartido,String NomePartido){//Import do Json
+		//Tem que fazer o tratamento do Partido depois
+		if(setCpf(Cpf)) {//Se o cpf não for valido ja aborta
+			this.Nome=Nome;
+			this.Numero=Integer.parseInt(Numero);
+			this.Partido=new Partido(NomePartido,NumeroPartido);
+			
 		}
 	}
 	

@@ -1,8 +1,6 @@
 package Modelo;
-
 import java.util.Date;
-
-import org.json.JSONObject;
+import org.json.*;
 
 public class Voto {
 	private Eleitor eleitor;
@@ -33,6 +31,12 @@ public class Voto {
 		this.eleitor=eleitor;
 		this.candidato=candidato;
 		this.NumeroUrna=NumeroUrna;
+		data=new Date();
+	}
+	public Voto(String eleitorCpf,String candidatoCpf,String NumeroUrna){//import Json
+		this.eleitor=eleitor;//Depois tem que procura o eleitor por cpf
+		this.candidato=candidato;//Procura o candidato por cpf
+		this.NumeroUrna=Integer.parseInt(NumeroUrna);
 		data=new Date();
 	}
 	public String makeJson() {

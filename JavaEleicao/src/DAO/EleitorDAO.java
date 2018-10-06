@@ -3,7 +3,13 @@ package DAO;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import Modelo.Documentos;
 import Modelo.Eleitor;
+import Modelo.Senha;
 
 public class EleitorDAO {
 	private final int TAMANHO = 50;
@@ -11,6 +17,38 @@ public class EleitorDAO {
 	private Eleitor[] Array = new Eleitor[TAMANHO];
 	private Eleitor celulaVetor = null;
 
+	public void ReadJson(String Sjson) throws NoSuchAlgorithmException, JSONException, IOException {
+		//Cria um Objeto Json com a String passada como parametro
+		JSONObject json=new JSONObject(Sjson);
+		
+		//Quebra o Json no Vetor
+		JSONArray jsonEleitor = json.getJSONArray("Eleitor");
+		
+		//Le o json  Candidato por Candidato
+		for (int i = 0; i < jsonEleitor.length(); i++) {
+			//recupera candidato de índice "i" no array 
+            JSONObject e = jsonEleitor.getJSONObject(i);
+			//Adiciona ao Vetor
+            this.CriarEleitor(e.getString("TituloEleitor"), e.getString("Nome"),e.getString("Cpf"),e.getString("UrnaVotacao"),e.getString("Senha"));
+			
+		}
+	}
+	
+	
+	public boolean CriarEleitor(String TituloEleitor, String Nome, String Cpf, String UrnaVotacao, String Senha) throws NoSuchAlgorithmException, IOException {
+		if (Total <= TAMANHO) {// Evita estourar Array
+			this.celulaVetor = new Eleitor(TituloEleitor, Nome, Cpf, UrnaVotacao, Senha);
+			if (celulaVetor != null) {// Evita "lixo" no array
+				Array[Total] = this.celulaVetor;
+				Total++;
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	
 	public boolean CriarEleitor(String TituloEleitor, String Nome, String Cpf, int UrnaVotacao, String Path) throws NoSuchAlgorithmException, IOException {
 		if (Total <= TAMANHO) {// Evita estourar Array
 			this.celulaVetor = new Eleitor(TituloEleitor, Nome, Cpf, UrnaVotacao, Path);
