@@ -1,12 +1,16 @@
 package Interface;
+
+import java.io.File;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author cambraia
@@ -107,13 +111,30 @@ public class Login extends javax.swing.JFrame {
 
     private void AbrirCaminhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirCaminhoActionPerformed
         // TODO add your handling code here:
-        Caminho AbrirCaminho = new Caminho();
-        AbrirCaminho.setVisible(true);
-        
+        JFileChooser arquivo = new JFileChooser();
+        arquivo.setFileFilter(new FileNameExtensionFilter("Image files", "ppm"));
+        arquivo.setAcceptAllFileFilterUsed(false);
+        arquivo.showOpenDialog(null);
+        File file = arquivo.getSelectedFile();
+        String caminho = file.getAbsolutePath();
+        TextoCaminho.setText(caminho);
     }//GEN-LAST:event_AbrirCaminhoActionPerformed
 
     private void ConfirmarLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarLoginActionPerformed
         // TODO add your handling code here:
+        if (TextoCaminho.getText().length() <= 0) {
+            JOptionPane.showMessageDialog(this, "Abra o arquivo");
+        } else {
+            //LUCAS CONFIRMA SENHA
+            boolean confirmacao = true;
+            if (confirmacao) {
+                new Urna().setVisible(true);
+                this.dispose();
+
+            }else{
+                JOptionPane.showMessageDialog(this, "Senha Incorreta");
+            }
+        }
     }//GEN-LAST:event_ConfirmarLoginActionPerformed
 
     /**

@@ -1,4 +1,11 @@
 package Interface;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
  *
  * @author cambraia
@@ -35,10 +42,10 @@ public class TelaEleitor extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setSize(new java.awt.Dimension(300, 400));
 
-        jLabel1.setText("Digite o Titulo de Eleitor");
+        jLabel1.setText("Titulo de Eleitor");
 
         Confirmar.setIcon(new javax.swing.ImageIcon("/home/cambraia/NetBeansProjects/TelaUrnaCandidato/confirmar.png")); // NOI18N
 
@@ -48,13 +55,13 @@ public class TelaEleitor extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Digite a Seção");
+        jLabel2.setText("Seção");
 
         FotoEleitor.setText("Foto do Eleitor");
 
         Foto.setText("AQUI FICA A FOTO");
 
-        jLabel7.setText("Digite o CPF do Eleitor");
+        jLabel7.setText("CPF do Eleitor");
 
         CpfEleitor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -62,7 +69,7 @@ public class TelaEleitor extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setText("Digite o nome do eleitor");
+        jLabel4.setText("Nome do eleitor");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

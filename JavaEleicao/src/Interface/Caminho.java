@@ -1,5 +1,15 @@
 package Interface;
 
+
+import java.io.File;
+
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
  *
  * @author cambraia
@@ -24,7 +34,7 @@ public class Caminho extends javax.swing.JFrame {
 
         jFileChooser1 = new javax.swing.JFileChooser();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jFileChooser1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +104,13 @@ public class Caminho extends javax.swing.JFrame {
     private javax.swing.JFileChooser jFileChooser1;
     // End of variables declaration//GEN-END:variables
 
-    int showSaveDialog(Object object) {
+
+
+    void setFileSelectionMode(int FILES_ONLY) {
+        
+    }
+
+    File getSelectedFile() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

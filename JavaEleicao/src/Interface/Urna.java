@@ -1,4 +1,16 @@
 package Interface;
+
+
+import java.text.ParseException;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import javax.swing.text.MaskFormatter;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 /**
  *
  * @author cambraia
@@ -10,6 +22,9 @@ public class Urna extends javax.swing.JFrame {
      */
     public Urna() {
         initComponents();
+        Confirma.setEnabled(false);
+        
+
     }
 
     /**
@@ -38,8 +53,9 @@ public class Urna extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         ApagarNumero = new javax.swing.JButton();
+        BotaoBranco = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButton1.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         jButton1.setText("1");
@@ -130,6 +146,11 @@ public class Urna extends javax.swing.JFrame {
 
         CampoCandidato.setEditable(false);
         CampoCandidato.setFont(new java.awt.Font("Ubuntu", 0, 36)); // NOI18N
+        CampoCandidato.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CampoCandidatoMouseClicked(evt);
+            }
+        });
         CampoCandidato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CampoCandidatoActionPerformed(evt);
@@ -137,6 +158,11 @@ public class Urna extends javax.swing.JFrame {
         });
 
         Confirma.setIcon(new javax.swing.ImageIcon("/home/cambraia/NetBeansProjects/TelaUrnaCandidato/confirmar.png")); // NOI18N
+        Confirma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmaActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("jLabel1");
 
@@ -148,6 +174,14 @@ public class Urna extends javax.swing.JFrame {
         ApagarNumero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ApagarNumeroActionPerformed(evt);
+            }
+        });
+
+        BotaoBranco.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        BotaoBranco.setText("Branco");
+        BotaoBranco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotaoBrancoActionPerformed(evt);
             }
         });
 
@@ -168,29 +202,34 @@ public class Urna extends javax.swing.JFrame {
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Limpar))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(ApagarNumero))
+                            .addComponent(Limpar)
+                            .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(ApagarNumero))
+                                .addGap(36, 36, 36)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Confirma))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Confirma))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(BotaoBranco, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(24, 24, 24))
         );
@@ -230,9 +269,11 @@ public class Urna extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(84, 84, 84)
                                 .addComponent(jButton9)))))
-                .addGap(18, 18, 18)
-                .addComponent(jButton0)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(BotaoBranco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(Confirma)
@@ -246,74 +287,162 @@ public class Urna extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setOk() {
+        Confirma.setEnabled(true);
+        //LUCAS: MOSTRAR CANDIDATO NO LABEL 
+        //Candidato cand; 
+        //cand = ObjectNumero(Integer.parseInt(CampoCandidato.getText()));
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        CampoCandidato.setText(CampoCandidato.getText()+"1");
+        if (CampoCandidato.getText().length() < 5) {
+            CampoCandidato.setText(CampoCandidato.getText() + "1");
+            if (CampoCandidato.getText().length() == 5) {
+                setOk();
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        CampoCandidato.setText(CampoCandidato.getText()+"2");
+        if (CampoCandidato.getText().length() < 5) {
+            CampoCandidato.setText(CampoCandidato.getText() + "2");
+            if (CampoCandidato.getText().length() == 5) {
+                setOk();
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        CampoCandidato.setText(CampoCandidato.getText()+"3");
+        if (CampoCandidato.getText().length() < 5) {
+            CampoCandidato.setText(CampoCandidato.getText() + "3");
+            if (CampoCandidato.getText().length() == 5) {
+                setOk();
+            }
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        CampoCandidato.setText(CampoCandidato.getText()+"4");
+        if (CampoCandidato.getText().length() < 5) {
+            CampoCandidato.setText(CampoCandidato.getText() + "4");
+            if (CampoCandidato.getText().length() == 5) {
+                setOk();
+            }
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        CampoCandidato.setText(CampoCandidato.getText()+"5");
+        if (CampoCandidato.getText().length() < 5) {
+            CampoCandidato.setText(CampoCandidato.getText() + "5");
+            if (CampoCandidato.getText().length() == 5) {
+                setOk();
+            }
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        CampoCandidato.setText(CampoCandidato.getText()+"6");
+        if (CampoCandidato.getText().length() < 5) {
+            CampoCandidato.setText(CampoCandidato.getText() + "6");
+            if (CampoCandidato.getText().length() == 5) {
+                setOk();
+            }
+        }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-        CampoCandidato.setText(CampoCandidato.getText()+"7");
+        if (CampoCandidato.getText().length() < 5) {
+            CampoCandidato.setText(CampoCandidato.getText() + "7");
+            if (CampoCandidato.getText().length() == 5) {
+                setOk();
+            }
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
-        CampoCandidato.setText(CampoCandidato.getText()+"8");
+        if (CampoCandidato.getText().length() < 5) {
+            CampoCandidato.setText(CampoCandidato.getText() + "8");
+            if (CampoCandidato.getText().length() == 5) {
+                setOk();
+            }
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        CampoCandidato.setText(CampoCandidato.getText()+"9");
+        if (CampoCandidato.getText().length() < 5) {
+            CampoCandidato.setText(CampoCandidato.getText() + "9");
+            if (CampoCandidato.getText().length() == 5) {
+                setOk();
+            }
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton0ActionPerformed
         // TODO add your handling code here:
-        CampoCandidato.setText(CampoCandidato.getText()+"0");
+        if (CampoCandidato.getText().length() < 5) {
+            CampoCandidato.setText(CampoCandidato.getText() + "0");
+            if (CampoCandidato.getText().length() == 5) {
+                setOk();
+            }
+        }
     }//GEN-LAST:event_jButton0ActionPerformed
 
     private void LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparActionPerformed
         // TODO add your handling code here:
         CampoCandidato.setText("");
+        Confirma.setEnabled(false);
     }//GEN-LAST:event_LimparActionPerformed
 
     private void CampoCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoCandidatoActionPerformed
         // TODO add your handling code here:
         CampoCandidato.setEditable(false);
+
+
     }//GEN-LAST:event_CampoCandidatoActionPerformed
 
     private void ApagarNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApagarNumeroActionPerformed
         // TODO add your handling code here:
-        String str = CampoCandidato.getText();
-        StringBuilder w = new StringBuilder(str);
-        str = String.valueOf( w.deleteCharAt(str.length() - 1) );
-        CampoCandidato.setText(str);
+        if (CampoCandidato.getText().length() != 0) {
+            String str = CampoCandidato.getText();
+            StringBuilder w = new StringBuilder(str);
+            str = String.valueOf(w.deleteCharAt(str.length() - 1));
+            CampoCandidato.setText(str);
+            Confirma.setEnabled(false);
+
+        }
     }//GEN-LAST:event_ApagarNumeroActionPerformed
-/**/
+
+    private void ConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmaActionPerformed
+        // TODO add your handling code here:
+        String texto = CampoCandidato.getText();       
+            Confirma.setEnabled(true);    
+            //LUCAS CRIA VOTO
+            new Login().setVisible(true);
+            this.dispose();
+    }//GEN-LAST:event_ConfirmaActionPerformed
+
+    private void CampoCandidatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CampoCandidatoMouseClicked
+        // TODO add your handling code here:
+        if (CampoCandidato.getText().length() != 5) {
+            Confirma.setEnabled(false);
+        } else {
+            Confirma.setEnabled(true);
+        }
+    }//GEN-LAST:event_CampoCandidatoMouseClicked
+
+    private void BotaoBrancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoBrancoActionPerformed
+        // TODO add your handling code here:
+        //LUCAS CRIA VOTO BRANCO 
+        new Login().setVisible(true);
+            this.dispose();
+    }//GEN-LAST:event_BotaoBrancoActionPerformed
+    /**/
     /**
      * @param args the command line arguments
      */
@@ -351,6 +480,7 @@ public class Urna extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ApagarNumero;
+    private javax.swing.JButton BotaoBranco;
     private javax.swing.JTextField CampoCandidato;
     private javax.swing.JButton Confirma;
     private javax.swing.JButton Limpar;

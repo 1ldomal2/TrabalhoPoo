@@ -1,4 +1,10 @@
 package Interface;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 /**
  *
  * @author cambraia
@@ -10,6 +16,22 @@ public class TelaCandidato extends javax.swing.JFrame {
      */
     public TelaCandidato() {
         initComponents();
+        ConfirmarCandidato.setEnabled(false);
+    }
+
+    private boolean VerificaCampo() {
+        if (CampoNomeCandidato.getText().length() > 0) {
+            if (CampoNumCandidato.getText().length() == 5) {
+                if (CampoCPFC.getText().length() >= 9 || CampoCPFC.getText().length() <= 14) {
+                    if (CampoPartidoF.getText().length() >= 9 || CampoCPFC.getText().length() <= 14) {
+                        ConfirmarCandidato.setVisible(true);
+                        return true;
+                    }
+                }
+            }
+        }
+        ConfirmarCandidato.setVisible(false);
+        return false;
     }
 
     /**
@@ -22,7 +44,7 @@ public class TelaCandidato extends javax.swing.JFrame {
     private void initComponents() {
 
         LabelNomeCandidato = new javax.swing.JLabel();
-        CampoNomeCandidado = new javax.swing.JTextField();
+        CampoNomeCandidato = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabelNumCandidato = new javax.swing.JLabel();
         CampoNumCandidato = new javax.swing.JTextField();
@@ -34,13 +56,13 @@ public class TelaCandidato extends javax.swing.JFrame {
         LabelPartidoF = new javax.swing.JLabel();
         ConfirmarCandidato = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         LabelNomeCandidato.setText("Nome do candidato");
 
-        CampoNomeCandidado.addActionListener(new java.awt.event.ActionListener() {
+        CampoNomeCandidato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CampoNomeCandidadoActionPerformed(evt);
+                CampoNomeCandidatoActionPerformed(evt);
             }
         });
 
@@ -57,6 +79,11 @@ public class TelaCandidato extends javax.swing.JFrame {
         LabelPartidoF.setText("Partido Filiado");
 
         ConfirmarCandidato.setIcon(new javax.swing.ImageIcon("/home/cambraia/NetBeansProjects/TelaUrnaCandidato/confirmar.png")); // NOI18N
+        ConfirmarCandidato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarCandidatoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,7 +99,7 @@ public class TelaCandidato extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(55, 55, 55)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(CampoNomeCandidado, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(CampoNomeCandidato, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(LabelNomeCandidato, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelNumCandidato, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                         .addComponent(CampoNumCandidato, javax.swing.GroupLayout.Alignment.LEADING)))
@@ -92,7 +119,7 @@ public class TelaCandidato extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(LabelNomeCandidato)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CampoNomeCandidado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(CampoNomeCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabelNumCandidato)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -110,21 +137,25 @@ public class TelaCandidato extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LabelPartidoF)
                 .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CampoPartidoF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ConfirmarCandidato)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ConfirmarCandidato)
+                    .addComponent(CampoPartidoF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CampoNomeCandidadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoNomeCandidadoActionPerformed
+    private void CampoNomeCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoNomeCandidatoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CampoNomeCandidadoActionPerformed
+    }//GEN-LAST:event_CampoNomeCandidatoActionPerformed
 
     private void CampoNumCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoNumCandidatoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CampoNumCandidatoActionPerformed
+
+    private void ConfirmarCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarCandidatoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ConfirmarCandidatoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,7 +194,7 @@ public class TelaCandidato extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CampoCPFC;
-    private javax.swing.JTextField CampoNomeCandidado;
+    private javax.swing.JTextField CampoNomeCandidato;
     private javax.swing.JTextField CampoNumCandidato;
     private javax.swing.JTextField CampoPartidoF;
     private javax.swing.JButton ConfirmarCandidato;

@@ -1,4 +1,11 @@
 package Interface;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 /**
  *
  * @author cambraia
@@ -27,7 +34,7 @@ public class TelaPartido extends javax.swing.JFrame {
         ConfirmarPartido = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Nome do Partido");
 
