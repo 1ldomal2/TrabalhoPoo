@@ -1,2 +1,0 @@
-Caminho
-Caminho$1
