@@ -97,7 +97,7 @@ public class Central {
 	}
 
 	public boolean CadastroPartidos(String nome,int numero) {
-		Partido partido=new Partido();//Cria o objeto para colocar no Array
+		Partido partido=new Partido(nome, numero);//Cria o objeto para colocar no Array
 
 		// String Nome, Pesquisar se mais alguem tem o mesmo nome (Colocando em caixa alta e tirando espaço)
 		if(this.partido.ObjectNome(nome)!=null)//verifica se não existe nimguem com o mesmo nome
