@@ -128,7 +128,7 @@ public class Login extends javax.swing.JFrame {
             //LUCAS CONFIRMA SENHA
             boolean confirmacao = true;
             if (confirmacao) {
-                new Urna().setVisible(true);
+                new ConsoleUrna().setVisible(true);
                 this.dispose();
 
             }else{

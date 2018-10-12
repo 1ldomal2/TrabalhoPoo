@@ -72,11 +72,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="AbrirCaminho">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="/home/cambraia/NetBeansProjects/TelaUrnaCandidato/icone.png"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="AbrirCaminhoMouseClicked"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AbrirCaminhoActionPerformed"/>
