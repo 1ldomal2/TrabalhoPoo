@@ -57,6 +57,9 @@ public class Candidato {
 	public Partido getPartido() {
 		return Partido;
 	}
+	public Candidato getCandidato() {
+		return this;
+	}
 	public void setPartido(Partido partido) {
 		Partido = partido;
 	}

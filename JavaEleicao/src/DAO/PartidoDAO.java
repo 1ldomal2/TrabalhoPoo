@@ -9,13 +9,20 @@ import org.json.JSONObject;
 
 import Modelo.Documentos;
 import Modelo.Partido;
-
+/**Classe para objetos do tipo Partido, onde armazena um vetor 'this.Array' com n Partidos
+ * @author Lucas Mateus Fernandes
+ */
 public class PartidoDAO {
 	private final int TAMANHO = 50;
 	private static int Total = 0;
 	private Partido[] Array = new Partido[TAMANHO];
 	private Partido celulaVetor = null;
 
+
+	/**Le o Json
+	 * @param String - Json
+	 * @return Void  - Preenche "this.Array" de acordo com Json
+	 */
 	public void ReadJson(String Sjson) throws NoSuchAlgorithmException, JSONException, IOException {//Acho que não precisa mas é para futuras Modificações
 		//Cria um Objeto Json com a String passada como parametro
 		JSONObject json=new JSONObject(Sjson);
@@ -33,7 +40,10 @@ public class PartidoDAO {
 		}
 	}
 	
-
+	/**Cria o Json
+	 * @param Void
+	 * @return String - contendo o Json de "this.Array"
+	 * */
 	public String makeJson() {
 		JSONObject json=new JSONObject();//Superior
 		JSONArray partidos=new JSONArray();
@@ -49,6 +59,11 @@ public class PartidoDAO {
 		return json.toString();
 	}
 	
+	/**Cria o Partido e o insere em 'this.array' 
+	 * @param String - Nome do partido
+	 * @param String - Numero do Partido
+	 * @return Boolean - Confirmando se criou ou nao o partido
+	 * */
 	public boolean CriarPartido(String Nome, int Numero) {
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Partido(Nome, Numero ) ;
@@ -61,7 +76,10 @@ public class PartidoDAO {
 		return false;
 
 	}
-
+	/**Cria Eleitor e insere em 'this.array'
+	 * @param Partido - Objeto Partido
+	 * @return Boolean -  Confirma se inseriu ou nao o partido em this this.array
+	 */
 	public boolean CriarPartido(Partido partido) {
 		if (Total <= TAMANHO && partido != null) {//Evita estourar Array e "lixo" no array
 			this.celulaVetor = partido;
@@ -72,7 +90,10 @@ public class PartidoDAO {
 		return false;
 
 	}
-
+	/**Deleta Partido de 'this.array'
+	 * @param Partido - Objeto partido
+	 * @return Void
+	 */
 	public void DeletaPartito(Partido partido) {
 		if(partido ==null) {//evita erro
 			return;
@@ -90,7 +111,10 @@ public class PartidoDAO {
 		}
 
 	}
-
+	/**Procura e retorna a partido que possui o numero 'x' em 'this.array'
+	 * @param int - Numero do partido
+	 * @return Partido - Retorona o Objeto partido presente em this.array que possui o numero 'x'
+	 */
 	public Partido ObjectNumero(int numero) {
 		for (int i = 0; i < Total; i++) {
 			if(Array[i]!=null) {
@@ -103,6 +127,10 @@ public class PartidoDAO {
 
 	}
 
+	/**Procura e retorna a partido que possui o nome 'x' em 'this.array'
+	 * @param String - Nome do partido
+	 * @return Partido - Retorona o Objeto partido presente em this.array que possui o nome 'x'
+	 */
 	public Partido ObjectNome(String nome) {
 		Documentos doc = new Documentos(nome);
 

@@ -7,16 +7,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Modelo.Documentos;
 import Modelo.Eleitor;
-import Modelo.Senha;
 
+/**Classe para objetos do tipo Eleitor, onde armazena um vetor 'this.Array' com n Eleitores
+ * @author Lucas Mateus Fernandes
+ */
 public class EleitorDAO {
 	private final int TAMANHO = 50;
 	private static int Total = 0;
-	private Eleitor[] Array = new Eleitor[TAMANHO];
+	public Eleitor[] Array = new Eleitor[TAMANHO];
 	private Eleitor celulaVetor = null;
 
+
+	/**Le o Json
+	 * @param String - Json
+	 * @return Void  - Preenche "this.Array" de acordo com Json
+	 */
 	public void ReadJson(String Sjson) throws NoSuchAlgorithmException, JSONException, IOException {
 		//Cria um Objeto Json com a String passada como parametro
 		JSONObject json=new JSONObject(Sjson);
@@ -33,7 +39,10 @@ public class EleitorDAO {
 			
 		}
 	}
-	
+	/**Cria o Json
+	 * @param Void
+	 * @return String - contendo o Json de "this.Array"
+	 * */
 	public String makeJson() {
 		JSONObject json=new JSONObject();//Superior
 		JSONArray eleitores=new JSONArray();
@@ -52,7 +61,14 @@ public class EleitorDAO {
 		return json.toString();
 	}
 	
-	
+	/**Cria EleitorS e insere em 'this.array' Porem a senha é setada na mão
+	 * @param String -Titulo Eleitor 
+	 * @param String - Nome Eleitor
+	 * @param String - Cpf do Eleitor 11 digitos
+	 * @param String - Numero da urna de votação
+	 * @param String - Senha Hash do  do eleitor
+	 * @return Boolean - Confirmando se criou ou nao o eleitor
+	 * */
 	public boolean CriarEleitor(String TituloEleitor, String Nome, String Cpf, String UrnaVotacao, String Senha) throws NoSuchAlgorithmException, IOException {
 		if (Total <= TAMANHO) {// Evita estourar Array
 			this.celulaVetor = new Eleitor(TituloEleitor, Nome, Cpf, UrnaVotacao, Senha);
@@ -66,7 +82,14 @@ public class EleitorDAO {
 
 	}
 
-	
+	/**Cria Eleitor e insere em 'this.array' Porem a senha é gerada apartir do path
+	 * @param String -Titulo Eleitor 
+	 * @param String - Nome Eleitor
+	 * @param String - Cpf do Eleitor 11 digitos
+	 * @param Int - Numero da urna de votação
+	 * @param String - Caminho da imagem .ppm
+	 * @return Boolean - Confirmando se criou ou nao o eleitor
+	 * */
 	public boolean CriarEleitor(String TituloEleitor, String Nome, String Cpf, int UrnaVotacao, String Path) throws NoSuchAlgorithmException, IOException {
 		if (Total <= TAMANHO) {// Evita estourar Array
 			this.celulaVetor = new Eleitor(TituloEleitor, Nome, Cpf, UrnaVotacao, Path);
@@ -79,7 +102,10 @@ public class EleitorDAO {
 		return false;
 
 	}
-
+	/**Cria Eleitor e insere em 'this.array'
+	 * @param Eleitor - Objeto eleitor
+	 * @return Boolean - Confirma se inseriu ou nao o eleitor em this this.array
+	 */
 	public boolean CriarEleitor(Eleitor eleitor) {
 		if (Total <= TAMANHO && eleitor != null) {// Evita estourar Array e "lixo" no array
 			this.celulaVetor = eleitor;
@@ -90,7 +116,10 @@ public class EleitorDAO {
 		return false;
 
 	}
-
+	/**Deleta Eleitor de 'this.array'
+	 * @param Eleitor - Objeto eleitor
+	 * @return Void
+	 */
 	public void DeletaEleitor(Eleitor eleitor) {
 		if(eleitor==null) {//Evita erro 
 			return;
@@ -110,7 +139,11 @@ public class EleitorDAO {
 		}
 
 	}
-	//Buscar por titulo e por cpf
+
+	/**Procura e retorna a pessoas que possui o titulo 'x' em 'this.array'
+	 * @param String - Titulo de eleitor
+	 * @return Eleitor - Retorono o Objeto eleitor presente em this.array que possui o titulo 'x'
+	 */
 	public Eleitor ObjectTitulo(String titulo) {
 		for (int i = 0; i < Total; i++) {
 			if(Array[i]!=null) {
@@ -122,7 +155,10 @@ public class EleitorDAO {
 		return null;// Não achou
 
 	}
-	
+	/**Retorna a pessoa que possui o cpf 'x' em 'this.array'
+	 * @param String - Numero do eleitor
+	 * @return Eleitor - Retorona o Objeto Eleitor presente em this.array que possui o cpf x
+	 */
 	public Eleitor ObjectCpf(String cpf) {
 		for (int i = 0; i < Total; i++) {
 			if(Array[i]!=null) {
@@ -133,6 +169,10 @@ public class EleitorDAO {
 		}
 		return null;// Não achou
 	}
+	/**Retorna a pessoa que possui presente em 'this.array' que possui a senha hash 'x'
+	 * @param String - Senha Hash do eleitor
+	 * @return Eleitor - Retorona o Objeto Eleitor presente em this.array que possui a senha hash x
+	 */
 	public Eleitor ObjectHash(String hash) {//SeRetorna algo diferente de null é pq Senha deu Match
 		for (int i = 0; i < Total; i++) {
 			if(Array[i]!=null) {

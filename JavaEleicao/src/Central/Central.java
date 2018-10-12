@@ -12,6 +12,7 @@ public class Central {
 	private EleitorDAO eleitor = new EleitorDAO();
 	private PartidoDAO partido = new PartidoDAO();
 	private VotoDAO voto = new VotoDAO();
+	private Integer[] nVotos = new Integer[50];
 
 
 	public boolean Send() {
@@ -26,6 +27,10 @@ public class Central {
 	}
 
 	public boolean Resultado() {
+		for (int i = 0; i < array.length; i++) {
+			nVotos[i]=voto.NVotosCandidato(candidato.Array[i].getCandidato());
+		}
+		
 		// Pesquisar os resultados
 		// Fazer uma relação de Candidatos Votos (Procurar voto por Candidato)
 		// Fazer uma relação de Partidos Votos (Procurar voto por partido)

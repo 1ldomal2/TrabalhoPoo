@@ -5,16 +5,24 @@ import org.json.JSONObject;
 
 import Modelo.Candidato;
 import Modelo.Documentos;
-import Modelo.Partido;
+
+/**Classe para objetos do tipo CandidatoDAO, onde armazena um vetor 'this.Array' com n Candidatos
+ * @author Lucas Mateus Fernandes
+ */
 
 public class CandidatoDAO {
 	private final int TAMANHO = 50;
 	private static int Total = 0;
-	private Candidato[] Array = new Candidato[TAMANHO];
+	public Candidato[] Array = new Candidato[TAMANHO];
 	private Candidato celulaVetor = null;
 	
-	
+
+	/**Le o Json
+	 * @param String - Json
+	 * @return Void  - Preenche "this.Array" de acordo com Json
+	 */
 	public void ReadJson(String Sjson) {
+		
 		//Cria um Objeto Json com a String passada como parametro
 		JSONObject json=new JSONObject(Sjson);
 		
@@ -32,6 +40,10 @@ public class CandidatoDAO {
 		
 		
 	}
+	/**Cria o Json
+	 * @param Void
+	 * @return String - contendo o Json de "this.Array"
+	 * */
 	public String makeJson() {
 		JSONObject json=new JSONObject();//Superior
 		JSONArray candidatos=new JSONArray();
@@ -49,18 +61,15 @@ public class CandidatoDAO {
 		json.put("Candidato",candidatos);
 		return json.toString();
 	}
+	/**Cria Candidato e insere em 'this.array'
+	 * @param String - Nome Candidato
+	 * @param String - Numero Candidato
+	 * @param String - Cpf do Candidato
+	 * @param String - Nome do Partido
+	 * @param String - Numero do Partido
+	 * @return Boolean - Confirmando se criou ou nao o candidato
+	 * */
 	
-	public boolean CriarCandidato(String Nome, int Numero, String Cpf, Partido partido) {
-		if (Total < TAMANHO) {//Evita estourar Array
-			this.celulaVetor = new Candidato(Nome, Numero, Cpf, partido);
-			if (celulaVetor != null) {//Evita "lixo" no array
-				Array[Total] = this.celulaVetor;
-				Total++;
-				return true;
-			}
-		}
-		return false;
-	}
 	public boolean CriarCandidato(String Nome, String Numero, String Cpf, String NomePartido,String NumeroPartido) {
 		if (Total < TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Candidato(Nome, Numero, Cpf, NomePartido, NumeroPartido);
@@ -72,7 +81,10 @@ public class CandidatoDAO {
 		}
 		return false;
 	}
-
+	/**Cria Candidato e insere em 'this.array'
+	 * @param Candidato - Objeto candidato
+	 * @return Boolean -  Confirma se inseriu ou nao o candidato em this this.array
+	 */
 	public boolean CriarCandidato(Candidato candidato) {
 		if (Total <= TAMANHO && candidato != null) {//Evita estourar Array e "lixo" no array
 			this.celulaVetor = candidato;
@@ -83,7 +95,11 @@ public class CandidatoDAO {
 		return false;
 
 	}
-
+	
+	/**Deleta Candidato de 'this.array'
+	 * @param Candidato - Objeto candidato
+	 * @return Void
+	 */
 	public void DeletaCandidato(Candidato candidato) {
 		if(candidato ==null) {//evita erro
 			return;
@@ -101,11 +117,32 @@ public class CandidatoDAO {
 		}
 
 	}
-
-	public Candidato ObjectNumero(int numero) {
+	
+	/**Numero de pessoas que possui o cpf 'x' em 'this.array'
+	 * @param String - Cpf do candidato
+	 * @return int - Numero de pessoas com cpf 'x'
+	 */
+	public int intCCPF(String cpf) {
+		int contador=0;
 		for (int i = 0; i < Total; i++) {
 			if(Array[i]!=null) {
-				if (Array[i].getNumero() == numero) {
+				if (Array[i].getCpf().equals(cpf)) {
+					contador++;
+				}
+			}
+		}
+		return contador;// Não achou
+	}
+	
+	/**Procura e retorna a pessoas que possui o numero 'x' em 'this.array'
+	 * @param String - Numero do candidato
+	 * @return Candidato - Retorono o Objeto Candidato presente em this.array que possui o numero x
+	 */
+	public Candidato ObjectNumero(String numero) {
+		int num=Integer.parseInt(numero);
+		for (int i = 0; i < Total; i++) {
+			if(Array[i]!=null) {
+				if (Array[i].getNumero() == num) {
 					return Array[i];// Retorna o candidato com Numero procurado
 				}
 			}
@@ -113,7 +150,10 @@ public class CandidatoDAO {
 		return null;// Não achou
 
 	}
-
+	/**Numero de pessoas que possui o cpf 'x' em 'this.array'
+	 * @param String - cpf do candidato
+	 * @return Candidato - Retorono o Objeto Candidato presente em this.array que possui o numero x
+	 */
 	public Candidato ObjectCpf(String cpf) {
 		Documentos doc = new Documentos(cpf);
 
