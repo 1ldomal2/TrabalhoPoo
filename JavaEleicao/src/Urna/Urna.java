@@ -13,9 +13,10 @@ import Modelo.*;
 public class Urna {
 	private static int TotalUrnas=0;
 	private int Numero;
-	private CandidatoDAO ArrayCandidato=null;
-	private EleitorDAO ArrayEleitor=null;
-	private VotoDAO ArrayVoto=null;
+	private CandidatoDAO ArrayCandidato=new CandidatoDAO();
+	private EleitorDAO ArrayEleitor=new EleitorDAO();
+	private VotoDAO ArrayVoto=new VotoDAO();
+	
 	//Questoes de segurança
 	private boolean Logado=false;
 	private Eleitor User=null;
@@ -46,7 +47,7 @@ public class Urna {
         
         //TESTE
         try {
-			ArrayEleitor.CriarEleitor("1", "2", "06680923603", "01", "/home/lucas/Área de Trabalho/TrabalhoPoo/Arquivos PPM/bolao.ppm");
+			ArrayEleitor.CriarEleitor("1", "2", "06680923603", 01, "/home/lucas/Área de Trabalho/TrabalhoPoo/Arquivos PPM/bolao.ppm");
 		} catch (NoSuchAlgorithmException | IOException e) {
 			e.printStackTrace();
 		}

@@ -22,7 +22,7 @@ public class VotoDAO {
 	private EleitorDAO[] ArrayE = null;
 	private CandidatoDAO[] ArrayC = null;
 	/**Le o Json
-	 * @param String - Json
+	 * @param Sjson - Json
 	 * @return Void  - Preenche "this.Array" de acordo com Json
 	 */
 	public void ReadJson(String Sjson) throws NoSuchAlgorithmException, JSONException, IOException {//Acho que não precisa mas é para futuras Modificações
