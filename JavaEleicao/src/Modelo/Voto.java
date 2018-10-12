@@ -1,37 +1,71 @@
 package Modelo;
 import java.util.Date;
 import org.json.*;
-
+/**
+ *private Eleitor eleitor 
+ *private Candidato candidato
+ *private Date data
+ *private int NumeroUrna
+ * @author lucas
+ *
+ */
 public class Voto {
 	private Eleitor eleitor;
 	private Candidato candidato;
 	private Date data;
 	private int NumeroUrna;
 
+	/**
+	 * 
+	 * @return Object Eleitor
+	 */
 	public Eleitor getEleitor() {
 		return eleitor;
 	}
+	/**
+	 * @return Cpf do Eleitor
+	 */
 	public String getECPF() {
 		return eleitor.getCpfString();
 	}
-
+	/**
+	 * 
+	 * @return Object Candidato
+	 */
 	public Candidato getCandidato() {
 		return candidato;
 	}
+	/**
+	 * 
+	 * @return Cpf do Candidato
+	 */
 	public String getCCPF() {
 		return candidato.getCpfString();
 	}
-	
+	/**
+	 * @return Long (parametro do date)
+	 */
 	public long getTime() {
 		return data.getTime();
 	}
+	/**
+	 * 
+	 * @return Object Date
+	 */
 	public Date getData() {
 		return data;
 	}
-
+	/**
+	 * 
+	 * @return Numero da Urna
+	 */
 	public int getNumeroUrna() {
 		return NumeroUrna;
 	}
+	/**
+	 * 
+	 * @param numeroUrna Numero da urna
+	 */
 	public void setNumeroUrna(int numeroUrna) {
 		NumeroUrna = numeroUrna;
 	}
@@ -59,16 +93,5 @@ public class Voto {
 		this.candidato=candidato;//Procura o candidato por cpf
 		this.NumeroUrna=Integer.parseInt(NumeroUrna);
 		data=new Date(Integer.parseInt(Data));
-	}
-	public String makeJson() {
-		//Cria um objecto Json
-		JSONObject json=new JSONObject();
-		json.put("Urna",NumeroUrna);
-		json.put("CpfEleitor",eleitor.getCpfString());
-		json.put("CpfCandidato",candidato.getCpfString());
-		json.put("Data",data.getTime());
-
-		//Transforma em String
-		return json.toString();
 	}
 }

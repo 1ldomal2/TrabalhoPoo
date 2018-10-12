@@ -2,36 +2,54 @@ package Modelo;
 import org.json.*;
 import java.util.Date;
 
+/**Classe que faz tratamento do cpf
+*private String Nome;
+*private int Numero;
+*private Date DataCadastro;
+ * @author Lucas Mateus Fernandes
+ */
+
 public class Partido {
 	private String Nome;
 	private int Numero;
 	private Date DataCadastro;
 	
+	/**
+	 * 
+	 * @param nome Nome do partido
+	 * @param numero Numero do partido
+	 */
 	
-	//Neste caso chamar funçoes gera uma sobrecarga ou seja é possivel fazer mas não é viavel
-	public Partido(String nome,int numero) {
-		setNome(nome);
-		setNumero(numero);
-		DataCadastro=new Date();		
-	}
-	public Partido(String nome,String numero) {//Import do Json
+	public Partido(String nome,String numero) {
 		this.Numero=Integer.parseInt(numero);
 		this.Nome=nome;
 		DataCadastro=null;//So é relevante para a Central		
 	}
-		
+	/**
+	 * 
+	 * @return Object com data de cadastro
+	 */
 	public Date getDataCadastro() {
 		return DataCadastro;
 	}
-	
+	/**
+	 * 
+	 * @param nome Nome do partido
+	 */
 	public void setNome(String nome) {
 		this.Nome = nome;
 	}
-	
+	/**
+	 * @return Nome do Partido
+	 */
 	public String getNome() {
 		return Nome;
 	}
-	public String getNOME() {//ESTA FUNCIONANDO ?????????????
+	/**
+	 * 
+	 * @return Nome do Partido em CAIXA ALTA
+	 */
+	public String getNOME() {
 		String aux=this.Nome.toUpperCase();//Transforma tudo em caixa alta
 		String[] parts = aux.split(" ");//Separa em espaços
 		String retorno ="";
@@ -41,28 +59,24 @@ public class Partido {
 				
 		return retorno;
 	}
-	
+	/**
+	 * @param numero Numero do partido
+	 */
 	public void setNumero(int numero) {
 		Numero = numero;
 	}
-	
+	/**
+	 * 
+	 * @return Numero do partido
+	 */
 	public int getNumero() {
 		return Numero;
 	}
-	
+	/**
+	 * @return Numero-Nome partido
+	 */
 	public String toString(){
-		return Nome;	
-	}
-	
-	public String makeJson() {
-		//Cria um objecto Json
-		JSONObject json=new JSONObject();
-		json.put("Nome",Nome);
-		json.put("Numero",Numero);
-		json.put("Data",DataCadastro.getTime());
-
-		//Transforma em String
-		return json.toString();
+		return Numero+"-"+Nome;	
 	}
 	
 }
