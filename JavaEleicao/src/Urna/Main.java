@@ -9,6 +9,7 @@ import DAO.CandidatoDAO;
 import DAO.EleitorDAO;
 import DAO.PartidoDAO;
 import DAO.VotoDAO;
+import Interface.Login;
 import Modelo.Documentos;
 import Modelo.Partido;
 
@@ -16,7 +17,9 @@ import Modelo.Partido;
 public class Main {
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-		Urna instancia1=new Urna() ;
+		//Cria tela de Login
+		Login ins=new Login();
+		ins.setVisible(true);
 	}
 }
 

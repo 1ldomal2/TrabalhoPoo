@@ -20,7 +20,7 @@ public class EleitorDAO {
 
 
 	/**Le o Json
-	 * @param String - Json
+	 * @param Sjson - Json
 	 * @return Void  - Preenche "this.Array" de acordo com Json
 	 */
 	public void ReadJson(String Sjson) throws NoSuchAlgorithmException, JSONException, IOException {
@@ -62,11 +62,11 @@ public class EleitorDAO {
 	}
 	
 	/**Cria EleitorS e insere em 'this.array' Porem a senha é setada na mão
-	 * @param String -Titulo Eleitor 
-	 * @param String - Nome Eleitor
-	 * @param String - Cpf do Eleitor 11 digitos
-	 * @param String - Numero da urna de votação
-	 * @param String - Senha Hash do  do eleitor
+	 * @param TituloEleitor -Titulo Eleitor 
+	 * @param Nome - Nome Eleitor
+	 * @param Cpf - Cpf do Eleitor 11 digitos
+	 * @param UrnaVotacao - Numero da urna de votação
+	 * @param Senha - Senha Hash do  do eleitor
 	 * @return Boolean - Confirmando se criou ou nao o eleitor
 	 * */
 	public boolean CriarEleitor(String TituloEleitor, String Nome, String Cpf, String UrnaVotacao, String Senha) throws NoSuchAlgorithmException, IOException {
@@ -83,11 +83,11 @@ public class EleitorDAO {
 	}
 
 	/**Cria Eleitor e insere em 'this.array' Porem a senha é gerada apartir do path
-	 * @param String -Titulo Eleitor 
-	 * @param String - Nome Eleitor
-	 * @param String - Cpf do Eleitor 11 digitos
-	 * @param Int - Numero da urna de votação
-	 * @param String - Caminho da imagem .ppm
+	  * @param TituloEleitor -Titulo Eleitor 
+	 * @param Nome - Nome Eleitor
+	 * @param Cpf - Cpf do Eleitor 11 digitos
+	 * @param UrnaVotacao - Numero da urna de votação
+	 * @param Path - Caminha da imagem que vai gerar a hash
 	 * @return Boolean - Confirmando se criou ou nao o eleitor
 	 * */
 	public boolean CriarEleitor(String TituloEleitor, String Nome, String Cpf, int UrnaVotacao, String Path) throws NoSuchAlgorithmException, IOException {
@@ -103,7 +103,7 @@ public class EleitorDAO {
 
 	}
 	/**Cria Eleitor e insere em 'this.array'
-	 * @param Eleitor - Objeto eleitor
+	 * @param eleitor - Objeto eleitor
 	 * @return Boolean - Confirma se inseriu ou nao o eleitor em this this.array
 	 */
 	public boolean CriarEleitor(Eleitor eleitor) {
@@ -117,7 +117,7 @@ public class EleitorDAO {
 
 	}
 	/**Deleta Eleitor de 'this.array'
-	 * @param Eleitor - Objeto eleitor
+	 * @param eleitor - Objeto eleitor
 	 * @return Void
 	 */
 	public void DeletaEleitor(Eleitor eleitor) {
@@ -141,7 +141,7 @@ public class EleitorDAO {
 	}
 
 	/**Procura e retorna a pessoas que possui o titulo 'x' em 'this.array'
-	 * @param String - Titulo de eleitor
+	 * @param titulo - Titulo de eleitor
 	 * @return Eleitor - Retorono o Objeto eleitor presente em this.array que possui o titulo 'x'
 	 */
 	public Eleitor ObjectTitulo(String titulo) {
@@ -156,7 +156,7 @@ public class EleitorDAO {
 
 	}
 	/**Retorna a pessoa que possui o cpf 'x' em 'this.array'
-	 * @param String - Numero do eleitor
+	 * @param cpf - Numero do eleitor
 	 * @return Eleitor - Retorona o Objeto Eleitor presente em this.array que possui o cpf x
 	 */
 	public Eleitor ObjectCpf(String cpf) {
@@ -170,7 +170,7 @@ public class EleitorDAO {
 		return null;// Não achou
 	}
 	/**Retorna a pessoa que possui presente em 'this.array' que possui a senha hash 'x'
-	 * @param String - Senha Hash do eleitor
+	 * @param hash - Senha Hash do eleitor
 	 * @return Eleitor - Retorona o Objeto Eleitor presente em this.array que possui a senha hash x
 	 */
 	public Eleitor ObjectHash(String hash) {//SeRetorna algo diferente de null é pq Senha deu Match

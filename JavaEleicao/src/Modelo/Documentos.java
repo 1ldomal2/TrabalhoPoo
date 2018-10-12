@@ -33,7 +33,7 @@ public class Documentos {
 	}
 	/**
 	 * Faz a verificação do cpf se é valido ou nao
-	 *@param String - Cpf
+	 *@param cpf - Cpf
 	 *@return Retorna True ou False para ver se o cpf digitado é valido ou nao
 	 */	
 	public boolean validaCpf(String cpf) {

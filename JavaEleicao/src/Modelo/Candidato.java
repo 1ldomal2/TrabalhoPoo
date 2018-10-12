@@ -17,11 +17,11 @@ public class Candidato {
 		
 	}
 	/**Construtor Candidato
-	 * @param String - Nome do Candidato
-	 * @param String - Numero
-	 * @param String - Cpf
-	 * @param String-  NumeroPartido
-	 * @param String-  NomePartido
+	 * @param Nome - Nome do Candidato
+	 * @param Numero - Numero do Candidato
+	 * @param Cpf - Cpf do Candidato
+	 * @param NumeroPartido-  Numero do Partido
+	 * @param NomePartido-  Nome do Partido
 	 */	
 	public Candidato(String Nome,String Numero,String Cpf,String NumeroPartido,String NomePartido){//Import do Json
 		//Tem que fazer o tratamento do Partido depois
@@ -52,7 +52,7 @@ public class Candidato {
 	public void setNumero(int numero) {
 		Numero = numero;
 	}
-	/**@param String-  Numero Cpf
+	/**@param cpf-  Numero Cpf em String
 	 * @return Boolean - TRUE (se cpf for valido) FALSE(se cpf for invalido)
 	 */
 	public boolean setCpf(String cpf) {
@@ -84,7 +84,7 @@ public class Candidato {
 	public Candidato getCandidato() {
 		return this;
 	}
-	/*@param Partido - Objecto Partido 
+	/*@param partido - Objecto Partido 
 	 */
 	public void setPartido(Partido partido) {
 		Partido = partido;

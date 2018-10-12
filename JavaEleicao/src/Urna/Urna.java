@@ -43,6 +43,13 @@ public class Urna {
 		
 		//cria um JSONArray e preenche com valores string
         JSONArray jsonArray = new JSONArray();
+        
+        //TESTE
+        try {
+			ArrayEleitor.CriarEleitor("1", "2", "06680923603", "01", "/home/lucas/Área de Trabalho/TrabalhoPoo/Arquivos PPM/bolao.ppm");
+		} catch (NoSuchAlgorithmException | IOException e) {
+			e.printStackTrace();
+		}
 		
 		
 	}

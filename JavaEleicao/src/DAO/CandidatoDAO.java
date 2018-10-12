@@ -18,7 +18,7 @@ public class CandidatoDAO {
 	
 
 	/**Le o Json
-	 * @param String - Json
+	 * @param Sjson - String com Json
 	 * @return Void  - Preenche "this.Array" de acordo com Json
 	 */
 	public void ReadJson(String Sjson) {
@@ -62,11 +62,11 @@ public class CandidatoDAO {
 		return json.toString();
 	}
 	/**Cria Candidato e insere em 'this.array'
-	 * @param String - Nome Candidato
-	 * @param String - Numero Candidato
-	 * @param String - Cpf do Candidato
-	 * @param String - Nome do Partido
-	 * @param String - Numero do Partido
+	 * @param Nome - Nome Candidato
+	 * @param Numero - Numero Candidato
+	 * @param Cpf - Cpf do Candidato
+	 * @param NomePartido - Nome do Partido
+	 * @param NumeroPartido - Numero do Partido
 	 * @return Boolean - Confirmando se criou ou nao o candidato
 	 * */
 	
@@ -82,7 +82,7 @@ public class CandidatoDAO {
 		return false;
 	}
 	/**Cria Candidato e insere em 'this.array'
-	 * @param Candidato - Objeto candidato
+	 * @param candidato - Objeto candidato
 	 * @return Boolean -  Confirma se inseriu ou nao o candidato em this this.array
 	 */
 	public boolean CriarCandidato(Candidato candidato) {
@@ -97,7 +97,7 @@ public class CandidatoDAO {
 	}
 	
 	/**Deleta Candidato de 'this.array'
-	 * @param Candidato - Objeto candidato
+	 * @param candidato - Objeto candidato
 	 * @return Void
 	 */
 	public void DeletaCandidato(Candidato candidato) {
@@ -119,7 +119,7 @@ public class CandidatoDAO {
 	}
 	
 	/**Numero de pessoas que possui o cpf 'x' em 'this.array'
-	 * @param String - Cpf do candidato
+	 * @param cpf - Cpf do candidato
 	 * @return int - Numero de pessoas com cpf 'x'
 	 */
 	public int intCCPF(String cpf) {
@@ -135,7 +135,7 @@ public class CandidatoDAO {
 	}
 	
 	/**Procura e retorna a pessoas que possui o numero 'x' em 'this.array'
-	 * @param String - Numero do candidato
+	 * @param numero - Numero do candidato
 	 * @return Candidato - Retorono o Objeto Candidato presente em this.array que possui o numero x
 	 */
 	public Candidato ObjectNumero(String numero) {
@@ -151,7 +151,7 @@ public class CandidatoDAO {
 
 	}
 	/**Numero de pessoas que possui o cpf 'x' em 'this.array'
-	 * @param String - cpf do candidato
+	 * @param cpf - cpf do candidato
 	 * @return Candidato - Retorono o Objeto Candidato presente em this.array que possui o numero x
 	 */
 	public Candidato ObjectCpf(String cpf) {
