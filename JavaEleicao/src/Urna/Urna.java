@@ -16,6 +16,7 @@ public class Urna {
 	private CandidatoDAO ArrayCandidato=new CandidatoDAO();
 	private EleitorDAO ArrayEleitor=new EleitorDAO();
 	private VotoDAO ArrayVoto=new VotoDAO();
+	private PartidoDAO ArrayPartido=new PartidoDAO();
 	
 	//Questoes de segurança
 	private boolean Logado=false;
@@ -35,23 +36,12 @@ public class Urna {
 		TotalUrnas++;
 		Numero=TotalUrnas;
 	}
-	public void Receive() {//Não sei o que tem que retorna
+	public void Receive() {//Não sei o que tem que retorna}
 		//Pega DO GOOGLE dRIVE
-		
-		//Cria um Objeto Json
-		String JsonCru;
-		JSONObject json=new JSONObject();
-		
-		//cria um JSONArray e preenche com valores string
-        JSONArray jsonArray = new JSONArray();
-        
-        //TESTE
-        try {
-			ArrayEleitor.CriarEleitor("1", "2", "06680923603", 01, "/home/lucas/Área de Trabalho/TrabalhoPoo/Arquivos PPM/bolao.ppm");
-		} catch (NoSuchAlgorithmException | IOException e) {
-			e.printStackTrace();
-		}
-		
+		  ArrayCandidato.Receive();
+		  //ArrayEleitor.Receive();
+		  //ArrayVoto.Receive();
+		  //ArrayPartido.Receive();
 		
 	}
 	public void Send() {

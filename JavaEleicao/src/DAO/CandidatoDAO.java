@@ -16,15 +16,21 @@ public class CandidatoDAO {
 	public Candidato[] Array = new Candidato[TAMANHO];
 	private Candidato celulaVetor = null;
 	
-
+	/**Conexao com Google drive*/
+	public void Receive() {
+		
+		String json ="{\"Candidato\":[{\"Numero\":\"13\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"},{\"Numero\":\"13\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"},{\"Numero\":\"13\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"}]}";
+		ReadJson(json);
+	}
+	
 	/**Le o Json
 	 * @param Sjson - String com Json
 	 * @return Void  - Preenche "this.Array" de acordo com Json
 	 */
 	public void ReadJson(String Sjson) {
-		
 		//Cria um Objeto Json com a String passada como parametro
 		JSONObject json=new JSONObject(Sjson);
+
 		
 		//Quebra o Json no Vetor
 		JSONArray jsonCandidatos = json.getJSONArray("Candidato");
@@ -32,10 +38,18 @@ public class CandidatoDAO {
 		//Le o json  Candidato por Candidato
 		for (int i = 0; i < jsonCandidatos.length(); i++) {
 			//recupera candidato de índice "i" no array 
-            JSONObject c = jsonCandidatos.getJSONObject(i);
-			//Adiciona ao Vetor
-            this.CriarCandidato(c.getString("Nome"), c.getString("Numero"),c.getString("Cpf"),c.getString("NomePartido"),c.getString("NumeroPartido"));
 			
+            JSONObject c = jsonCandidatos.getJSONObject(i);
+            System.out.println(c.getString("Nome")); 
+            System.out.println(c.getString("Numero"));
+            System.out.println(c.getString("Cpf"));
+            System.out.println(c.getString("NomePartido"));
+            System.out.println(c.getString("NumeroPartido"));
+            System.out.println("Tamanho = "+i);
+            
+			//Adiciona ao Vetor
+           this.CriarCandidato(c.getString("Nome"), c.getString("Numero"),c.getString("Cpf"),c.getString("NumeroPartido"),c.getString("NomePartido"));
+		System.out.println("Criou");
 		}
 		
 		
@@ -50,11 +64,11 @@ public class CandidatoDAO {
 		JSONObject candidato=new JSONObject();//Superior
 		for (int i = 0; i < Total; i++) {
 			//Cria Objetos Json
-			candidato.put("Nome", Array[i].getNome());
-			candidato.put("Numero", Array[i].getNumero());
-			candidato.put("Cpf", Array[i].getCpf());
-			candidato.put("NomePartido", Array[i].getPartido().getNome());
-			candidato.put("NumeroPartido", Array[i].getPartido().getNumero());
+			candidato.put("Nome",Array[i].getNome());
+			candidato.put("Numero",""+Array[i].getNumero());//Transformando o int em string
+			candidato.put("Cpf",Array[i].getCpf());
+			candidato.put("NomePartido",Array[i].getPartido().getNome());
+			candidato.put("NumeroPartido",""+Array[i].getPartido().getNumero());//Transformando o int em string
 			//Adicionao Objeto Json em um vetor de Jsons
 			candidatos.put(candidato);
 		}
@@ -64,15 +78,15 @@ public class CandidatoDAO {
 	/**Cria Candidato e insere em 'this.array'
 	 * @param Nome - Nome Candidato
 	 * @param Numero - Numero Candidato
-	 * @param Cpf - Cpf do Candidato
-	 * @param NomePartido - Nome do Partido
+	 * @param Cpf - Cpf do Candidato 
 	 * @param NumeroPartido - Numero do Partido
+	 * @param NomePartido - Nome do Partido
 	 * @return Boolean - Confirmando se criou ou nao o candidato
 	 * */
 	
-	public boolean CriarCandidato(String Nome, String Numero, String Cpf, String NomePartido,String NumeroPartido) {
+	public boolean CriarCandidato(String Nome, String Numero, String Cpf, String NumeroPartido,String NomePartido) {
 		if (Total < TAMANHO) {//Evita estourar Array
-			this.celulaVetor = new Candidato(Nome, Numero, Cpf, NomePartido, NumeroPartido);
+			this.celulaVetor = new Candidato(Nome, Numero, Cpf,NumeroPartido , NomePartido);
 			if (celulaVetor != null) {//Evita "lixo" no array
 				Array[Total] = this.celulaVetor;
 				Total++;

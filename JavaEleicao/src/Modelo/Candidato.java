@@ -13,6 +13,7 @@ public class Candidato {
 	private Documentos Cpf;
 	private Partido Partido;
 	
+	
 	public Candidato() {
 		
 	}
@@ -28,7 +29,7 @@ public class Candidato {
 		if(setCpf(Cpf)) {//Se o cpf não for valido ja aborta
 			this.Nome=Nome;
 			this.Numero=Integer.parseInt(Numero);
-			this.Partido=new Partido(NomePartido,NumeroPartido);
+			this.Partido=new Partido(NumeroPartido,NomePartido);
 			
 		}
 	}

@@ -20,7 +20,7 @@ public class Partido {
 	 * @param numero Numero do partido
 	 */
 	
-	public Partido(String nome,String numero) {
+	public Partido(String numero,String nome) {
 		this.Numero=Integer.parseInt(numero);
 		this.Nome=nome;
 		DataCadastro=null;//So é relevante para a Central		

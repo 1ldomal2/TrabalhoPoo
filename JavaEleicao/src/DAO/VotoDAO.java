@@ -21,6 +21,20 @@ public class VotoDAO {
 	//Quando carregar ???
 	private EleitorDAO[] ArrayE = null;
 	private CandidatoDAO[] ArrayC = null;
+	
+	
+	/**Conexao com Google drive*/
+	public void Receive() {
+		String json="{\"Voto\":[{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"066.809.236-03\",\"Time\":\"1539385115367\"}]}";
+
+		try {
+			ReadJson(json);
+		} catch (NoSuchAlgorithmException | JSONException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**Le o Json
 	 * @param Sjson - Json
 	 * @return Void  - Preenche "this.Array" de acordo com Json
@@ -59,8 +73,8 @@ public class VotoDAO {
 			//Cria Objetos Json
 			voto.put("CpfEleitor", Array[i].getECPF());
 			voto.put("CpfCandidato", Array[i].getCCPF());
-			voto.put("nUrna",Array[i].getCCPF());
-			voto.put("Time",Array[i].getTime());
+			voto.put("nUrna",""+Array[i].getCCPF());
+			voto.put("Time",""+Array[i].getTime());
 			//Adicionao Objeto Json em um vetor de Jsons
 			votos.put(voto);
 		}

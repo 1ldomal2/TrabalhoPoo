@@ -18,7 +18,18 @@ public class PartidoDAO {
 	private Partido[] Array = new Partido[TAMANHO];
 	private Partido celulaVetor = null;
 
+	/**Conexao com Google drive*/
+	public void Receive() {
+		String json="{\"Partido\":[{\"Numero\":\"1\",\"Nome\":\"Nome\"}]}";
 
+		try {
+			ReadJson(json);
+		} catch (NoSuchAlgorithmException | JSONException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**Le o Json
 	 * @param String - Json
 	 * @return Void  - Preenche "this.Array" de acordo com Json
@@ -51,7 +62,7 @@ public class PartidoDAO {
 		for (int i = 0; i < Total; i++) {
 			//Cria Objetos Json
 			partido.put("Nome", Array[i].getNome());
-			partido.put("Numero", Array[i].getNumero());
+			partido.put("Numero",""+Array[i].getNumero());
 			//Adicionao Objeto Json em um vetor de Jsons
 			partidos.put(partido);
 		}
