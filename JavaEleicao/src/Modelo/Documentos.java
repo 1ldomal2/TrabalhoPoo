@@ -1,24 +1,41 @@
 package Modelo;
-
+/**Classe que faz tratamento do cpf
+ *private boolean fomatedCpf   
+ *private boolean validCpf
+ *private String formated
+ *private String noFormated
+ * @author Lucas Mateus Fernandes
+ */
 public class Documentos {
 	private boolean fomatedCpf=false;
 	private boolean validCpf=false;
 	private String formated="";
 	private String noFormated="";
 	
+	/**Construtor que ja seta todos os atributo*/	
 	public Documentos(String cpf){
 		validaCpf(cpf);
 	}
 	public Documentos(){
 		
 	}
+	/**
+	 *@return Retorna True ou False para ver se o cpf digitado no contrutor veio com pontuação '14 digitos' ou sem pontuação '11digitos	
+	 */	
 	public boolean getFomatedCpf() {
 		return fomatedCpf;
 	}
+	/**
+	 *@return Retorna True ou False para ver se o cpf digitado é valido ou nao
+	 */	
 	public boolean getValidCpf() {
 		return validCpf;
 	}
-	
+	/**
+	 * Faz a verificação do cpf se é valido ou nao
+	 *@param String - Cpf
+	 *@return Retorna True ou False para ver se o cpf digitado é valido ou nao
+	 */	
 	public boolean validaCpf(String cpf) {
 		int nponto = 0;
 		int nhifen = 0;
@@ -183,6 +200,9 @@ public class Documentos {
 		return true;
 			
 	}
+	/**
+	 *@return String - Retorna a região do cpf de acordo com o ultimo digito antes dos digitos verificadores
+	 */	
 	public String regiaoCpf(String cpf) {
 		if(validCpf != true) {
 			return "Cpf Invalido";
@@ -219,6 +239,9 @@ public class Documentos {
 				return "Cpf Invalido";
 			}		
 	}
+	/**
+	 *@return Transforma a formatação do cpf
+	 */	
 	public void stringsCpf(){
 		String cpf ="";
 		if(fomatedCpf==true) {
@@ -259,12 +282,21 @@ public class Documentos {
 		return;
 		
 	}
+	/**
+	 *@return String- Cpf sem pontuação 11digitos
+	 */	
 	public String toString(){
 		return formated;	
 	}
+	/**
+	 *@return String- Cpf com pontuação 14digitos
+	 */	
 	public String toStringPonto(){
 		return noFormated;		
 	}
+	/**
+	 *@return Boolean -Verifica se o cpf é igual "Tanto com pontuação ou sem pontuação'
+	 */	
 	public boolean equals(String cpf){//Verifica se é igual formatado ou não
 		if(cpf.equals(formated)||cpf.equals(noFormated)) {
 			return true;	
