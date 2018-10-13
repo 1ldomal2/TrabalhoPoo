@@ -68,15 +68,16 @@ public class VotoDAO {
 	public String makeJson() {
 		JSONObject json=new JSONObject();//Superior
 		JSONArray votos=new JSONArray();
-		JSONObject voto=new JSONObject();//Superior
+		JSONObject[] voto=new JSONObject[Total];//Superior
 		for (int i = 0; i < Total; i++) {
+			voto[i]=new JSONObject();
 			//Cria Objetos Json
-			voto.put("CpfEleitor", Array[i].getECPF());
-			voto.put("CpfCandidato", Array[i].getCCPF());
-			voto.put("nUrna",""+Array[i].getCCPF());
-			voto.put("Time",""+Array[i].getTime());
+			voto[i].put("CpfEleitor", Array[i].getECPF());
+			voto[i].put("CpfCandidato", Array[i].getCCPF());
+			voto[i].put("nUrna",""+Array[i].getCCPF());
+			voto[i].put("Time",""+Array[i].getTime());
 			//Adicionao Objeto Json em um vetor de Jsons
-			votos.put(voto);
+			votos.put(voto[i]);
 		}
 		json.put("Voto",votos);
 		return json.toString();

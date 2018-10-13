@@ -24,10 +24,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
         ArrayCandidato=new CandidatoDAO();
     
         //Receive Google Drive
-        ArrayCandidato.Receive();
-        
-        //
-        
+        ArrayCandidato.Receive();        
 
     }
 

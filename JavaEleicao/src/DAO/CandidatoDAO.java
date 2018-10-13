@@ -19,7 +19,7 @@ public class CandidatoDAO {
 	/**Conexao com Google drive*/
 	public void Receive() {
 		
-		String json ="{\"Candidato\":[{\"Numero\":\"13\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"},{\"Numero\":\"13\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"},{\"Numero\":\"13\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"}]}";
+		String json ="{\"Candidato\":[{\"Numero\":\"12345\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"},{\"Numero\":\"11111\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"},{\"Numero\":\"13\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"}]}";
 		ReadJson(json);
 	}
 	
@@ -38,18 +38,10 @@ public class CandidatoDAO {
 		//Le o json  Candidato por Candidato
 		for (int i = 0; i < jsonCandidatos.length(); i++) {
 			//recupera candidato de índice "i" no array 
-			
             JSONObject c = jsonCandidatos.getJSONObject(i);
-            System.out.println(c.getString("Nome")); 
-            System.out.println(c.getString("Numero"));
-            System.out.println(c.getString("Cpf"));
-            System.out.println(c.getString("NomePartido"));
-            System.out.println(c.getString("NumeroPartido"));
-            System.out.println("Tamanho = "+i);
-            
+           
 			//Adiciona ao Vetor
            this.CriarCandidato(c.getString("Nome"), c.getString("Numero"),c.getString("Cpf"),c.getString("NumeroPartido"),c.getString("NomePartido"));
-		System.out.println("Criou");
 		}
 		
 		
@@ -61,16 +53,17 @@ public class CandidatoDAO {
 	public String makeJson() {
 		JSONObject json=new JSONObject();//Superior
 		JSONArray candidatos=new JSONArray();
-		JSONObject candidato=new JSONObject();//Superior
+		JSONObject[] candidato=new JSONObject[Total];//Superior
 		for (int i = 0; i < Total; i++) {
 			//Cria Objetos Json
-			candidato.put("Nome",Array[i].getNome());
-			candidato.put("Numero",""+Array[i].getNumero());//Transformando o int em string
-			candidato.put("Cpf",Array[i].getCpf());
-			candidato.put("NomePartido",Array[i].getPartido().getNome());
-			candidato.put("NumeroPartido",""+Array[i].getPartido().getNumero());//Transformando o int em string
+			candidato[i]=new JSONObject();
+			candidato[i].put("Nome",Array[i].getNome());
+			candidato[i].put("Numero",""+Array[i].getNumero());//Transformando o int em string
+			candidato[i].put("Cpf",Array[i].getCpf());
+			candidato[i].put("NomePartido",Array[i].getPartido().getNome());
+			candidato[i].put("NumeroPartido",""+Array[i].getPartido().getNumero());//Transformando o int em string
 			//Adicionao Objeto Json em um vetor de Jsons
-			candidatos.put(candidato);
+			candidatos.put(candidato[i]);
 		}
 		json.put("Candidato",candidatos);
 		return json.toString();

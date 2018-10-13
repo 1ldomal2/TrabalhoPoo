@@ -58,13 +58,15 @@ public class PartidoDAO {
 	public String makeJson() {
 		JSONObject json=new JSONObject();//Superior
 		JSONArray partidos=new JSONArray();
-		JSONObject partido=new JSONObject();//Superior
+		JSONObject[] partido=new JSONObject[Total];//Superior
 		for (int i = 0; i < Total; i++) {
+			//Instancia o Objcte
+			partido[i]=new JSONObject();
 			//Cria Objetos Json
-			partido.put("Nome", Array[i].getNome());
-			partido.put("Numero",""+Array[i].getNumero());
+			partido[i].put("Nome", Array[i].getNome());
+			partido[i].put("Numero",""+Array[i].getNumero());
 			//Adicionao Objeto Json em um vetor de Jsons
-			partidos.put(partido);
+			partidos.put(partido[i]);
 		}
 		json.put("Partido",partidos);
 		return json.toString();

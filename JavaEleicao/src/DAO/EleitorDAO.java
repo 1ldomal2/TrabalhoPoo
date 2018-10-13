@@ -21,7 +21,7 @@ public class EleitorDAO {
 	/**Conexao com Google drive*/
 	public void Receive() {
 		String json="{\"Eleitor\":[{\"UrnaVotacao\":\"1\",\"Senha\":\"956eee1761b6224b512dcb6491c0355dfe2dad05d242e5f70f97651b3d6674f3\",\"Cpf\":\"066.809.236-03\",\"TituloEleitor\":\"Titulo1\",\"Nome\":\"Nome1\"}]}";
-		
+		//HASH TA ERRADO
 		try {
 			ReadJson(json);
 		} catch (NoSuchAlgorithmException | JSONException | IOException e) {
@@ -59,16 +59,18 @@ public class EleitorDAO {
 	public String makeJson() {
 		JSONObject json=new JSONObject();//Superior
 		JSONArray eleitores=new JSONArray();
-		JSONObject eleitor=new JSONObject();//Superior
+		JSONObject[] eleitor=new JSONObject[Total];
 		for (int i = 0; i < Total; i++) {
+			
 			//Cria Objetos Json
-			eleitor.put("UrnaVotacao",""+Array[i].getUrnaVotacao());
-			eleitor.put("Senha", Array[i].getHash());
-			eleitor.put("Cpf", Array[i].getCpfString());
-			eleitor.put("TituloEleitor", Array[i].getTituloEleitor());
-			eleitor.put("Nome", Array[i].getNome());
+			eleitor[i]=new JSONObject();
+			eleitor[i].put("UrnaVotacao",""+Array[i].getUrnaVotacao());
+			eleitor[i].put("Senha", Array[i].getHash());
+			eleitor[i].put("Cpf", Array[i].getCpfString());
+			eleitor[i].put("TituloEleitor", Array[i].getTituloEleitor());
+			eleitor[i].put("Nome", Array[i].getNome());
 			//Adicionao Objeto Json em um vetor de Jsons
-			eleitores.put(eleitor);
+			eleitores.put(eleitor[i]);
 		}
 		json.put("Eleitor",eleitores);
 		return json.toString();
