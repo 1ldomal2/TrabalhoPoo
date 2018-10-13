@@ -6,8 +6,10 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.text.MaskFormatter;
 
+
 import DAO.CandidatoDAO;
 import DAO.EleitorDAO;
+import Modelo.Candidato;
 
 /**
  *
@@ -15,7 +17,8 @@ import DAO.EleitorDAO;
  */
 public class ConsoleUrna extends javax.swing.JFrame {
 	private CandidatoDAO ArrayCandidato=null;
-   
+
+	
     public ConsoleUrna() {
         initComponents();
         Confirma.setEnabled(false);
@@ -159,11 +162,11 @@ public class ConsoleUrna extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("Nome Partido");
 
-        jLabel2.setText("jLabel1");
+        jLabel2.setText("Numero Partido");
 
-        jLabel3.setText("jLabel1");
+        jLabel3.setText("Nome Candidato");
 
         ApagarNumero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,12 +276,30 @@ public class ConsoleUrna extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void MostraCandidato() {
+		if(CampoCandidato.getText().length()==5) {
+			//Pega Numero do terminal e pesquisa se há algum candidato com esse numero
+			Candidato cand=ArrayCandidato.ObjectNumero(CampoCandidato.getText());
+			if(cand ==null) {//Nao há nimguem com esse numero
+				jLabel3.setText("Nome Candidato");
+				jLabel2.setText("Numero Partido");
+				jLabel1.setText("Nome Partido");
+				cand=null;
+			}else {
+				jLabel3.setText(cand.getNome());
+				jLabel2.setText(""+cand.getPartido().getNumero());
+				jLabel1.setText(cand.getPartido().getNOME());
+			}
+		}else {
+			jLabel3.setText("Nome Candidato");
+			jLabel2.setText("Numero Partido");
+			jLabel1.setText("Nome Partido");
+			
+			return;
+		}
+	}
     private void setOk() {
         Confirma.setEnabled(true);
-        //LUCAS: MOSTRAR CANDIDATO NO LABEL 
-        //Candidato cand; 
-        //cand = ObjectNumero(Integer.parseInt(CampoCandidato.getText()));
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -288,6 +309,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
                 setOk();
             }
         }
+        MostraCandidato();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -298,6 +320,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
                 setOk();
             }
         }
+        MostraCandidato();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -308,6 +331,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
                 setOk();
             }
         }
+        MostraCandidato();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -328,6 +352,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
                 setOk();
             }
         }
+        MostraCandidato();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -338,6 +363,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
                 setOk();
             }
         }
+        MostraCandidato();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -348,6 +374,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
                 setOk();
             }
         }
+        MostraCandidato();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -358,6 +385,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
                 setOk();
             }
         }
+        MostraCandidato();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -368,6 +396,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
                 setOk();
             }
         }
+        MostraCandidato();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton0ActionPerformed
@@ -378,12 +407,14 @@ public class ConsoleUrna extends javax.swing.JFrame {
                 setOk();
             }
         }
+        MostraCandidato();
     }//GEN-LAST:event_jButton0ActionPerformed
 
     private void LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparActionPerformed
         // TODO add your handling code here:
         CampoCandidato.setText("");
         Confirma.setEnabled(false);
+        MostraCandidato();
     }//GEN-LAST:event_LimparActionPerformed
 
     private void CampoCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoCandidatoActionPerformed
@@ -403,6 +434,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
             Confirma.setEnabled(false);
 
         }
+        MostraCandidato();
     }//GEN-LAST:event_ApagarNumeroActionPerformed
 
     private void ConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmaActionPerformed

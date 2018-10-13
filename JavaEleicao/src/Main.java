@@ -40,7 +40,6 @@ public class Main {
 				+pDAO.makeJson();
 		
 		System.out.println(str);
-		
 	
 	}
 
