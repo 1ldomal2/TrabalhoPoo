@@ -22,7 +22,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
         
         //Estrutura para Conexao com google Drive
         ArrayCandidato=new CandidatoDAO();
-    
+        
         //Receive Google Drive
         ArrayCandidato.Receive();        
 

@@ -15,24 +15,35 @@ import Modelo.Voto;
  */
 public class VotoDAO {
 	private final int TAMANHO = 50;
-	private static int Total = 0;
+	public static int Total = 0;
 	private Voto[] Array = new Voto[TAMANHO];
 	private Voto celulaVetor = null;
 	//Quando carregar ???
-	private EleitorDAO[] ArrayE = null;
-	private CandidatoDAO[] ArrayC = null;
+	private EleitorDAO ArrayE = null;
+	private CandidatoDAO ArrayC = null;
 	
 	
 	/**Conexao com Google drive*/
 	public void Receive() {
-		String json="{\"Voto\":[{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"066.809.236-03\",\"Time\":\"1539402355515\"},{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"066.809.236-03\",\"Time\":\"1539402355515\"}]}";
-
+		//Carrega Votos
+		String json="{\"Voto\":[{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"1\",\"Time\":\"1539405966018\"},{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"1\",\"Time\":\"1539405966018\"}]}";
+		
+		//Carrega Candidatos
+		ArrayC=new CandidatoDAO();
+		ArrayC.Receive();
+		//Carrega Eleitores
+		ArrayE=new EleitorDAO();
+		ArrayE.Receive();
+		
+		
 		try {
 			ReadJson(json);
 		} catch (NoSuchAlgorithmException | JSONException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	/**Le o Json
@@ -45,16 +56,16 @@ public class VotoDAO {
 		JSONObject json=new JSONObject(Sjson);
 		
 		//Quebra o Json no Vetor
-		JSONArray jsonPartido = json.getJSONArray("Voto");
-		
+		JSONArray jsonVoto = json.getJSONArray("Voto");
 		//Le o json  Voto por Voto
-		for (int i = 0; i < jsonPartido.length(); i++) {
+		for (int i = 0; i < jsonVoto.length(); i++) {
 			//recupera candidato de índice "i" no array 
-            JSONObject v = jsonPartido.getJSONObject(i);
+            JSONObject v = jsonVoto.getJSONObject(i);
             //Procura Candidato por Cpf
-            Candidato cand=ArrayC[0].ObjectCpf(v.getString("CpfCandidato"));
+            Candidato cand=ArrayC.ObjectCpf(v.getString("CpfCandidato"));
             //Procura Eleitor por Cpf
-           Eleitor ele=ArrayE[0].ObjectCpf(v.getString("CpfEleitor"));
+            Eleitor ele=ArrayE.ObjectCpf(v.getString("CpfEleitor"));
+            
 
 			//Adiciona ao Vetor
             this.CriarVoto(ele,cand, Integer.parseInt(v.getString("nUrna")),Long.parseLong(v.getString("Time")));
@@ -74,7 +85,7 @@ public class VotoDAO {
 			//Cria Objetos Json
 			voto[i].put("CpfEleitor", Array[i].getECPF());
 			voto[i].put("CpfCandidato", Array[i].getCCPF());
-			voto[i].put("nUrna",""+Array[i].getCCPF());
+			voto[i].put("nUrna",""+Array[i].getNumeroUrna());
 			voto[i].put("Time",""+Array[i].getTime());
 			//Adicionao Objeto Json em um vetor de Jsons
 			votos.put(voto[i]);

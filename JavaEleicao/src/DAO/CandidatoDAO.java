@@ -12,7 +12,7 @@ import Modelo.Documentos;
 
 public class CandidatoDAO {
 	private final int TAMANHO = 50;
-	private static int Total = 0;
+	public static int Total = 0;
 	public Candidato[] Array = new Candidato[TAMANHO];
 	private Candidato celulaVetor = null;
 	

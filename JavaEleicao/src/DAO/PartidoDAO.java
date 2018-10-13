@@ -14,7 +14,7 @@ import Modelo.Partido;
  */
 public class PartidoDAO {
 	private final int TAMANHO = 50;
-	private static int Total = 0;
+	public static int Total = 0;
 	private Partido[] Array = new Partido[TAMANHO];
 	private Partido celulaVetor = null;
 

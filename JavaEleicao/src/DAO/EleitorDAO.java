@@ -14,7 +14,7 @@ import Modelo.Eleitor;
  */
 public class EleitorDAO {
 	private final int TAMANHO = 50;
-	private static int Total = 0;
+	public static int Total = 0;
 	public Eleitor[] Array = new Eleitor[TAMANHO];
 	private Eleitor celulaVetor = null;
 

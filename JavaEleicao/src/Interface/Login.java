@@ -9,6 +9,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import Modelo.Candidato;
+import Modelo.Eleitor;
 import Urna.Urna;
 
 /*
@@ -136,12 +138,15 @@ public class Login extends javax.swing.JFrame {
 			JOptionPane.showMessageDialog(this, "Abra o arquivo");
 		} else {
 			// Verifica se a senha è igual
+			
 			boolean login = false;
-			try {
-				login = inst.Login(TextoCaminho.getText());
-			} catch (NoSuchAlgorithmException | IOException e) {
-				e.printStackTrace();
-			}
+				try {
+					login = inst.Login(TextoCaminho.getText());
+				} catch (NoSuchAlgorithmException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
 			//Se for igual chama Console.Urna
 			if (login) {
 				new ConsoleUrna().setVisible(true);

@@ -39,9 +39,9 @@ public class Urna {
 	public void Receive() {//Não sei o que tem que retorna}
 		//Pega DO GOOGLE dRIVE
 		  ArrayCandidato.Receive();
-		  //ArrayEleitor.Receive();
-		  //ArrayVoto.Receive();
-		  //ArrayPartido.Receive();
+		  ArrayEleitor.Receive();
+		  ArrayVoto.Receive();
+		  ArrayPartido.Receive();
 		
 	}
 	public void Send() {
