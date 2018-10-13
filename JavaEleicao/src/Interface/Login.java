@@ -9,6 +9,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import DAO.VotoDAO;
 import Modelo.Candidato;
 import Modelo.Eleitor;
 import Urna.Urna;
@@ -24,11 +25,19 @@ import Urna.Urna;
  */
 public class Login extends javax.swing.JFrame {
 	private Urna inst = null;
+	private VotoDAO vDAO =null;
 
 	/**
 	 * Creates new form Login
 	 */
+	
+
 	public Login() {
+		initComponents();
+	}
+	
+	public Login(VotoDAO vDAO) {
+		this.vDAO=vDAO;
 		// Inicia componentes da tela
 		initComponents();
 
@@ -139,17 +148,17 @@ public class Login extends javax.swing.JFrame {
 		} else {
 			// Verifica se a senha è igual
 			
-			boolean login = false;
+			boolean loginOk = false;
 				try {
-					login = inst.Login(TextoCaminho.getText());
+					loginOk = inst.Login(TextoCaminho.getText());
 				} catch (NoSuchAlgorithmException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			
 			//Se for igual chama Console.Urna
-			if (login) {
-				new ConsoleUrna().setVisible(true);
+			if (loginOk) {
+				new ConsoleUrna(vDAO).setVisible(true);
 				this.dispose();
 			} else {
 				JOptionPane.showMessageDialog(this, "Senha Incorreta");

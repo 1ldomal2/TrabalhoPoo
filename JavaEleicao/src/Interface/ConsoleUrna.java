@@ -9,6 +9,7 @@ import javax.swing.text.MaskFormatter;
 
 import DAO.CandidatoDAO;
 import DAO.EleitorDAO;
+import DAO.VotoDAO;
 import Modelo.Candidato;
 
 /**
@@ -17,9 +18,13 @@ import Modelo.Candidato;
  */
 public class ConsoleUrna extends javax.swing.JFrame {
 	private CandidatoDAO ArrayCandidato=null;
-
+	private VotoDAO vDAO=null;
 	
-    public ConsoleUrna() {
+	public ConsoleUrna() {
+        initComponents();
+	}
+    public ConsoleUrna(VotoDAO vDAO) {
+    	this.vDAO=vDAO;
         initComponents();
         Confirma.setEnabled(false);
         
