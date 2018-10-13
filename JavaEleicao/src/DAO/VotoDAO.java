@@ -25,6 +25,7 @@ public class VotoDAO {
 	
 	/**Conexao com Google drive*/
 	public void Receive() {
+		System.out.println("Conexao com Google Drive 'Votos'");
 		//Carrega Votos
 		String json="{\"Voto\":[{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"1\",\"Time\":\"1539405966018\"},{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"1\",\"Time\":\"1539405966018\"}]}";
 		
@@ -34,7 +35,6 @@ public class VotoDAO {
 		//Carrega Eleitores
 		ArrayE=new EleitorDAO();
 		ArrayE.Receive();
-		
 		
 		try {
 			ReadJson(json);
@@ -51,7 +51,7 @@ public class VotoDAO {
 	 * @return Void  - Preenche "this.Array" de acordo com Json
 	 */
 	public void ReadJson(String Sjson) throws NoSuchAlgorithmException, JSONException, IOException {//Acho que não precisa mas é para futuras Modificações
-		
+		System.out.println("Lendo Json");
 		//Cria um Objeto Json com a String passada como parametro
 		JSONObject json=new JSONObject(Sjson);
 		
@@ -66,7 +66,6 @@ public class VotoDAO {
             //Procura Eleitor por Cpf
             Eleitor ele=ArrayE.ObjectCpf(v.getString("CpfEleitor"));
             
-
 			//Adiciona ao Vetor
             this.CriarVoto(ele,cand, Integer.parseInt(v.getString("nUrna")),Long.parseLong(v.getString("Time")));
 		}
@@ -77,6 +76,7 @@ public class VotoDAO {
 	 * @return String - contendo o Json de "this.Array"
 	 * */
 	public String makeJson() {
+		System.out.println("Criando Json");
 		JSONObject json=new JSONObject();//Superior
 		JSONArray votos=new JSONArray();
 		JSONObject[] voto=new JSONObject[Total];//Superior
@@ -100,6 +100,7 @@ public class VotoDAO {
 	 * @return Boolean - Confirmando se criou ou nao o voto
 	 * */
 	public void CriarVoto(Eleitor eleitor,Candidato candidato,int numero) {
+		System.out.println("Criando Voto");
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Voto(eleitor,candidato, numero ) ;
 			if (celulaVetor != null) {//Evita "lixo" no array
@@ -119,6 +120,7 @@ public class VotoDAO {
 	 *@return Boolean - Confirmando se criou ou nao o voto
 	 * */
 	public void CriarVoto(Eleitor eleitor,Candidato candidato,int numero,long time) {
+		System.out.println("Criando Voto");
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Voto(eleitor,candidato, numero,time) ;
 			if (celulaVetor != null) {//Evita "lixo" no array
@@ -134,6 +136,7 @@ public class VotoDAO {
 	 * @return Boolean -  Confirma se inseriu ou nao o Voto em this this.array
 	 */
 	public void CriarVoto(Voto Voto) {
+		System.out.println("Criando Voto");
 		if (Total <= TAMANHO && Voto != null) {//Evita estourar Array e "lixo" no array
 			this.celulaVetor = Voto;
 			Array[Total] = this.celulaVetor;
@@ -147,6 +150,7 @@ public class VotoDAO {
 	 * @return Void
 	 */
 	public void DeletaVoto(Voto Voto) {
+		System.out.println("Deletando Voto");
 		if(Voto ==null) {//evita erro
 			return;
 		}
@@ -167,10 +171,13 @@ public class VotoDAO {
 	 * @return int - Numero de votos que o Candidato 'x' recebeu
 	 */
 	public int NVotosCandidato(Candidato candidato) {
-		int nVotos=0;//Variavel a ser retornada
-		if(candidato == null) {//evita erro
-			return nVotos;
+		if(candidato==null) {
+			System.out.println("Candidato não Existe");
+			return 0;
 		}
+		
+		System.out.println("Contabilizando Votos de "+candidato.getNome());
+		int nVotos=0;//Variavel a ser retornada		
 		for (int i = 0; i < Total; i++) {
 			if(Array[i] != null) {//evita erro
 				if(Array[i].getCandidato()==candidato) {

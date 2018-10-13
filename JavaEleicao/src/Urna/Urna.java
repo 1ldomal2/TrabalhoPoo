@@ -17,7 +17,6 @@ public class Urna {
 	private EleitorDAO ArrayEleitor=new EleitorDAO();
 	private VotoDAO ArrayVoto=new VotoDAO();
 	private PartidoDAO ArrayPartido=new PartidoDAO();
-	
 	//Questoes de segurança
 	private boolean Logado=false;
 	private Eleitor User=null;
