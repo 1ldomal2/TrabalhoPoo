@@ -36,27 +36,41 @@ public class Urna {
 		TotalUrnas++;
 		Numero=TotalUrnas;
 	}
-	public void Receive() {//Não sei o que tem que retorna}
-		//Pega DO GOOGLE dRIVE
-		  ArrayCandidato.Receive();
-		  ArrayEleitor.Receive();
-		  ArrayVoto.Receive();
-		  ArrayPartido.Receive();
+	public void Receive() {
+	//Pega DO GOOGLE dRIVE
+		System.out.println("Carregou Candidatos");
+		ArrayCandidato.Receive();
 		
+		System.out.println("Carregou Eleitores");
+		ArrayEleitor.Receive();
+
+		System.out.println("Carregou Partidos");
+		ArrayPartido.Receive();
+		
+		System.out.println("Carregou Votos");
+		ArrayVoto.Receive();
 	}
 	public void Send() {
 		//MANDA PARA O GOOGLE DRIVE
-		JSONObject json=new JSONObject();
 		
 	}
 	public boolean Login(String Path) throws NoSuchAlgorithmException, IOException {//Logar deixa salvo o eleitor
+		
+		System.out.println("Transformando a Img em Hash");
 		Senha psw=new Senha(Path);//Transforma a Img em Hash
+		
 		String hash=psw.getHash();//Salvo a Hash
+		System.out.println("Imagem>Hash :"+hash);
+		
+		System.out.println("Procurando pelo Hash");
 		Eleitor eleitor = ArrayEleitor.ObjectHash(hash);//Eleitor logado
+		
 		if(eleitor == null) {//Nao logou
+			System.out.println("Não Logou");
 			Deslogar();//Ter um controle de segurança
 			return false;
 		}
+		System.out.println("Logado como :"+eleitor.getNome());
 		this.Logado=true;//Ter um controle de segurança
 		this.User=eleitor;//Switch on
 		return true;
@@ -64,14 +78,19 @@ public class Urna {
 	public void Deslogar() {
 		this.Logado=false;//Ter um controle de segurança
 		this.User=null;//switch off
+		System.out.println("Deslogado");
 	}
 	
 	//Cria o Voto
 	public boolean Votar(Candidato candidato) {//Ao votar vc desloga
 		if(Logado==false) {
+			System.out.println("Não é possivel Votar sem estar Logado");
+			System.out.println("Flag Logado=False");
 			return false;
 		}
 		if(this.User == null) {
+			System.out.println("Não é possivel Votar sem estar Logado");
+			System.out.println("User=NULL");
 			return false;
 		}
 			this.ArrayVoto.CriarVoto(this.User,candidato,this.Numero);//Criou o voto e armazenou no Array da urna

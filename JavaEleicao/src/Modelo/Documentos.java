@@ -7,36 +7,47 @@ package Modelo;
  * @author Lucas Mateus Fernandes
  */
 public class Documentos {
-	private boolean fomatedCpf=false;
+	private boolean formatedCpf=false;
 	private boolean validCpf=false;
 	private String formated="";
 	private String noFormated="";
 	
-	/**Construtor que ja seta todos os atributo*/	
+	/**Construtor que Valida e Preencher CPF c/ e s/ Formatação*/	
 	public Documentos(String cpf){
 		validaCpf(cpf);
 	}
+	
+	
 	public Documentos(){
-		
 	}
+	
+	
 	/**
 	 *@return Retorna True ou False para ver se o cpf digitado no contrutor veio com pontuação '14 digitos' ou sem pontuação '11digitos	
 	 */	
 	public boolean getFomatedCpf() {
-		return fomatedCpf;
+		System.out.println("CPF c/ Pontuação ="+formatedCpf);
+		return formatedCpf;
 	}
+	
+	
 	/**
 	 *@return Retorna True ou False para ver se o cpf digitado é valido ou nao
 	 */	
 	public boolean getValidCpf() {
+		System.out.println("CPF Valido ="+validCpf);
 		return validCpf;
 	}
+	
+	
 	/**
-	 * Faz a verificação do cpf se é valido ou nao
+	 * Faz a verificação do CPF se é valido ou nao
 	 *@param cpf - Cpf
 	 *@return Retorna True ou False para ver se o cpf digitado é valido ou nao
 	 */	
 	public boolean validaCpf(String cpf) {
+		System.out.println("Validando Cpf ");
+		
 		int nponto = 0;
 		int nhifen = 0;
 		int[] dv1 = new int[11];//coloco 11 mas na vdd usa so 9
@@ -86,6 +97,7 @@ public class Documentos {
 															}else {
 																nhifen++;
 																if(nhifen >1) {//Evita que tenha mais de 1 hifen
+																	System.out.println("Pontuação Incorreta pois Possui + de 1 hifen ");
 																	validCpf=false;
 																	return false;
 																}
@@ -94,6 +106,7 @@ public class Documentos {
 														}else {
 															nponto++;
 															if(nponto >2) {//Evita que tenha mais de 2 pontos
+																System.out.println("Pontuação Incorreta pois Possui + de 2 pontos ");
 																validCpf=false;
 																return false;
 															}
@@ -129,6 +142,7 @@ public class Documentos {
 												if(cpf.charAt(indice)!='8') {
 													if(cpf.charAt(indice)!='9') {
 														validCpf=false;
+														System.out.println("Cpf possui Caracteres");
 														return false;//Se não for igual a nenhum digito
 													}
 												}
@@ -163,38 +177,41 @@ public class Documentos {
 		if(tamanho==11) {//Verifica se os digitos batem "opção sem formataçao"
 			if((cpf.charAt(9)-'0')!=(11-(total1)%11)){
 				if(!((cpf.charAt(9)-'0')==0 && (11-(total1)%11)>9)){
-					
-
+					System.out.println("Digito verificado 1 está incorreto");
 					validCpf=false;
 					return false;
 				}
 			}
 			if((cpf.charAt(10)-'0')!=(11-(total2)%11)) {
 				if(!((cpf.charAt(10)-'0')==0 && (11-(total2)%11)>9)){
+					System.out.println("Digito verificado 2 está incorreto");
 					validCpf=false;
 					return false;
 				}
 			}
-			fomatedCpf=false;//Seta as variaveis
+			formatedCpf=false;//Seta as variaveis
 			noFormated=cpf;//Seta as variaveis
 		}else {//Verifica se os digitos batem "opçao com formatação"s
 			if(tamanho==14) {
 				if((cpf.charAt(12)-'0')!=(11-(total1)%11)) {
 					if(!((cpf.charAt(12)-'0')==0 && (11-(total1)%11)>9)){
+						System.out.println("Digito verificado 1 está incorreto");
 						validCpf=false;
 						return false;
 					}
 				}
 				if((cpf.charAt(13)-'0')!=(11-(total2)%11)) {
-				if(!((cpf.charAt(13)-'0')==0 && (11-(total2)%11)>9)){
+					if(!((cpf.charAt(13)-'0')==0 && (11-(total2)%11)>9)){
+						System.out.println("Digito verificado 2 está incorreto");
 						validCpf=false;
 						return false;
 					}
 				}
-				fomatedCpf=true;//Seta as variaveis
+				formatedCpf=true;//Seta as variaveis
 				formated=cpf;
 			}
 		}
+		System.out.println("CPF Valido ");
 		validCpf=true;
 		stringsCpf();
 		return true;
@@ -209,7 +226,7 @@ public class Documentos {
 		}
 		char digito= ' ';
 		
-		if(fomatedCpf==true) {
+		if(formatedCpf==true) {
 			digito=cpf.charAt(10);//9ºDigito
 		}else {
 			digito=cpf.charAt(8);//9ºDigito
@@ -244,7 +261,7 @@ public class Documentos {
 	 */	
 	public void stringsCpf(){
 		String cpf ="";
-		if(fomatedCpf==true) {
+		if(formatedCpf==true) {
 			cpf+=formated.charAt(0);
 			cpf+=formated.charAt(1);
 			cpf+=formated.charAt(2);
@@ -299,8 +316,10 @@ public class Documentos {
 	 */	
 	public boolean equals(String cpf){//Verifica se é igual formatado ou não
 		if(cpf.equals(formated)||cpf.equals(noFormated)) {
+			System.out.println("CPF são iguais");
 			return true;	
 		}
+		System.out.println("CPF não sao iguais");
 		return false;
 	}
 	

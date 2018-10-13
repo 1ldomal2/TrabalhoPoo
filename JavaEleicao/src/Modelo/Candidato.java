@@ -17,7 +17,7 @@ public class Candidato {
 	public Candidato() {
 		
 	}
-	/**Construtor Candidato
+	/**Construtor Candidato (Todos Argumentos são String)
 	 * @param Nome - Nome do Candidato
 	 * @param Numero - Numero do Candidato
 	 * @param Cpf - Cpf do Candidato
@@ -26,12 +26,25 @@ public class Candidato {
 	 */	
 	public Candidato(String Nome,String Numero,String Cpf,String NumeroPartido,String NomePartido){//Import do Json
 		//Tem que fazer o tratamento do Partido depois
+		System.out.println("Validando Cpf");
 		if(setCpf(Cpf)) {//Se o cpf não for valido ja aborta
-			this.Nome=Nome;
-			this.Numero=Integer.parseInt(Numero);
-			this.Partido=new Partido(NumeroPartido,NomePartido);
+			System.out.println("Cpf Valido");
 			
+			System.out.println("Setando Nome Candidato");
+			this.Nome=Nome;
+			
+			System.out.println("Setando Numero Candidato");
+			this.Numero=Integer.parseInt(Numero);
+			
+			System.out.println("Setando Partido Candidato");
+			this.Partido=new Partido(NumeroPartido,NomePartido);
+			System.out.println("Partido OK");
+			
+			System.out.println("Candidato Criado");
+		}else {
+			System.out.println("Cpf Invalido");
 		}
+		
 	}
 	/**@return String-  Nome Candidato
 	 */	
@@ -58,9 +71,14 @@ public class Candidato {
 	 */
 	public boolean setCpf(String cpf) {
 		Documentos doc=new Documentos();
+		
+		System.out.println("Validando novo CPF");
 		if(doc.validaCpf(cpf)) {//So muda se o cpf passado for valido
+			System.out.println("Trocando CPF");
 			this.Cpf = doc;
 			return true;
+		}else {
+			System.out.println("CPF Invalido");
 		}
 		return false;
 	}
@@ -90,17 +108,4 @@ public class Candidato {
 	public void setPartido(Partido partido) {
 		Partido = partido;
 	}
-	
-	/*
-	public String makeJson() {
-		//Cria um objecto Json
-		JSONObject json=new JSONObject();
-		json.put("Nome",Nome);
-		json.put("Numero",Numero);
-		json.put("Cpf",Cpf.toString());
-		json.put("Partido",Partido.toString());
-		
-		//Transforma em String
-		return json.toString();
-	}*/
 }

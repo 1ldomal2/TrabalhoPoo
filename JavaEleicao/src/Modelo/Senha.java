@@ -26,6 +26,7 @@ public class Senha {
 	 * @param path Caminho da Imagem
 	 */
 	public Senha(String path) throws NoSuchAlgorithmException, IOException {
+		System.out.println("Setando uma Senha apartir de uma imagem");
 		this.setImagem(path);
 	}
 	/**
@@ -35,6 +36,7 @@ public class Senha {
 	 */
 	public Senha(String Inconsistente,String Hash) {
 		if(Inconsistente.equals("INCONSISTENTE")) {
+			System.out.println("Senha Hash foi passada na 'mão' ");
 			this.Hash=Hash;
 			this.Inconsistencia=true;
 		}
@@ -48,32 +50,43 @@ public class Senha {
 	}
 	/**
 	 * @param path Caminho da imagem
+	 * @throws IOException 
 	 */
-	public void setImagem(String path) throws IOException, NoSuchAlgorithmException{
+	public void setImagem(String path) throws IOException{
 		
-		FileReader arq = new FileReader(path);//Abre o Arquivo localizada em $Path
+		FileReader arq=null;
+		try {
+			System.out.println("Abrindo "+path);
+			arq = new FileReader(path);
+		} catch (FileNotFoundException e1) {
+			System.out.println("Arquivo não encontrado");
+			e1.printStackTrace();
+		}//Abre o Arquivo localizada em $Path
+		
 		
 		BufferedReader lerArq = new BufferedReader(arq);//Buffer do Arrquivo aberto
 
 		String conteudoArq="";
         try {
 			while(arq.ready()){//Le Arquivo
+				System.out.println("Lendo Imagem");
 				conteudoArq+=lerArq.readLine();  //Concatena todo o arquivo é uma so string      	
 			}
-		} catch (IOException e) {//Nao entendo ainda o que é try catch mas foipara evitar erro
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		} catch (IOException e){e.printStackTrace();}
         arq.close();//Fecha Arquivo
         this.senha=conteudoArq;//transfere da variavel de escopo local para uma variavel persistente
         
-		setHash();
+		try {
+			setHash();
+			System.out.println("Gerando Senha");
+		} catch (NoSuchAlgorithmException e) {e.printStackTrace();}
 	}
 
 	/**
 	 * Cria o Hash de acordo com a imagem que veio
 	 */
 	private void setHash() throws NoSuchAlgorithmException {// SHA-256
+		System.out.println("Criando Hash");
 		MessageDigest crypto = MessageDigest.getInstance("SHA-256");// Seleciona o tipo de cripitografia
 		crypto.update(this.senha.getBytes());// Numero de bytes a ser cripitografado
 		byte[] cadeiaByte = crypto.digest();// Retorna a cripitografia em binário
@@ -102,14 +115,18 @@ public class Senha {
 	 * @return Se a senha é a mesma ou nao
 	 */
 	public boolean equals(Senha senha) {//Verifica se o Hash de ambas senhas são iguais
-		return this.Hash.equals(senha.Hash);
+		boolean retorno=this.Hash.equals(senha.Hash);
+		System.out.println("Senhas Iguais ="+retorno);
+		return retorno;
 	}
 	/**
 	 * @param senha Obecjt Senha
 	 * @return Se a senha é a mesma ou nao
 	 */
 	public boolean equals(String senha) {//Verifica se o Hash de ambas senhas são iguais
-		return this.Hash.equals(senha);
+		boolean retorno=this.Hash.equals(senha);
+		System.out.println("Senhas Iguais ="+retorno);
+		return retorno;
 	}
 	
 }
