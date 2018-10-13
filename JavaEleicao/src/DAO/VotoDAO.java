@@ -25,7 +25,7 @@ public class VotoDAO {
 	
 	/**Conexao com Google drive*/
 	public void Receive() {
-		String json="{\"Voto\":[{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"066.809.236-03\",\"Time\":\"1539385115367\"}]}";
+		String json="{\"Voto\":[{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"066.809.236-03\",\"Time\":\"1539402355515\"},{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"066.809.236-03\",\"Time\":\"1539402355515\"}]}";
 
 		try {
 			ReadJson(json);

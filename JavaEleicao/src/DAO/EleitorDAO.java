@@ -20,8 +20,8 @@ public class EleitorDAO {
 
 	/**Conexao com Google drive*/
 	public void Receive() {
-		String json="{\"Eleitor\":[{\"UrnaVotacao\":\"1\",\"Senha\":\"956eee1761b6224b512dcb6491c0355dfe2dad05d242e5f70f97651b3d6674f3\",\"Cpf\":\"066.809.236-03\",\"TituloEleitor\":\"Titulo1\",\"Nome\":\"Nome1\"}]}";
-		//HASH TA ERRADO
+		String json="{\"Eleitor\":[{\"UrnaVotacao\":\"1\",\"Senha\":\"956eee1761b6224b512dcb6491c0355dfe2dad05d242e5f70f97651b3d6674f3\",\"Cpf\":\"066.809.236-03\",\"TituloEleitor\":\"Titulo1\",\"Nome\":\"Nome1\"},{\"UrnaVotacao\":\"2\",\"Senha\":\"6194d7c363019ffff907f3cd33f214980106ccfdd03871defa9e6f726bfa7211\",\"Cpf\":\"066.809.236-03\",\"TituloEleitor\":\"Titulo2\",\"Nome\":\"Nome2\"}]}";
+
 		try {
 			ReadJson(json);
 		} catch (NoSuchAlgorithmException | JSONException | IOException e) {

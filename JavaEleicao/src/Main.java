@@ -31,10 +31,12 @@ public class Main {
 		System.out.println("Voto");
 		VotoDAO vDAO =new VotoDAO();
 		vDAO.CriarVoto(eDAO.Array[0], cDAO.Array[0], 1);
+		vDAO.CriarVoto(eDAO.Array[1], cDAO.Array[1], 1);
 		
 		System.out.println("Partido");
 	    PartidoDAO pDAO =new PartidoDAO();
 	    pDAO.CriarPartido("01","Nome");
+	    pDAO.CriarPartido("02","Name");
 	    
 		String str=cDAO.makeJson()+"\n"
 				+eDAO.makeJson()+"\n"

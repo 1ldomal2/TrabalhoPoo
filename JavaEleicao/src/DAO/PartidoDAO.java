@@ -20,7 +20,7 @@ public class PartidoDAO {
 
 	/**Conexao com Google drive*/
 	public void Receive() {
-		String json="{\"Partido\":[{\"Numero\":\"1\",\"Nome\":\"Nome\"}]}";
+		String json="{\"Partido\":[{\"Numero\":\"1\",\"Nome\":\"Nome\"},{\"Numero\":\"2\",\"Nome\":\"Name\"}]}";
 
 		try {
 			ReadJson(json);

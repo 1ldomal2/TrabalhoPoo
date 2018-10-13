@@ -19,7 +19,7 @@ public class CandidatoDAO {
 	/**Conexao com Google drive*/
 	public void Receive() {
 		
-		String json ="{\"Candidato\":[{\"Numero\":\"12345\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"},{\"Numero\":\"11111\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"},{\"Numero\":\"13\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"}]}";
+		String json ="{\"Candidato\":[{\"Numero\":\"11\",\"NumeroPartido\":\"21\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome1\",\"NomePartido\":\"s1\"},{\"Numero\":\"12\",\"NumeroPartido\":\"22\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome2\",\"NomePartido\":\"s2\"},{\"Numero\":\"13\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"}]}";
 		ReadJson(json);
 	}
 	
