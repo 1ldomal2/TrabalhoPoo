@@ -17,9 +17,15 @@ import Modelo.Partido;
 public class Main {
 
 	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
+		//Criando Strutura para armazenamento do voto
+		VotoDAO vDAO=new VotoDAO();
+		
+		System.out.println("Start");
 		//Cria tela de Login
-		Login ins=new Login();
+		Login ins=new Login(vDAO);
 		ins.setVisible(true);
+		
+		System.out.println("Esperando Login");
 	}
 }
 

@@ -46,7 +46,7 @@ public class PartidoDAO {
 			//recupera candidato de índice "i" no array 
             JSONObject p = jsonPartido.getJSONObject(i);
 			//Adiciona ao Vetor
-            this.CriarPartido(p.getString("NomePartido"),p.getString("NumeroPartido"));
+            this.CriarPartido(p.getString("Numero"),p.getString("Nome"));
 			
 		}
 	}
@@ -73,13 +73,13 @@ public class PartidoDAO {
 	}
 	
 	/**Cria o Partido e o insere em 'this.array' 
-	 * @param String - Nome do partido
-	 * @param String - Numero do Partido
+	 * @param Numero - Numero do Partido
+	 * @param Nome - Nome do partido
 	 * @return Boolean - Confirmando se criou ou nao o partido
 	 * */
-	public boolean CriarPartido(String Nome, String Numero) {
+	public boolean CriarPartido(String Numero, String Nome) {
 		if (Total <= TAMANHO) {//Evita estourar Array
-			this.celulaVetor = new Partido(Nome, Numero ) ;
+			this.celulaVetor = new Partido(Numero, Nome ) ;
 			if (celulaVetor != null) {//Evita "lixo" no array
 				Array[Total] = this.celulaVetor;
 				Total++;

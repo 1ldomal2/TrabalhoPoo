@@ -53,10 +53,13 @@ public class Urna {
 		//MANDA PARA O GOOGLE DRIVE
 		
 	}
-	public boolean Login(String Path) throws NoSuchAlgorithmException, IOException {//Logar deixa salvo o eleitor
+	public boolean Login(String Path){//Logar deixa salvo o eleitor
 		
 		System.out.println("Transformando a Img em Hash");
-		Senha psw=new Senha(Path);//Transforma a Img em Hash
+		Senha psw=null;
+		try {
+			psw = new Senha(Path);
+		} catch (NoSuchAlgorithmException | IOException e) {e.printStackTrace();}//Transforma a Img em Hash
 		
 		String hash=psw.getHash();//Salvo a Hash
 		System.out.println("Imagem>Hash :"+hash);

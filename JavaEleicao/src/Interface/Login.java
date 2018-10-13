@@ -37,7 +37,10 @@ public class Login extends javax.swing.JFrame {
 	}
 	
 	public Login(VotoDAO vDAO) {
+		System.out.println("Inicializando a urna");
+		//Estrutura de Armazenamento de Votos
 		this.vDAO=vDAO;
+		
 		// Inicia componentes da tela
 		initComponents();
 
@@ -132,29 +135,32 @@ public class Login extends javax.swing.JFrame {
 
 	private void AbrirCaminhoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AbrirCaminhoActionPerformed
 		// TODO add your handling code here:
-		JFileChooser arquivo = new JFileChooser();
+		//Endereço que vai começar a pesquisar
+		System.out.println("Localizando Imagem");
+		String pathInicial="/home/lucas/Área de Trabalho/TrabalhoPoo/Arquivos PPM/";
+		JFileChooser arquivo = new JFileChooser(pathInicial);
 		arquivo.setFileFilter(new FileNameExtensionFilter("Image files", "ppm"));
 		arquivo.setAcceptAllFileFilterUsed(false);
 		arquivo.showOpenDialog(null);
 		File file = arquivo.getSelectedFile();
-		String caminho = file.getAbsolutePath();
-		TextoCaminho.setText(caminho);
-	}// GEN-LAST:event_AbrirCaminhoActionPerformed
+		if(file!=null) {
+			System.out.println("Arquivo Localizado");
+			String caminho = file.getAbsolutePath();
+			TextoCaminho.setText(caminho);
+		}		
+	}
 
 	private void ConfirmarLoginActionPerformed(java.awt.event.ActionEvent evt) {
 		// Faz login
 		if (TextoCaminho.getText().length() <= 0) {
+			System.out.println("Não Há caminho para o arquivo");
 			JOptionPane.showMessageDialog(this, "Abra o arquivo");
 		} else {
-			// Verifica se a senha è igual
-			
+			// Verifica se a senha é igual
+			System.out.println(inst);
+			System.out.println("Verificando a Senha");
 			boolean loginOk = false;
-				try {
-					loginOk = inst.Login(TextoCaminho.getText());
-				} catch (NoSuchAlgorithmException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			loginOk = inst.Login(TextoCaminho.getText());
 			
 			//Se for igual chama Console.Urna
 			if (loginOk) {
