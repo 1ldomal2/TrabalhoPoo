@@ -1,6 +1,10 @@
 package Interface;
 
 
+import DAO.CandidatoDAO;
+import DAO.EleitorDAO;
+import DAO.PartidoDAO;
+import DAO.VotoDAO;
 import Interface.TelaPartido;
 
 /*
@@ -14,10 +18,28 @@ import Interface.TelaPartido;
  * @author cambraia
  */
 public class CentralBotão extends javax.swing.JFrame {
-
+	private CandidatoDAO cDAO=null;
+	private EleitorDAO eDAO=null;
+	private PartidoDAO pDAO=null;
+	private VotoDAO vDAO=null;
+	
     /**
      * Creates new form CentralBotão
      */
+    public CentralBotão(CandidatoDAO cDAO,EleitorDAO eDAO,PartidoDAO pDAO,VotoDAO vDAO) {
+        initComponents();
+        this.cDAO=cDAO;
+        this.eDAO=eDAO;
+        this.pDAO=pDAO;
+        this.vDAO=vDAO;
+        
+        //Conexao com Google Drive
+        cDAO.Receive();
+        eDAO.Receive();
+        pDAO.Receive();
+        vDAO.Receive();
+    }
+    
     public CentralBotão() {
         initComponents();
     }
@@ -91,7 +113,7 @@ public class CentralBotão extends javax.swing.JFrame {
 
     private void BotaoCadastroCandiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastroCandiActionPerformed
         // TODO add your handling code here:
-        new TelaCandidato().show();
+        new TelaCandidato(cDAO,pDAO).show();
         
     }//GEN-LAST:event_BotaoCadastroCandiActionPerformed
 

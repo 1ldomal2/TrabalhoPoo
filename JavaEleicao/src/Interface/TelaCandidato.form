@@ -23,6 +23,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="CampoNomeCandidato" alignment="0" max="32767" attributes="0"/>
+          <Component id="CampoNumCandidato" alignment="0" max="32767" attributes="0"/>
+          <Component id="CampoCPFC" alignment="0" max="32767" attributes="0"/>
+          <Component id="CampoPartidoF" alignment="0" max="32767" attributes="0"/>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
@@ -35,23 +39,20 @@
                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" pref="95" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="CampoNomeCandidato" alignment="0" max="32767" attributes="0"/>
                       <Component id="LabelNomeCandidato" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabelNumCandidato" alignment="0" pref="200" max="32767" attributes="0"/>
-                      <Component id="CampoNumCandidato" alignment="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="LabelPartidoF" alignment="0" pref="200" max="32767" attributes="0"/>
+                      <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="149" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                  <Component id="LabelPartidoF" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                  <Component id="CampoPartidoF" alignment="0" max="32767" attributes="0"/>
-                  <Component id="CampoCPFC" alignment="0" pref="200" max="32767" attributes="0"/>
-              </Group>
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="ConfirmarCandidato" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
+              <Component id="ConfirmarCandidato" min="-2" pref="123" max="-2" attributes="0"/>
+              <EmptySpace pref="120" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -74,15 +75,15 @@
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="CampoCPFC" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="LabelPartidoF" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="LabelPartidoF" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="ConfirmarCandidato" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="CampoPartidoF" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="CampoPartidoF" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="ConfirmarCandidato" min="-2" pref="51" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -130,9 +131,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="ConfirmarCandidato">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="/home/cambraia/NetBeansProjects/TelaUrnaCandidato/confirmar.png"/>
-        </Property>
+        <Property name="text" type="java.lang.String" value="Criar Candidato"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ConfirmarCandidatoActionPerformed"/>

@@ -1,32 +1,45 @@
 package Interface;
+import DAO.*;
+import Modelo.*;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author cambraia
  */
 public class TelaCandidato extends javax.swing.JFrame {
-
+	private CandidatoDAO cDAO=null;
+	private PartidoDAO pDAO=null;
     /**
      * Creates new form TelaCandidato
      */
-    public TelaCandidato() {
+	public TelaCandidato(CandidatoDAO cDAO,PartidoDAO pDAO) {
         initComponents();
         ConfirmarCandidato.setEnabled(false);
+        this.cDAO=cDAO;
+        this.pDAO=pDAO;
+    }
+	public TelaCandidato() {
+        initComponents();
     }
 
     private boolean VerificaCampo() {
-        if (CampoNomeCandidato.getText().length() > 0) {
-            if (CampoNumCandidato.getText().length() == 5) {
-                if (CampoCPFC.getText().length() >= 9 || CampoCPFC.getText().length() <= 14) {
-                    if (CampoPartidoF.getText().length() >= 9 || CampoCPFC.getText().length() <= 14) {
-                        ConfirmarCandidato.setVisible(true);
-                        return true;
-                    }
+    	Documentos doc=new Documentos();
+        if (CampoNomeCandidato.getText().length() > 0) {//Verifica Nome
+            if (CampoNumCandidato.getText().length() == 5) {//Verifica Numero Candidato
+            	try {//Verifica se tem apenas Numeros em Campo Candidato
+            		Integer.parseInt(CampoNumCandidato.getText());
+				} catch (Exception e) {
+					ConfirmarCandidato.setVisible(false);
+					return false;
+				}
+                if (CampoCPFC.getText().length() >= 9 || CampoCPFC.getText().length() <= 14) {//Verifica CPF
+                	if(doc.validaCpf(CampoCPFC.getText())) {//Verifica se o CPF é valido
+                		if (CampoPartidoF.getText().length()>0) {
+                			//Tem que verificar se o Partido Existe
+	                        ConfirmarCandidato.setVisible(true);
+	                        return true;
+	                    }
+                	}
                 }
             }
         }
@@ -78,7 +91,7 @@ public class TelaCandidato extends javax.swing.JFrame {
 
         LabelPartidoF.setText("Partido Filiado");
 
-        ConfirmarCandidato.setIcon(new javax.swing.ImageIcon("/home/cambraia/NetBeansProjects/TelaUrnaCandidato/confirmar.png")); // NOI18N
+        ConfirmarCandidato.setText("Criar Candidato");
         ConfirmarCandidato.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConfirmarCandidatoActionPerformed(evt);
@@ -89,6 +102,10 @@ public class TelaCandidato extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(CampoNomeCandidato)
+            .addComponent(CampoNumCandidato)
+            .addComponent(CampoCPFC)
+            .addComponent(CampoPartidoF)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -99,19 +116,16 @@ public class TelaCandidato extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(55, 55, 55)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(CampoNomeCandidato, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(LabelNomeCandidato, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelNumCandidato, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                        .addComponent(CampoNumCandidato, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addGap(0, 149, Short.MAX_VALUE))
+                        .addComponent(jLabelNumCandidato, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(LabelPartidoF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(LabelPartidoF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(CampoPartidoF, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CampoCPFC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ConfirmarCandidato))
+                .addGap(112, 112, 112)
+                .addComponent(ConfirmarCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,14 +146,15 @@ public class TelaCandidato extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoCPFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(LabelPartidoF)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LabelPartidoF)
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ConfirmarCandidato)
-                    .addComponent(CampoPartidoF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(CampoPartidoF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ConfirmarCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();

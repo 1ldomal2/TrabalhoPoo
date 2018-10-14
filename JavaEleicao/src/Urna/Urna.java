@@ -2,11 +2,6 @@ package Urna;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import DAO.*;
 import Modelo.*;
 
