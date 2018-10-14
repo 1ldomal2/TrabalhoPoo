@@ -22,6 +22,7 @@ public class TelaCandidato extends javax.swing.JFrame {
         this.cDAO=cDAO;
         this.pDAO=pDAO;
         this.TelaSuperior=TelaSuperior;
+        CampoNumCandidato.setColumns(5);
     }
 	public TelaCandidato() {
         initComponents();
@@ -101,7 +102,6 @@ public class TelaCandidato extends javax.swing.JFrame {
         ConfirmarCandidato = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
         LabelNomeCandidato.setText("Nome do candidato");
         jLabelNumCandidato.setText("Numero do candidato");
         jLabelCPFC.setText("CPF do candidato"); 
@@ -119,7 +119,12 @@ public class TelaCandidato extends javax.swing.JFrame {
             }
         });
         CampoNumCandidato.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
+        	public void keyPressed(java.awt.event.KeyEvent evt) {
+        		if (CampoNumCandidato.getText().length() >= 5) {
+        			CampoNumCandidato.setText(CampoNumCandidato.getText().substring(0,4));
+        		}
+        	}
+        	public void keyReleased(java.awt.event.KeyEvent evt) {
             	VerificaCampo(evt);
             }
         });
