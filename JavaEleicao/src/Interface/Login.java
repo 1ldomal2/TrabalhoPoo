@@ -78,7 +78,7 @@ public class Login extends javax.swing.JFrame {
 			}
 		});
 
-		AbrirCaminho.setIcon(new javax.swing.ImageIcon("/home/cambraia/NetBeansProjects/TelaUrnaCandidato/icone.png")); // NOI18N
+		AbrirCaminho.setIcon(new javax.swing.ImageIcon("../icons/pasta.png")); // NOI18N
 		AbrirCaminho.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mouseClicked(java.awt.event.MouseEvent evt) {
 				AbrirCaminhoMouseClicked(evt);

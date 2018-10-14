@@ -1,14 +1,12 @@
 package Interface;
 
-
 import java.text.ParseException;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import javax.swing.text.MaskFormatter;
-
+import javax.swing.ImageIcon;
 
 import DAO.CandidatoDAO;
-import DAO.EleitorDAO;
 import DAO.VotoDAO;
 import Modelo.Candidato;
 import Modelo.Eleitor;
@@ -18,34 +16,38 @@ import Modelo.Eleitor;
  * @author cambraia
  */
 public class ConsoleUrna extends javax.swing.JFrame {
-	private CandidatoDAO ArrayCandidato=null;
-	private VotoDAO vDAO=null;
-	private Eleitor User=null;
+	private CandidatoDAO ArrayCandidato = null;
+	private VotoDAO vDAO = null;
+	private Eleitor User = null;
 	private int nUrna = 0;
-	private Login TelaLogin=null;
-	
+	private Login TelaLogin = null;
+
 	public ConsoleUrna() {
-        initComponents();
+		initComponents();
 	}
-    public ConsoleUrna(Login TelaLogin,VotoDAO vDAO,Eleitor User,int nUrna) {
-    	this.vDAO=vDAO;
-    	this.TelaLogin=TelaLogin;
-        initComponents();
-        Confirma.setEnabled(false);
-        
-        this.nUrna=nUrna;
-        
-        this.User=User;
-        //Estrutura para Conexao com google Drive
-        ArrayCandidato=new CandidatoDAO();
-        
-        //Receive Google Drive
-        ArrayCandidato.Receive();        
 
-    }
+	public ConsoleUrna(Login TelaLogin, VotoDAO vDAO, Eleitor User, int nUrna) {
+		this.vDAO = vDAO;
+		this.TelaLogin = TelaLogin;
+		initComponents();
 
-   
-    @SuppressWarnings("unchecked")
+		// Colocando Icones
+
+		Confirma.setEnabled(false);
+
+		this.nUrna = nUrna;
+
+		this.User = User;
+		// Estrutura para Conexao com google Drive
+		ArrayCandidato = new CandidatoDAO();
+
+		// Receive Google Drive
+		ArrayCandidato.Receive();
+
+	}
+
+	@SuppressWarnings("unchecked")
+	// <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -150,6 +152,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
             }
         });
 
+        Limpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/apagar.png"))); // NOI18N
         Limpar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LimparActionPerformed(evt);
@@ -169,6 +172,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
             }
         });
 
+        Confirma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/confirmar.png"))); // NOI18N
         Confirma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConfirmaActionPerformed(evt);
@@ -181,6 +185,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
 
         jLabel3.setText("Nome Candidato");
 
+        ApagarNumero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/cancelar.png"))); // NOI18N
         ApagarNumero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ApagarNumeroActionPerformed(evt);
@@ -200,40 +205,48 @@ public class ConsoleUrna extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Limpar)
-                            .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(Limpar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ApagarNumero)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Confirma)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(ApagarNumero))
-                                .addGap(36, 36, 36)
+                                .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BotaoBranco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Confirma)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(72, 72, 72)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addComponent(BotaoBranco, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(CampoCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(95, Short.MAX_VALUE))
+                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(CampoCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(147, Short.MAX_VALUE))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ApagarNumero, Confirma, Limpar, jButton0, jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jButton7, jButton8, jButton9});
@@ -241,280 +254,284 @@ public class ConsoleUrna extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CampoCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(CampoCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton5)
-                                    .addComponent(jButton6))
-                                .addGap(15, 15, 15)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton7)
-                                    .addComponent(jButton8)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(84, 84, 84)
-                                .addComponent(jButton9)))
-                        .addGap(12, 12, 12)
+                            .addComponent(jButton3)
+                            .addComponent(jButton2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton5)
+                            .addComponent(jButton6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton7)
+                            .addComponent(jButton8)
+                            .addComponent(jButton9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BotaoBranco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BotaoBranco, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(133, 133, 133)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(Confirma)
-                        .addComponent(Limpar))
-                    .addComponent(ApagarNumero))
-                .addContainerGap())
+                    .addComponent(Limpar)
+                    .addComponent(ApagarNumero)
+                    .addComponent(Confirma))
+                .addGap(22, 22, 22))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {ApagarNumero, Confirma, Limpar, jButton0, jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jButton7, jButton8, jButton9});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private Candidato MostraCandidato() {
-		if(CampoCandidato.getText().length()==5) {
-			//Pega Numero do terminal e pesquisa se há algum candidato com esse numero
-			Candidato cand=ArrayCandidato.ObjectNumero(CampoCandidato.getText());
-			if(cand ==null) {//Nao há nimguem com esse numero
+
+	private Candidato MostraCandidato() {
+		if (CampoCandidato.getText().length() == 5) {
+			// Pega Numero do terminal e pesquisa se há algum candidato com esse numero
+			Candidato cand = ArrayCandidato.ObjectNumero(CampoCandidato.getText());
+			if (cand == null) {// Nao há nimguem com esse numero
 				jLabel3.setText("Nome Candidato");
 				jLabel2.setText("Numero Partido");
 				jLabel1.setText("Nome Partido");
-				cand=null;
+				cand = null;
 				return null;
-			}else {
+			} else {
 				jLabel3.setText(cand.getNome());
-				jLabel2.setText(""+cand.getPartido().getNumero());
+				jLabel2.setText("" + cand.getPartido().getNumero());
 				jLabel1.setText(cand.getPartido().getNOME());
 				return cand;
 			}
-		}else {
+		} else {
 			jLabel3.setText("Nome Candidato");
 			jLabel2.setText("Numero Partido");
 			jLabel1.setText("Nome Partido");
-			
+
 			return null;
 		}
 	}
-    private void setOk() {
-        Confirma.setEnabled(true);
-    }
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if (CampoCandidato.getText().length() < 5) {
-            CampoCandidato.setText(CampoCandidato.getText() + "1");
-            if (CampoCandidato.getText().length() == 5) {
-                setOk();
-            }
-        }
-        MostraCandidato();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        if (CampoCandidato.getText().length() < 5) {
-            CampoCandidato.setText(CampoCandidato.getText() + "2");
-            if (CampoCandidato.getText().length() == 5) {
-                setOk();
-            }
-        }
-        MostraCandidato();
-    }//GEN-LAST:event_jButton2ActionPerformed
+	private void setOk() {
+		Confirma.setEnabled(true);
+	}
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        if (CampoCandidato.getText().length() < 5) {
-            CampoCandidato.setText(CampoCandidato.getText() + "3");
-            if (CampoCandidato.getText().length() == 5) {
-                setOk();
-            }
-        }
-        MostraCandidato();
-    }//GEN-LAST:event_jButton3ActionPerformed
+	private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
+		// TODO add your handling code here:
+		if (CampoCandidato.getText().length() < 5) {
+			CampoCandidato.setText(CampoCandidato.getText() + "1");
+			if (CampoCandidato.getText().length() == 5) {
+				setOk();
+			}
+		}
+		MostraCandidato();
+	}// GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        if (CampoCandidato.getText().length() < 5) {
-            CampoCandidato.setText(CampoCandidato.getText() + "4");
-            if (CampoCandidato.getText().length() == 5) {
-                setOk();
-            }
-        }
-    }//GEN-LAST:event_jButton4ActionPerformed
+	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton2ActionPerformed
+		// TODO add your handling code here:
+		if (CampoCandidato.getText().length() < 5) {
+			CampoCandidato.setText(CampoCandidato.getText() + "2");
+			if (CampoCandidato.getText().length() == 5) {
+				setOk();
+			}
+		}
+		MostraCandidato();
+	}// GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        if (CampoCandidato.getText().length() < 5) {
-            CampoCandidato.setText(CampoCandidato.getText() + "5");
-            if (CampoCandidato.getText().length() == 5) {
-                setOk();
-            }
-        }
-        MostraCandidato();
-    }//GEN-LAST:event_jButton5ActionPerformed
+	private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton3ActionPerformed
+		// TODO add your handling code here:
+		if (CampoCandidato.getText().length() < 5) {
+			CampoCandidato.setText(CampoCandidato.getText() + "3");
+			if (CampoCandidato.getText().length() == 5) {
+				setOk();
+			}
+		}
+		MostraCandidato();
+	}// GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        if (CampoCandidato.getText().length() < 5) {
-            CampoCandidato.setText(CampoCandidato.getText() + "6");
-            if (CampoCandidato.getText().length() == 5) {
-                setOk();
-            }
-        }
-        MostraCandidato();
-    }//GEN-LAST:event_jButton6ActionPerformed
+	private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton4ActionPerformed
+		// TODO add your handling code here:
+		if (CampoCandidato.getText().length() < 5) {
+			CampoCandidato.setText(CampoCandidato.getText() + "4");
+			if (CampoCandidato.getText().length() == 5) {
+				setOk();
+			}
+		}
+	}// GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        if (CampoCandidato.getText().length() < 5) {
-            CampoCandidato.setText(CampoCandidato.getText() + "7");
-            if (CampoCandidato.getText().length() == 5) {
-                setOk();
-            }
-        }
-        MostraCandidato();
-    }//GEN-LAST:event_jButton7ActionPerformed
+	private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton5ActionPerformed
+		// TODO add your handling code here:
+		if (CampoCandidato.getText().length() < 5) {
+			CampoCandidato.setText(CampoCandidato.getText() + "5");
+			if (CampoCandidato.getText().length() == 5) {
+				setOk();
+			}
+		}
+		MostraCandidato();
+	}// GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        if (CampoCandidato.getText().length() < 5) {
-            CampoCandidato.setText(CampoCandidato.getText() + "8");
-            if (CampoCandidato.getText().length() == 5) {
-                setOk();
-            }
-        }
-        MostraCandidato();
-    }//GEN-LAST:event_jButton8ActionPerformed
+	private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton6ActionPerformed
+		// TODO add your handling code here:
+		if (CampoCandidato.getText().length() < 5) {
+			CampoCandidato.setText(CampoCandidato.getText() + "6");
+			if (CampoCandidato.getText().length() == 5) {
+				setOk();
+			}
+		}
+		MostraCandidato();
+	}// GEN-LAST:event_jButton6ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
-        if (CampoCandidato.getText().length() < 5) {
-            CampoCandidato.setText(CampoCandidato.getText() + "9");
-            if (CampoCandidato.getText().length() == 5) {
-                setOk();
-            }
-        }
-        MostraCandidato();
-    }//GEN-LAST:event_jButton9ActionPerformed
+	private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton7ActionPerformed
+		// TODO add your handling code here:
+		if (CampoCandidato.getText().length() < 5) {
+			CampoCandidato.setText(CampoCandidato.getText() + "7");
+			if (CampoCandidato.getText().length() == 5) {
+				setOk();
+			}
+		}
+		MostraCandidato();
+	}// GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton0ActionPerformed
-        // TODO add your handling code here:
-        if (CampoCandidato.getText().length() < 5) {
-            CampoCandidato.setText(CampoCandidato.getText() + "0");
-            if (CampoCandidato.getText().length() == 5) {
-                setOk();
-            }
-        }
-        MostraCandidato();
-    }//GEN-LAST:event_jButton0ActionPerformed
+	private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton8ActionPerformed
+		// TODO add your handling code here:
+		if (CampoCandidato.getText().length() < 5) {
+			CampoCandidato.setText(CampoCandidato.getText() + "8");
+			if (CampoCandidato.getText().length() == 5) {
+				setOk();
+			}
+		}
+		MostraCandidato();
+	}// GEN-LAST:event_jButton8ActionPerformed
 
-    private void LimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimparActionPerformed
-        // TODO add your handling code here:
-        CampoCandidato.setText("");
-        Confirma.setEnabled(false);
-        MostraCandidato();
-    }//GEN-LAST:event_LimparActionPerformed
+	private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton9ActionPerformed
+		// TODO add your handling code here:
+		if (CampoCandidato.getText().length() < 5) {
+			CampoCandidato.setText(CampoCandidato.getText() + "9");
+			if (CampoCandidato.getText().length() == 5) {
+				setOk();
+			}
+		}
+		MostraCandidato();
+	}// GEN-LAST:event_jButton9ActionPerformed
 
-    private void CampoCandidatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoCandidatoActionPerformed
-        // TODO add your handling code here:
-        CampoCandidato.setEditable(false);
+	private void jButton0ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton0ActionPerformed
+		// TODO add your handling code here:
+		if (CampoCandidato.getText().length() < 5) {
+			CampoCandidato.setText(CampoCandidato.getText() + "0");
+			if (CampoCandidato.getText().length() == 5) {
+				setOk();
+			}
+		}
+		MostraCandidato();
+	}// GEN-LAST:event_jButton0ActionPerformed
 
+	private void LimparActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_LimparActionPerformed
+		// TODO add your handling code here:
+		CampoCandidato.setText("");
+		Confirma.setEnabled(false);
+		MostraCandidato();
+	}// GEN-LAST:event_LimparActionPerformed
 
-    }//GEN-LAST:event_CampoCandidatoActionPerformed
+	private void CampoCandidatoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_CampoCandidatoActionPerformed
+		// TODO add your handling code here:
+		CampoCandidato.setEditable(false);
 
-    private void ApagarNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApagarNumeroActionPerformed
-        // TODO add your handling code here:
-        if (CampoCandidato.getText().length() != 0) {
-            String str = CampoCandidato.getText();
-            StringBuilder w = new StringBuilder(str);
-            str = String.valueOf(w.deleteCharAt(str.length() - 1));
-            CampoCandidato.setText(str);
-            Confirma.setEnabled(false);
+	}// GEN-LAST:event_CampoCandidatoActionPerformed
 
-        }
-        MostraCandidato();
-    }//GEN-LAST:event_ApagarNumeroActionPerformed
+	private void ApagarNumeroActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ApagarNumeroActionPerformed
+		// TODO add your handling code here:
+		if (CampoCandidato.getText().length() != 0) {
+			String str = CampoCandidato.getText();
+			StringBuilder w = new StringBuilder(str);
+			str = String.valueOf(w.deleteCharAt(str.length() - 1));
+			CampoCandidato.setText(str);
+			Confirma.setEnabled(false);
 
-    private void ConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmaActionPerformed
-        // TODO add your handling code here:
-        String texto = CampoCandidato.getText();       
-            Confirma.setEnabled(true);    
-            //LUCAS CRIA VOTO
-            Candidato cand=MostraCandidato();
-            vDAO.CriarVoto(User, cand, nUrna);
-            
-            this.TelaLogin.setVisible(true);
-            this.dispose();
-    }//GEN-LAST:event_ConfirmaActionPerformed
+		}
+		MostraCandidato();
+	}// GEN-LAST:event_ApagarNumeroActionPerformed
 
-    private void CampoCandidatoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CampoCandidatoMouseClicked
-        // TODO add your handling code here:
-        if (CampoCandidato.getText().length() != 5) {
-            Confirma.setEnabled(false);
-        } else {
-            Confirma.setEnabled(true);
-        }
-    }//GEN-LAST:event_CampoCandidatoMouseClicked
+	private void ConfirmaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ConfirmaActionPerformed
+		// TODO add your handling code here:
+		String texto = CampoCandidato.getText();
+		Confirma.setEnabled(true);
+		// LUCAS CRIA VOTO
+		Candidato cand = MostraCandidato();
+		vDAO.CriarVoto(User, cand, nUrna);
 
-    private void BotaoBrancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoBrancoActionPerformed
-        // TODO add your handling code here:
-        //LUCAS CRIA VOTO BRANCO 
-        new Login().setVisible(true);
-            this.dispose();
-    }//GEN-LAST:event_BotaoBrancoActionPerformed
-    /**/
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ConsoleUrna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ConsoleUrna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ConsoleUrna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ConsoleUrna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+		this.TelaLogin.setVisible(true);
+		this.dispose();
+	}// GEN-LAST:event_ConfirmaActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ConsoleUrna().setVisible(true);
-            }
-        });
-    }
+	private void CampoCandidatoMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_CampoCandidatoMouseClicked
+		// TODO add your handling code here:
+		if (CampoCandidato.getText().length() != 5) {
+			Confirma.setEnabled(false);
+		} else {
+			Confirma.setEnabled(true);
+		}
+	}// GEN-LAST:event_CampoCandidatoMouseClicked
+
+	private void BotaoBrancoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BotaoBrancoActionPerformed
+		// TODO add your handling code here:
+		// LUCAS CRIA VOTO BRANCO
+		new Login().setVisible(true);
+		this.dispose();
+	}// GEN-LAST:event_BotaoBrancoActionPerformed
+	/**/
+
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String args[]) {
+		/* Set the Nimbus look and feel */
+		// <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+		// (optional) ">
+		/*
+		 * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+		 * look and feel. For details see
+		 * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+		 */
+		try {
+			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+				if ("Nimbus".equals(info.getName())) {
+					javax.swing.UIManager.setLookAndFeel(info.getClassName());
+					break;
+				}
+			}
+		} catch (ClassNotFoundException ex) {
+			java.util.logging.Logger.getLogger(ConsoleUrna.class.getName()).log(java.util.logging.Level.SEVERE, null,
+					ex);
+		} catch (InstantiationException ex) {
+			java.util.logging.Logger.getLogger(ConsoleUrna.class.getName()).log(java.util.logging.Level.SEVERE, null,
+					ex);
+		} catch (IllegalAccessException ex) {
+			java.util.logging.Logger.getLogger(ConsoleUrna.class.getName()).log(java.util.logging.Level.SEVERE, null,
+					ex);
+		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+			java.util.logging.Logger.getLogger(ConsoleUrna.class.getName()).log(java.util.logging.Level.SEVERE, null,
+					ex);
+		}
+		// </editor-fold>
+		// </editor-fold>
+
+		/* Create and display the form */
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new ConsoleUrna().setVisible(true);
+			}
+		});
+	}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ApagarNumero;
