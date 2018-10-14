@@ -30,6 +30,7 @@ public class Main {
 		vDAO.CriarVoto(eDAO.Array[0], cDAO.Array[0], 1);
 		vDAO.CriarVoto(eDAO.Array[1], cDAO.Array[1], 1);
 		
+		
 	    PartidoDAO pDAO =new PartidoDAO();
 	    pDAO.CriarPartido("01","Nome");
 	    pDAO.CriarPartido("02","Name");

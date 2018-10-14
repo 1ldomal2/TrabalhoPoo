@@ -11,6 +11,7 @@ import DAO.CandidatoDAO;
 import DAO.EleitorDAO;
 import DAO.VotoDAO;
 import Modelo.Candidato;
+import Modelo.Eleitor;
 
 /**
  *
@@ -19,15 +20,22 @@ import Modelo.Candidato;
 public class ConsoleUrna extends javax.swing.JFrame {
 	private CandidatoDAO ArrayCandidato=null;
 	private VotoDAO vDAO=null;
+	private Eleitor User=null;
+	private int nUrna = 0;
+	private Login TelaLogin=null;
 	
 	public ConsoleUrna() {
         initComponents();
 	}
-    public ConsoleUrna(VotoDAO vDAO) {
+    public ConsoleUrna(Login TelaLogin,VotoDAO vDAO,Eleitor User,int nUrna) {
     	this.vDAO=vDAO;
+    	this.TelaLogin=TelaLogin;
         initComponents();
         Confirma.setEnabled(false);
         
+        this.nUrna=nUrna;
+        
+        this.User=User;
         //Estrutura para Conexao com google Drive
         ArrayCandidato=new CandidatoDAO();
         
@@ -281,7 +289,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void MostraCandidato() {
+    private Candidato MostraCandidato() {
 		if(CampoCandidato.getText().length()==5) {
 			//Pega Numero do terminal e pesquisa se há algum candidato com esse numero
 			Candidato cand=ArrayCandidato.ObjectNumero(CampoCandidato.getText());
@@ -290,17 +298,19 @@ public class ConsoleUrna extends javax.swing.JFrame {
 				jLabel2.setText("Numero Partido");
 				jLabel1.setText("Nome Partido");
 				cand=null;
+				return null;
 			}else {
 				jLabel3.setText(cand.getNome());
 				jLabel2.setText(""+cand.getPartido().getNumero());
 				jLabel1.setText(cand.getPartido().getNOME());
+				return cand;
 			}
 		}else {
 			jLabel3.setText("Nome Candidato");
 			jLabel2.setText("Numero Partido");
 			jLabel1.setText("Nome Partido");
 			
-			return;
+			return null;
 		}
 	}
     private void setOk() {
@@ -447,7 +457,10 @@ public class ConsoleUrna extends javax.swing.JFrame {
         String texto = CampoCandidato.getText();       
             Confirma.setEnabled(true);    
             //LUCAS CRIA VOTO
-            new Login().setVisible(true);
+            Candidato cand=MostraCandidato();
+            vDAO.CriarVoto(User, cand, nUrna);
+            
+            this.TelaLogin.setVisible(true);
             this.dispose();
     }//GEN-LAST:event_ConfirmaActionPerformed
 

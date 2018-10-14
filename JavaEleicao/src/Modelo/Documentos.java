@@ -26,7 +26,7 @@ public class Documentos {
 	 *@return Retorna True ou False para ver se o cpf digitado no contrutor veio com pontuação '14 digitos' ou sem pontuação '11digitos	
 	 */	
 	public boolean getFomatedCpf() {
-		System.out.println("CPF c/ Pontuação ="+formatedCpf);
+		//System.out.println("CPF c/ Pontuação ="+formatedCpf);
 		return formatedCpf;
 	}
 	
@@ -35,7 +35,7 @@ public class Documentos {
 	 *@return Retorna True ou False para ver se o cpf digitado é valido ou nao
 	 */	
 	public boolean getValidCpf() {
-		System.out.println("CPF Valido ="+validCpf);
+		//System.out.println("CPF Valido ="+validCpf);
 		return validCpf;
 	}
 	
@@ -46,7 +46,7 @@ public class Documentos {
 	 *@return Retorna True ou False para ver se o cpf digitado é valido ou nao
 	 */	
 	public boolean validaCpf(String cpf) {
-		System.out.println("Validando Cpf ");
+		//System.out.println("Validando Cpf ");
 		
 		int nponto = 0;
 		int nhifen = 0;
@@ -177,14 +177,14 @@ public class Documentos {
 		if(tamanho==11) {//Verifica se os digitos batem "opção sem formataçao"
 			if((cpf.charAt(9)-'0')!=(11-(total1)%11)){
 				if(!((cpf.charAt(9)-'0')==0 && (11-(total1)%11)>9)){
-					System.out.println("Digito verificado 1 está incorreto");
+					System.out.println("Digito verificador 1 está incorreto");
 					validCpf=false;
 					return false;
 				}
 			}
 			if((cpf.charAt(10)-'0')!=(11-(total2)%11)) {
 				if(!((cpf.charAt(10)-'0')==0 && (11-(total2)%11)>9)){
-					System.out.println("Digito verificado 2 está incorreto");
+					System.out.println("Digito verificador 2 está incorreto");
 					validCpf=false;
 					return false;
 				}
@@ -195,14 +195,14 @@ public class Documentos {
 			if(tamanho==14) {
 				if((cpf.charAt(12)-'0')!=(11-(total1)%11)) {
 					if(!((cpf.charAt(12)-'0')==0 && (11-(total1)%11)>9)){
-						System.out.println("Digito verificado 1 está incorreto");
+						System.out.println("Digito verificador 1 está incorreto");
 						validCpf=false;
 						return false;
 					}
 				}
 				if((cpf.charAt(13)-'0')!=(11-(total2)%11)) {
 					if(!((cpf.charAt(13)-'0')==0 && (11-(total2)%11)>9)){
-						System.out.println("Digito verificado 2 está incorreto");
+						System.out.println("Digito verificador 2 está incorreto");
 						validCpf=false;
 						return false;
 					}
@@ -211,7 +211,7 @@ public class Documentos {
 				formated=cpf;
 			}
 		}
-		System.out.println("CPF Valido ");
+		//System.out.println("CPF Valido ");
 		validCpf=true;
 		stringsCpf();
 		return true;
@@ -316,10 +316,10 @@ public class Documentos {
 	 */	
 	public boolean equals(String cpf){//Verifica se é igual formatado ou não
 		if(cpf.equals(formated)||cpf.equals(noFormated)) {
-			System.out.println("CPF são iguais");
+			//System.out.println("CPF são iguais");
 			return true;	
 		}
-		System.out.println("CPF não sao iguais");
+		//System.out.println("CPF não sao iguais");
 		return false;
 	}
 	

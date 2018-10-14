@@ -27,7 +27,7 @@ public class Central {
 	}
 
 	public boolean Resultado() {
-		for (int i = 0; i < array.length; i++) {
+		for (int i = 0; i <voto.getTotal(); i++) {
 			nVotos[i]=voto.NVotosCandidato(candidato.Array[i].getCandidato());
 		}
 		
@@ -78,15 +78,15 @@ public class Central {
 		Candidato candidato = new Candidato();//Cria o objeto para colocar no Array
 
 		// int Numero Pesquisar e ver se mais alguem tem o mesmo Numero
-		if (this.candidato.ObjectNumero(numero) != null)// se diferente de null é porque ja existe esse cpf cadastrado
+		if (this.candidato.ObjectNumero(""+numero) != null)// se diferente de null é porque ja existe esse cpf cadastrado
 			return false;
 		candidato.setNumero(numero);
 
 		// String Cpf Pesquisar e ver se mais alguem tem o mesmo Cpf
-		if (this.candidato.ObjectNumero(numero) != null)// se diferente de null é porque ja existe esse numero
+		if (this.candidato.ObjectNumero(""+numero) != null)// se diferente de null é porque ja existe esse numero
 														// cadastrado
 			return false;
-		candidato.setNumero(numero);
+		candidato.setNumero(numero);	
 
 		// String Nome
 		candidato.setNome(nome);
@@ -102,7 +102,7 @@ public class Central {
 	}
 
 	public boolean CadastroPartidos(String nome,int numero) {
-		Partido partido=new Partido(nome, numero);//Cria o objeto para colocar no Array
+		Partido partido=new Partido(""+numero, nome);//Cria o objeto para colocar no Array
 
 		// String Nome, Pesquisar se mais alguem tem o mesmo nome (Colocando em caixa alta e tirando espaço)
 		if(this.partido.ObjectNome(nome)!=null)//verifica se não existe nimguem com o mesmo nome

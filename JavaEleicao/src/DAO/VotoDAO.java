@@ -15,7 +15,7 @@ import Modelo.Voto;
  */
 public class VotoDAO {
 	private final int TAMANHO = 50;
-	public static int Total = 0;
+	private  int Total = 0;
 	private Voto[] Array = new Voto[TAMANHO];
 	private Voto celulaVetor = null;
 	//Quando carregar ???
@@ -77,6 +77,7 @@ public class VotoDAO {
 	 * */
 	public String makeJson() {
 		System.out.println("Criando Json");
+		System.out.println(Total);
 		JSONObject json=new JSONObject();//Superior
 		JSONArray votos=new JSONArray();
 		JSONObject[] voto=new JSONObject[Total];//Superior
@@ -96,7 +97,7 @@ public class VotoDAO {
 	/**Cria o Voto e o insere em 'this.array'  É ACONSELHAVEL USAR ESTE METODO DENTRO DA URNA POIS A DATA DO VOTO É GERADA AUTOMATICAMENTE
 	 * @param Eleitor Objeto Eleitor
 	 * @param Candidato - Objeto Candidato
-	 * @param int - numero da urna
+	 * @param numero - numero da urna
 	 * @return Boolean - Confirmando se criou ou nao o voto
 	 * */
 	public void CriarVoto(Eleitor eleitor,Candidato candidato,int numero) {
@@ -113,10 +114,10 @@ public class VotoDAO {
 	}
 	/**Cria o Voto e o insere em 'this.array'  É ACONSELHAVEL USAR ESTE METODO DENTRO DA CENTRAL POIS A DATA DO VOTO NÃO É GERADA AUTOMATICAMENTE
 	 
-	 *@param Eleitor Objeto Eleito
-	 *@param Candidato - Objeto Candidato
-	 *@param int - numero da urna
-	 *@param int - long refente a data de criação do voto (segundos decorridos deste o inicio de 1970) 
+	 *@param eleitor Objeto Eleito
+	 *@param candidato - Objeto Candidato
+	 *@param numero - numero da urna
+	 *@param time - long refente a data de criação do voto (segundos decorridos deste o inicio de 1970) 
 	 *@return Boolean - Confirmando se criou ou nao o voto
 	 * */
 	public void CriarVoto(Eleitor eleitor,Candidato candidato,int numero,long time) {
@@ -145,6 +146,11 @@ public class VotoDAO {
 		return;
 
 	}
+
+	public int getTotal() {
+		return Total;
+	}
+	
 	/**Deleta Voto de 'this.array'
 	 * @param Voto - Objeto Voto
 	 * @return Void

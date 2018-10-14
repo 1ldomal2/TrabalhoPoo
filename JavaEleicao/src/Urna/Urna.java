@@ -53,7 +53,7 @@ public class Urna {
 		//MANDA PARA O GOOGLE DRIVE
 		
 	}
-	public boolean Login(String Path){//Logar deixa salvo o eleitor
+	public Eleitor Login(String Path){//Logar deixa salvo o eleitor
 		
 		System.out.println("Transformando a Img em Hash");
 		Senha psw=null;
@@ -70,12 +70,12 @@ public class Urna {
 		if(eleitor == null) {//Nao logou
 			System.out.println("Não Logou");
 			Deslogar();//Ter um controle de segurança
-			return false;
+			return null;
 		}
 		System.out.println("Logado como :"+eleitor.getNome());
 		this.Logado=true;//Ter um controle de segurança
 		this.User=eleitor;//Switch on
-		return true;
+		return eleitor;
 	}
 	public void Deslogar() {
 		this.Logado=false;//Ter um controle de segurança

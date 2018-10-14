@@ -158,13 +158,12 @@ public class Login extends javax.swing.JFrame {
 		} else {
 			// Verifica se a senha é igual
 			System.out.println("Verificando a Senha");
-			boolean loginOk = false;
-			System.out.println(inst);
-			loginOk = inst.Login(TextoCaminho.getText());
+			Eleitor elei=inst.Login(TextoCaminho.getText());
 			//Se for igual chama Console.Urna
-			if (loginOk) {
-				new ConsoleUrna(vDAO).setVisible(true);
-				this.dispose();
+			if (elei != null) {
+				new ConsoleUrna(this,vDAO,elei,elei.getUrnaVotacao()).setVisible(true);
+				this.setVisible(false);
+				System.out.println("\n\n\n"+vDAO.makeJson());
 			} else {
 				JOptionPane.showMessageDialog(this, "Senha Incorreta");
 			}
