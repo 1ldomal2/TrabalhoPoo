@@ -131,7 +131,7 @@ public class CentralBotão extends javax.swing.JFrame {
 
     private void BotaoCadastroPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastroPartidoActionPerformed
         // TODO add your handling code here:
-        new TelaPartido().show();
+        new TelaPartido(this,pDAO).setVisible(true);
     }//GEN-LAST:event_BotaoCadastroPartidoActionPerformed
 
     /**

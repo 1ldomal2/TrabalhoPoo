@@ -27,6 +27,9 @@ public class Partido {
 		this.Nome=nome;
 		DataCadastro=null;//So é relevante para a Central		
 	}
+	public Partido() {
+		
+	}
 	/**
 	 * 
 	 * @return Object com data de cadastro

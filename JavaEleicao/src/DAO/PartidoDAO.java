@@ -145,13 +145,7 @@ public class PartidoDAO {
 	 * @return Partido - Retorona o Objeto partido presente em this.array que possui o nome 'x'
 	 */
 	public Partido ObjectNome(String nome) {
-		Documentos doc = new Documentos(nome);
-
-		if (!doc.validaCpf(nome)) {// é um cpf valido?
-			return null;
-		}
-		nome = doc.toString();// pega o sem pontuação pois em candidato fica salvo o sem pontuação
-
+		
 		for (int i = 0; i < Total; i++) {
 			if(Array[i]!=null) {
 				if (Array[i].getNome().equals(nome)) {
