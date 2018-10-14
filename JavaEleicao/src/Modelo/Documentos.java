@@ -299,13 +299,13 @@ public class Documentos {
 	 *@return String- Cpf sem pontuação 11digitos
 	 */	
 	public String toString(){
-		return formated;	
+		return noFormated;	
 	}
 	/**
 	 *@return String- Cpf com pontuação 14digitos
 	 */	
 	public String toStringPonto(){
-		return noFormated;		
+		return formated;		
 	}
 	/**
 	 *@return Boolean -Verifica se o cpf é igual "Tanto com pontuação ou sem pontuação'

@@ -1,4 +1,6 @@
 package Interface;
+import javax.swing.JOptionPane;
+
 import DAO.*;
 import Modelo.*;
 
@@ -9,14 +11,17 @@ import Modelo.*;
 public class TelaCandidato extends javax.swing.JFrame {
 	private CandidatoDAO cDAO=null;
 	private PartidoDAO pDAO=null;
+	private CentralBotão TelaSuperior=null;
     /**
      * Creates new form TelaCandidato
      */
-	public TelaCandidato(CandidatoDAO cDAO,PartidoDAO pDAO) {
+	
+	public TelaCandidato(CentralBotão TelaSuperior,CandidatoDAO cDAO,PartidoDAO pDAO) {
         initComponents();
         ConfirmarCandidato.setEnabled(false);
         this.cDAO=cDAO;
         this.pDAO=pDAO;
+        this.TelaSuperior=TelaSuperior;
     }
 	public TelaCandidato() {
         initComponents();
@@ -24,28 +29,50 @@ public class TelaCandidato extends javax.swing.JFrame {
     }
 
     private boolean VerificaCampo(){
-    	System.out.println("Chamou");/*
-    	Documentos doc=new Documentos();
-        if (CampoNomeCandidato.getText().length() > 0) {//Verifica Nome
-            if (CampoNumCandidato.getText().length() == 5) {//Verifica Numero Candidato
-            	try {//Verifica se tem apenas Numeros em Campo Candidato
+     	Documentos doc=new Documentos();
+     	//Verifica se foi digitado algo no campo nome
+        if (CampoNomeCandidato.getText().length() > 0) {
+        	//Verifica se o Numero Candidato tem 5 caracteres
+            if (CampoNumCandidato.getText().length() == 5) {
+            	//Verifica se tem apenas Numeros em Campo Candidato
+            	try {
             		Integer.parseInt(CampoNumCandidato.getText());
 				} catch (Exception e) {
-					ConfirmarCandidato.setVisible(false);
+					ConfirmarCandidato.setEnabled(false);
 					return false;
 				}
-                if (CampoCPFC.getText().length() >= 9 || CampoCPFC.getText().length() <= 14) {//Verifica CPF
-                	if(doc.validaCpf(CampoCPFC.getText())) {//Verifica se o CPF é valido
+            	//Verifica se Cpf tem a Quantidade Certa de caracteres
+                if (CampoCPFC.getText().length() == 11 || CampoCPFC.getText().length() == 14) {//Verifica CPF
+                	//Verifica se o Cpf Digitado é valido
+                	if(doc.validaCpf(CampoCPFC.getText())) {
+                		//Verifica se digitou algo no campo partido
                 		if (CampoPartidoF.getText().length()>0) {
-                			//Tem que verificar se o Partido Existe
-	                        ConfirmarCandidato.setVisible(true);
+                			//Tem que verificar se o Partido Existe Começa procurando por Nome
+                			Partido part=null;
+                			part=pDAO.ObjectNome(CampoPartidoF.getText());
+                			if(part==null) {
+                				//Se não achou por nome ve se Digitou um numero no campo
+                				try {
+									Integer.parseInt(CampoPartidoF.getText());
+								} catch (Exception e) {
+									ConfirmarCandidato.setEnabled(false);
+									return false;
+								}
+                				//Procura o Partido pelo numero
+                				part=pDAO.ObjectNumero(Integer.parseInt(CampoPartidoF.getText()));
+                				if(part==null) {
+                					ConfirmarCandidato.setEnabled(false);
+                					return false;
+                				}
+                			}
+	                        ConfirmarCandidato.setEnabled(true);
 	                        return true;
 	                    }
                 	}
                 }
             }
         }
-        ConfirmarCandidato.setVisible(false);*/
+        ConfirmarCandidato.setEnabled(false);
         return false;
       }
    
@@ -87,27 +114,27 @@ public class TelaCandidato extends javax.swing.JFrame {
             }
         });
         CampoNomeCandidato.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
             	VerificaCampo(evt);
             }
         });
         CampoNumCandidato.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
             	VerificaCampo(evt);
             }
         });
         CampoCPFC.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
             	VerificaCampo(evt);
             }
         });
         CampoPartidoF.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
             	VerificaCampo(evt);
-            }
+            } 
         });
         this.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
             	VerificaCampo(evt);
             }
         });
@@ -183,11 +210,31 @@ public class TelaCandidato extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                                 
 
-    private void ConfirmarCandidatoActionPerformed(java.awt.event.ActionEvent evt) {                                                   
-        // TODO add your handling code here:
+    private void ConfirmarCandidatoActionPerformed(java.awt.event.ActionEvent evt) {           
+			Partido part=null;
+			part=pDAO.ObjectNome(CampoPartidoF.getText());//Procura Partido pelo Nome
+			if(part==null) {
+				//Se não achou por nome  Procura o Partido pelo numero
+				part=pDAO.ObjectNumero(Integer.parseInt(CampoPartidoF.getText()));
+				if(part==null) {
+					JOptionPane.showMessageDialog(null, "Partido Invalido");//Provavelmente nunca passará por aqui
+					return;
+				}
+			}
+			boolean criado=false;
+    	try {
+    		criado=cDAO.CriarCandidato(CampoNomeCandidato.getText(), CampoNumCandidato.getText(), CampoCPFC.getText(),part);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
+		}
+    	if(criado==true) {
+    		Documentos doc=new Documentos(CampoCPFC.getText());
+    		JOptionPane.showMessageDialog(null, "Cadastrado com sucesso \n "+"Nome:"+CampoNomeCandidato.getText()+"\nNumero:"+CampoNumCandidato.getText()+"\nCPF:"+doc.toStringPonto()+"\nNome Partido:"+part.getNome()+"\nNumero Partido:"+part.getNumero());
+    	}
     }                                                  
 
-    private void VerificaCampo(java.awt.event.KeyEvent evt) {                                              
+    private void VerificaCampo(java.awt.event.KeyEvent evt) { 
+    	//ERRO Quero primeiro adicionar o Numero ao campo e depois Chamar o evento AJUDA
     	VerificaCampo();
     }    
                                                 

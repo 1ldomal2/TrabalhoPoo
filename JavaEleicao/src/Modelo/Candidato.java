@@ -35,6 +35,16 @@ public class Candidato {
 			 System.out.println("Cpf Invalido");
 		}
 	}
+	public Candidato(String Nome, String Numero, String Cpf,Partido Partido) {// Import do
+		System.out.println("Criando Candidato");
+		if (setCpf(Cpf)) {// Se o cpf não for valido ja aborta
+			this.Nome = Nome;
+			this.Numero = Integer.parseInt(Numero);
+			this.Partido = Partido;
+		} else {
+			 System.out.println("Cpf Invalido");
+		}
+	}
 
 	/**
 	 * @return String- Nome Candidato

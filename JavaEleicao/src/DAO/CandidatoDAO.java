@@ -5,6 +5,7 @@ import org.json.JSONObject;
 
 import Modelo.Candidato;
 import Modelo.Documentos;
+import Modelo.Partido;
 
 /**Classe para objetos do tipo CandidatoDAO, onde armazena um vetor 'this.Array' com n Candidatos
  * @author Lucas Mateus Fernandes
@@ -79,6 +80,17 @@ public class CandidatoDAO {
 	public boolean CriarCandidato(String Nome, String Numero, String Cpf, String NumeroPartido,String NomePartido) {
 		if (Total < TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Candidato(Nome, Numero, Cpf,NumeroPartido , NomePartido);
+			if (celulaVetor != null) {//Evita "lixo" no array
+				Array[Total] = this.celulaVetor;
+				Total++;
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean CriarCandidato(String Nome, String Numero, String Cpf, Partido Partido) {
+		if (Total < TAMANHO) {//Evita estourar Array
+			this.celulaVetor = new Candidato(Nome, Numero, Cpf,Partido);
 			if (celulaVetor != null) {//Evita "lixo" no array
 				Array[Total] = this.celulaVetor;
 				Total++;
