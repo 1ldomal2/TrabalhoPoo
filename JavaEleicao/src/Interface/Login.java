@@ -59,71 +59,75 @@ public class Login extends javax.swing.JFrame {
 	 */
 	@SuppressWarnings("unchecked")
 	// <editor-fold defaultstate="collapsed" desc="Generated
-	// Code">//GEN-BEGIN:initComponents
-	private void initComponents() {
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-		CaminhoArquivo = new javax.swing.JFileChooser();
-		Texto = new javax.swing.JLabel();
-		TextoCaminho = new javax.swing.JTextField();
-		AbrirCaminho = new javax.swing.JButton();
-		ConfirmarLogin = new javax.swing.JButton();
+        CaminhoArquivo = new javax.swing.JFileChooser();
+        Texto = new javax.swing.JLabel();
+        TextoCaminho = new javax.swing.JTextField();
+        AbrirCaminho = new javax.swing.JButton();
+        ConfirmarLogin = new javax.swing.JButton();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		Texto.setText("Digite a senha: (Caminho)");
+        Texto.setText("Digite a senha: (Caminho)");
 
-		TextoCaminho.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				TextoCaminhoActionPerformed(evt);
-			}
-		});
+        TextoCaminho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextoCaminhoActionPerformed(evt);
+            }
+        });
 
-		AbrirCaminho.setIcon(new javax.swing.ImageIcon("../icons/pasta.png")); // NOI18N
-		AbrirCaminho.addMouseListener(new java.awt.event.MouseAdapter() {
-			public void mouseClicked(java.awt.event.MouseEvent evt) {
-				AbrirCaminhoMouseClicked(evt);
-			}
-		});
-		AbrirCaminho.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				AbrirCaminhoActionPerformed(evt);
-			}
-		});
+        AbrirCaminho.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pasta.png"))); // NOI18N
+        AbrirCaminho.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AbrirCaminhoMouseClicked(evt);
+            }
+        });
+        AbrirCaminho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AbrirCaminhoActionPerformed(evt);
+            }
+        });
 
-		ConfirmarLogin.setText("Login");
-		ConfirmarLogin.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
-				ConfirmarLoginActionPerformed(evt);
-			}
-		});
+        ConfirmarLogin.setText("Login");
+        ConfirmarLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarLoginActionPerformed(evt);
+            }
+        });
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		getContentPane().setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-						layout.createSequentialGroup().addGap(0, 0, Short.MAX_VALUE).addComponent(ConfirmarLogin))
-				.addGroup(layout.createSequentialGroup().addContainerGap()
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addGroup(layout.createSequentialGroup()
-										.addComponent(TextoCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 154,
-												javax.swing.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(AbrirCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 34,
-												javax.swing.GroupLayout.PREFERRED_SIZE))
-								.addComponent(Texto))
-						.addGap(0, 78, Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup().addComponent(Texto).addGap(32, 32, 32)
-						.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-								.addComponent(TextoCaminho, javax.swing.GroupLayout.PREFERRED_SIZE,
-										javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-								.addComponent(AbrirCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 28,
-										javax.swing.GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-						.addComponent(ConfirmarLogin)));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(ConfirmarLogin))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TextoCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(AbrirCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Texto))
+                .addGap(0, 78, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(Texto)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TextoCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AbrirCaminho, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addComponent(ConfirmarLogin))
+        );
 
-		pack();
-	}// </editor-fold>//GEN-END:initComponents
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
 
 	private void TextoCaminhoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_TextoCaminhoActionPerformed
 		// TODO add your handling code here:
@@ -208,11 +212,11 @@ public class Login extends javax.swing.JFrame {
 		});
 	}
 
-	// Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton AbrirCaminho;
-	private javax.swing.JFileChooser CaminhoArquivo;
-	private javax.swing.JButton ConfirmarLogin;
-	private javax.swing.JLabel Texto;
-	private javax.swing.JTextField TextoCaminho;
-	// End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AbrirCaminho;
+    private javax.swing.JFileChooser CaminhoArquivo;
+    private javax.swing.JButton ConfirmarLogin;
+    private javax.swing.JLabel Texto;
+    private javax.swing.JTextField TextoCaminho;
+    // End of variables declaration//GEN-END:variables
 }
