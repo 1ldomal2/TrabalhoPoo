@@ -235,6 +235,8 @@ public class TelaCandidato extends javax.swing.JFrame {
     	if(criado==true) {
     		Documentos doc=new Documentos(CampoCPFC.getText());
     		JOptionPane.showMessageDialog(null, "Cadastrado com sucesso \n "+"Nome:"+CampoNomeCandidato.getText()+"\nNumero:"+CampoNumCandidato.getText()+"\nCPF:"+doc.toStringPonto()+"\nNome Partido:"+part.getNome()+"\nNumero Partido:"+part.getNumero());
+    		TelaSuperior.setVisible(true);
+    		this.dispose();
     	}
     }                                                  
 

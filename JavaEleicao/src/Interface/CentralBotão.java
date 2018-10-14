@@ -125,7 +125,8 @@ public class CentralBotão extends javax.swing.JFrame {
 
     private void BotaoCadastroEleitorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastroEleitorActionPerformed
         // TODO add your handling code here:
-        new TelaEleitor().show();
+        new TelaEleitor(this,eDAO).setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_BotaoCadastroEleitorActionPerformed
 
     private void BotaoCadastroPartidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoCadastroPartidoActionPerformed

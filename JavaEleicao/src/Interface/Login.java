@@ -26,6 +26,7 @@ import Urna.Urna;
 public class Login extends javax.swing.JFrame {
 	private Urna inst = null;
 	private VotoDAO vDAO =null;
+	
 
 	/**
 	 * Creates new form Login
