@@ -13,6 +13,7 @@ import Modelo.Eleitor;
  * @author Lucas Mateus Fernandes
  */
 public class EleitorDAO {
+	
 	private final int TAMANHO = 50;
 	public static int Total = 0;
 	public Eleitor[] Array = new Eleitor[TAMANHO];

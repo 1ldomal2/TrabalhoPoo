@@ -26,7 +26,6 @@ public class Documentos {
 	 *@return Retorna True ou False para ver se o cpf digitado no contrutor veio com pontuação '14 digitos' ou sem pontuação '11digitos	
 	 */	
 	public boolean getFomatedCpf() {
-		//System.out.println("CPF c/ Pontuação ="+formatedCpf);
 		return formatedCpf;
 	}
 	
@@ -35,7 +34,6 @@ public class Documentos {
 	 *@return Retorna True ou False para ver se o cpf digitado é valido ou nao
 	 */	
 	public boolean getValidCpf() {
-		//System.out.println("CPF Valido ="+validCpf);
 		return validCpf;
 	}
 	
@@ -46,7 +44,6 @@ public class Documentos {
 	 *@return Retorna True ou False para ver se o cpf digitado é valido ou nao
 	 */	
 	public boolean validaCpf(String cpf) {
-		//System.out.println("Validando Cpf ");
 		
 		int nponto = 0;
 		int nhifen = 0;
@@ -211,7 +208,6 @@ public class Documentos {
 				formated=cpf;
 			}
 		}
-		//System.out.println("CPF Valido ");
 		validCpf=true;
 		stringsCpf();
 		return true;
@@ -316,10 +312,8 @@ public class Documentos {
 	 */	
 	public boolean equals(String cpf){//Verifica se é igual formatado ou não
 		if(cpf.equals(formated)||cpf.equals(noFormated)) {
-			//System.out.println("CPF são iguais");
 			return true;	
 		}
-		//System.out.println("CPF não sao iguais");
 		return false;
 	}
 	

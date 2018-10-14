@@ -65,9 +65,7 @@ public class Eleitor {
 	public void setCpf(String cpf) {
 		Documentos doc=new Documentos();
 		if(doc.validaCpf(cpf)) {
-			System.out.println("Cpf Valido");
 			this.Cpf = doc;
-			System.out.println("Switch Cpf");
 		}else {
 			System.out.println("Cpf Invalido");
 		}

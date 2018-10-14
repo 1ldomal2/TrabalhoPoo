@@ -21,15 +21,10 @@ public class Partido {
 	 */
 	
 	public Partido(String numero,String nome) {
-
-		System.out.println("Setando Numero Partido");
-		this.Numero=Integer.parseInt(numero);
-
-		System.out.println("Setando Nome Partido");
-		this.Nome=nome;
+		System.out.println("Criando Partido");
 		
-
-		System.out.println("Setando Data de Criação do Partido como NULL");
+		this.Numero=Integer.parseInt(numero);
+		this.Nome=nome;
 		DataCadastro=null;//So é relevante para a Central		
 	}
 	/**

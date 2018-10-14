@@ -83,6 +83,7 @@ public class Voto {
 		data=new Date(time);
 	}
 	public Voto(String eleitorCpf,String candidatoCpf,String NumeroUrna){//import Json
+		System.out.println("Criando Voto");
 		this.eleitor=eleitor;//Depois tem que procura o eleitor por cpf
 		this.candidato=candidato;//Procura o candidato por cpf
 		this.NumeroUrna=Integer.parseInt(NumeroUrna);

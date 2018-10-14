@@ -36,7 +36,6 @@ public class Senha {
 	 */
 	public Senha(String Inconsistente,String Hash) {
 		if(Inconsistente.equals("INCONSISTENTE")) {
-			System.out.println("Senha Hash foi passada na 'mão' ");
 			this.Hash=Hash;
 			this.Inconsistencia=true;
 		}
@@ -68,8 +67,8 @@ public class Senha {
 
 		String conteudoArq="";
         try {
+    		System.out.println("Lendo Imagem");
 			while(arq.ready()){//Le Arquivo
-				System.out.println("Lendo Imagem");
 				conteudoArq+=lerArq.readLine();  //Concatena todo o arquivo é uma so string      	
 			}
 		} catch (IOException e){e.printStackTrace();}
@@ -116,7 +115,6 @@ public class Senha {
 	 */
 	public boolean equals(Senha senha) {//Verifica se o Hash de ambas senhas são iguais
 		boolean retorno=this.Hash.equals(senha.Hash);
-		System.out.println("Senhas Iguais ="+retorno);
 		return retorno;
 	}
 	/**
@@ -125,7 +123,6 @@ public class Senha {
 	 */
 	public boolean equals(String senha) {//Verifica se o Hash de ambas senhas são iguais
 		boolean retorno=this.Hash.equals(senha);
-		System.out.println("Senhas Iguais ="+retorno);
 		return retorno;
 	}
 	
