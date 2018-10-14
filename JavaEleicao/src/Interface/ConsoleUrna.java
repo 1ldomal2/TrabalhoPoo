@@ -24,24 +24,26 @@ public class ConsoleUrna extends javax.swing.JFrame {
 
 	public ConsoleUrna() {
 		initComponents();
+		Confirma.setEnabled(false);
+
+		// Receive Google Drive os Candidatos que podem ser votados
+		ArrayCandidato = new CandidatoDAO();
+		ArrayCandidato.Receive();
 	}
 
 	public ConsoleUrna(Login TelaLogin, VotoDAO vDAO, Eleitor User, int nUrna) {
-		this.vDAO = vDAO;
-		this.TelaLogin = TelaLogin;
+		//Argumentos
+		this.vDAO = vDAO;//Armazena os votos de todas as Urnas
+		this.TelaLogin = TelaLogin;//Usado para voltar para a janela
+		this.nUrna = nUrna;//Qual o numero da Urna Criada
+		this.User = User;//Quem esta votando
+		
+		//Iniciando Tela
 		initComponents();
-
-		// Colocando Icones
-
 		Confirma.setEnabled(false);
 
-		this.nUrna = nUrna;
-
-		this.User = User;
-		// Estrutura para Conexao com google Drive
+		// Receive Google Drive os Candidatos que podem ser votados
 		ArrayCandidato = new CandidatoDAO();
-
-		// Receive Google Drive
 		ArrayCandidato.Receive();
 
 	}
@@ -241,12 +243,12 @@ public class ConsoleUrna extends javax.swing.JFrame {
                                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(CampoCandidato, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addGap(74, 74, 74)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(147, Short.MAX_VALUE))))
+                        .addContainerGap(91, Short.MAX_VALUE))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {ApagarNumero, Confirma, Limpar, jButton0, jButton1, jButton2, jButton3, jButton4, jButton5, jButton6, jButton7, jButton8, jButton9});
@@ -280,7 +282,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
                             .addComponent(jButton0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BotaoBranco, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -465,9 +467,14 @@ public class ConsoleUrna extends javax.swing.JFrame {
 		// TODO add your handling code here:
 		String texto = CampoCandidato.getText();
 		Confirma.setEnabled(true);
-		// LUCAS CRIA VOTO
 		Candidato cand = MostraCandidato();
-		vDAO.CriarVoto(User, cand, nUrna);
+		if(cand != null) {
+			System.out.println("Voto Valido");
+			vDAO.CriarVoto(User, cand, nUrna);
+		}else {//Voto Nulo
+			System.out.println("Voto Invalido");
+			vDAO.CriarVoto(User, null, nUrna);
+		}
 
 		this.TelaLogin.setVisible(true);
 		this.dispose();
