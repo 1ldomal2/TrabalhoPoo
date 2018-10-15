@@ -171,7 +171,7 @@ public class CentralBotão extends javax.swing.JFrame {
     	FileWriter arq;
 
 		try {
-			arq = new FileWriter("Arquivos");
+			arq = new FileWriter("Arquivos.json");
 			PrintWriter gravarArq = new PrintWriter(arq);//Objeto buffer
 	    	
 	    	DAO EstrutraDados=new DAO(cDAO,eDAO,pDAO,vDAO);
