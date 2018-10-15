@@ -53,31 +53,6 @@ public class DAO {
 		json.put("Voto", jsonVoto);
 		return json.toString();
 	}
-	public String LerArquivo(String path) {
-
-		FileReader arq=null;
-		try {
-			System.out.println("Abrindo "+path);
-			arq = new FileReader(path);
-		} catch (FileNotFoundException e1) {
-			System.out.println("Arquivo não encontrado");
-			e1.printStackTrace();
-		}//Abre o Arquivo localizada em $Path
-		
-		
-		BufferedReader lerArq = new BufferedReader(arq);//Buffer do Arrquivo aberto
-
-		String conteudoArq="";
-        try {
-			while(arq.ready()){//Le Arquivo
-				conteudoArq+=lerArq.readLine();  //Concatena todo o arquivo é uma so string      	
-			}
-		} catch (IOException e){e.printStackTrace();}
-        try {
-        	arq.close();//Fecha Arquivo
-		} catch (Exception e){}
-        return conteudoArq;
-        
-	}
+	
 
 }
