@@ -1,7 +1,14 @@
 package VISAO;
 
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.swing.JOptionPane;
+
 import DAO.CandidatoDAO;
+import DAO.DAO;
 import DAO.EleitorDAO;
 import DAO.PartidoDAO;
 import DAO.VotoDAO;
@@ -160,7 +167,24 @@ public class CentralBotão extends javax.swing.JFrame {
     }//GEN-LAST:event_ResultadoActionPerformed
 
     private void UploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UploadActionPerformed
-        //Lucas
+        //Cria um arquivo
+    	FileWriter arq;
+
+		try {
+			arq = new FileWriter("Arquivos");
+			PrintWriter gravarArq = new PrintWriter(arq);//Objeto buffer
+	    	
+	    	DAO EstrutraDados=new DAO(cDAO,eDAO,pDAO,vDAO);
+	    	String Json=EstrutraDados.Salvar();//Convertendo tudo para string
+	    	
+	    	gravarArq.printf(Json);
+			arq.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			JOptionPane.showInternalMessageDialog(null,"Erro Ao criar Arquivo");
+		}
+			
+    	
     }//GEN-LAST:event_UploadActionPerformed
 
     /**

@@ -1,6 +1,7 @@
 package Central;
 
 import DAO.CandidatoDAO;
+import DAO.DAO;
 import DAO.EleitorDAO;
 import DAO.PartidoDAO;
 import DAO.VotoDAO;
@@ -22,6 +23,7 @@ public class Main {
 			
 		//Cria tela da Central
 		CentralBotão ins=new CentralBotão(cDAO,eDAO,pDAO,vDAO);
+		
 		ins.setVisible(true);
 		
 
