@@ -13,25 +13,51 @@ import javax.swing.JOptionPane;
 
 import DAO.*;
 import MODELO.*;
+import VISAO.CentralBotão;
+import VISAO.TelaCentral;
 
 public class Central {
 	
+	private TelaCentral tela=null;
 	private CandidatoDAO cDAO=null;
 	private EleitorDAO eDAO=null;
 	private PartidoDAO pDAO=null;
 	private VotoDAO	vDAO=null;
 	private int[] nVotos=null;
 
+	/**
+	 * Inicializa a Central ,
+	 * Carrega os dados Salvos,
+	 * Inicia a tela;
+	 * 
+	 */
+	public Central() {
+		//Inicia Central
+		this.cDAO=new CandidatoDAO();
+		this.eDAO=new EleitorDAO();
+		this.pDAO=new PartidoDAO();
+		this.vDAO=new VotoDAO();
+		
+		//Carrega Dados Da ultima seção 
+		 cDAO.Receive();
+	     eDAO.Receive();
+	     pDAO.Receive();
+	     vDAO.Receive();
+	    
+		nVotos=new int[eDAO.Total];//Trocar .TOTAL para get TOTAL
 
-	public Central(CandidatoDAO cDAO,EleitorDAO eDAO,PartidoDAO pDAO,VotoDAO vDAO) {
-		this.cDAO=cDAO;
-		this.eDAO=eDAO;
-		this.pDAO=pDAO;
-		this.vDAO=vDAO;
-		nVotos=new int[eDAO.Total];
-		//Trocar .TOTAL para get TOTAL
+		//Habilita a Tela
+		tela=new TelaCentral(this);
+		tela.setVisible(true);
+		
 	}
 	
+	
+	/**
+	 * 
+	 * @param Path - Caminho para Salvar
+	 * @return Arquivo .json com todos os dados
+	 */
 	public boolean Send(String Path) {
 	//Salva os Arquivos
 		//Cria um arquivo
@@ -54,7 +80,7 @@ public class Central {
 	}
 
 	public String Receive(String Path) {
-		//Abre o Arquivo localizada em $Path
+		//Abre o Arquivo localizado em $Path
 			FileReader arq=null;
 			try {
 				System.out.println("Abrindo "+Path);
@@ -145,9 +171,9 @@ public class Central {
 	
 	
 	public boolean CadastrarPartido(String CampoNumeroPartido,String CampoNomePartido){
-		private Partido partido=null;
-		private boolean verificacao=false;
-		private int numeroPartido=0;
+		 Partido partido=null;
+		 boolean verificacao=false;
+		 int numeroPartido=0;
 
 		//Procura Partidos pelo Nome
 			partido=pDAO.ObjectNome(CampoNumeroPartido);
@@ -179,16 +205,19 @@ public class Central {
 	    			 JOptionPane.showMessageDialog(null, "Partido Criado com sucesso\n"+
 	    				"\nNumero:"+CampoNumeroPartido+
 	    				"\nNome:"+CampoNomePartido);
+	    			 return true;
 	    		}else{
 	    			JOptionPane.showMessageDialog(null, "Erro ao criar o Partido");
+	    			return false;
 	    		}
 	    	}
+	   return verificacao;
 
 	}
 
 public boolean CriarEleitor(String CampoNome,String CampoTitulo,String CampoCPF,String CampoUrna){
-	private Eleitor eleitor=null;
-	private int numero=0;
+	Eleitor eleitor=null;
+	int numero=0;
 	//Vai Pegar e Tentar Carregar uma Imagem 
 	//Vai Gerar um Eleitor
 
@@ -204,7 +233,7 @@ public boolean CriarEleitor(String CampoNome,String CampoTitulo,String CampoCPF,
 	eleitor.setUrnaVotacao(numero);
 	//Imagem ja foi setada ao carregar a imagem
 
-	if(eDAO.CriarEleitor(eleitor){
+	if(eDAO.CriarEleitor(eleitor)){
 		JOptionPane.showMessageDialog(null,"Eleitor Cadastrado com Sucesso\n"+
 								    		"\nNome:"+CampoNome+
 								    		"\nCPF:"+eleitor.getCpf().toStringPonto()+
@@ -214,6 +243,7 @@ public boolean CriarEleitor(String CampoNome,String CampoTitulo,String CampoCPF,
 		return true;
 	}else{
 		JOptionPane.showMessageDialog(null,"Erro ao cadastrar");
+		return false;
 	}
 }
 
