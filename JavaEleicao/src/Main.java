@@ -1,47 +1,77 @@
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
+import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.store.FileDataStoreFactory;
+import com.google.api.services.drive.Drive;
+import com.google.api.services.drive.DriveScopes;
+import com.google.api.services.drive.model.File;
+import com.google.api.services.drive.model.FileList;
+
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Date;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.security.GeneralSecurityException;
+import java.util.Collections;
+import java.util.List;
 
-import org.json.*;
+public class DriveQuickstart {
+    private static final String APPLICATION_NAME = "Google Drive API Java Quickstart";
+    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+    private static final String TOKENS_DIRECTORY_PATH = "tokens";
 
-import DAO.CandidatoDAO;
-import DAO.EleitorDAO;
-import DAO.PartidoDAO;
-import DAO.VotoDAO;
-import Modelo.Documentos;
-import Modelo.Partido;
+    /**
+     * Global instance of the scopes required by this quickstart.
+     * If modifying these scopes, delete your previously saved tokens/ folder.
+     */
+    private static final List<String> SCOPES = Collections.singletonList(DriveScopes.DRIVE_METADATA_READONLY);
+    private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
+    /**
+     * Creates an authorized Credential object.
+     * @param HTTP_TRANSPORT The network HTTP Transport.
+     * @return An authorized Credential object.
+     * @throws IOException If the credentials.json file cannot be found.
+     */
+    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
+        // Load client secrets.
+        InputStream in = DriveQuickstart.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
-public class Main {
+        // Build flow and trigger user authorization request.
+        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+                HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
+                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
+                .setAccessType("offline")
+                .build();
+        return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+    }
 
+    public static void main(String... args) throws IOException, GeneralSecurityException {
+        // Build a new authorized API client service.
+        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+        Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                .setApplicationName(APPLICATION_NAME)
+                .build();
 
-	public static void main(String[] args) throws NoSuchAlgorithmException, IOException {
-		
-		CandidatoDAO cDAO =new CandidatoDAO();
-		cDAO.CriarCandidato("Nome1", "11", "06680923603", "21", "s1");
-		cDAO.CriarCandidato("Nome2", "12", "06680923603", "22", "s2");
-		cDAO.CriarCandidato("Nome3", "13", "06680923603", "23", "s3");
-		
-		EleitorDAO eDAO =new EleitorDAO();
-		eDAO.CriarEleitor("Titulo1","Nome1","06680923603",01,"/home/lucas/Área de Trabalho/TrabalhoPoo/Arquivos PPM/bolao.ppm");
-		eDAO.CriarEleitor("Titulo2","Nome2","06680923603",02,"/home/lucas/Área de Trabalho/TrabalhoPoo/Arquivos PPM/lagoa.ppm");
-
-		VotoDAO vDAO =new VotoDAO();
-		vDAO.CriarVoto(eDAO.Array[0], cDAO.Array[0], 1);
-		vDAO.CriarVoto(eDAO.Array[1], cDAO.Array[1], 1);
-		
-		
-	    PartidoDAO pDAO =new PartidoDAO();
-	    pDAO.CriarPartido("01","Nome");
-	    pDAO.CriarPartido("02","Name");
-	    
-		String str=cDAO.makeJson()+"\n"
-				+eDAO.makeJson()+"\n"
-				+vDAO.makeJson()+"\n"
-				+pDAO.makeJson();
-		
-		System.out.println(str);
-	
-	}
-
+        // Print the names and IDs for up to 10 files.
+        FileList result = service.files().list()
+                .setPageSize(10)
+                .setFields("nextPageToken, files(id, name)")
+                .execute();
+        List<File> files = result.getFiles();
+        if (files == null || files.isEmpty()) {
+            System.out.println("No files found.");
+        } else {
+            System.out.println("Files:");
+            for (File file : files) {
+                System.out.printf("%s (%s)\n", file.getName(), file.getId());
+            }
+        }
+    }
 }
