@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 import DAO.*;
-import Modelo.*;
+import MODELO.*;
 
 public class Central {
 

@@ -3,9 +3,9 @@ package DAO;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import Modelo.Candidato;
-import Modelo.Documentos;
-import Modelo.Partido;
+import MODELO.Candidato;
+import MODELO.Documentos;
+import MODELO.Partido;
 
 /**Classe para objetos do tipo CandidatoDAO, onde armazena um vetor 'this.Array' com n Candidatos
  * @author Lucas Mateus Fernandes

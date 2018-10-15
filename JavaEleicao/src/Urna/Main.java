@@ -2,7 +2,7 @@ package Urna;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import DAO.VotoDAO;
-import Interface.Login;
+import VISAO.Login;
 
 
 public class Main {

@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Modelo.Eleitor;
+import MODELO.Eleitor;
 
 /**Classe para objetos do tipo Eleitor, onde armazena um vetor 'this.Array' com n Eleitores
  * @author Lucas Mateus Fernandes

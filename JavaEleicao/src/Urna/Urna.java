@@ -3,7 +3,7 @@ package Urna;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import DAO.*;
-import Modelo.*;
+import MODELO.*;
 
 public class Urna {
 	private static int TotalUrnas=0;

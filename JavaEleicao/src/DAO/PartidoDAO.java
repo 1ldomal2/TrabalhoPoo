@@ -7,8 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Modelo.Documentos;
-import Modelo.Partido;
+import MODELO.Documentos;
+import MODELO.Partido;
 /**Classe para objetos do tipo Partido, onde armazena um vetor 'this.Array' com n Partidos
  * @author Lucas Mateus Fernandes
  */

@@ -7,9 +7,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import Modelo.Candidato;
-import Modelo.Eleitor;
-import Modelo.Voto;
+import MODELO.Candidato;
+import MODELO.Eleitor;
+import MODELO.Voto;
 /**Classe para objetos do tipo Voto, onde armazena um vetor 'this.Array' com n Votos
  * @author Lucas Mateus Fernandes
  */

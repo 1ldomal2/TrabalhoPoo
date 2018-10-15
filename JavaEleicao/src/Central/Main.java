@@ -4,7 +4,7 @@ import DAO.CandidatoDAO;
 import DAO.EleitorDAO;
 import DAO.PartidoDAO;
 import DAO.VotoDAO;
-import Interface.CentralBotão;
+import VISAO.CentralBotão;
 
 public class Main {
 
