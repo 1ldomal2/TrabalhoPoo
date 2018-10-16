@@ -5,13 +5,16 @@
  */
 package VISAO;
 import CENTRAL.Central;
-import MODELO.Documentos;
+import MODELO.*;
+import DAO.*;
 import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author lucas
@@ -46,7 +49,7 @@ public class TelaCentral extends javax.swing.JFrame {
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jLayeredPane5 = new javax.swing.JLayeredPane();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        Tabela = new javax.swing.JTable();
         jLayeredPane6 = new javax.swing.JLayeredPane();
         jScrollPane5 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
@@ -91,6 +94,9 @@ public class TelaCentral extends javax.swing.JFrame {
         PartidoCampoNumero = new javax.swing.JTextField();
         PartidoLabelNumero = new javax.swing.JLabel();
         Partido = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         jLabel4.setText("jLabel1");
 
@@ -100,18 +106,40 @@ public class TelaCentral extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTabbedPane2.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTabbedPane2AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
+        Tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Eleitor", "Candidato", "Partido"
             }
-        ));
-        jScrollPane3.setViewportView(jTable2);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(Tabela);
 
         jLayeredPane5.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -125,9 +153,9 @@ public class TelaCentral extends javax.swing.JFrame {
         );
         jLayeredPane5Layout.setVerticalGroup(
             jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane5Layout.createSequentialGroup()
+            .addGroup(jLayeredPane5Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 35, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Tabela", jLayeredPane5);
@@ -525,6 +553,14 @@ public class TelaCentral extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Partido", jLayeredPane8);
 
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -670,6 +706,53 @@ public class TelaCentral extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CarregarActionPerformed
 
+    private void jTabbedPane2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTabbedPane2AncestorAdded
+        //Chama os 3 Resultados
+        instancia.Resultado();
+        
+        Tabela.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Eleitor", "Candidato", "Partido"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+         
+         
+         
+        DefaultTableModel model = (DefaultTableModel) Tabela.getModel();
+        
+        for (int i = 0; i < instancia.TotalVotos();i++) {
+           Voto v= instancia.VotoIndice(i);
+           if(v!=null){
+                String eName= v.getEleitor().getNome();
+                String cName= v.getCandidato().getNome();
+                String pName= v.getCandidato().getPartido().getNome();
+                Object[] linha ={eName,cName,pName};
+                model.addRow(linha);
+           }
+        }
+        
+
+        
+    }//GEN-LAST:event_jTabbedPane2AncestorAdded
+
     /**
      * @param args the command line arguments
      */
@@ -734,6 +817,7 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JTextField PartidoCampoNumero;
     private javax.swing.JLabel PartidoLabelNome;
     private javax.swing.JLabel PartidoLabelNumero;
+    private javax.swing.JTable Tabela;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel13;
@@ -753,11 +837,13 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane7;
     private javax.swing.JLayeredPane jLayeredPane8;
     private javax.swing.JList<String> jList3;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }

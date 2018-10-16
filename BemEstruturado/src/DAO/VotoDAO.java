@@ -193,6 +193,9 @@ public class VotoDAO {
 		}
 		return nVotos;
 	}
+        public Voto VotoIndice(int i){
+            return Array[i];
+    }
 }
 
 

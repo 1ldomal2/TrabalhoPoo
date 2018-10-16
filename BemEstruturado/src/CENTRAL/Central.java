@@ -1,13 +1,7 @@
 package CENTRAL;
 
-import DAO.DAO;
-import DAO.EleitorDAO;
-import DAO.VotoDAO;
-import DAO.CandidatoDAO;
-import DAO.PartidoDAO;
-import MODELO.Partido;
-import MODELO.Documentos;
-import MODELO.Eleitor;
+import DAO.*;
+import MODELO.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -185,11 +179,11 @@ public class Central {
 
 		//Conseguiu Criar o Candidato
 		if(criado==true) {
-			Documentos doc=new Documentos(CampoCPF);
+			Documentos docs=new Documentos(CampoCPF);
 			JOptionPane.showMessageDialog(null, "Cadastrado com sucesso \n"+
 												"\nNome:"+CampoNomeCandidato+
 												"\nNumero:"+CampoNumeroCandidato+
-												"\nCPF:"+doc.toStringPonto()+
+												"\nCPF:"+docs.toStringPonto()+
 												"\nNome Partido:"+partido.getNome()+
 												"\nNumero Partido:"+partido.getNumero());
 			return true;
@@ -277,5 +271,10 @@ public boolean CriarEleitor(String Path,String CampoNome,String CampoTitulo,Stri
 		return false;
 	}
 }
-
+    public int TotalVotos(){
+        return vDAO.getTotal();
+    }
+    public Voto VotoIndice(int i){
+        return this.vDAO.VotoIndice(i);
+    }
 }
