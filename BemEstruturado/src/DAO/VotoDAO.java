@@ -42,8 +42,6 @@ public class VotoDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
 	
 	/**Le o Json

@@ -710,6 +710,7 @@ public class TelaCentral extends javax.swing.JFrame {
         //Chama os 3 Resultados
         instancia.Resultado();
         
+        //Zera a Tabela
         Tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -735,9 +736,8 @@ public class TelaCentral extends javax.swing.JFrame {
         });
          
          
-         
-        DefaultTableModel model = (DefaultTableModel) Tabela.getModel();
-        
+        //Preenche a tabela
+        DefaultTableModel model = (DefaultTableModel) Tabela.getModel(){
         for (int i = 0; i < instancia.TotalVotos();i++) {
            Voto v= instancia.VotoIndice(i);
            if(v!=null){
