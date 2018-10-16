@@ -246,16 +246,19 @@ public class Central {
 public boolean CriarEleitor(String Path,String CampoNome,String CampoTitulo,String CampoCPF,String CampoUrna){
 	Eleitor eleitor=null;
 	int numero=0;
-	//Vai Pegar e Tentar Carregar uma Imagem 
-	//Vai Gerar um Eleitor
-
+	eleitor=new Eleitor();
+        try{
+            eleitor.setImagemSenha(Path);
+        }catch(Exception e){
+            return false;
+        }
 	eleitor.setNome(CampoNome);
 	eleitor.setCpf(CampoCPF);
 	eleitor.setTituloEleitor(CampoTitulo);
 	try{
 		numero=Integer.parseInt(CampoUrna);
 	}catch(Exception e){
-		System.out.println("umero Invalido");
+		System.out.println("Numero Invalido");
 		return false;
 	}
 	eleitor.setUrnaVotacao(numero);

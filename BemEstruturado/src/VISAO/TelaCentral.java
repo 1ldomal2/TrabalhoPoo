@@ -5,11 +5,19 @@
  */
 package VISAO;
 import CENTRAL.Central;
+import MODELO.Documentos;
+import java.io.File;
+import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author lucas
  */
 public class TelaCentral extends javax.swing.JFrame {
+    private String Path="";
     private Central instancia=null;
     /**
      * Creates new form NewJFrame
@@ -58,6 +66,7 @@ public class TelaCentral extends javax.swing.JFrame {
         EleitorLabelCPF = new javax.swing.JLabel();
         EleitorLabelUrna = new javax.swing.JLabel();
         Eleitor = new javax.swing.JLabel();
+        Carregar = new javax.swing.JToggleButton();
         jLayeredPane7 = new javax.swing.JLayeredPane();
         CandidatoButaoCriar1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -210,6 +219,13 @@ public class TelaCentral extends javax.swing.JFrame {
 
         Eleitor.setText("Dados Cadastrados");
 
+        Carregar.setText("Carregar Imagem");
+        Carregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CarregarActionPerformed(evt);
+            }
+        });
+
         jLayeredPane3.setLayer(EleitorButaoCriar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(EleitorCampoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -224,6 +240,7 @@ public class TelaCentral extends javax.swing.JFrame {
         jLayeredPane3.setLayer(EleitorLabelCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(EleitorLabelUrna, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane3.setLayer(Eleitor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane3.setLayer(Carregar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
         jLayeredPane3.setLayout(jLayeredPane3Layout);
@@ -245,11 +262,15 @@ public class TelaCentral extends javax.swing.JFrame {
                             .addComponent(Eleitor, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(EleitorLabelNome)
-                            .addComponent(EleitorLabelTitulo)
                             .addComponent(EleitorLabelCPF)
-                            .addComponent(EleitorLabelUrna))))
-                .addContainerGap(345, Short.MAX_VALUE))
+                            .addComponent(EleitorLabelUrna)
+                            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(EleitorLabelNome)
+                                    .addComponent(EleitorLabelTitulo))
+                                .addGap(76, 76, 76)
+                                .addComponent(Carregar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(98, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(EleitorButaoCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -278,9 +299,12 @@ public class TelaCentral extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(EleitorCampoUrna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                        .addComponent(EleitorLabelNome)
-                        .addGap(46, 46, 46)
-                        .addComponent(EleitorLabelTitulo)
+                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                                .addComponent(EleitorLabelNome)
+                                .addGap(46, 46, 46)
+                                .addComponent(EleitorLabelTitulo))
+                            .addComponent(Carregar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(46, 46, 46)
                         .addComponent(EleitorLabelCPF)
                         .addGap(46, 46, 46)
@@ -538,18 +562,51 @@ public class TelaCentral extends javax.swing.JFrame {
     private void EleitorButaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EleitorButaoCriarActionPerformed
         //Pegando da tela e salvando em variaveis
         boolean validacao=false;
-        String Path=null;
+        if(Path.length()==0){
+            JOptionPane.showMessageDialog(null,"Selecio a Imagem .ppm");
+            return;
+        }
         String CampoNome=EleitorCampoNome.getText();
         String CampoTitulo=EleitorCampoTitulo.getText();
         String CampoCPF=EleitorCampoCPF.getText();
         String CampoUrna=EleitorCampoUrna.getText();
-        validacao=instancia.CriarEleitor(Path, CampoNome, CampoTitulo, CampoCPF, CampoUrna);
+        
+        //Valida Nome
+        if(CampoNome.length()==0){
+            JOptionPane.showMessageDialog(null,"Digite o Nome");
+            return;
+        }
+        
+        //Valida Titulo
+        if(CampoTitulo.length()==0){
+            JOptionPane.showMessageDialog(null,"Digite o Titulo de Eleitor");
+        }
+        
+        //Valida Urna
+        int numero =0;
+        try{
+           numero= Integer.parseInt(CampoUrna);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Digita apenas numero no campo da Urna");
+            return;
+        }
+        
+        //Valida Cpf
+        Documentos doc=new Documentos(CampoCPF);
+        if(!doc.getValidCpf()){
+             JOptionPane.showMessageDialog(null,"Digite um Cpf Valido");
+             return;
+        }
+        
+        
+        validacao=instancia.CriarEleitor(this.Path, CampoNome, CampoTitulo, CampoCPF, CampoUrna);
+        this.Path="";//Reseta o PAth
         if(validacao){
             String DadosCadastrados="";
             DadosCadastrados="Nome: "+CampoNome+
                             "\nTitulo: "+CampoTitulo+
                             "\nCpf: "+CampoCPF+
-                            "\nUrna: "+CamposUrna;
+                            "\nUrna: "+CampoUrna;
             Eleitor.setText(DadosCadastrados);
         }
     }//GEN-LAST:event_EleitorButaoCriarActionPerformed
@@ -587,6 +644,31 @@ public class TelaCentral extends javax.swing.JFrame {
             Candidato.setText(DadosCandidato);
         }
     }//GEN-LAST:event_CandidatoButaoCriar1ActionPerformed
+
+    private void CarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarregarActionPerformed
+         //Pega o Caminho Da imagem
+        System.out.println("Localizando Imagem");
+          
+        //este caminho é arbitrario  (ficava mais faci lde debugar)
+        String pathInicial="/home/lucas/Área de Trabalho/TrabalhoPoo/Arquivos PPM/";
+	JFileChooser arquivo = new JFileChooser(pathInicial);
+        //limita o tipo de arquivo que pode ser aberto
+	arquivo.setFileFilter(new FileNameExtensionFilter("Image files", "ppm"));
+	arquivo.setAcceptAllFileFilterUsed(false);
+	arquivo.showOpenDialog(null);
+        File file= arquivo.getSelectedFile();
+        //Verifica se foi possivel Abrir
+	if(file!=null) {
+            System.out.println("Arquivo Localizado");
+            Path = file.getAbsolutePath();
+            Carregar.setSelected(true);
+            //Avisa que a imagem foi carregada
+	}else{
+            Path ="";
+            Carregar.setSelected(false);
+            //Avisa que a imagem não foi carregada
+        }
+    }//GEN-LAST:event_CarregarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -635,6 +717,7 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JLabel CandidatoLabelNome1;
     private javax.swing.JLabel CandidatoLabelNumero;
     private javax.swing.JLabel CandidatoLabelPartido;
+    private javax.swing.JToggleButton Carregar;
     private javax.swing.JLabel Eleitor;
     private javax.swing.JButton EleitorButaoCriar;
     private javax.swing.JTextField EleitorCampoCPF;
