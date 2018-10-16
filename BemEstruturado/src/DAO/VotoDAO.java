@@ -1,15 +1,15 @@
 package DAO;
 
+import MODELO.Voto;
+import MODELO.Candidato;
+import MODELO.Eleitor;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import JSON.JSONArray;
+import JSON.JSONException;
+import JSON.JSONObject;
 
-import MODELO.Candidato;
-import MODELO.Eleitor;
-import MODELO.Voto;
 /**Classe para objetos do tipo Voto, onde armazena um vetor 'this.Array' com n Votos
  * @author Lucas Mateus Fernandes
  */

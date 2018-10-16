@@ -1,9 +1,14 @@
 package Urna;
 
+import DAO.EleitorDAO;
+import DAO.VotoDAO;
+import DAO.CandidatoDAO;
+import DAO.PartidoDAO;
+import MODELO.Senha;
+import MODELO.Candidato;
+import MODELO.Eleitor;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import DAO.*;
-import MODELO.*;
 
 public class Urna {
 	private static int TotalUrnas=0;

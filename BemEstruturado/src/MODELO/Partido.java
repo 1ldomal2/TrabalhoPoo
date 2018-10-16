@@ -1,5 +1,4 @@
 package MODELO;
-import org.json.*;
 import java.util.Date;
 
 /**Classe que faz tratamento do cpf

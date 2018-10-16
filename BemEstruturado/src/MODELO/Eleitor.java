@@ -1,5 +1,4 @@
 package MODELO;
-import org.json.*;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 /**Classe que faz tratamento do cpf

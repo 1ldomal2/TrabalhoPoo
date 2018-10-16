@@ -1,6 +1,5 @@
 package MODELO;
 import java.util.Date;
-import org.json.*;
 /**
  *private Eleitor eleitor 
  *private Candidato candidato

@@ -1,7 +1,7 @@
 package DAO;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
+import JSON.JSONArray;
+import JSON.JSONObject;
 
 /**
  * Cria Json de tudo misturado
