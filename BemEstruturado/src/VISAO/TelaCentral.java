@@ -711,6 +711,7 @@ public class TelaCentral extends javax.swing.JFrame {
         instancia.Resultado();
         
         //Zera a Tabela
+        
         Tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -735,9 +736,8 @@ public class TelaCentral extends javax.swing.JFrame {
             }
         });
          
-         
         //Preenche a tabela
-        DefaultTableModel model = (DefaultTableModel) Tabela.getModel(){
+        DefaultTableModel model = (DefaultTableModel) Tabela.getModel();
         for (int i = 0; i < instancia.TotalVotos();i++) {
            Voto v= instancia.VotoIndice(i);
            if(v!=null){
@@ -748,9 +748,6 @@ public class TelaCentral extends javax.swing.JFrame {
                 model.addRow(linha);
            }
         }
-        
-
-        
     }//GEN-LAST:event_jTabbedPane2AncestorAdded
 
     /**
