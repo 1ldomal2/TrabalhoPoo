@@ -576,8 +576,8 @@ public class TelaCentral extends javax.swing.JFrame {
         boolean validacao=false;
         String CampoNomeCandidato=CandidatoCampoNome.getText();
         String CampoNumeroCandidato=CandidatoCampoNumero.getText();
-        String CampoCPF=EleitorCampoCPF.getText();
-        String CampoPartido=EleitorCampoUrna.getText();
+        String CampoCPF=CandidatoCampoCPF.getText();
+        String CampoPartido=CandidatoCampoPartido.getText();
         validacao = instancia.CadastrarCandidato(CampoPartido, CampoNomeCandidato, CampoNumeroCandidato, CampoCPF)
         if(validacao){
             String DadosCandidato="Nome: "+CampoNomeCandidato+

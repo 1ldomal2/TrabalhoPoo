@@ -120,14 +120,39 @@ public class Central {
 	
 	
 	public boolean CadastrarCandidato(String CampoPartido,String CampoNomeCandidato,String CampoNumeroCandidato,String CampoCPF) {//Passa os N Campos
-
+               
+                //Verificando Nome
+                if(CampoNomeCandidato.length()==0){
+                    JOptionPane.showMessageDialog(null, "Nome não pode ser Nulo");
+                    return false;
+                }
+                
+                //Verificando Numero
+                if(CampoNumeroCandidato.length()!=5){
+                    JOptionPane.showMessageDialog(null, "Numero do Candidato deve ter 5 Digitos");
+                    return false;
+                }else{
+                    int numero=0;
+                    try{
+                        Integer.parseInt(CampoNumeroCandidato);
+                    }catch(Exception e){
+                         JOptionPane.showMessageDialog(null, "5 DIGITOS");
+                    }
+                }                 
+                
+                //Verificando Cpf
+                Documentos doc=new Documentos(CampoCPF);
+                if(!doc.getValidCpf()){
+                    JOptionPane.showMessageDialog(null, "Cpf Invalido");
+                    return false;
+                }
+                
+                //Partido
 		Partido partido=null;
 		boolean criado=false;//Retorno
-
 		//Procura PARTIDO
 			//Procura Partido pelo Nome
 			partido=pDAO.ObjectNome(CampoPartido);
-
 			
 			if(partido==null) {//Se Não Achou por Nome  Procura o Partido pelo numero
 
