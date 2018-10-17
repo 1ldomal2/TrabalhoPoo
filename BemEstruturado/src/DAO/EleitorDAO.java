@@ -15,7 +15,7 @@ import JSON.JSONObject;
 public class EleitorDAO {
 	
 	private final int TAMANHO = 50;
-	public int Total = 0;
+	private int Total = 0;
 	public Eleitor[] Array = new Eleitor[TAMANHO];
 	private Eleitor celulaVetor = null;
 
@@ -201,5 +201,7 @@ public class EleitorDAO {
 	}
 	
 
-
+        public int getTotal(){
+            return Total;
+        }
 }

@@ -13,8 +13,8 @@ import JSON.JSONObject;
 
 public class CandidatoDAO {
 	private final int TAMANHO = 50;
-	public int Total = 0;
-	public Candidato[] Array = new Candidato[TAMANHO];
+	private int Total = 0;
+	private Candidato[] Array = new Candidato[TAMANHO];
 	private Candidato celulaVetor = null;
 	
 	/**Conexao com Google drive*/
@@ -195,5 +195,8 @@ public class CandidatoDAO {
         }
         public Candidato CandidatoIndice(int i){
             return Array[i];
-        }
+        }  
+        
+        
+        
 }

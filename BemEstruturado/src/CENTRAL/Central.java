@@ -29,23 +29,23 @@ public class Central {
 	 * 
 	 */
 	public Central() {
-		//Inicia Central
-		this.cDAO=new CandidatoDAO();
-		this.eDAO=new EleitorDAO();
-		this.pDAO=new PartidoDAO();
-		this.vDAO=new VotoDAO();
+            //Inicia Central
+            this.cDAO=new CandidatoDAO();
+            this.eDAO=new EleitorDAO();
+            this.pDAO=new PartidoDAO();
+            this.vDAO=new VotoDAO();
 		
-		//Carrega Dados Da ultima seção 
-             cDAO.Receive();
-	     eDAO.Receive();
-	     pDAO.Receive();
-	     vDAO.Receive();
+            //Carrega Dados Da ultima seção 
+            cDAO.Receive();
+	    eDAO.Receive();
+	    pDAO.Receive();
+	    vDAO.Receive();
 	    
-		nVotos=new int[eDAO.Total];//Trocar .TOTAL para get TOTAL
+            nVotos=new int[eDAO.getTotal()];
 
-		//Habilita a Tela
-		tela=new TelaCentral(this);
-		tela.setVisible(true);
+            //Habilita a Tela
+            tela=new TelaCentral(this);
+            tela.setVisible(true);
 		
 	}
 	
@@ -57,7 +57,7 @@ public class Central {
 	 */
 	public boolean Send(String Path) {
 	//Salva os Arquivos
-		//Cria um arquivo
+        //Cria um arquivo
     	FileWriter arq;
 		try {
 			arq = new FileWriter(Path);
@@ -104,15 +104,22 @@ public class Central {
 	public String Resultado() {
 	     String resultado="";
 	     for (int i = 0; i < nVotos.length; i++) {//Pega a Quantidade de Votos de cada eleitor
-		     nVotos[i]=vDAO.NVotosCandidato(cDAO.Array[i]);
-		     resultado=cDAO.Array[i].getNome()+":\t"+nVotos[i]+"\n";
+		     nVotos[i]=vDAO.NVotosCandidato(cDAO.CandidatoIndice(i));
+		     resultado=cDAO.CandidatoIndice(i).getNome()+":\t"+nVotos[i]+"\n";
 	     };
 	     return resultado;
 	}
 	
 	
 	
-	
+	/**
+         * 
+         * @param CampoPartido  Nome do partido
+         * @param CampoNomeCandidato Nome do Candidato
+         * @param CampoNumeroCandidato  Numero do Candidato
+         * @param CampoCPF  CPF do candidato
+         * @return se foi possivel criar o candidato
+         */
 	public boolean CadastrarCandidato(String CampoPartido,String CampoNomeCandidato,String CampoNumeroCandidato,String CampoCPF) {//Passa os N Campos
                
                 //Verificando Nome
@@ -192,7 +199,12 @@ public class Central {
 		return false;
 	}
 	
-	
+	/**
+         * 
+         * @param CampoNumeroPartido Numero do Partido
+         * @param CampoNomePartido Nome do partido
+         * @return Se foi possivelcriar o Partido
+         */
 	public boolean CadastrarPartido(String CampoNumeroPartido,String CampoNomePartido){
 		 Partido partido=null;
 		 boolean verificacao=false;
@@ -238,6 +250,15 @@ public class Central {
 
 	}
 
+        /**
+         * 
+         * @param Path  Caminho da Foto
+         * @param CampoNome Nome
+         * @param CampoTitulo Titulo de Eleitor
+         * @param CampoCPF  CPF do Eleitor
+         * @param CampoUrna Urna de Votacao
+         * @return Se foi possivel criar o eleitor
+         */
 public boolean CriarEleitor(String Path,String CampoNome,String CampoTitulo,String CampoCPF,String CampoUrna){
 	Eleitor eleitor=null;
 	int numero=0;
@@ -298,5 +319,9 @@ public boolean CriarEleitor(String Path,String CampoNome,String CampoTitulo,Stri
      */
     public Candidato CandidatoIndice(int i){
         return this.cDAO.CandidatoIndice(i);
+    }
+    
+    public int nVotoIndice(int i) {
+        return nVotos[i];
     }
 }
