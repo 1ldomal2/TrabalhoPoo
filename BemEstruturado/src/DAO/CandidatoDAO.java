@@ -190,4 +190,10 @@ public class CandidatoDAO {
 		return null;// Não achou
 
 	}
+        public int getTotal(){
+            return Total;
+        }
+        public Candidato CandidatoIndice(int i){
+            return Array[i];
+        }
 }

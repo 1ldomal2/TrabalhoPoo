@@ -131,6 +131,7 @@ public class Central {
                         Integer.parseInt(CampoNumeroCandidato);
                     }catch(Exception e){
                          JOptionPane.showMessageDialog(null, "5 DIGITOS");
+                         return false;
                     }
                 }                 
                 
@@ -271,10 +272,31 @@ public boolean CriarEleitor(String Path,String CampoNome,String CampoTitulo,Stri
 		return false;
 	}
 }
+    /**
+     * @return Retorna o Numero de votos ou seja posiçoes nao nulas de vDAO
+     */
     public int TotalVotos(){
         return vDAO.getTotal();
     }
+    /**
+     * @param i Indice
+     * @return Retorna o voto presente em vDAO com indice 'i'
+     */
     public Voto VotoIndice(int i){
         return this.vDAO.VotoIndice(i);
+    }
+    /**
+     * 
+     * @return Retorna o total de candidatos ou seja numeo de posiçoes nao nula de cDAO
+     */
+    public int TotalCandidatos(){
+        return cDAO.getTotal();
+    }
+     /**
+     * @param i Indice
+     * @return Retorna o voto presente em cDAO com indice 'i'
+     */
+    public Candidato CandidatoIndice(int i){
+        return this.cDAO.CandidatoIndice(i);
     }
 }

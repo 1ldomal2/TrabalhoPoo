@@ -8,6 +8,7 @@ import CENTRAL.Central;
 import MODELO.*;
 import DAO.*;
 import java.io.File;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -53,6 +54,8 @@ public class TelaCentral extends javax.swing.JFrame {
         jLayeredPane6 = new javax.swing.JLayeredPane();
         jScrollPane5 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
+        ListName = new javax.swing.JLabel();
+        ListVotos = new javax.swing.JLabel();
         jLayeredPane2 = new javax.swing.JLayeredPane();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         EleitorButaoCriar = new javax.swing.JButton();
@@ -158,7 +161,7 @@ public class TelaCentral extends javax.swing.JFrame {
                 .addGap(0, 35, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Tabela", jLayeredPane5);
+        jTabbedPane2.addTab("Tabela de Votos", jLayeredPane5);
 
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -167,22 +170,38 @@ public class TelaCentral extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(jList3);
 
+        ListName.setText("jLabel11");
+
+        ListVotos.setText("jLabel12");
+
         jLayeredPane6.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(ListName, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(ListVotos, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane6Layout = new javax.swing.GroupLayout(jLayeredPane6);
         jLayeredPane6.setLayout(jLayeredPane6Layout);
         jLayeredPane6Layout.setHorizontalGroup(
             jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane6Layout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 661, Short.MAX_VALUE))
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 324, Short.MAX_VALUE)
+                .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ListName)
+                    .addComponent(ListVotos))
+                .addGap(161, 161, 161))
         );
         jLayeredPane6Layout.setVerticalGroup(
             jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
+            .addGroup(jLayeredPane6Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(ListName)
+                .addGap(18, 18, 18)
+                .addComponent(ListVotos)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Lista", jLayeredPane6);
+        jTabbedPane2.addTab("Lista Candidatos com numero de Votos", jLayeredPane6);
 
         javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
         jLayeredPane2.setLayout(jLayeredPane2Layout);
@@ -192,10 +211,10 @@ public class TelaCentral extends javax.swing.JFrame {
         );
         jLayeredPane2Layout.setVerticalGroup(
             jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 454, Short.MAX_VALUE)
+            .addGap(0, 462, Short.MAX_VALUE)
         );
 
-        jTabbedPane2.addTab("Texto", jLayeredPane2);
+        jTabbedPane2.addTab("TXT", jLayeredPane2);
 
         jTabbedPane1.addTab("Resultado", jTabbedPane2);
 
@@ -339,7 +358,7 @@ public class TelaCentral extends javax.swing.JFrame {
                         .addComponent(EleitorLabelUrna)))
                 .addGap(18, 18, 18)
                 .addComponent(Eleitor, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Eleitor", jLayeredPane3);
@@ -464,7 +483,7 @@ public class TelaCentral extends javax.swing.JFrame {
                         .addComponent(CandidatoLabelPartido)))
                 .addGap(18, 18, 18)
                 .addComponent(Candidato, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Candidato", jLayeredPane7);
@@ -548,7 +567,7 @@ public class TelaCentral extends javax.swing.JFrame {
                         .addComponent(PartidoLabelNumero)))
                 .addGap(18, 18, 18)
                 .addComponent(Partido, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Partido", jLayeredPane8);
@@ -671,7 +690,7 @@ public class TelaCentral extends javax.swing.JFrame {
         String CampoNumeroCandidato=CandidatoCampoNumero.getText();
         String CampoCPF=CandidatoCampoCPF.getText();
         String CampoPartido=CandidatoCampoPartido.getText();
-        validacao = instancia.CadastrarCandidato(CampoPartido, CampoNomeCandidato, CampoNumeroCandidato, CampoCPF)
+        validacao = instancia.CadastrarCandidato(CampoPartido, CampoNomeCandidato, CampoNumeroCandidato, CampoCPF);
         if(validacao){
             String DadosCandidato="Nome: "+CampoNomeCandidato+
                                   "\nNumero: "+CampoNumeroCandidato+
@@ -710,8 +729,9 @@ public class TelaCentral extends javax.swing.JFrame {
         //Chama os 3 Resultados
         instancia.Resultado();
         
-        //Zera a Tabela
         
+    //Tabela
+        //Zera a Tabela
         Tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -748,6 +768,15 @@ public class TelaCentral extends javax.swing.JFrame {
                 model.addRow(linha);
            }
         }
+        jScrollPane3.setViewportView(Tabela);
+    //Lista  
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        for (int i = 0; i < instancia.TotalCandidatos(); i++) {
+            listModel.addElement(instancia.CandidatoIndice(i).getNome());
+        }
+        jList3.setModel(listModel);
+        jScrollPane5.setViewportView(jList3);
+        
     }//GEN-LAST:event_jTabbedPane2AncestorAdded
 
     /**
@@ -808,6 +837,8 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JLabel EleitorLabelNome;
     private javax.swing.JLabel EleitorLabelTitulo;
     private javax.swing.JLabel EleitorLabelUrna;
+    private javax.swing.JLabel ListName;
+    private javax.swing.JLabel ListVotos;
     private javax.swing.JLabel Partido;
     private javax.swing.JButton PartidoButaoCriar;
     private javax.swing.JTextField PartidoCampoNome;
