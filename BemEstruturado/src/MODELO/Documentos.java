@@ -14,6 +14,7 @@ public class Documentos {
 	
 	/**Construtor que Valida e Preencher CPF c/ e s/ Formatação*/	
 	public Documentos(String cpf){
+                System.out.println("Vindo para constrir cpf:"+cpf);
 		validaCpf(cpf);
 	}
 	
@@ -28,7 +29,7 @@ public class Documentos {
 	public boolean getFomatedCpf() {
 		return formatedCpf;
 	}
-	
+
 	
 	/**
 	 *@return Retorna True ou False para ver se o cpf digitado é valido ou nao
@@ -73,7 +74,8 @@ public class Documentos {
 				validCpf=false;
 				return false;
 			}
-
+                        //Pontuação esta ok
+                        
 			for (indice = 0; indice < tamanho; indice++) {
 				if(cpf.charAt(indice)!='0') {
 				//For aninhado evita processamento desneecessário
@@ -125,7 +127,7 @@ public class Documentos {
 				}
 			}
 		}
-		if(tamanho==11){//Verifica se os pontos estao nos lugares certos
+		if(tamanho==11){
 			for (indice = 0; indice < tamanho; indice++) {
 				if(cpf.charAt(indice)!='0') {
 				//For aninhado evita processamento desneecessário
@@ -270,8 +272,8 @@ public class Documentos {
 			cpf+=formated.charAt(9);
 			cpf+=formated.charAt(10);
 			//-
-			cpf+=formated.charAt(11);
 			cpf+=formated.charAt(12);
+			cpf+=formated.charAt(13);
 			
 			this.noFormated=cpf;
 		}else {

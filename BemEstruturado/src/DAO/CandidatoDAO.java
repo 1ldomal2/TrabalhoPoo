@@ -18,9 +18,15 @@ public class CandidatoDAO {
 	private Candidato celulaVetor = null;
 	
 	/**Conexao com Google drive*/
-	public void Receive() {
+	public void Receive() {                
 		String json ="{\"Candidato\":[{\"Numero\":\"11111\",\"NumeroPartido\":\"21\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome1\",\"NomePartido\":\"s1\"},{\"Numero\":\"12345\",\"NumeroPartido\":\"22\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome2\",\"NomePartido\":\"s2\"},{\"Numero\":\"00000\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"}]}";
-		ReadJson(json);
+            /*
+                JSONObject oJson=new JSONObject(json);//Criou um json;
+                oJson.getJSONArray("Candidato");//Pega o Array de Candidatos
+                
+                System.out.println(oJson.getJSONArray("Candidato").toString());//Pega somente o que é referente e Candidato);
+            */
+                ReadJson(json);
 	}
 	
 	/**Le o Json
@@ -28,21 +34,20 @@ public class CandidatoDAO {
 	 * @return Void  - Preenche "this.Array" de acordo com Json
 	 */
 	public void ReadJson(String Sjson) {
-		//Cria um Objeto Json com a String passada como parametro
-		JSONObject json=new JSONObject(Sjson);
-
-		
-		//Quebra o Json no Vetor
-		JSONArray jsonCandidatos = json.getJSONArray("Candidato");
-		
-		//Le o json  Candidato por Candidato
-		for (int i = 0; i < jsonCandidatos.length(); i++) {
-			//recupera candidato de índice "i" no array 
-            JSONObject c = jsonCandidatos.getJSONObject(i);
+            //Cria um Objeto Json com a String passada como parametro
+            JSONObject json=new JSONObject(Sjson);
+	
+            //Quebra o Json no Vetor
+            JSONArray jsonCandidatos = json.getJSONArray("Candidato");
+	
+            //Le o json  Candidato por Candidato
+            for (int i = 0; i < jsonCandidatos.length(); i++) {
+                //recupera candidato de índice "i" no array 
+                JSONObject c = jsonCandidatos.getJSONObject(i);
            
-			//Adiciona ao Vetor
-           this.CriarCandidato(c.getString("Nome"), c.getString("Numero"),c.getString("Cpf"),c.getString("NumeroPartido"),c.getString("NomePartido"));
-		}
+		//Adiciona ao Vetor
+                this.CriarCandidato(c.getString("Nome"), c.getString("Numero"),c.getString("Cpf"),c.getString("NumeroPartido"),c.getString("NomePartido"));
+            }
 		
 		
 	}

@@ -123,4 +123,34 @@ public class Candidato {
 	public void setPartido(Partido partido) {
 		Partido = partido;
 	}
+        
+         public boolean equals(Candidato candidato){
+            //Argumento veio vazio
+            if(candidato==null){
+                //System.out.println("Argumento Veio Vazio");
+                return false;
+            }
+            
+            //verifica nome
+            if(!(this.Nome.equals(candidato.getNome()))){
+                //System.out.println(this.Nome+" != "+candidato.getNome());
+                return false;
+            }
+            //verifica numero
+             if(!(this.Numero==candidato.getNumero())){
+                 //System.out.println(this.Numero+" != "+candidato.getNumero());
+                return false;
+            }
+            
+            //Transforma String em cpf
+            Documentos aux=new Documentos(candidato.getCpfString());
+            //verifica CPF
+            if(!(Cpf.toString().equals(aux.toString()))){
+                 System.out.println("vindo"+candidato.getCpfString());
+                 System.out.println(Cpf.toString()+" != "+aux.toString());
+                return false;
+            }
+        //Verifica Partido
+        return true;
+    }
 }

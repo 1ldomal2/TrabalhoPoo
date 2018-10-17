@@ -1,6 +1,8 @@
 package CENTRAL;
 
 import DAO.*;
+import JSON.JSONArray;
+import JSON.JSONObject;
 import MODELO.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -20,7 +22,7 @@ public class Central {
 	private EleitorDAO eDAO=null;
 	private PartidoDAO pDAO=null;
 	private VotoDAO	vDAO=null;
-	private int[] nVotos=null;
+	public int[] nVotos=null;
 
 	/**
 	 * Inicializa a Central ,
@@ -41,7 +43,8 @@ public class Central {
 	    pDAO.Receive();
 	    vDAO.Receive();
 	    
-            nVotos=new int[eDAO.getTotal()];
+            nVotos=new int[50];
+            //Cria com 50 mas nao usa Todos
 
             //Habilita a Tela
             tela=new TelaCentral(this);
@@ -98,19 +101,37 @@ public class Central {
 			}
 	}
 	/**
-	 * Retorna uma string   "Nome:NumeroVotos \n" Com nome de todos os candidatos
-	 * @return String com os votos
+	 * Retorna uma string   {Nome:"Candidato",Eleitor:"NumeroDeVotos"}
+	 * @return Json com o resultado da votacao
 	 */
 	public String Resultado() {
-	     String resultado="";
-	     for (int i = 0; i < nVotos.length; i++) {//Pega a Quantidade de Votos de cada eleitor
-		     nVotos[i]=vDAO.NVotosCandidato(cDAO.CandidatoIndice(i));
-		     resultado=cDAO.CandidatoIndice(i).getNome()+":\t"+nVotos[i]+"\n";
-	     };
-	     return resultado;
+            CalculaVotos();
+            return JsonResultado();
+            
 	}
 	
-	
+	private void CalculaVotos(){
+            for (int i = 0; i < cDAO.getTotal(); i++) {//Pega a Quantidade de Votos de cada eleitor
+		nVotos[i]=vDAO.NVotosCandidato(cDAO.CandidatoIndice(i));
+                System.out.println(cDAO.CandidatoIndice(i).getNome()+" possui "+nVotos[i]+" votos");
+	    };
+        }
+        private String JsonResultado(){
+             JSONObject json=new JSONObject();//Json que vai retornar
+             JSONArray resultados=new JSONArray();//de Candidatos/Votos
+             JSONObject[] resultado=new JSONObject[cDAO.getTotal()];//Superior
+	     for (int i = 0; i < cDAO.getTotal(); i++) {//Pega a Quantidade de Votos de cada eleitor
+                     //Cria Objetos Json
+			resultado[i]=new JSONObject();
+			resultado[i].put("Nome",cDAO.CandidatoIndice(i).getNome());
+			resultado[i].put("Votos",""+nVotoIndice(i));
+			//Adicionao Objeto Json em um vetor de Jsons
+			resultados.put(resultado[i]);
+	     };
+            json.put("Resultado",resultados);
+            return json.toString();
+        }
+        
 	
 	/**
          * 

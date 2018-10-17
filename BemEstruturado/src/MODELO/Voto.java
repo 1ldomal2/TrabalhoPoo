@@ -34,6 +34,7 @@ public class Voto {
 	public Candidato getCandidato() {
 		return candidato;
 	}
+       
 	/**
 	 * 
 	 * @return Cpf do Candidato

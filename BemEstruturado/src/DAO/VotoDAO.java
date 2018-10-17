@@ -9,6 +9,7 @@ import java.security.NoSuchAlgorithmException;
 import JSON.JSONArray;
 import JSON.JSONException;
 import JSON.JSONObject;
+import javax.swing.JOptionPane;
 
 /**Classe para objetos do tipo Voto, onde armazena um vetor 'this.Array' com n Votos
  * @author Lucas Mateus Fernandes
@@ -175,17 +176,19 @@ public class VotoDAO {
 	 * @return int - Numero de votos que o Candidato 'x' recebeu
 	 */
 	public int NVotosCandidato(Candidato candidato) {
+                //Verifica se o parametro Veio Nulo
 		if(candidato==null) {
 			System.out.println("Candidato não Existe");
 			return 0;
 		}
+                int nVotos=0;//Variavel para contabilizar	
 		
-		System.out.println("Contabilizando Votos de "+candidato.getNome());
-		int nVotos=0;//Variavel a ser retornada		
+                //Procura Votos do Candidato
 		for (int i = 0; i < Total; i++) {
 			if(Array[i] != null) {//evita erro
-				if(Array[i].getCandidato()==candidato) {
+				if(Array[i].getCandidato().equals(candidato)) {
 					nVotos++;// Conta Numero de votos no candidato "x"
+                                        System.out.println("+1");
 				}
 			}
 		}
