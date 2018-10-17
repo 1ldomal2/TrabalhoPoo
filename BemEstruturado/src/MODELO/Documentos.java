@@ -14,7 +14,6 @@ public class Documentos {
 	
 	/**Construtor que Valida e Preencher CPF c/ e s/ Formatação*/	
 	public Documentos(String cpf){
-                System.out.println("Vindo para constrir cpf:"+cpf);
 		validaCpf(cpf);
 	}
 	

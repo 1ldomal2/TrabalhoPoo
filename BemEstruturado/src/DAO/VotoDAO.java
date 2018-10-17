@@ -185,12 +185,11 @@ public class VotoDAO {
 		
                 //Procura Votos do Candidato
 		for (int i = 0; i < Total; i++) {
-			if(Array[i] != null) {//evita erro
-				if(Array[i].getCandidato().equals(candidato)) {
-					nVotos++;// Conta Numero de votos no candidato "x"
-                                        System.out.println("+1");
-				}
-			}
+                    if(Array[i] != null) {//evita erro
+                        if(Array[i].getCandidato().equals(candidato)) {
+                            nVotos++;// Conta Numero de votos no candidato "x"
+                        }
+                    }
 		}
 		return nVotos;
 	}
