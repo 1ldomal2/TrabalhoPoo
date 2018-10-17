@@ -38,10 +38,10 @@ public class Central {
             this.vDAO=new VotoDAO();
 		
             //Carrega Dados Da ultima seção 
+            pDAO.Receive();//Partido tem que vir antes de Candidato
             cDAO.Receive();
 	    eDAO.Receive();
-	    pDAO.Receive();
-	    vDAO.Receive();
+	    vDAO.Receive();//Voto tem que vir depois de eleitor e de candidato
 	    
             nVotos=new int[50];
             //Cria com 50 mas nao usa Todos

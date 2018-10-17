@@ -33,6 +33,13 @@ public class TelaCentral extends javax.swing.JFrame {
     public TelaCentral(Central central) {
         this.instancia=central;
         initComponents();
+        //Ficas esteticamente bonito
+        ListLabelCPF.setText("");
+        ListLabelNumero.setText("");
+        ListLabelNome.setText("");
+        ListLabelNVotos.setText("");
+        ListLabelNomePartido.setText("");
+        ListLabelNumeroPartido.setText("");
     }
 
     /**
@@ -52,7 +59,6 @@ public class TelaCentral extends javax.swing.JFrame {
         jLayeredPane5 = new javax.swing.JLayeredPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tabela = new javax.swing.JTable();
-        jLayeredPane2 = new javax.swing.JLayeredPane();
         jLayeredPane6 = new javax.swing.JLayeredPane();
         jScrollPane5 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
@@ -62,6 +68,8 @@ public class TelaCentral extends javax.swing.JFrame {
         ListLabelNomePartido = new javax.swing.JLabel();
         ListLabelNumero = new javax.swing.JLabel();
         ListLabelNVotos = new javax.swing.JLabel();
+        jLayeredPane9 = new javax.swing.JLayeredPane();
+        jLabel11 = new javax.swing.JLabel();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         EleitorButaoCriar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -157,7 +165,7 @@ public class TelaCentral extends javax.swing.JFrame {
             jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane5Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 68, Short.MAX_VALUE))
+                .addGap(0, 97, Short.MAX_VALUE))
         );
         jLayeredPane5Layout.setVerticalGroup(
             jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,19 +175,6 @@ public class TelaCentral extends javax.swing.JFrame {
         );
 
         jTabbedPane2.addTab("Tabela de Votos", jLayeredPane5);
-
-        javax.swing.GroupLayout jLayeredPane2Layout = new javax.swing.GroupLayout(jLayeredPane2);
-        jLayeredPane2.setLayout(jLayeredPane2Layout);
-        jLayeredPane2Layout.setHorizontalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 766, Short.MAX_VALUE)
-        );
-        jLayeredPane2Layout.setVerticalGroup(
-            jLayeredPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 462, Short.MAX_VALUE)
-        );
-
-        jTabbedPane2.addTab("TXT", jLayeredPane2);
 
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -219,7 +214,7 @@ public class TelaCentral extends javax.swing.JFrame {
             jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane6Layout.createSequentialGroup()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane6Layout.createSequentialGroup()
                         .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,6 +249,29 @@ public class TelaCentral extends javax.swing.JFrame {
         );
 
         jTabbedPane2.addTab("Lista Candidatos com numero de Votos", jLayeredPane6);
+
+        jLabel11.setText("Pegar o Maio numero de nVotos depois pegar o indice que tem o numero e depois mostrar os candidados de indice x");
+
+        jLayeredPane9.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane9Layout = new javax.swing.GroupLayout(jLayeredPane9);
+        jLayeredPane9.setLayout(jLayeredPane9Layout);
+        jLayeredPane9Layout.setHorizontalGroup(
+            jLayeredPane9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane9Layout.createSequentialGroup()
+                .addContainerGap(80, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(65, 65, 65))
+        );
+        jLayeredPane9Layout.setVerticalGroup(
+            jLayeredPane9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane9Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jLabel11)
+                .addContainerGap(383, Short.MAX_VALUE))
+        );
+
+        jTabbedPane2.addTab("Vencedor", jLayeredPane9);
 
         jTabbedPane1.addTab("Resultado", jTabbedPane2);
 
@@ -356,7 +374,7 @@ public class TelaCentral extends javax.swing.JFrame {
                                     .addComponent(EleitorLabelTitulo))
                                 .addGap(76, 76, 76)
                                 .addComponent(Carregar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(EleitorButaoCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -486,7 +504,7 @@ public class TelaCentral extends javax.swing.JFrame {
                             .addComponent(CandidatoLabelPartido))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane7Layout.createSequentialGroup()
-                .addContainerGap(440, Short.MAX_VALUE)
+                .addContainerGap(469, Short.MAX_VALUE)
                 .addComponent(CandidatoButaoCriar1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
@@ -582,7 +600,7 @@ public class TelaCentral extends javax.swing.JFrame {
                             .addComponent(PartidoLabelNumero))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane8Layout.createSequentialGroup()
-                .addContainerGap(440, Short.MAX_VALUE)
+                .addContainerGap(469, Short.MAX_VALUE)
                 .addComponent(PartidoButaoCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
@@ -767,9 +785,8 @@ public class TelaCentral extends javax.swing.JFrame {
     private void jTabbedPane2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTabbedPane2AncestorAdded
         //Chama os 3 Resultados
         instancia.Resultado();
-        
-        
-    //Tabela
+
+        //Tabela
         //Zera a Tabela
         Tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -794,21 +811,21 @@ public class TelaCentral extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-         
+
         //Preenche a tabela
         DefaultTableModel model = (DefaultTableModel) Tabela.getModel();
         for (int i = 0; i < instancia.TotalVotos();i++) {
-           Voto v= instancia.VotoIndice(i);
-           if(v!=null){
+            Voto v= instancia.VotoIndice(i);
+            if(v!=null){
                 String eName= v.getEleitor().getNome();
                 String cName= v.getCandidato().getNome();
                 String pName= v.getCandidato().getPartido().getNome();
                 Object[] linha ={eName,cName,pName};
                 model.addRow(linha);
-           }
+            }
         }
         jScrollPane3.setViewportView(Tabela);
-    //Lista  
+        //Lista
         DefaultListModel<String> listModel = new DefaultListModel<>();
         for (int i = 0; i < instancia.TotalCandidatos(); i++) {
             listModel.addElement(instancia.CandidatoIndice(i).getNome());
@@ -816,7 +833,7 @@ public class TelaCentral extends javax.swing.JFrame {
         jList3.setModel(listModel);
         jScrollPane5.setViewportView(jList3);
         jList3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
+
     }//GEN-LAST:event_jTabbedPane2AncestorAdded
 
     private void jList3ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList3ValueChanged
@@ -834,10 +851,11 @@ public class TelaCentral extends javax.swing.JFrame {
             candidato=instancia.CandidatoIndice(indice);//Procura Candidato criado
             if(candidato!=null){
                 ListLabelCPF.setText("CPF:"+candidato.getCpfString());
+                ListLabelNumero.setText("Numero:"+candidato.getCpf());
                 ListLabelNome.setText("Nome:"+candidato.getNome());
                 ListLabelNVotos.setText("Numero de Votos:"+instancia.nVotoIndice(indice));
                 Partido partido=null;
-                candidato.getPartido();
+                partido=candidato.getPartido();
                 if(partido != null){
                     ListLabelNomePartido.setText("Nome Partido:"+partido.getNome());
                     ListLabelNumeroPartido.setText("Numero Partido:"+partido.getNumero());
@@ -846,10 +864,7 @@ public class TelaCentral extends javax.swing.JFrame {
                 }
             }
         }
-       
-      
-        
-        
+
     }//GEN-LAST:event_jList3ValueChanged
 
     /**
@@ -925,6 +940,7 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JTable Tabela;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
@@ -935,12 +951,12 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
     private javax.swing.JLayeredPane jLayeredPane5;
     private javax.swing.JLayeredPane jLayeredPane6;
     private javax.swing.JLayeredPane jLayeredPane7;
     private javax.swing.JLayeredPane jLayeredPane8;
+    private javax.swing.JLayeredPane jLayeredPane9;
     private javax.swing.JList<String> jList3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

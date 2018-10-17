@@ -5,6 +5,7 @@ import MODELO.Candidato;
 import MODELO.Documentos;
 import JSON.JSONArray;
 import JSON.JSONObject;
+import javax.swing.JOptionPane;
 
 
 /**Classe para objetos do tipo CandidatoDAO, onde armazena um vetor 'this.Array' com n Candidatos
@@ -44,8 +45,8 @@ public class CandidatoDAO {
             for (int i = 0; i < jsonCandidatos.length(); i++) {
                 //recupera candidato de índice "i" no array 
                 JSONObject c = jsonCandidatos.getJSONObject(i);
-           
-		//Adiciona ao Vetor
+                
+                //Adiciona ao Vetor
                 this.CriarCandidato(c.getString("Nome"), c.getString("Numero"),c.getString("Cpf"),c.getString("NumeroPartido"),c.getString("NomePartido"));
             }
 		

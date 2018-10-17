@@ -107,7 +107,7 @@ public class Candidato {
 	 * @return Partido - Objecto Partido
 	 */
 	public Partido getPartido() {
-		return Partido;
+		return this.Partido;
 	}
 
 	/*
