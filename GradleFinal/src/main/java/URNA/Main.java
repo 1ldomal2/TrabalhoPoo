@@ -1,4 +1,4 @@
-package Urna;
+package URNA;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import DAO.VotoDAO;

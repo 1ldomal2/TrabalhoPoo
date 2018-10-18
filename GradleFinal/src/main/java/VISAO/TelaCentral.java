@@ -4,9 +4,11 @@
  * and open the template in the editor.
  */
 package VISAO;
+import MODELO.Candidato;
+import MODELO.Voto;
+import MODELO.Documentos;
+import MODELO.Partido;
 import CENTRAL.Central;
-import MODELO.*;
-import DAO.*;
 import java.io.File;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;

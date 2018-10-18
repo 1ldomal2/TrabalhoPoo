@@ -12,7 +12,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import DAO.VotoDAO;
 import MODELO.Candidato;
 import MODELO.Eleitor;
-import Urna.Urna;
+import URNA.Urna;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

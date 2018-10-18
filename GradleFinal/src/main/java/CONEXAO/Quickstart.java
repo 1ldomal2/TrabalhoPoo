@@ -1,4 +1,4 @@
-package conexao;
+package CONEXAO;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -13,14 +13,18 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
+import java.io.ByteArrayOutputStream;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Quickstart {
     private static final String APPLICATION_NAME = "Google Drive API Java Quickstart";
@@ -53,15 +57,30 @@ public class Quickstart {
                 .build();
         return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
     }
-
-    public static void main(String... args) throws IOException, GeneralSecurityException {
-        // Build a new authorized API client service.
-        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-        Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
-                .setApplicationName(APPLICATION_NAME)
-                .build();
-
-        // Print the names and IDs for up to 10 files.
+    
+    /**
+     * 
+     * @param service Conexao
+     * @param fileID Id do arquivo
+     * @return String com conteudo do arquivo
+     * @throws IOException 
+     */
+    public String read(Drive service,String fileID) throws IOException{
+        String fileId = fileID;
+        OutputStream outputStream = new ByteArrayOutputStream();
+        service.files().get(fileId)
+        .executeMediaAndDownloadTo(outputStream);
+        return outputStream.toString();
+    }
+    /**
+     * 
+     * @param service Conexao
+     * @param name Nome do Arquivo
+     * @return Id do Arquivo
+     */
+    public String idFile(Drive service,String name) throws IOException{
+       
+         // Print the names and IDs for up to 10 files.
         FileList result = service.files().list()
                 .setPageSize(10)
                 .setFields("nextPageToken, files(id, name)")
@@ -70,10 +89,35 @@ public class Quickstart {
         if (files == null || files.isEmpty()) {
             System.out.println("No files found.");
         } else {
-            System.out.println("Files:");
             for (File file : files) {
+                System.out.println(file.getName());
+                if(file.getName().equals(name)){
+                   return file.getId();
+                }
                 System.out.printf("%s (%s)\n", file.getName(), file.getId());
             }
         }
+        return null;
     }
+    
+    /**
+     * 
+     * @return Conexao
+     * @throws GeneralSecurityException
+     * @throws IOException 
+     */
+   public Drive Conexao() throws GeneralSecurityException, IOException{
+        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+        Drive service = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                .setApplicationName(APPLICATION_NAME)
+                .build();
+        return service;
+   }   
+   
+     public static void main(String... args){
+         
+     }
+
+   
+   
 }

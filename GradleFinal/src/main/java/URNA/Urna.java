@@ -1,4 +1,4 @@
-package Urna;
+package URNA;
 
 import DAO.EleitorDAO;
 import DAO.VotoDAO;

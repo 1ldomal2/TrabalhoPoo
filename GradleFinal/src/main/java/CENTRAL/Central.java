@@ -1,9 +1,17 @@
 package CENTRAL;
 
-import DAO.*;
+import MODELO.Candidato;
+import MODELO.Voto;
+import MODELO.Documentos;
+import MODELO.Partido;
+import MODELO.Eleitor;
+import DAO.DAO;
+import DAO.PartidoDAO;
+import DAO.CandidatoDAO;
+import DAO.EleitorDAO;
+import DAO.VotoDAO;
 import JSON.JSONArray;
 import JSON.JSONObject;
-import MODELO.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
