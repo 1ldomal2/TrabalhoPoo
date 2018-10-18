@@ -5,6 +5,7 @@ import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.FileContent;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -113,11 +114,24 @@ public class Quickstart {
                 .build();
         return service;
    }   
-   
-     public static void main(String... args){
-         
-     }
+   /**
+    * 
+    * @param service Conexao
+    * @throws IOException 
+    */
+   public void Upload(Drive service,String Arquivo,String Caminho) throws IOException {
+        File arquivo = new File();
+        arquivo.setName(Arquivo);
+        java.io.File caminhoArquivo = new java.io.File(Caminho);
+        FileContent conteudoArquivo = new FileContent("file/json", caminhoArquivo);
+        try {
+            File file = service.files().create(arquivo, conteudoArquivo)
+                    .setFields("id")
+                    .setFields("name")
+                    .execute();
+        } catch (IOException ex) {
+            ex.getMessage();
+        }
 
-   
-   
+    }
 }
