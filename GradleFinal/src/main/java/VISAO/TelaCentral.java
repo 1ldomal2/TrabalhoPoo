@@ -4,11 +4,9 @@
  * and open the template in the editor.
  */
 package VISAO;
-import MODELO.Candidato;
-import MODELO.Voto;
-import MODELO.Documentos;
-import MODELO.Partido;
 import CENTRAL.Central;
+import MODELO.*;
+import DAO.*;
 import java.io.File;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -42,6 +40,59 @@ public class TelaCentral extends javax.swing.JFrame {
         ListLabelNVotos.setText("");
         ListLabelNomePartido.setText("");
         ListLabelNumeroPartido.setText("");
+        
+        //Chama os 3 Resultados
+        instancia.Resultado();
+
+        //Tabela
+        //Zera a Tabela
+        Tabela.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Eleitor", "Candidato", "Partido"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+
+        //Preenche a tabela
+        DefaultTableModel model = (DefaultTableModel) Tabela.getModel();
+        for (int i = 0; i < instancia.TotalVotos();i++) {
+            Voto v= instancia.VotoIndice(i);
+            if(v!=null){
+                String eName= v.getEleitor().getNome();
+                String cName= v.getCandidato().getNome();
+                String pName= v.getCandidato().getPartido().getNome();
+                Object[] linha ={eName,cName,pName};
+                model.addRow(linha);
+            }
+        }
+        jScrollPane3.setViewportView(Tabela);
+        //Lista
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        for (int i = 0; i < instancia.TotalCandidatos(); i++) {
+            listModel.addElement(instancia.CandidatoIndice(i).getNome());
+        }
+        jList3.setModel(listModel);
+        jScrollPane5.setViewportView(jList3);
+        jList3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        
     }
 
     /**
@@ -57,21 +108,6 @@ public class TelaCentral extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jLayeredPane5 = new javax.swing.JLayeredPane();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        Tabela = new javax.swing.JTable();
-        jLayeredPane6 = new javax.swing.JLayeredPane();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
-        ListLabelNome = new javax.swing.JLabel();
-        ListLabelNumeroPartido = new javax.swing.JLabel();
-        ListLabelCPF = new javax.swing.JLabel();
-        ListLabelNomePartido = new javax.swing.JLabel();
-        ListLabelNumero = new javax.swing.JLabel();
-        ListLabelNVotos = new javax.swing.JLabel();
-        jLayeredPane9 = new javax.swing.JLayeredPane();
-        jLabel11 = new javax.swing.JLabel();
         jLayeredPane3 = new javax.swing.JLayeredPane();
         EleitorButaoCriar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -112,9 +148,20 @@ public class TelaCentral extends javax.swing.JFrame {
         PartidoCampoNumero = new javax.swing.JTextField();
         PartidoLabelNumero = new javax.swing.JLabel();
         Partido = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        jLayeredPane5 = new javax.swing.JLayeredPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Tabela = new javax.swing.JTable();
+        jLayeredPane6 = new javax.swing.JLayeredPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jList3 = new javax.swing.JList<>();
+        ListLabelNome = new javax.swing.JLabel();
+        ListLabelNumeroPartido = new javax.swing.JLabel();
+        ListLabelCPF = new javax.swing.JLabel();
+        ListLabelNomePartido = new javax.swing.JLabel();
+        ListLabelNumero = new javax.swing.JLabel();
+        ListLabelNVotos = new javax.swing.JLabel();
+        jLayeredPane9 = new javax.swing.JLayeredPane();
+        jLabel11 = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel1");
 
@@ -124,158 +171,15 @@ public class TelaCentral extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTabbedPane2.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
+        jTabbedPane1.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jTabbedPane2AncestorAdded(evt);
+                jTabbedPane1AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
-        });
-
-        Tabela.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Eleitor", "Candidato", "Partido"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
-        jScrollPane3.setViewportView(Tabela);
-
-        jLayeredPane5.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane5Layout = new javax.swing.GroupLayout(jLayeredPane5);
-        jLayeredPane5.setLayout(jLayeredPane5Layout);
-        jLayeredPane5Layout.setHorizontalGroup(
-            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane5Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 698, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 97, Short.MAX_VALUE))
-        );
-        jLayeredPane5Layout.setVerticalGroup(
-            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane5Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 35, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Tabela de Votos", jLayeredPane5);
-
-        jList3.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jList3.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                jList3ValueChanged(evt);
-            }
-        });
-        jScrollPane5.setViewportView(jList3);
-
-        ListLabelNome.setText("Nome");
-
-        ListLabelNumeroPartido.setText("Numero Partido");
-
-        ListLabelCPF.setText("Cpf");
-
-        ListLabelNomePartido.setText("Nome Partido");
-
-        ListLabelNumero.setText("Numero");
-
-        ListLabelNVotos.setText("Total de Votos");
-
-        jLayeredPane6.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(ListLabelNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(ListLabelNumeroPartido, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(ListLabelCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(ListLabelNomePartido, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(ListLabelNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(ListLabelNVotos, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane6Layout = new javax.swing.GroupLayout(jLayeredPane6);
-        jLayeredPane6.setLayout(jLayeredPane6Layout);
-        jLayeredPane6Layout.setHorizontalGroup(
-            jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane6Layout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
-                .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane6Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ListLabelCPF)
-                            .addComponent(ListLabelNumero))
-                        .addGap(216, 216, 216))
-                    .addGroup(jLayeredPane6Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ListLabelNome)
-                            .addComponent(ListLabelNomePartido)
-                            .addComponent(ListLabelNumeroPartido)
-                            .addComponent(ListLabelNVotos))
-                        .addContainerGap())))
-        );
-        jLayeredPane6Layout.setVerticalGroup(
-            jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
-            .addGroup(jLayeredPane6Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(ListLabelNome)
-                .addGap(18, 18, 18)
-                .addComponent(ListLabelNumero)
-                .addGap(18, 18, 18)
-                .addComponent(ListLabelCPF)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ListLabelNomePartido)
-                .addGap(24, 24, 24)
-                .addComponent(ListLabelNumeroPartido)
-                .addGap(18, 18, 18)
-                .addComponent(ListLabelNVotos)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Lista Candidatos com numero de Votos", jLayeredPane6);
-
-        jLabel11.setText("Pegar o Maio numero de nVotos depois pegar o indice que tem o numero e depois mostrar os candidados de indice x");
-
-        jLayeredPane9.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout jLayeredPane9Layout = new javax.swing.GroupLayout(jLayeredPane9);
-        jLayeredPane9.setLayout(jLayeredPane9Layout);
-        jLayeredPane9Layout.setHorizontalGroup(
-            jLayeredPane9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane9Layout.createSequentialGroup()
-                .addContainerGap(80, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addGap(65, 65, 65))
-        );
-        jLayeredPane9Layout.setVerticalGroup(
-            jLayeredPane9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane9Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jLabel11)
-                .addContainerGap(383, Short.MAX_VALUE))
-        );
-
-        jTabbedPane2.addTab("Vencedor", jLayeredPane9);
-
-        jTabbedPane1.addTab("Resultado", jTabbedPane2);
 
         EleitorButaoCriar.setText("Criar");
         EleitorButaoCriar.addActionListener(new java.awt.event.ActionListener() {
@@ -376,7 +280,7 @@ public class TelaCentral extends javax.swing.JFrame {
                                     .addComponent(EleitorLabelTitulo))
                                 .addGap(76, 76, 76)
                                 .addComponent(Carregar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(127, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(EleitorButaoCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -417,7 +321,7 @@ public class TelaCentral extends javax.swing.JFrame {
                         .addComponent(EleitorLabelUrna)))
                 .addGap(18, 18, 18)
                 .addComponent(Eleitor, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Eleitor", jLayeredPane3);
@@ -506,7 +410,7 @@ public class TelaCentral extends javax.swing.JFrame {
                             .addComponent(CandidatoLabelPartido))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane7Layout.createSequentialGroup()
-                .addContainerGap(469, Short.MAX_VALUE)
+                .addContainerGap(477, Short.MAX_VALUE)
                 .addComponent(CandidatoButaoCriar1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
@@ -542,7 +446,7 @@ public class TelaCentral extends javax.swing.JFrame {
                         .addComponent(CandidatoLabelPartido)))
                 .addGap(18, 18, 18)
                 .addComponent(Candidato, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Candidato", jLayeredPane7);
@@ -602,7 +506,7 @@ public class TelaCentral extends javax.swing.JFrame {
                             .addComponent(PartidoLabelNumero))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane8Layout.createSequentialGroup()
-                .addContainerGap(469, Short.MAX_VALUE)
+                .addContainerGap(477, Short.MAX_VALUE)
                 .addComponent(PartidoButaoCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
@@ -626,170 +530,11 @@ public class TelaCentral extends javax.swing.JFrame {
                         .addComponent(PartidoLabelNumero)))
                 .addGap(18, 18, 18)
                 .addComponent(Partido, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(221, Short.MAX_VALUE))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Partido", jLayeredPane8);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
-        );
-
-        pack();
-    }// </editor-fold>//GEN-END:initComponents
-
-    private void CandidatoCampoCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CandidatoCampoCPFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CandidatoCampoCPFActionPerformed
-
-    private void CandidatoCampoNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CandidatoCampoNumeroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CandidatoCampoNumeroActionPerformed
-
-    private void EleitorCampoCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EleitorCampoCPFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EleitorCampoCPFActionPerformed
-
-    private void EleitorCampoTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EleitorCampoTituloActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EleitorCampoTituloActionPerformed
-
-    private void PartidoCampoNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PartidoCampoNumeroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PartidoCampoNumeroActionPerformed
-
-    private void EleitorButaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EleitorButaoCriarActionPerformed
-        //Pegando da tela e salvando em variaveis
-        boolean validacao=false;
-        if(Path.length()==0){
-            JOptionPane.showMessageDialog(null,"Selecio a Imagem .ppm");
-            return;
-        }
-        String CampoNome=EleitorCampoNome.getText();
-        String CampoTitulo=EleitorCampoTitulo.getText();
-        String CampoCPF=EleitorCampoCPF.getText();
-        String CampoUrna=EleitorCampoUrna.getText();
-        
-        //Valida Nome
-        if(CampoNome.length()==0){
-            JOptionPane.showMessageDialog(null,"Digite o Nome");
-            return;
-        }
-        
-        //Valida Titulo
-        if(CampoTitulo.length()==0){
-            JOptionPane.showMessageDialog(null,"Digite o Titulo de Eleitor");
-        }
-        
-        //Valida Urna
-        int numero =0;
-        try{
-           numero= Integer.parseInt(CampoUrna);
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null,"Digita apenas numero no campo da Urna");
-            return;
-        }
-        
-        //Valida Cpf
-        Documentos doc=new Documentos(CampoCPF);
-        if(!doc.getValidCpf()){
-             JOptionPane.showMessageDialog(null,"Digite um Cpf Valido");
-             return;
-        }
-        
-        
-        validacao=instancia.CriarEleitor(this.Path, CampoNome, CampoTitulo, CampoCPF, CampoUrna);
-        this.Path="";//Reseta o PAth
-        if(validacao){
-            String DadosCadastrados="";
-            DadosCadastrados="Nome: "+CampoNome+
-                            "\nTitulo: "+CampoTitulo+
-                            "\nCpf: "+CampoCPF+
-                            "\nUrna: "+CampoUrna;
-            Eleitor.setText(DadosCadastrados);
-        }
-    }//GEN-LAST:event_EleitorButaoCriarActionPerformed
-
-    private void EleitorCampoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EleitorCampoNomeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EleitorCampoNomeActionPerformed
-
-    private void PartidoButaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PartidoButaoCriarActionPerformed
-        boolean validacao=false;
-        String CampoNumeroPartido=PartidoCampoNumero.getText();
-        String CampoNomePartido=PartidoCampoNome.getText();
-        validacao=instancia.CadastrarPartido(CampoNumeroPartido, CampoNomePartido);
-        if(validacao){
-            String DadosPartido="Numero: "+CampoNumeroPartido+
-                                "\nNome: "+CampoNomePartido;
-            
-            Partido.setText(DadosPartido);
-        }
-        
-    }//GEN-LAST:event_PartidoButaoCriarActionPerformed
-
-    private void CandidatoButaoCriar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CandidatoButaoCriar1ActionPerformed
-        boolean validacao=false;
-        String CampoNomeCandidato=CandidatoCampoNome.getText();
-        String CampoNumeroCandidato=CandidatoCampoNumero.getText();
-        String CampoCPF=CandidatoCampoCPF.getText();
-        String CampoPartido=CandidatoCampoPartido.getText();
-        validacao = instancia.CadastrarCandidato(CampoPartido, CampoNomeCandidato, CampoNumeroCandidato, CampoCPF);
-        if(validacao){
-            String DadosCandidato="Nome: "+CampoNomeCandidato+
-                                  "\nNumero: "+CampoNumeroCandidato+
-                                  "\nCPF: "+CampoCPF+
-                                  "\nPartido: "+CampoPartido;
-            Candidato.setText(DadosCandidato);
-        }
-    }//GEN-LAST:event_CandidatoButaoCriar1ActionPerformed
-
-    private void CarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarregarActionPerformed
-         //Pega o Caminho Da imagem
-        System.out.println("Localizando Imagem");
-          
-        //este caminho é arbitrario  (ficava mais faci lde debugar)
-        String pathInicial="/home/lucas/Área de Trabalho/TrabalhoPoo/Arquivos PPM/";
-	JFileChooser arquivo = new JFileChooser(pathInicial);
-        //limita o tipo de arquivo que pode ser aberto
-	arquivo.setFileFilter(new FileNameExtensionFilter("Image files", "ppm"));
-	arquivo.setAcceptAllFileFilterUsed(false);
-	arquivo.showOpenDialog(null);
-        File file= arquivo.getSelectedFile();
-        //Verifica se foi possivel Abrir
-	if(file!=null) {
-            System.out.println("Arquivo Localizado");
-            Path = file.getAbsolutePath();
-            Carregar.setSelected(true);
-            //Avisa que a imagem foi carregada
-	}else{
-            Path ="";
-            Carregar.setSelected(false);
-            //Avisa que a imagem não foi carregada
-        }
-    }//GEN-LAST:event_CarregarActionPerformed
-
-    private void jTabbedPane2AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTabbedPane2AncestorAdded
-        //Chama os 3 Resultados
-        instancia.Resultado();
-
-        //Tabela
-        //Zera a Tabela
         Tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -813,30 +558,137 @@ public class TelaCentral extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-
-        //Preenche a tabela
-        DefaultTableModel model = (DefaultTableModel) Tabela.getModel();
-        for (int i = 0; i < instancia.TotalVotos();i++) {
-            Voto v= instancia.VotoIndice(i);
-            if(v!=null){
-                String eName= v.getEleitor().getNome();
-                String cName= v.getCandidato().getNome();
-                String pName= v.getCandidato().getPartido().getNome();
-                Object[] linha ={eName,cName,pName};
-                model.addRow(linha);
-            }
-        }
         jScrollPane3.setViewportView(Tabela);
-        //Lista
-        DefaultListModel<String> listModel = new DefaultListModel<>();
-        for (int i = 0; i < instancia.TotalCandidatos(); i++) {
-            listModel.addElement(instancia.CandidatoIndice(i).getNome());
-        }
-        jList3.setModel(listModel);
-        jScrollPane5.setViewportView(jList3);
-        jList3.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-    }//GEN-LAST:event_jTabbedPane2AncestorAdded
+        jLayeredPane5.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane5Layout = new javax.swing.GroupLayout(jLayeredPane5);
+        jLayeredPane5.setLayout(jLayeredPane5Layout);
+        jLayeredPane5Layout.setHorizontalGroup(
+            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE)
+        );
+        jLayeredPane5Layout.setVerticalGroup(
+            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Tabela de Votos", jLayeredPane5);
+
+        jList3.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList3.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList3ValueChanged(evt);
+            }
+        });
+        jScrollPane5.setViewportView(jList3);
+
+        ListLabelNome.setText("Nome");
+
+        ListLabelNumeroPartido.setText("Numero Partido");
+
+        ListLabelCPF.setText("Cpf");
+
+        ListLabelNomePartido.setText("Nome Partido");
+
+        ListLabelNumero.setText("Numero");
+
+        ListLabelNVotos.setText("Total de Votos");
+
+        jLayeredPane6.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(ListLabelNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(ListLabelNumeroPartido, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(ListLabelCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(ListLabelNomePartido, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(ListLabelNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane6.setLayer(ListLabelNVotos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane6Layout = new javax.swing.GroupLayout(jLayeredPane6);
+        jLayeredPane6.setLayout(jLayeredPane6Layout);
+        jLayeredPane6Layout.setHorizontalGroup(
+            jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane6Layout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane6Layout.createSequentialGroup()
+                        .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ListLabelCPF)
+                            .addComponent(ListLabelNumero))
+                        .addGap(216, 216, 216))
+                    .addGroup(jLayeredPane6Layout.createSequentialGroup()
+                        .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ListLabelNome)
+                            .addComponent(ListLabelNomePartido)
+                            .addComponent(ListLabelNumeroPartido)
+                            .addComponent(ListLabelNVotos))
+                        .addContainerGap())))
+        );
+        jLayeredPane6Layout.setVerticalGroup(
+            jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+            .addGroup(jLayeredPane6Layout.createSequentialGroup()
+                .addGap(54, 54, 54)
+                .addComponent(ListLabelNome)
+                .addGap(18, 18, 18)
+                .addComponent(ListLabelNumero)
+                .addGap(18, 18, 18)
+                .addComponent(ListLabelCPF)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ListLabelNomePartido)
+                .addGap(24, 24, 24)
+                .addComponent(ListLabelNumeroPartido)
+                .addGap(18, 18, 18)
+                .addComponent(ListLabelNVotos)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Lista Candidatos com numero de Votos", jLayeredPane6);
+
+        jLabel11.setText("Pegar o Maio numero de nVotos depois pegar o indice que tem o numero e depois mostrar os candidados de indice x");
+
+        jLayeredPane9.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jLayeredPane9Layout = new javax.swing.GroupLayout(jLayeredPane9);
+        jLayeredPane9.setLayout(jLayeredPane9Layout);
+        jLayeredPane9Layout.setHorizontalGroup(
+            jLayeredPane9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane9Layout.createSequentialGroup()
+                .addContainerGap(108, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addGap(65, 65, 65))
+        );
+        jLayeredPane9Layout.setVerticalGroup(
+            jLayeredPane9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jLayeredPane9Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(jLabel11)
+                .addContainerGap(437, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Vencedor", jLayeredPane9);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jTabbedPane1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTabbedPane1AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPane1AncestorAdded
 
     private void jList3ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList3ValueChanged
         int indice=jList3.getAnchorSelectionIndex();
@@ -866,8 +718,137 @@ public class TelaCentral extends javax.swing.JFrame {
                 }
             }
         }
-
     }//GEN-LAST:event_jList3ValueChanged
+
+    private void PartidoCampoNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PartidoCampoNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PartidoCampoNumeroActionPerformed
+
+    private void PartidoButaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PartidoButaoCriarActionPerformed
+        boolean validacao=false;
+        String CampoNumeroPartido=PartidoCampoNumero.getText();
+        String CampoNomePartido=PartidoCampoNome.getText();
+        validacao=instancia.CadastrarPartido(CampoNumeroPartido, CampoNomePartido);
+        if(validacao){
+            String DadosPartido="Numero: "+CampoNumeroPartido+
+            "\nNome: "+CampoNomePartido;
+
+            Partido.setText(DadosPartido);
+        }
+
+    }//GEN-LAST:event_PartidoButaoCriarActionPerformed
+
+    private void CandidatoCampoCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CandidatoCampoCPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CandidatoCampoCPFActionPerformed
+
+    private void CandidatoCampoNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CandidatoCampoNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CandidatoCampoNumeroActionPerformed
+
+    private void CandidatoButaoCriar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CandidatoButaoCriar1ActionPerformed
+        boolean validacao=false;
+        String CampoNomeCandidato=CandidatoCampoNome.getText();
+        String CampoNumeroCandidato=CandidatoCampoNumero.getText();
+        String CampoCPF=CandidatoCampoCPF.getText();
+        String CampoPartido=CandidatoCampoPartido.getText();
+        validacao = instancia.CadastrarCandidato(CampoPartido, CampoNomeCandidato, CampoNumeroCandidato, CampoCPF);
+        if(validacao){
+            String DadosCandidato="Nome: "+CampoNomeCandidato+
+            "\nNumero: "+CampoNumeroCandidato+
+            "\nCPF: "+CampoCPF+
+            "\nPartido: "+CampoPartido;
+            Candidato.setText(DadosCandidato);
+        }
+    }//GEN-LAST:event_CandidatoButaoCriar1ActionPerformed
+
+    private void CarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarregarActionPerformed
+        //Pega o Caminho Da imagem
+        System.out.println("Localizando Imagem");
+
+        //este caminho é arbitrario  (ficava mais faci lde debugar)
+        String pathInicial="/home/lucas/Área de Trabalho/TrabalhoPoo/Arquivos PPM/";
+        JFileChooser arquivo = new JFileChooser(pathInicial);
+        //limita o tipo de arquivo que pode ser aberto
+        arquivo.setFileFilter(new FileNameExtensionFilter("Image files", "ppm"));
+        arquivo.setAcceptAllFileFilterUsed(false);
+        arquivo.showOpenDialog(null);
+        File file= arquivo.getSelectedFile();
+        //Verifica se foi possivel Abrir
+        if(file!=null) {
+            System.out.println("Arquivo Localizado");
+            Path = file.getAbsolutePath();
+            Carregar.setSelected(true);
+            //Avisa que a imagem foi carregada
+        }else{
+            Path ="";
+            Carregar.setSelected(false);
+            //Avisa que a imagem não foi carregada
+        }
+    }//GEN-LAST:event_CarregarActionPerformed
+
+    private void EleitorCampoCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EleitorCampoCPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EleitorCampoCPFActionPerformed
+
+    private void EleitorCampoTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EleitorCampoTituloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EleitorCampoTituloActionPerformed
+
+    private void EleitorCampoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EleitorCampoNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EleitorCampoNomeActionPerformed
+
+    private void EleitorButaoCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EleitorButaoCriarActionPerformed
+        //Pegando da tela e salvando em variaveis
+        boolean validacao=false;
+        if(Path.length()==0){
+            JOptionPane.showMessageDialog(null,"Selecio a Imagem .ppm");
+            return;
+        }
+        String CampoNome=EleitorCampoNome.getText();
+        String CampoTitulo=EleitorCampoTitulo.getText();
+        String CampoCPF=EleitorCampoCPF.getText();
+        String CampoUrna=EleitorCampoUrna.getText();
+
+        //Valida Nome
+        if(CampoNome.length()==0){
+            JOptionPane.showMessageDialog(null,"Digite o Nome");
+            return;
+        }
+
+        //Valida Titulo
+        if(CampoTitulo.length()==0){
+            JOptionPane.showMessageDialog(null,"Digite o Titulo de Eleitor");
+        }
+
+        //Valida Urna
+        int numero =0;
+        try{
+            numero= Integer.parseInt(CampoUrna);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Digita apenas numero no campo da Urna");
+            return;
+        }
+
+        //Valida Cpf
+        Documentos doc=new Documentos(CampoCPF);
+        if(!doc.getValidCpf()){
+            JOptionPane.showMessageDialog(null,"Digite um Cpf Valido");
+            return;
+        }
+
+        validacao=instancia.CriarEleitor(this.Path, CampoNome, CampoTitulo, CampoCPF, CampoUrna);
+        this.Path="";//Reseta o PAth
+        if(validacao){
+            String DadosCadastrados="";
+            DadosCadastrados="Nome: "+CampoNome+
+            "\nTitulo: "+CampoTitulo+
+            "\nCpf: "+CampoCPF+
+            "\nUrna: "+CampoUrna;
+            Eleitor.setText(DadosCadastrados);
+        }
+    }//GEN-LAST:event_EleitorButaoCriarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -960,13 +941,9 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane8;
     private javax.swing.JLayeredPane jLayeredPane9;
     private javax.swing.JList<String> jList3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
 }
