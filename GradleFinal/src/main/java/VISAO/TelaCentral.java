@@ -730,6 +730,7 @@ public class TelaCentral extends javax.swing.JFrame {
         String CampoNomePartido=PartidoCampoNome.getText();
         validacao=instancia.CadastrarPartido(CampoNumeroPartido, CampoNomePartido);
         if(validacao){
+            instancia.Send();
             String DadosPartido="Numero: "+CampoNumeroPartido+
             "\nNome: "+CampoNomePartido;
 
@@ -754,6 +755,7 @@ public class TelaCentral extends javax.swing.JFrame {
         String CampoPartido=CandidatoCampoPartido.getText();
         validacao = instancia.CadastrarCandidato(CampoPartido, CampoNomeCandidato, CampoNumeroCandidato, CampoCPF);
         if(validacao){
+            instancia.Send();
             String DadosCandidato="Nome: "+CampoNomeCandidato+
             "\nNumero: "+CampoNumeroCandidato+
             "\nCPF: "+CampoCPF+
@@ -841,6 +843,7 @@ public class TelaCentral extends javax.swing.JFrame {
         validacao=instancia.CriarEleitor(this.Path, CampoNome, CampoTitulo, CampoCPF, CampoUrna);
         this.Path="";//Reseta o PAth
         if(validacao){
+            instancia.Send();
             String DadosCadastrados="";
             DadosCadastrados="Nome: "+CampoNome+
             "\nTitulo: "+CampoTitulo+

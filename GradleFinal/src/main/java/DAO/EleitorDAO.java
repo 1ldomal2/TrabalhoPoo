@@ -12,7 +12,7 @@ import JSON.JSONObject;
 /**Classe para objetos do tipo Eleitor, onde armazena um vetor 'this.Array' com n Eleitores
  * @author Lucas Mateus Fernandes
  */
-public class EleitorDAO {
+public class EleitorDAO extends DAO{
 	
 	private final int TAMANHO = 50;
 	private int Total = 0;
@@ -21,8 +21,8 @@ public class EleitorDAO {
 
 	/**Conexao com Google drive*/
 	public void Receive() {
-		String json="{\"Eleitor\":[{\"UrnaVotacao\":\"1\",\"Senha\":\"956eee1761b6224b512dcb6491c0355dfe2dad05d242e5f70f97651b3d6674f3\",\"Cpf\":\"066.809.236-03\",\"TituloEleitor\":\"Titulo1\",\"Nome\":\"Nome1\"},{\"UrnaVotacao\":\"2\",\"Senha\":\"6194d7c363019ffff907f3cd33f214980106ccfdd03871defa9e6f726bfa7211\",\"Cpf\":\"066.809.236-03\",\"TituloEleitor\":\"Titulo2\",\"Nome\":\"Nome2\"}]}";
-
+		//String json="{\"Eleitor\":[{\"UrnaVotacao\":\"1\",\"Senha\":\"956eee1761b6224b512dcb6491c0355dfe2dad05d242e5f70f97651b3d6674f3\",\"Cpf\":\"066.809.236-03\",\"TituloEleitor\":\"Titulo1\",\"Nome\":\"Nome1\"},{\"UrnaVotacao\":\"2\",\"Senha\":\"6194d7c363019ffff907f3cd33f214980106ccfdd03871defa9e6f726bfa7211\",\"Cpf\":\"066.809.236-03\",\"TituloEleitor\":\"Titulo2\",\"Nome\":\"Nome2\"}]}";
+                String  json=DownloadJson();
 		try {
 			ReadJson(json);
 		} catch (NoSuchAlgorithmException | JSONException | IOException e) {

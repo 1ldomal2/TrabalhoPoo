@@ -1,52 +1,43 @@
 package DAO;
 
+import CONEXAO.Quickstart;
 import JSON.JSONArray;
 import JSON.JSONObject;
+import com.google.api.services.drive.Drive;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- * Cria Json de tudo misturado
+ * Pega o Cnteudo Json do arquivo no google drive
  * @author lucas
  *
  */
-public class DAO {
+public abstract class DAO {
 	private CandidatoDAO cDAO=null;
 	private EleitorDAO eDAO=null;
 	private PartidoDAO pDAO=null;
 	private VotoDAO vDAO=null;
 	
-	public DAO(CandidatoDAO cDAO,EleitorDAO eDAO,PartidoDAO pDAO,VotoDAO vDAO){
-		this.cDAO=cDAO;
-		this.eDAO=eDAO;
-		this.pDAO=pDAO;
-		this.vDAO=vDAO;
-	}
-
-	/**
-	 * 
-	 * @return Json com todos os Dados DAO
-	 */
-	public String Salvar() {
-		System.out.println("Criado Json Geral");
-		JSONObject json=new JSONObject();//Superior
-		
-		JSONObject cJson=new JSONObject(cDAO.makeJson());
-		JSONArray jsonCandidato = cJson.getJSONArray("Candidato");//Quebra o Json no Vetor
-		
-		JSONObject eJson=new JSONObject(eDAO.makeJson());
-		JSONArray jsonEleitor = eJson.getJSONArray("Eleitor");//Quebra o Json no Vetor
-		
-		JSONObject pJson=new JSONObject(pDAO.makeJson());
-		JSONArray jsonPartido = pJson.getJSONArray("Partido");//Quebra o Json no Vetor
-		
-		JSONObject vJson=new JSONObject(vDAO.makeJson());
-		JSONArray jsonVoto = vJson.getJSONArray("Voto");//Quebra o Json no Vetor
-		
-		json.put("Candidato", jsonCandidato);
-		json.put("Eleitor", jsonEleitor);
-		json.put("Partido", jsonPartido);
-		json.put("Voto", jsonVoto);
-		return json.toString();
-	}
 	
-
+        public String DownloadJson(){
+            String NomeArquivo="Eleicao.json";
+            Quickstart drive = new Quickstart();
+            Drive conexao;
+            try {
+                conexao = drive.Conexao();
+            } catch (GeneralSecurityException ex) {
+               return null;
+            } catch (IOException ex) {
+               return null;
+            }
+            String idArq = drive.idFile(conexao,NomeArquivo);
+            String jSon=drive.read(conexao,idArq);
+            return jSon;
+        }
+        /**
+         * Cada DAO tem o seu receive
+         */
+        abstract void Receive();
 }

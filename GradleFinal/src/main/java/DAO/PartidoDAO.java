@@ -11,7 +11,7 @@ import JSON.JSONObject;
 /**Classe para objetos do tipo Partido, onde armazena um vetor 'this.Array' com n Partidos
  * @author Lucas Mateus Fernandes
  */
-public class PartidoDAO {
+public class PartidoDAO extends DAO {
 	private final int TAMANHO = 50;
 	public int Total = 0;
 	private Partido[] Array = new Partido[TAMANHO];
@@ -19,8 +19,8 @@ public class PartidoDAO {
 
 	/**Conexao com Google drive*/
 	public void Receive() {
-		String json="{\"Partido\":[{\"Numero\":\"1\",\"Nome\":\"Nome\"},{\"Numero\":\"2\",\"Nome\":\"Name\"}]}";
-
+		//String json="{\"Partido\":[{\"Numero\":\"1\",\"Nome\":\"Nome\"},{\"Numero\":\"2\",\"Nome\":\"Name\"}]}";
+                String  json=DownloadJson();
 		try {
 			ReadJson(json);
 		} catch (NoSuchAlgorithmException | JSONException | IOException e) {

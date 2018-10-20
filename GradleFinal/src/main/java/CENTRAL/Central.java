@@ -1,5 +1,6 @@
 package CENTRAL;
 
+import CONEXAO.Quickstart;
 import DAO.*;
 import JSON.JSONArray;
 import JSON.JSONObject;
@@ -12,6 +13,10 @@ import java.io.PrintWriter;
 import javax.swing.JOptionPane;
 
 import VISAO.TelaCentral;
+import com.google.api.services.drive.Drive;
+import java.security.GeneralSecurityException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Central {
 
@@ -49,11 +54,14 @@ public class Central {
     }
 
     /**
-     *
+     * Envia um Arquivo para o google Drive
+     *@param Nome Nome do Arquivo
      * @param Path - Caminho para Salvar
      * @return Arquivo .json com todos os dados
      */
-    public boolean Send(String Path) {
+    public boolean Send() {
+        String Path="./Eleicao.json";
+        String Nome="Eleicao.json";
         //Salva os Arquivos
         //Cria um arquivo
         FileWriter arq;
@@ -61,8 +69,7 @@ public class Central {
             arq = new FileWriter(Path);
             PrintWriter gravarArq = new PrintWriter(arq);//Objeto buffer
 
-            DAO EstrutraDados = new DAO(cDAO, eDAO, pDAO, vDAO);
-            String Json = EstrutraDados.Salvar();//Convertendo tudo para string
+            String Json =makeJson();//Convertendo tudo para string
 
             gravarArq.printf(Json);
             arq.close();
@@ -70,11 +77,22 @@ public class Central {
             e1.printStackTrace();
             JOptionPane.showInternalMessageDialog(null, "Erro Ao criar Arquivo");
         }
-
+        //Envia o Arquivopara o Drive
+        Quickstart drive = new Quickstart();
+        Drive conexao=null;
+        try {
+            conexao = drive.Conexao();
+        } catch (GeneralSecurityException ex) {        
+        } catch (IOException ex) {}
+        drive.Upload(conexao, Nome, Path);
         return true;
     }
-
+    /*
+     * @param Path Caminho do
+     * @return 
+   
     public String Receive(String Path) {
+        
         //Abre o Arquivo localizado em $Path
         FileReader arq = null;
         try {
@@ -95,6 +113,7 @@ public class Central {
             return null;
         }
     }
+    */
 
     /**
      * Retorna uma string {Nome:"Candidato",Eleitor:"NumeroDeVotos"}
@@ -363,4 +382,32 @@ public class Central {
     public int nVotoIndice(int i) {
         return nVotos[i];
     }
+    
+    /**
+	 * 
+	 * @return Json com todos os Dados DAO
+	 */
+	public String makeJson() {
+		System.out.println("Criado Json Geral");
+		JSONObject json=new JSONObject();//Superior
+		
+		JSONObject cJson=new JSONObject(cDAO.makeJson());
+		JSONArray jsonCandidato = cJson.getJSONArray("Candidato");//Quebra o Json no Vetor
+		
+		JSONObject eJson=new JSONObject(eDAO.makeJson());
+		JSONArray jsonEleitor = eJson.getJSONArray("Eleitor");//Quebra o Json no Vetor
+		
+		JSONObject pJson=new JSONObject(pDAO.makeJson());
+		JSONArray jsonPartido = pJson.getJSONArray("Partido");//Quebra o Json no Vetor
+		
+		JSONObject vJson=new JSONObject(vDAO.makeJson());
+		JSONArray jsonVoto = vJson.getJSONArray("Voto");//Quebra o Json no Vetor
+		
+		json.put("Candidato", jsonCandidato);
+		json.put("Eleitor", jsonEleitor);
+		json.put("Partido", jsonPartido);
+		json.put("Voto", jsonVoto);
+		return json.toString();
+	}
+    //Ver quem ganho retornar maior numero do vetor
 }

@@ -66,11 +66,15 @@ public class Quickstart {
      * @return String com conteudo do arquivo
      * @throws IOException 
      */
-    public String read(Drive service,String fileID) throws IOException{
+    public String read(Drive service,String fileID){
         String fileId = fileID;
         OutputStream outputStream = new ByteArrayOutputStream();
-        service.files().get(fileId)
-        .executeMediaAndDownloadTo(outputStream);
+        try {
+            service.files().get(fileId)
+                    .executeMediaAndDownloadTo(outputStream);
+        } catch (IOException ex) {
+            Logger.getLogger(Quickstart.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return outputStream.toString();
     }
     /**
@@ -79,24 +83,29 @@ public class Quickstart {
      * @param name Nome do Arquivo
      * @return Id do Arquivo
      */
-    public String idFile(Drive service,String name) throws IOException{
+    public String idFile(Drive service,String name){
        
-         // Print the names and IDs for up to 10 files.
-        FileList result = service.files().list()
-                .setPageSize(10)
-                .setFields("nextPageToken, files(id, name)")
-                .execute();
-        List<File> files = result.getFiles();
-        if (files == null || files.isEmpty()) {
-            System.out.println("No files found.");
-        } else {
-            for (File file : files) {
-                System.out.println(file.getName());
-                if(file.getName().equals(name)){
-                   return file.getId();
+        try {
+            // Print the names and IDs for up to 10 files.
+            FileList result = service.files().list()
+                    .setPageSize(10)
+                    .setFields("nextPageToken, files(id, name)")
+                    .execute();
+            List<File> files = result.getFiles();
+            if (files == null || files.isEmpty()) {
+                System.out.println("No files found.");
+            } else {
+                for (File file : files) {
+                    System.out.println(file.getName());
+                    if(file.getName().equals(name)){
+                        return file.getId();
+                    }
+                    System.out.printf("%s (%s)\n", file.getName(), file.getId());
                 }
-                System.out.printf("%s (%s)\n", file.getName(), file.getId());
             }
+            return null;
+        } catch (IOException ex) {
+            Logger.getLogger(Quickstart.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -119,7 +128,7 @@ public class Quickstart {
     * @param service Conexao
     * @throws IOException 
     */
-   public void Upload(Drive service,String Arquivo,String Caminho) throws IOException {
+   public void Upload(Drive service,String Arquivo,String Caminho){
         File arquivo = new File();
         arquivo.setName(Arquivo);
         java.io.File caminhoArquivo = new java.io.File(Caminho);

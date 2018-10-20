@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 /**Classe para objetos do tipo Voto, onde armazena um vetor 'this.Array' com n Votos
  * @author Lucas Mateus Fernandes
  */
-public class VotoDAO {
+public class VotoDAO extends DAO {
 	private final int TAMANHO = 50;
 	private  int Total = 0;
 	private Voto[] Array = new Voto[TAMANHO];
@@ -22,14 +22,17 @@ public class VotoDAO {
 	//Quando carregar ???
 	private EleitorDAO ArrayE = null;
 	private CandidatoDAO ArrayC = null;
+
 	
 	
 	/**Conexao com Google drive*/
 	public void Receive() {
 		System.out.println("Conexao com Google Drive 'Votos'");
 		//Carrega Votos
-		String json="{\"Voto\":[{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"1\",\"Time\":\"1539405966018\"},{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"1\",\"Time\":\"1539405966018\"}]}";
-		
+                                // PAra fins de teste
+                                //String json="{\"Voto\":[{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"1\",\"Time\":\"1539405966018\"},{\"CpfCandidato\":\"066.809.236-03\",\"CpfEleitor\":\"066.809.236-03\",\"nUrna\":\"1\",\"Time\":\"1539405966018\"}]}";
+		//Faz conexao e baixa o Json
+               String  json=DownloadJson();
 		//Carrega Candidatos
 		ArrayC=new CandidatoDAO();
 		ArrayC.Receive();

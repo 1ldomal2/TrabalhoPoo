@@ -1,10 +1,12 @@
 package DAO;
 
+import CONEXAO.*;
 import MODELO.Partido;
 import MODELO.Candidato;
 import MODELO.Documentos;
 import JSON.JSONArray;
 import JSON.JSONObject;
+import com.google.api.services.drive.Drive;
 import javax.swing.JOptionPane;
 
 
@@ -12,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author Lucas Mateus Fernandes
  */
 
-public class CandidatoDAO {
+public class CandidatoDAO extends DAO{
 	private final int TAMANHO = 50;
 	private int Total = 0;
 	private Candidato[] Array = new Candidato[TAMANHO];
@@ -20,13 +22,9 @@ public class CandidatoDAO {
 	
 	/**Conexao com Google drive*/
 	public void Receive() {                
-		String json ="{\"Candidato\":[{\"Numero\":\"11111\",\"NumeroPartido\":\"21\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome1\",\"NomePartido\":\"s1\"},{\"Numero\":\"12345\",\"NumeroPartido\":\"22\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome2\",\"NomePartido\":\"s2\"},{\"Numero\":\"00000\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"}]}";
-            /*
-                JSONObject oJson=new JSONObject(json);//Criou um json;
-                oJson.getJSONArray("Candidato");//Pega o Array de Candidatos
+		//String json ="{\"Candidato\":[{\"Numero\":\"11111\",\"NumeroPartido\":\"21\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome1\",\"NomePartido\":\"s1\"},{\"Numero\":\"12345\",\"NumeroPartido\":\"22\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome2\",\"NomePartido\":\"s2\"},{\"Numero\":\"00000\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"}]}";
+                String  json=DownloadJson();
                 
-                System.out.println(oJson.getJSONArray("Candidato").toString());//Pega somente o que é referente e Candidato);
-            */
                 ReadJson(json);
 	}
 	
