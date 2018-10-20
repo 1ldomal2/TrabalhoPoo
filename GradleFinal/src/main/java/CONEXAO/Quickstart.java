@@ -96,11 +96,11 @@ public class Quickstart {
                 System.out.println("No files found.");
             } else {
                 for (File file : files) {
-                    System.out.println(file.getName());
+                    //System.out.println(file.getName());
                     if(file.getName().equals(name)){
+                        System.out.printf("%s (%s)\n", file.getName(), file.getId());
                         return file.getId();
                     }
-                    System.out.printf("%s (%s)\n", file.getName(), file.getId());
                 }
             }
             return null;
@@ -143,4 +143,21 @@ public class Quickstart {
         }
 
     }
+   
+   
+   
+   
+   /**
+    * Excluir permanentemente um arquivo, ignorando a lixeira.
+    * @param service Drive instância do serviço da API.
+    * ID do arquivo ID @param do arquivo a ser excluído.
+    */
+    public void Delete(Drive service,String Nome) throws IOException{
+        try {
+            service.files().delete(this.idFile(service, Nome)).execute();
+        } catch (Exception e) {
+            System.out.println("Não foi posivel apagar o arquivo "+Nome);
+        }
+        
+   }
 }

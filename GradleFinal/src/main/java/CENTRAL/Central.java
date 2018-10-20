@@ -39,11 +39,15 @@ public class Central {
         this.vDAO = new VotoDAO();
 
         //Carrega Dados Da ultima seção 
-        pDAO.Receive();//Partido tem que vir antes de Candidato
-        cDAO.Receive();
-        eDAO.Receive();
-        vDAO.Receive();//Voto tem que vir depois de eleitor e de candidato
-
+       try{
+            pDAO.Receive();
+           //Partido tem que vir antes de Candidato
+            cDAO.Receive();
+            eDAO.Receive();
+            vDAO.Receive();//Voto tem que vir depois de eleitor e de candidato
+       }catch(Exception e){
+           JOptionPane.showMessageDialog(null, "Erro Ao Baixar do Drive,Verifique sua Conexão");
+       }
         nVotos = new int[50];
         //Cria com 50 mas nao usa Todos
 
@@ -59,7 +63,7 @@ public class Central {
      * @param Path - Caminho para Salvar
      * @return Arquivo .json com todos os dados
      */
-    public boolean Send() {
+    public boolean Send(){
         String Path="./Eleicao.json";
         String Nome="Eleicao.json";
         //Salva os Arquivos
@@ -77,17 +81,27 @@ public class Central {
             e1.printStackTrace();
             JOptionPane.showInternalMessageDialog(null, "Erro Ao criar Arquivo");
         }
-        //Envia o Arquivopara o Drive
+       
         Quickstart drive = new Quickstart();
         Drive conexao=null;
         try {
+            //conecta ao Drive
             conexao = drive.Conexao();
-        } catch (GeneralSecurityException ex) {        
-        } catch (IOException ex) {}
-        drive.Upload(conexao, Nome, Path);
-        return true;
+            //Apaga o Arquivo que ja estava no Drive
+            drive.Delete(conexao, Nome);
+            System.out.println("Apagou Arquivo Anterior");
+            //Envia o Arquivopara o Drive
+            drive.Upload(conexao, Nome, Path);
+            System.out.println("Arquivo Apagado");
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+        
+      
+       
     }
-    /*
+    /**
      * @param Path Caminho do
      * @return 
    
