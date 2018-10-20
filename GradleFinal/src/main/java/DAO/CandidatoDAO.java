@@ -80,7 +80,7 @@ public class CandidatoDAO extends DAO{
 	 * @param NomePartido - Nome do Partido
 	 * @return Boolean - Confirmando se criou ou nao o candidato
 	 * */
-	
+        
 	public boolean CriarCandidato(String Nome, String Numero, String Cpf, String NumeroPartido,String NomePartido) {
 		if (Total < TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Candidato(Nome, Numero, Cpf,NumeroPartido , NomePartido);

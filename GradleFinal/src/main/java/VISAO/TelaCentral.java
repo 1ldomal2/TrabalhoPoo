@@ -107,51 +107,41 @@ public class TelaCentral extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jLayeredPane3 = new javax.swing.JLayeredPane();
+        Panel = new javax.swing.JTabbedPane();
+        PanelEleitor = new javax.swing.JLayeredPane();
         EleitorButaoCriar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         EleitorCampoNome = new javax.swing.JTextField();
-        EleitorLabelNome = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         EleitorCampoTitulo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         EleitorCampoCPF = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         EleitorCampoUrna = new javax.swing.JTextField();
-        EleitorLabelTitulo = new javax.swing.JLabel();
-        EleitorLabelCPF = new javax.swing.JLabel();
-        EleitorLabelUrna = new javax.swing.JLabel();
         Eleitor = new javax.swing.JLabel();
         Carregar = new javax.swing.JToggleButton();
-        jLayeredPane7 = new javax.swing.JLayeredPane();
+        PanelCandidato = new javax.swing.JLayeredPane();
         CandidatoButaoCriar1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         CandidatoCampoNome = new javax.swing.JTextField();
-        CandidatoLabelNome1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         CandidatoCampoNumero = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         CandidatoCampoCPF = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         CandidatoCampoPartido = new javax.swing.JTextField();
-        CandidatoLabelNumero = new javax.swing.JLabel();
-        CandidatoLabelCPF = new javax.swing.JLabel();
-        CandidatoLabelPartido = new javax.swing.JLabel();
         Candidato = new javax.swing.JLabel();
-        jLayeredPane8 = new javax.swing.JLayeredPane();
+        PanelPartido = new javax.swing.JLayeredPane();
         PartidoButaoCriar = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         PartidoCampoNome = new javax.swing.JTextField();
-        PartidoLabelNome = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         PartidoCampoNumero = new javax.swing.JTextField();
-        PartidoLabelNumero = new javax.swing.JLabel();
         Partido = new javax.swing.JLabel();
-        jLayeredPane5 = new javax.swing.JLayeredPane();
+        PanelVotos = new javax.swing.JLayeredPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tabela = new javax.swing.JTable();
-        jLayeredPane6 = new javax.swing.JLayeredPane();
+        PanelResultado = new javax.swing.JLayeredPane();
         jScrollPane5 = new javax.swing.JScrollPane();
         jList3 = new javax.swing.JList<>();
         ListLabelNome = new javax.swing.JLabel();
@@ -160,8 +150,10 @@ public class TelaCentral extends javax.swing.JFrame {
         ListLabelNomePartido = new javax.swing.JLabel();
         ListLabelNumero = new javax.swing.JLabel();
         ListLabelNVotos = new javax.swing.JLabel();
-        jLayeredPane9 = new javax.swing.JLayeredPane();
-        jLabel11 = new javax.swing.JLabel();
+        PanelVencedor = new javax.swing.JLayeredPane();
+        resultadoTxt = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        VencedorTxt = new javax.swing.JTextArea();
 
         jLabel4.setText("jLabel1");
 
@@ -171,13 +163,18 @@ public class TelaCentral extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTabbedPane1.addAncestorListener(new javax.swing.event.AncestorListener() {
+        Panel.addAncestorListener(new javax.swing.event.AncestorListener() {
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
-                jTabbedPane1AncestorAdded(evt);
+                PanelAncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
             }
             public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        Panel.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                PanelStateChanged(evt);
             }
         });
 
@@ -196,8 +193,6 @@ public class TelaCentral extends javax.swing.JFrame {
                 EleitorCampoNomeActionPerformed(evt);
             }
         });
-
-        EleitorLabelNome.setText("Erro");
 
         jLabel3.setText("Titulo de Eleito");
 
@@ -221,12 +216,6 @@ public class TelaCentral extends javax.swing.JFrame {
 
         EleitorCampoUrna.setText("Digite...");
 
-        EleitorLabelTitulo.setText("Erro");
-
-        EleitorLabelCPF.setText("Erro");
-
-        EleitorLabelUrna.setText("Erro");
-
         Eleitor.setText("Dados Cadastrados");
 
         Carregar.setText("Carregar Imagem");
@@ -236,32 +225,28 @@ public class TelaCentral extends javax.swing.JFrame {
             }
         });
 
-        jLayeredPane3.setLayer(EleitorButaoCriar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(EleitorCampoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(EleitorLabelNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(EleitorCampoTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(EleitorCampoCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(EleitorCampoUrna, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(EleitorLabelTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(EleitorLabelCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(EleitorLabelUrna, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(Eleitor, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane3.setLayer(Carregar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelEleitor.setLayer(EleitorButaoCriar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelEleitor.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelEleitor.setLayer(EleitorCampoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelEleitor.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelEleitor.setLayer(EleitorCampoTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelEleitor.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelEleitor.setLayer(EleitorCampoCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelEleitor.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelEleitor.setLayer(EleitorCampoUrna, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelEleitor.setLayer(Eleitor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelEleitor.setLayer(Carregar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jLayeredPane3Layout = new javax.swing.GroupLayout(jLayeredPane3);
-        jLayeredPane3.setLayout(jLayeredPane3Layout);
-        jLayeredPane3Layout.setHorizontalGroup(
-            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+        javax.swing.GroupLayout PanelEleitorLayout = new javax.swing.GroupLayout(PanelEleitor);
+        PanelEleitor.setLayout(PanelEleitorLayout);
+        PanelEleitorLayout.setHorizontalGroup(
+            PanelEleitorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelEleitorLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelEleitorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(PanelEleitorLayout.createSequentialGroup()
+                        .addGroup(PanelEleitorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(EleitorCampoNome)
                             .addComponent(jLabel3)
                             .addComponent(EleitorCampoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
@@ -270,31 +255,23 @@ public class TelaCentral extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(EleitorCampoCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                             .addComponent(Eleitor, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(EleitorLabelCPF)
-                            .addComponent(EleitorLabelUrna)
-                            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(EleitorLabelNome)
-                                    .addComponent(EleitorLabelTitulo))
-                                .addGap(76, 76, 76)
-                                .addComponent(Carregar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(118, 118, 118)
+                        .addComponent(Carregar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(135, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane3Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEleitorLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(EleitorButaoCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
-        jLayeredPane3Layout.setVerticalGroup(
-            jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane3Layout.createSequentialGroup()
+        PanelEleitorLayout.setVerticalGroup(
+            PanelEleitorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelEleitorLayout.createSequentialGroup()
                 .addComponent(EleitorButaoCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
+                .addGroup(PanelEleitorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelEleitorLayout.createSequentialGroup()
                         .addComponent(EleitorCampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
@@ -308,23 +285,13 @@ public class TelaCentral extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(EleitorCampoUrna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane3Layout.createSequentialGroup()
-                                .addComponent(EleitorLabelNome)
-                                .addGap(46, 46, 46)
-                                .addComponent(EleitorLabelTitulo))
-                            .addComponent(Carregar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addComponent(EleitorLabelCPF)
-                        .addGap(46, 46, 46)
-                        .addComponent(EleitorLabelUrna)))
+                    .addComponent(Carregar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(Eleitor, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(129, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Eleitor", jLayeredPane3);
+        Panel.addTab("Eleitor", PanelEleitor);
 
         CandidatoButaoCriar1.setText("Criar");
         CandidatoButaoCriar1.addActionListener(new java.awt.event.ActionListener() {
@@ -336,8 +303,6 @@ public class TelaCentral extends javax.swing.JFrame {
         jLabel2.setText("Nome candidato");
 
         CandidatoCampoNome.setText("Digite...");
-
-        CandidatoLabelNome1.setText("Erro");
 
         jLabel7.setText("Numero");
 
@@ -361,95 +326,68 @@ public class TelaCentral extends javax.swing.JFrame {
 
         CandidatoCampoPartido.setText("Digite...");
 
-        CandidatoLabelNumero.setText("Erro");
-
-        CandidatoLabelCPF.setText("Erro");
-
-        CandidatoLabelPartido.setText("Erro");
-
         Candidato.setText("Dados Cadastrados");
 
-        jLayeredPane7.setLayer(CandidatoButaoCriar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(CandidatoCampoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(CandidatoLabelNome1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(CandidatoCampoNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(CandidatoCampoCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(CandidatoCampoPartido, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(CandidatoLabelNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(CandidatoLabelCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(CandidatoLabelPartido, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane7.setLayer(Candidato, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelCandidato.setLayer(CandidatoButaoCriar1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelCandidato.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelCandidato.setLayer(CandidatoCampoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelCandidato.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelCandidato.setLayer(CandidatoCampoNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelCandidato.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelCandidato.setLayer(CandidatoCampoCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelCandidato.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelCandidato.setLayer(CandidatoCampoPartido, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelCandidato.setLayer(Candidato, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jLayeredPane7Layout = new javax.swing.GroupLayout(jLayeredPane7);
-        jLayeredPane7.setLayout(jLayeredPane7Layout);
-        jLayeredPane7Layout.setHorizontalGroup(
-            jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane7Layout.createSequentialGroup()
+        javax.swing.GroupLayout PanelCandidatoLayout = new javax.swing.GroupLayout(PanelCandidato);
+        PanelCandidato.setLayout(PanelCandidatoLayout);
+        PanelCandidatoLayout.setHorizontalGroup(
+            PanelCandidatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCandidatoLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelCandidatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addGroup(jLayeredPane7Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CandidatoCampoNome)
-                            .addComponent(jLabel7)
-                            .addComponent(CandidatoCampoNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                            .addComponent(jLabel10)
-                            .addComponent(CandidatoCampoPartido, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                            .addComponent(jLabel8)
-                            .addComponent(CandidatoCampoCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                            .addComponent(Candidato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(CandidatoLabelNome1)
-                            .addComponent(CandidatoLabelNumero)
-                            .addComponent(CandidatoLabelCPF)
-                            .addComponent(CandidatoLabelPartido))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane7Layout.createSequentialGroup()
+                    .addGroup(PanelCandidatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(CandidatoCampoNome)
+                        .addComponent(jLabel7)
+                        .addComponent(CandidatoCampoNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addComponent(CandidatoCampoPartido, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                        .addComponent(jLabel8)
+                        .addComponent(CandidatoCampoCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                        .addComponent(Candidato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(424, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCandidatoLayout.createSequentialGroup()
                 .addContainerGap(477, Short.MAX_VALUE)
                 .addComponent(CandidatoButaoCriar1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
-        jLayeredPane7Layout.setVerticalGroup(
-            jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane7Layout.createSequentialGroup()
+        PanelCandidatoLayout.setVerticalGroup(
+            PanelCandidatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelCandidatoLayout.createSequentialGroup()
                 .addComponent(CandidatoButaoCriar1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane7Layout.createSequentialGroup()
-                        .addComponent(CandidatoCampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CandidatoCampoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CandidatoCampoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(CandidatoCampoPartido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jLayeredPane7Layout.createSequentialGroup()
-                        .addComponent(CandidatoLabelNome1)
-                        .addGap(46, 46, 46)
-                        .addComponent(CandidatoLabelNumero)
-                        .addGap(46, 46, 46)
-                        .addComponent(CandidatoLabelCPF)
-                        .addGap(46, 46, 46)
-                        .addComponent(CandidatoLabelPartido)))
+                .addComponent(CandidatoCampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CandidatoCampoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CandidatoCampoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CandidatoCampoPartido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Candidato, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(129, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Candidato", jLayeredPane7);
+        Panel.addTab("Candidato", PanelCandidato);
 
         PartidoButaoCriar.setText("Criar");
         PartidoButaoCriar.addActionListener(new java.awt.event.ActionListener() {
@@ -462,8 +400,6 @@ public class TelaCentral extends javax.swing.JFrame {
 
         PartidoCampoNome.setText("Digite...");
 
-        PartidoLabelNome.setText("Erro");
-
         jLabel14.setText("Numero Partido");
 
         PartidoCampoNumero.setText("Digite...");
@@ -473,67 +409,52 @@ public class TelaCentral extends javax.swing.JFrame {
             }
         });
 
-        PartidoLabelNumero.setText("Erro");
-
         Partido.setText("Dados Cadastrados");
 
-        jLayeredPane8.setLayer(PartidoButaoCriar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane8.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane8.setLayer(PartidoCampoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane8.setLayer(PartidoLabelNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane8.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane8.setLayer(PartidoCampoNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane8.setLayer(PartidoLabelNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane8.setLayer(Partido, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelPartido.setLayer(PartidoButaoCriar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelPartido.setLayer(jLabel13, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelPartido.setLayer(PartidoCampoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelPartido.setLayer(jLabel14, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelPartido.setLayer(PartidoCampoNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelPartido.setLayer(Partido, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jLayeredPane8Layout = new javax.swing.GroupLayout(jLayeredPane8);
-        jLayeredPane8.setLayout(jLayeredPane8Layout);
-        jLayeredPane8Layout.setHorizontalGroup(
-            jLayeredPane8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane8Layout.createSequentialGroup()
+        javax.swing.GroupLayout PanelPartidoLayout = new javax.swing.GroupLayout(PanelPartido);
+        PanelPartido.setLayout(PanelPartidoLayout);
+        PanelPartidoLayout.setHorizontalGroup(
+            PanelPartidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelPartidoLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addGroup(jLayeredPane8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelPartidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
-                    .addGroup(jLayeredPane8Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(PartidoCampoNome)
-                            .addComponent(jLabel14)
-                            .addComponent(PartidoCampoNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                            .addComponent(Partido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jLayeredPane8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PartidoLabelNome)
-                            .addComponent(PartidoLabelNumero))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane8Layout.createSequentialGroup()
+                    .addGroup(PanelPartidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(PartidoCampoNome)
+                        .addComponent(jLabel14)
+                        .addComponent(PartidoCampoNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                        .addComponent(Partido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(424, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelPartidoLayout.createSequentialGroup()
                 .addContainerGap(477, Short.MAX_VALUE)
                 .addComponent(PartidoButaoCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
-        jLayeredPane8Layout.setVerticalGroup(
-            jLayeredPane8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane8Layout.createSequentialGroup()
+        PanelPartidoLayout.setVerticalGroup(
+            PanelPartidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelPartidoLayout.createSequentialGroup()
                 .addComponent(PartidoButaoCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane8Layout.createSequentialGroup()
-                        .addComponent(PartidoCampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PartidoCampoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jLayeredPane8Layout.createSequentialGroup()
-                        .addComponent(PartidoLabelNome)
-                        .addGap(46, 46, 46)
-                        .addComponent(PartidoLabelNumero)))
+                .addComponent(PartidoCampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PartidoCampoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Partido, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(248, Short.MAX_VALUE))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Partido", jLayeredPane8);
+        Panel.addTab("Partido", PanelPartido);
 
         Tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -560,20 +481,20 @@ public class TelaCentral extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(Tabela);
 
-        jLayeredPane5.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelVotos.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jLayeredPane5Layout = new javax.swing.GroupLayout(jLayeredPane5);
-        jLayeredPane5.setLayout(jLayeredPane5Layout);
-        jLayeredPane5Layout.setHorizontalGroup(
-            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout PanelVotosLayout = new javax.swing.GroupLayout(PanelVotos);
+        PanelVotos.setLayout(PanelVotosLayout);
+        PanelVotosLayout.setHorizontalGroup(
+            PanelVotosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE)
         );
-        jLayeredPane5Layout.setVerticalGroup(
-            jLayeredPane5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+        PanelVotosLayout.setVerticalGroup(
+            PanelVotosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Tabela de Votos", jLayeredPane5);
+        Panel.addTab("Tabela de Votos", PanelVotos);
 
         jList3.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -599,39 +520,39 @@ public class TelaCentral extends javax.swing.JFrame {
 
         ListLabelNVotos.setText("Total de Votos");
 
-        jLayeredPane6.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(ListLabelNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(ListLabelNumeroPartido, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(ListLabelCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(ListLabelNomePartido, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(ListLabelNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane6.setLayer(ListLabelNVotos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelResultado.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelResultado.setLayer(ListLabelNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelResultado.setLayer(ListLabelNumeroPartido, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelResultado.setLayer(ListLabelCPF, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelResultado.setLayer(ListLabelNomePartido, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelResultado.setLayer(ListLabelNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelResultado.setLayer(ListLabelNVotos, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        javax.swing.GroupLayout jLayeredPane6Layout = new javax.swing.GroupLayout(jLayeredPane6);
-        jLayeredPane6.setLayout(jLayeredPane6Layout);
-        jLayeredPane6Layout.setHorizontalGroup(
-            jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane6Layout.createSequentialGroup()
+        javax.swing.GroupLayout PanelResultadoLayout = new javax.swing.GroupLayout(PanelResultado);
+        PanelResultado.setLayout(PanelResultadoLayout);
+        PanelResultadoLayout.setHorizontalGroup(
+            PanelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelResultadoLayout.createSequentialGroup()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
-                .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane6Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PanelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelResultadoLayout.createSequentialGroup()
+                        .addGroup(PanelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ListLabelCPF)
                             .addComponent(ListLabelNumero))
                         .addGap(216, 216, 216))
-                    .addGroup(jLayeredPane6Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelResultadoLayout.createSequentialGroup()
+                        .addGroup(PanelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ListLabelNome)
                             .addComponent(ListLabelNomePartido)
                             .addComponent(ListLabelNumeroPartido)
                             .addComponent(ListLabelNVotos))
                         .addContainerGap())))
         );
-        jLayeredPane6Layout.setVerticalGroup(
-            jLayeredPane6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        PanelResultadoLayout.setVerticalGroup(
+            PanelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
-            .addGroup(jLayeredPane6Layout.createSequentialGroup()
+            .addGroup(PanelResultadoLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(ListLabelNome)
                 .addGap(18, 18, 18)
@@ -647,48 +568,66 @@ public class TelaCentral extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Lista Candidatos com numero de Votos", jLayeredPane6);
+        Panel.addTab("Lista Candidatos com numero de Votos", PanelResultado);
 
-        jLabel11.setText("Pegar o Maio numero de nVotos depois pegar o indice que tem o numero e depois mostrar os candidados de indice x");
+        PanelVencedor.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                PanelVencedorComponentShown(evt);
+            }
+        });
 
-        jLayeredPane9.setLayer(jLabel11, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        resultadoTxt.setText("Vencedor?");
 
-        javax.swing.GroupLayout jLayeredPane9Layout = new javax.swing.GroupLayout(jLayeredPane9);
-        jLayeredPane9.setLayout(jLayeredPane9Layout);
-        jLayeredPane9Layout.setHorizontalGroup(
-            jLayeredPane9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane9Layout.createSequentialGroup()
-                .addContainerGap(108, Short.MAX_VALUE)
-                .addComponent(jLabel11)
-                .addGap(65, 65, 65))
+        VencedorTxt.setEditable(false);
+        VencedorTxt.setColumns(20);
+        VencedorTxt.setRows(5);
+        jScrollPane1.setViewportView(VencedorTxt);
+
+        PanelVencedor.setLayer(resultadoTxt, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelVencedor.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout PanelVencedorLayout = new javax.swing.GroupLayout(PanelVencedor);
+        PanelVencedor.setLayout(PanelVencedorLayout);
+        PanelVencedorLayout.setHorizontalGroup(
+            PanelVencedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelVencedorLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addGroup(PanelVencedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelVencedorLayout.createSequentialGroup()
+                        .addComponent(resultadoTxt)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 763, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        jLayeredPane9Layout.setVerticalGroup(
-            jLayeredPane9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jLayeredPane9Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jLabel11)
-                .addContainerGap(437, Short.MAX_VALUE))
+        PanelVencedorLayout.setVerticalGroup(
+            PanelVencedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelVencedorLayout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addComponent(resultadoTxt)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Vencedor", jLayeredPane9);
+        Panel.addTab("Vencedor", PanelVencedor);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(Panel)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(Panel)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTabbedPane1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTabbedPane1AncestorAdded
+    private void PanelAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_PanelAncestorAdded
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTabbedPane1AncestorAdded
+    }//GEN-LAST:event_PanelAncestorAdded
 
     private void jList3ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList3ValueChanged
         int indice=jList3.getAnchorSelectionIndex();
@@ -853,6 +792,27 @@ public class TelaCentral extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_EleitorButaoCriarActionPerformed
 
+    private void PanelStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_PanelStateChanged
+
+      
+    }//GEN-LAST:event_PanelStateChanged
+
+    private void PanelVencedorComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_PanelVencedorComponentShown
+        int [] indiceVencedores = instancia.indiceVencedores();
+        if(indiceVencedores.length >1){
+            resultadoTxt.setText("Empatou entre :");
+            String vencedores="";
+            for (int i = 0; i < indiceVencedores.length; i++) {
+                vencedores+="\n"+instancia.CandidatoIndice(indiceVencedores[i]).getNome();       
+            }
+            VencedorTxt.setText(vencedores);    
+        }else{
+            resultadoTxt.setText("Vencedor foi:");
+            Candidato vencedor=instancia.CandidatoIndice(indiceVencedores[0]);
+            VencedorTxt.setText("\n"+vencedor.getNome());
+        }      
+    }//GEN-LAST:event_PanelVencedorComponentShown
+
     /**
      * @param args the command line arguments
      */
@@ -896,10 +856,6 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JTextField CandidatoCampoNome;
     private javax.swing.JTextField CandidatoCampoNumero;
     private javax.swing.JTextField CandidatoCampoPartido;
-    private javax.swing.JLabel CandidatoLabelCPF;
-    private javax.swing.JLabel CandidatoLabelNome1;
-    private javax.swing.JLabel CandidatoLabelNumero;
-    private javax.swing.JLabel CandidatoLabelPartido;
     private javax.swing.JToggleButton Carregar;
     private javax.swing.JLabel Eleitor;
     private javax.swing.JButton EleitorButaoCriar;
@@ -907,26 +863,27 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JTextField EleitorCampoNome;
     private javax.swing.JTextField EleitorCampoTitulo;
     private javax.swing.JTextField EleitorCampoUrna;
-    private javax.swing.JLabel EleitorLabelCPF;
-    private javax.swing.JLabel EleitorLabelNome;
-    private javax.swing.JLabel EleitorLabelTitulo;
-    private javax.swing.JLabel EleitorLabelUrna;
     private javax.swing.JLabel ListLabelCPF;
     private javax.swing.JLabel ListLabelNVotos;
     private javax.swing.JLabel ListLabelNome;
     private javax.swing.JLabel ListLabelNomePartido;
     private javax.swing.JLabel ListLabelNumero;
     private javax.swing.JLabel ListLabelNumeroPartido;
+    private javax.swing.JTabbedPane Panel;
+    private javax.swing.JLayeredPane PanelCandidato;
+    private javax.swing.JLayeredPane PanelEleitor;
+    private javax.swing.JLayeredPane PanelPartido;
+    private javax.swing.JLayeredPane PanelResultado;
+    private javax.swing.JLayeredPane PanelVencedor;
+    private javax.swing.JLayeredPane PanelVotos;
     private javax.swing.JLabel Partido;
     private javax.swing.JButton PartidoButaoCriar;
     private javax.swing.JTextField PartidoCampoNome;
     private javax.swing.JTextField PartidoCampoNumero;
-    private javax.swing.JLabel PartidoLabelNome;
-    private javax.swing.JLabel PartidoLabelNumero;
     private javax.swing.JTable Tabela;
+    private javax.swing.JTextArea VencedorTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
@@ -937,16 +894,11 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLayeredPane jLayeredPane3;
-    private javax.swing.JLayeredPane jLayeredPane5;
-    private javax.swing.JLayeredPane jLayeredPane6;
-    private javax.swing.JLayeredPane jLayeredPane7;
-    private javax.swing.JLayeredPane jLayeredPane8;
-    private javax.swing.JLayeredPane jLayeredPane9;
     private javax.swing.JList<String> jList3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel resultadoTxt;
     // End of variables declaration//GEN-END:variables
 }

@@ -126,13 +126,6 @@ public class Central {
 
     }
 
-    private void CalculaVotos() {
-        for (int i = 0; i < cDAO.getTotal(); i++) {//Pega a Quantidade de Votos de cada eleitor
-            nVotos[i] = vDAO.NVotosCandidato(cDAO.CandidatoIndice(i));
-            System.out.println(cDAO.CandidatoIndice(i).getNome() + " possui " + nVotos[i] + " votos");
-        };
-    }
-
     private String JsonResultado() {
         JSONObject json = new JSONObject();//Json que vai retornar
         JSONArray resultados = new JSONArray();//de Candidatos/Votos
@@ -361,6 +354,9 @@ public class Central {
     public Voto VotoIndice(int i) {
         return this.vDAO.VotoIndice(i);
     }
+     public Candidato CandidatoIndice(int i) {
+        return this.cDAO.CandidatoIndice(i);
+    }
 
     /**
      *
@@ -371,12 +367,49 @@ public class Central {
         return cDAO.getTotal();
     }
 
-    /**
-     * @param i Indice
-     * @return Retorna o voto presente em cDAO com indice 'i'
-     */
-    public Candidato CandidatoIndice(int i) {
-        return this.cDAO.CandidatoIndice(i);
+
+    private void CalculaVotos() {
+        for (int i = 0; i < cDAO.getTotal(); i++) {//Pega a Quantidade de Votos de cada eleitor
+            nVotos[i] = vDAO.NVotosCandidato(cDAO.CandidatoIndice(i));
+            System.out.println(cDAO.CandidatoIndice(i).getNome() + " possui " + nVotos[i] + " votos");
+        };
+    }
+    
+    public int[] indiceVencedores(){
+        Resultado();
+        //Muito Procesasmento Desnecessário porem não estou usando alocamento dinamico
+        int maior=nVotos[0];
+        int qtdRepeticoes=0;
+        for (int i = 1; i < nVotos.length; i++) {//Começa da segunda posição para evitar erro na qtd de repetição
+            if(nVotos[i]>=maior){
+                if(nVotos[i]>maior){
+                    maior=nVotos[i];
+                    qtdRepeticoes=0;
+                }else{
+                    qtdRepeticoes++;
+                }
+            }
+        } 
+        //So é necessario este for por não usar alocação dinamica
+        int[] indiceVencedores =null;
+        if(qtdRepeticoes==0){
+            indiceVencedores = new int[1];
+        }else{
+            indiceVencedores = new int[qtdRepeticoes];
+        }
+        int jaPreenchido=0;
+        for (int i = 0; i <  nVotos.length; i++) {
+            if(nVotos[i]==maior){
+                indiceVencedores[jaPreenchido]=i;
+                jaPreenchido++;
+            }
+            
+        }
+        for (int i = 0; i < jaPreenchido; i++) {
+            System.out.println(indiceVencedores[i]);
+            
+        }
+        return indiceVencedores;
     }
 
     public int nVotoIndice(int i) {

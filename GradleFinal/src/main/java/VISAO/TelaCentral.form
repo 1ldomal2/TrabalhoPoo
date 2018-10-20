@@ -40,24 +40,25 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
+          <Component id="Panel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
+          <Component id="Panel" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+    <Container class="javax.swing.JTabbedPane" name="Panel">
       <Events>
-        <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="jTabbedPane1AncestorAdded"/>
+        <EventHandler event="ancestorAdded" listener="javax.swing.event.AncestorListener" parameters="javax.swing.event.AncestorEvent" handler="PanelAncestorAdded"/>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="PanelStateChanged"/>
       </Events>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JLayeredPane" name="jLayeredPane3">
+        <Container class="javax.swing.JLayeredPane" name="PanelEleitor">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Eleitor">
@@ -84,19 +85,8 @@
                                   <Component id="EleitorCampoCPF" alignment="0" pref="373" max="32767" attributes="0"/>
                                   <Component id="Eleitor" alignment="0" min="-2" pref="294" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="EleitorLabelCPF" min="-2" max="-2" attributes="0"/>
-                                  <Component id="EleitorLabelUrna" min="-2" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="EleitorLabelNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                                          <Component id="EleitorLabelTitulo" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                                      <Component id="Carregar" min="-2" pref="171" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
+                              <Component id="Carregar" min="-2" pref="171" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="135" max="32767" attributes="0"/>
@@ -131,20 +121,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="EleitorCampoUrna" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="EleitorLabelNome" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="46" pref="46" max="-2" attributes="0"/>
-                                      <Component id="EleitorLabelTitulo" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="Carregar" min="-2" pref="74" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                              <Component id="EleitorLabelCPF" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="46" pref="46" max="-2" attributes="0"/>
-                              <Component id="EleitorLabelUrna" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="Carregar" min="-2" pref="74" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="Eleitor" min="-2" pref="83" max="-2" attributes="0"/>
@@ -174,11 +151,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EleitorCampoNomeActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="EleitorLabelNome">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Erro"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
@@ -216,21 +188,6 @@
                 <Property name="text" type="java.lang.String" value="Digite..."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="EleitorLabelTitulo">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Erro"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="EleitorLabelCPF">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Erro"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="EleitorLabelUrna">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Erro"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="Eleitor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dados Cadastrados"/>
@@ -246,7 +203,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JLayeredPane" name="jLayeredPane7">
+        <Container class="javax.swing.JLayeredPane" name="PanelCandidato">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Candidato">
@@ -262,27 +219,18 @@
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="CandidatoCampoNome" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CandidatoCampoNumero" alignment="0" pref="373" max="32767" attributes="0"/>
-                                  <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CandidatoCampoPartido" alignment="0" pref="373" max="32767" attributes="0"/>
-                                  <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CandidatoCampoCPF" alignment="0" pref="373" max="32767" attributes="0"/>
-                                  <Component id="Candidato" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="CandidatoLabelNome1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CandidatoLabelNumero" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CandidatoLabelCPF" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CandidatoLabelPartido" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="CandidatoCampoNome" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="CandidatoCampoNumero" alignment="0" pref="373" max="32767" attributes="0"/>
+                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="CandidatoCampoPartido" alignment="0" pref="373" max="32767" attributes="0"/>
+                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="CandidatoCampoCPF" alignment="0" pref="373" max="32767" attributes="0"/>
+                              <Component id="Candidato" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="424" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="477" max="32767" attributes="0"/>
@@ -298,32 +246,19 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="CandidatoCampoNome" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="CandidatoCampoNumero" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="CandidatoCampoCPF" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="CandidatoCampoPartido" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="CandidatoLabelNome1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="46" pref="46" max="-2" attributes="0"/>
-                              <Component id="CandidatoLabelNumero" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="46" pref="46" max="-2" attributes="0"/>
-                              <Component id="CandidatoLabelCPF" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="46" pref="46" max="-2" attributes="0"/>
-                              <Component id="CandidatoLabelPartido" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="CandidatoCampoNome" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CandidatoCampoNumero" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CandidatoCampoCPF" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="CandidatoCampoPartido" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="Candidato" min="-2" pref="83" max="-2" attributes="0"/>
                       <EmptySpace pref="129" max="32767" attributes="0"/>
@@ -348,11 +283,6 @@
             <Component class="javax.swing.JTextField" name="CandidatoCampoNome">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Digite..."/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="CandidatoLabelNome1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Erro"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
@@ -391,21 +321,6 @@
                 <Property name="text" type="java.lang.String" value="Digite..."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="CandidatoLabelNumero">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Erro"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="CandidatoLabelCPF">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Erro"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="CandidatoLabelPartido">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Erro"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="Candidato">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dados Cadastrados"/>
@@ -413,7 +328,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JLayeredPane" name="jLayeredPane8">
+        <Container class="javax.swing.JLayeredPane" name="PanelPartido">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Partido">
@@ -429,21 +344,14 @@
                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="PartidoCampoNome" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="PartidoCampoNumero" alignment="0" pref="373" max="32767" attributes="0"/>
-                                  <Component id="Partido" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="PartidoLabelNome" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="PartidoLabelNumero" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="PartidoCampoNome" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel14" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="PartidoCampoNumero" alignment="0" pref="373" max="32767" attributes="0"/>
+                              <Component id="Partido" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="424" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="477" max="32767" attributes="0"/>
@@ -459,23 +367,14 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="PartidoCampoNome" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="PartidoCampoNumero" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="PartidoLabelNome" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="46" pref="46" max="-2" attributes="0"/>
-                              <Component id="PartidoLabelNumero" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
+                      <Component id="PartidoCampoNome" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="PartidoCampoNumero" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="Partido" min="-2" pref="83" max="-2" attributes="0"/>
-                      <EmptySpace pref="248" max="32767" attributes="0"/>
+                      <EmptySpace pref="255" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -499,11 +398,6 @@
                 <Property name="text" type="java.lang.String" value="Digite..."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="PartidoLabelNome">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Erro"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel14">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Numero Partido"/>
@@ -517,11 +411,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PartidoCampoNumeroActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="PartidoLabelNumero">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Erro"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="Partido">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dados Cadastrados"/>
@@ -529,7 +418,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JLayeredPane" name="jLayeredPane5">
+        <Container class="javax.swing.JLayeredPane" name="PanelVotos">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Tabela de Votos">
@@ -546,7 +435,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane3" alignment="0" pref="516" max="32767" attributes="0"/>
+                  <Component id="jScrollPane3" alignment="0" pref="533" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -595,7 +484,7 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JLayeredPane" name="jLayeredPane6">
+        <Container class="javax.swing.JLayeredPane" name="PanelResultado">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Lista Candidatos com numero de Votos">
@@ -713,7 +602,10 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JLayeredPane" name="jLayeredPane9">
+        <Container class="javax.swing.JLayeredPane" name="PanelVencedor">
+          <Events>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="PanelVencedorComponentShown"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Vencedor">
@@ -725,29 +617,53 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="108" max="32767" attributes="0"/>
-                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="resultadoTxt" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jScrollPane1" pref="763" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="437" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                      <Component id="resultadoTxt" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" pref="387" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel11">
+            <Component class="javax.swing.JLabel" name="resultadoTxt">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pegar o Maio numero de nVotos depois pegar o indice que tem o numero e depois mostrar os candidados de indice x"/>
+                <Property name="text" type="java.lang.String" value="Vencedor?"/>
               </Properties>
             </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTextArea" name="VencedorTxt">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="columns" type="int" value="20"/>
+                    <Property name="rows" type="int" value="5"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>
