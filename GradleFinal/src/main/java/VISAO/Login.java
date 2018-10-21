@@ -186,7 +186,7 @@ public class Login extends javax.swing.JFrame {
 			Eleitor elei=inst.Login(TextoCaminho.getText());
 			//Se for igual chama Console.Urna
 			if (elei != null) {
-				new ConsoleUrna(this,vDAO,elei,elei.getUrnaVotacao()).setVisible(true);
+//				new ConsoleUrna(this,vDAO,elei,elei.getUrnaVotacao()).setVisible(true);
 				this.setVisible(false);
 				System.out.println("\n\n\n"+vDAO.makeJson());
 			} else {

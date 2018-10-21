@@ -9,6 +9,7 @@ import MODELO.Candidato;
 import MODELO.Eleitor;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import javax.swing.JOptionPane;
 
 public class Urna {
 	private static int TotalUrnas=0;
@@ -19,17 +20,23 @@ public class Urna {
 	private PartidoDAO ArrayPartido=new PartidoDAO();
 	//Questoes de segurança
 	private boolean Logado=false;
+        private boolean TelaVisivel=false;
 	private Eleitor User=null;
 	
-	
+	public boolean getLogado(){
+            return this.Logado;
+        }
+        public boolean getTelaVisivel(){
+            return this.TelaVisivel;
+        }
+        public void setTelaVisivel(boolean arg){
+            this.TelaVisivel= arg;
+        }
 	public static int getTotalUrnas() {
 		return TotalUrnas;
 	}
 	public int getNumero() {
 		return Numero;
-	}
-	public boolean getLogado() {
-		return this.Logado;
 	}
 	public Urna() {
 		TotalUrnas++;
@@ -37,17 +44,15 @@ public class Urna {
 	}
 	public void Receive() {
 	//Pega DO GOOGLE dRIVE
-		System.out.println("Carregou Candidatos");
-		ArrayCandidato.Receive();
-		
-		System.out.println("Carregou Eleitores");
-		ArrayEleitor.Receive();
-
-		System.out.println("Carregou Partidos");
-		ArrayPartido.Receive();
-		
-		System.out.println("Carregou Votos");
-		ArrayVoto.Receive();
+            try{
+                ArrayPartido.Receive();
+               //Partido tem que vir antes de Candidato
+                ArrayCandidato.Receive();
+                ArrayEleitor.Receive();
+                ArrayVoto.Receive();//Voto tem que vir depois de eleitor e de candidato
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "Erro Ao Baixar do Drive,Verifique sua Conexão");
+            }
 	}
 	public void Send() {
 		//MANDA PARA O GOOGLE DRIVE

@@ -1,50 +1,36 @@
 package VISAO;
 
-import java.text.ParseException;
-import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import javax.swing.text.MaskFormatter;
-import javax.swing.ImageIcon;
-
 import DAO.CandidatoDAO;
 import DAO.VotoDAO;
 import MODELO.Candidato;
 import MODELO.Eleitor;
+import URNA.Urna;
 
 /**
  *
  * @author cambraia
  */
 public class ConsoleUrna extends javax.swing.JFrame {
-	private CandidatoDAO ArrayCandidato = null;
-	private VotoDAO vDAO = null;
-	private Eleitor User = null;
 	private int nUrna = 0;
-	private Login TelaLogin = null;
+	private Urna instancia = null;
+        private Eleitor User = null;
 
 	public ConsoleUrna() {
 		initComponents();
-		Confirma.setEnabled(false);
-
-		// Receive Google Drive os Candidatos que podem ser votados
-		ArrayCandidato = new CandidatoDAO();
-		ArrayCandidato.Receive();
 	}
 
-	public ConsoleUrna(Login TelaLogin, VotoDAO vDAO, Eleitor User, int nUrna) {
-		//Argumentos
-		this.vDAO = vDAO;//Armazena os votos de todas as Urnas
-		this.TelaLogin = TelaLogin;//Usado para voltar para a janela
-		this.nUrna = nUrna;//Qual o numero da Urna Criada
+	public ConsoleUrna(Urna instancia,Eleitor User, int nUrna) {
+	
+                //Argumentos
+		this.instancia=instancia;
+                this.nUrna = nUrna;//Qual o numero da Urna Criada
 		this.User = User;//Quem esta votando
 		
 		//Iniciando Tela
 		initComponents();
+                
 		Confirma.setEnabled(false);
-
-		// Receive Google Drive os Candidatos que podem ser votados
-		ArrayCandidato = new CandidatoDAO();
-		ArrayCandidato.Receive();
+                this.setVisible(true);
 
 	}
 
@@ -492,7 +478,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
 	private void BotaoBrancoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BotaoBrancoActionPerformed
 		// TODO add your handling code here:
 		// LUCAS CRIA VOTO BRANCO
-		new Login().setVisible(true);
+		new TelaLogin().setVisible(true);
 		this.dispose();
 	}// GEN-LAST:event_BotaoBrancoActionPerformed
 	/**/
