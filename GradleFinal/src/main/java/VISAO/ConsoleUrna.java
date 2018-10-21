@@ -288,7 +288,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
 	private Candidato MostraCandidato() {
 		if (CampoCandidato.getText().length() == 5) {
 			// Pega Numero do terminal e pesquisa se há algum candidato com esse numero
-			Candidato cand = ArrayCandidato.ObjectNumero(CampoCandidato.getText());
+			Candidato cand = instancia.ProcuraCandidato(CampoCandidato.getText());
 			if (cand == null) {// Nao há nimguem com esse numero
 				jLabel3.setText("Nome Candidato");
 				jLabel2.setText("Numero Partido");
@@ -456,13 +456,14 @@ public class ConsoleUrna extends javax.swing.JFrame {
 		Candidato cand = MostraCandidato();
 		if(cand != null) {
 			System.out.println("Voto Valido");
-			vDAO.CriarVoto(User, cand, nUrna);
+			instancia.Votar(User, cand, nUrna);
 		}else {//Voto Nulo
 			System.out.println("Voto Invalido");
-			vDAO.CriarVoto(User, null, nUrna);
+			instancia.Votar(User, null, nUrna);
+                        
 		}
-
-		this.TelaLogin.setVisible(true);
+                instancia.Send();
+		instancia.Deslogar();
 		this.dispose();
 	}// GEN-LAST:event_ConfirmaActionPerformed
 

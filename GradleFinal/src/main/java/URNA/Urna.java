@@ -89,7 +89,7 @@ public class Urna {
 	}
 	
 	//Cria o Voto
-	public boolean Votar(Candidato candidato) {//Ao votar vc desloga
+	public boolean Votar(Eleitor User,Candidato candidato,int nUrna) {//Ao votar vc desloga
 		if(Logado==false) {
 			System.out.println("Não é possivel Votar sem estar Logado");
 			System.out.println("Flag Logado=False");
@@ -100,10 +100,12 @@ public class Urna {
 			System.out.println("User=NULL");
 			return false;
 		}
-			this.ArrayVoto.CriarVoto(this.User,candidato,this.Numero);//Criou o voto e armazenou no Array da urna
+			this.ArrayVoto.CriarVoto(User,candidato,nUrna);//Criou o voto e armazenou no Array da urna
 			Deslogar();
 			return true;
-	
-		
 	}
+        public Candidato ProcuraCandidato(String NumeroCandidato){
+            Candidato candidato = ArrayCandidato.ObjectNumero(NumeroCandidato);
+            return candidato;
+        }
 }
