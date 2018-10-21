@@ -20,17 +20,18 @@ public class ConsoleUrna extends javax.swing.JFrame {
 	}
 
 	public ConsoleUrna(Urna instancia,Eleitor User, int nUrna) {
-	
+  System.out.println("1");	
                 //Argumentos
 		this.instancia=instancia;
                 this.nUrna = nUrna;//Qual o numero da Urna Criada
 		this.User = User;//Quem esta votando
-		
+System.out.println("2");		
 		//Iniciando Tela
 		initComponents();
-                
+ System.out.println("3");               
 		Confirma.setEnabled(false);
                 this.setVisible(true);
+ System.out.println("4");
 
 	}
 

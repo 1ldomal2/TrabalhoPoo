@@ -124,12 +124,6 @@ public class TelaLogin extends javax.swing.JFrame {
 			String caminho = file.getAbsolutePath();
 			TextPath.setText(caminho);
 		}	
-       
-       
-       instancia.setTelaVisivel(false);
-       System.out.println("Fechou");
-       this.setVisible(false);
-       this.dispose();
     }//GEN-LAST:event_ButtonCarregarActionPerformed
 
     private void ButtonLogarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLogarActionPerformed
@@ -141,22 +135,14 @@ public class TelaLogin extends javax.swing.JFrame {
 			// Verifica se a senha é igual
 			System.out.println("Verificando a Senha");
 			Eleitor elei=instancia.Login(TextPath.getText());
+                        
 			//Se for igual chama Console.Urna
 			if (elei != null) {
                             new ConsoleUrna(instancia,elei,elei.getUrnaVotacao());
                             instancia.setTelaVisivel(false);
                             System.out.println("Fechou");
                             this.setVisible(false);
-                            this.dispose();
-
-
-
-
-
-
-
-                    this.setVisible(false);
-                                
+                            this.dispose();                                
 			} else {
 				JOptionPane.showMessageDialog(this, "Senha Incorreta");
 			}

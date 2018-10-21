@@ -26,7 +26,7 @@ public class Main {
                             continue;
                         }
                     }catch(Exception evt){
-                        System.out.println("Erro no if");
+                        System.out.println("BUG");
                          ins=new TelaLogin(instancia);
                     }
                 }

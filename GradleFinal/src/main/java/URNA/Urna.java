@@ -59,7 +59,10 @@ public class Urna {
 		
 	}
 	public Eleitor Login(String Path){//Logar deixa salvo o eleitor
-		
+		if(ArrayEleitor.getTotal()==0){
+                    JOptionPane.showMessageDialog(null,"Não existe Eleitor Cadastrado");
+                    return null;
+                }
 		System.out.println("Transformando a Img em Hash");
 		Senha psw=null;
 		try {
