@@ -186,6 +186,10 @@ public class Urna {
     }
 
     public Candidato ProcuraCandidato(String NumeroCandidato) {
+        if(ArrayCandidato.getTotal()==0){
+            JOptionPane.showMessageDialog(null, "Não existe Candidato cadastrado ou você esta sem internet");
+            return null;
+        }
         Candidato candidato = ArrayCandidato.ObjectNumero(NumeroCandidato);
         return candidato;
     }

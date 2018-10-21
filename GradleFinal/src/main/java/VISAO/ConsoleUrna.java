@@ -20,18 +20,14 @@ public class ConsoleUrna extends javax.swing.JFrame {
 	}
 
 	public ConsoleUrna(Urna instancia,Eleitor User, int nUrna) {
-  System.out.println("1");	
                 //Argumentos
 		this.instancia=instancia;
                 this.nUrna = nUrna;//Qual o numero da Urna Criada
-		this.User = User;//Quem esta votando
-System.out.println("Logado ="+User.getNome());		
+		this.User = User;//Quem esta votando	
 		//Iniciando Tela
 		initComponents();
- System.out.println("3");               
 		Confirma.setEnabled(false);
                 this.setVisible(true);
- System.out.println("4");
 
 	}
 
@@ -208,7 +204,7 @@ System.out.println("Logado ="+User.getNome());
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton0, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BotaoBranco, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(BotaoBranco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -283,6 +279,7 @@ System.out.println("Logado ="+User.getNome());
 	private Candidato MostraCandidato() {
 		if (CampoCandidato.getText().length() == 5) {
 			// Pega Numero do terminal e pesquisa se há algum candidato com esse numero
+                        
 			Candidato cand = instancia.ProcuraCandidato(CampoCandidato.getText());
 			if (cand == null) {// Nao há nimguem com esse numero
 				jLabel3.setText("Nome Candidato");
