@@ -92,7 +92,7 @@ public class Central {
             System.out.println("Apagou Arquivo Anterior");
             //Envia o Arquivopara o Drive
             drive.Upload(conexao, Nome, Path);
-            System.out.println("Arquivo Apagado");
+            System.out.println("Arquivo Enviado");
             return true;
         } catch (Exception ex) {
             return false;
