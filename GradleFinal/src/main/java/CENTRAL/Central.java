@@ -39,15 +39,15 @@ public class Central {
         this.vDAO = new VotoDAO();
 
         //Carrega Dados Da ultima seção 
-       try{
+        try {
             pDAO.Receive();
-           //Partido tem que vir antes de Candidato
+            //Partido tem que vir antes de Candidato
             cDAO.Receive();
             eDAO.Receive();
             vDAO.Receive();//Voto tem que vir depois de eleitor e de candidato
-       }catch(Exception e){
-           JOptionPane.showMessageDialog(null, "Erro Ao Baixar do Drive,Verifique sua Conexão");
-       }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro Ao Baixar do Drive,Verifique sua Conexão");
+        }
         nVotos = new int[50];
         //Cria com 50 mas nao usa Todos
 
@@ -59,13 +59,14 @@ public class Central {
 
     /**
      * Envia um Arquivo para o google Drive
-     *@param Nome Nome do Arquivo
+     *
+     * @param Nome Nome do Arquivo
      * @param Path - Caminho para Salvar
      * @return Arquivo .json com todos os dados
      */
-    public boolean Send(){
-        String Path="./Eleicao.json";
-        String Nome="Eleicao.json";
+    public boolean Send() {
+        String Path = "./Eleicao.json";
+        String Nome = "Eleicao.json";
         //Salva os Arquivos
         //Cria um arquivo
         FileWriter arq;
@@ -73,7 +74,7 @@ public class Central {
             arq = new FileWriter(Path);
             PrintWriter gravarArq = new PrintWriter(arq);//Objeto buffer
 
-            String Json =makeJson();//Convertendo tudo para string
+            String Json = makeJson();//Convertendo tudo para string
 
             gravarArq.printf(Json);
             arq.close();
@@ -81,9 +82,9 @@ public class Central {
             e1.printStackTrace();
             JOptionPane.showInternalMessageDialog(null, "Erro Ao criar Arquivo");
         }
-       
+
         Quickstart drive = new Quickstart();
-        Drive conexao=null;
+        Drive conexao = null;
         try {
             //conecta ao Drive
             conexao = drive.Conexao();
@@ -97,9 +98,7 @@ public class Central {
         } catch (Exception ex) {
             return false;
         }
-        
-      
-       
+
     }
 
     /**
@@ -113,6 +112,10 @@ public class Central {
 
     }
 
+    /**
+     *
+     * @return Json referente ao resutlado da votação
+     */
     private String JsonResultado() {
         JSONObject json = new JSONObject();//Json que vai retornar
         JSONArray resultados = new JSONArray();//de Candidatos/Votos
@@ -341,7 +344,8 @@ public class Central {
     public Voto VotoIndice(int i) {
         return this.vDAO.VotoIndice(i);
     }
-     public Candidato CandidatoIndice(int i) {
+
+    public Candidato CandidatoIndice(int i) {
         return this.cDAO.CandidatoIndice(i);
     }
 
@@ -354,80 +358,92 @@ public class Central {
         return cDAO.getTotal();
     }
 
-
+    /**
+     * Calcula a quantidade de voto de cada eleitor
+     */
     private void CalculaVotos() {
         for (int i = 0; i < cDAO.getTotal(); i++) {//Pega a Quantidade de Votos de cada eleitor
             nVotos[i] = vDAO.NVotosCandidato(cDAO.CandidatoIndice(i));
             System.out.println(cDAO.CandidatoIndice(i).getNome() + " possui " + nVotos[i] + " votos");
         };
     }
-    
-    public int[] indiceVencedores(){
+
+    /**
+     *
+     * @return Ventor de inteiros com os indices dos vencedores
+     */
+    public int[] indiceVencedores() {
         Resultado();
         //Muito Procesasmento Desnecessário porem não estou usando alocamento dinamico
-        int maior=nVotos[0];
-        int qtdRepeticoes=0;
+        int maior = nVotos[0];
+        int qtdRepeticoes = 0;
         for (int i = 1; i < nVotos.length; i++) {//Começa da segunda posição para evitar erro na qtd de repetição
-            if(nVotos[i]>=maior){
-                if(nVotos[i]>maior){
-                    maior=nVotos[i];
-                    qtdRepeticoes=0;
-                }else{
+            if (nVotos[i] >= maior) {
+                if (nVotos[i] > maior) {
+                    maior = nVotos[i];
+                    qtdRepeticoes = 0;
+                } else {
                     qtdRepeticoes++;
                 }
             }
-        } 
+        }
         //So é necessario este for por não usar alocação dinamica
-        int[] indiceVencedores =null;
-        if(qtdRepeticoes==0){
+        int[] indiceVencedores = null;
+        if (qtdRepeticoes == 0) {
             indiceVencedores = new int[1];
-        }else{
+        } else {
             indiceVencedores = new int[qtdRepeticoes];
         }
-        int jaPreenchido=0;
-        for (int i = 0; i <  nVotos.length; i++) {
-            if(nVotos[i]==maior){
-                indiceVencedores[jaPreenchido]=i;
+        int jaPreenchido = 0;
+        for (int i = 0; i < nVotos.length; i++) {
+            if (nVotos[i] == maior) {
+                indiceVencedores[jaPreenchido] = i;
                 jaPreenchido++;
             }
-            
+
         }
         for (int i = 0; i < jaPreenchido; i++) {
             System.out.println(indiceVencedores[i]);
-            
+
         }
         return indiceVencedores;
     }
 
+    /**
+     * Retorna o numero de votos do candidato de indice 'i'
+     *
+     * @param i Indice
+     * @return numero de votos que o Candidato[i] ganhou
+     */
     public int nVotoIndice(int i) {
         return nVotos[i];
     }
-    
+
     /**
-	 * 
-	 * @return Json com todos os Dados DAO
-	 */
-	public String makeJson() {
-		System.out.println("Criado Json Geral");
-		JSONObject json=new JSONObject();//Superior
-		
-		JSONObject cJson=new JSONObject(cDAO.makeJson());
-		JSONArray jsonCandidato = cJson.getJSONArray("Candidato");//Quebra o Json no Vetor
-		
-		JSONObject eJson=new JSONObject(eDAO.makeJson());
-		JSONArray jsonEleitor = eJson.getJSONArray("Eleitor");//Quebra o Json no Vetor
-		
-		JSONObject pJson=new JSONObject(pDAO.makeJson());
-		JSONArray jsonPartido = pJson.getJSONArray("Partido");//Quebra o Json no Vetor
-		
-		JSONObject vJson=new JSONObject(vDAO.makeJson());
-		JSONArray jsonVoto = vJson.getJSONArray("Voto");//Quebra o Json no Vetor
-		
-		json.put("Candidato", jsonCandidato);
-		json.put("Eleitor", jsonEleitor);
-		json.put("Partido", jsonPartido);
-		json.put("Voto", jsonVoto);
-		return json.toString();
-	}
+     *
+     * @return Json com todos os Dados DAO
+     */
+    public String makeJson() {
+        System.out.println("Criado Json Geral");
+        JSONObject json = new JSONObject();//Superior
+
+        JSONObject cJson = new JSONObject(cDAO.makeJson());
+        JSONArray jsonCandidato = cJson.getJSONArray("Candidato");//Quebra o Json no Vetor
+
+        JSONObject eJson = new JSONObject(eDAO.makeJson());
+        JSONArray jsonEleitor = eJson.getJSONArray("Eleitor");//Quebra o Json no Vetor
+
+        JSONObject pJson = new JSONObject(pDAO.makeJson());
+        JSONArray jsonPartido = pJson.getJSONArray("Partido");//Quebra o Json no Vetor
+
+        JSONObject vJson = new JSONObject(vDAO.makeJson());
+        JSONArray jsonVoto = vJson.getJSONArray("Voto");//Quebra o Json no Vetor
+
+        json.put("Candidato", jsonCandidato);
+        json.put("Eleitor", jsonEleitor);
+        json.put("Partido", jsonPartido);
+        json.put("Voto", jsonVoto);
+        return json.toString();
+    }
     //Ver quem ganho retornar maior numero do vetor
 }
