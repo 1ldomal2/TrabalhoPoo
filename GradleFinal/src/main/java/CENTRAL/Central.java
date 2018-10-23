@@ -387,6 +387,9 @@ public class Central {
                 }
             }
         }
+        if(maior==0){//Significa que o vetor de votos está vazio
+            return null;
+        }
         //So é necessario este for por não usar alocação dinamica
         int[] indiceVencedores = null;
         if (qtdRepeticoes == 0) {
@@ -394,6 +397,7 @@ public class Central {
         } else {
             indiceVencedores = new int[qtdRepeticoes];
         }
+        
         int jaPreenchido = 0;
         for (int i = 0; i < nVotos.length; i++) {
             if (nVotos[i] == maior) {

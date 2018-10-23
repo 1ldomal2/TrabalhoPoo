@@ -799,6 +799,9 @@ public class TelaCentral extends javax.swing.JFrame {
 
     private void PanelVencedorComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_PanelVencedorComponentShown
         int [] indiceVencedores = instancia.indiceVencedores();
+        if(indiceVencedores==null){
+            return;
+        }
         if(indiceVencedores.length >1){
             resultadoTxt.setText("Empatou entre :");
             String vencedores="";
