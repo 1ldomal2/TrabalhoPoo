@@ -470,8 +470,10 @@ public class ConsoleUrna extends javax.swing.JFrame {
 
 	private void BotaoBrancoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BotaoBrancoActionPerformed
 		// TODO add your handling code here:
-		// LUCAS CRIA VOTO BRANCO
-		new TelaLogin().setVisible(true);
+		// Voto em branco não é contabilizado nem armazenado
+                System.out.println("Voto não contabilizado");
+                instancia.Deslogar();
+                new TelaLogin(instancia).setVisible(true);
 		this.dispose();
 	}// GEN-LAST:event_BotaoBrancoActionPerformed
 	/**/

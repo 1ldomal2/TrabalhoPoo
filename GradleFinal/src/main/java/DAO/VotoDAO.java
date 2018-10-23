@@ -78,8 +78,6 @@ public class VotoDAO extends DAO {
 	 * @return String - contendo o Json de "this.Array"
 	 * */
 	public String makeJson() {
-		System.out.println("Criando Json");
-		System.out.println(Total);
 		JSONObject json=new JSONObject();//Superior
 		JSONArray votos=new JSONArray();
 		JSONObject[] voto=new JSONObject[Total];//Superior
@@ -196,6 +194,10 @@ public class VotoDAO extends DAO {
 		}
 		return nVotos;
 	}
+        /**
+         * @param i Indice
+         * @return Voto
+         */
         public Voto VotoIndice(int i){
             return Array[i];
     }

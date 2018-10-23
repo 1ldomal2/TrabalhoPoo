@@ -37,7 +37,7 @@ public class Urna {
     public boolean getTelaVisivel() {
         return this.TelaVisivel;
     }
-
+    
     public void setTelaVisivel(boolean arg) {
         this.TelaVisivel = arg;
     }
@@ -46,15 +46,22 @@ public class Urna {
         return TotalUrnas;
     }
 
+    /**
+     * 
+     * @return Numero da Urna instanciada
+     */
     public int getNumero() {
         return Numero;
     }
-
+    
     public Urna() {
         TotalUrnas++;
         Numero = TotalUrnas;
     }
 
+    /**
+     * Pega os dados da Nuvem
+     */
     public void Receive() {
         //Pega DO GOOGLE dRIVE
         try {
@@ -67,8 +74,13 @@ public class Urna {
             JOptionPane.showMessageDialog(null, "Erro Ao Baixar do Drive,Verifique sua Conexão");
         }
     }
-
+    
+    /**
+     * Envia os dados para a nuuvem
+     * @return 
+     */
     public boolean Send() {
+        System.out.println("Enviando Arquivos...");
         String Path = "./Eleicao.json";
         String Nome = "Eleicao.json";
 
@@ -82,9 +94,8 @@ public class Urna {
             String Json = makeJson();//Convertendo tudo para string
             gravarArq.printf(Json);
             arq.close();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-            JOptionPane.showInternalMessageDialog(null, "Erro Ao criar Arquivo");
+        } catch (Exception e1) {
+            JOptionPane.showInternalMessageDialog(null,"Erro Ao criar Arquivo");
         }
 
         Quickstart drive = new Quickstart();
@@ -100,28 +111,32 @@ public class Urna {
             System.out.println("Arquivo Enviado");
             return true;
         } catch (Exception ex) {
+            System.out.println("Erro ao conectar no Drive");
             return false;
         }
 
     }
-    
-     /**
-	 * 
-	 * @return Json com todos os Dados DAO
-	 */
+    /**
+     * Cria um Json com todo o conteudo da Urna
+     * @return Json
+     */
 	public String makeJson() {
 		System.out.println("Criado Json Geral");
 		JSONObject json=new JSONObject();//Superior
 		
+                System.out.println("Json Candidato...");
 		JSONObject cJson=new JSONObject(ArrayCandidato.makeJson());
 		JSONArray jsonCandidato = cJson.getJSONArray("Candidato");//Quebra o Json no Vetor
 		
+                System.out.println("Json Eleitor...");
 		JSONObject eJson=new JSONObject(ArrayEleitor.makeJson());
 		JSONArray jsonEleitor = eJson.getJSONArray("Eleitor");//Quebra o Json no Vetor
 		
+                System.out.println("Json Partido...");
 		JSONObject pJson=new JSONObject(ArrayPartido.makeJson());
 		JSONArray jsonPartido = pJson.getJSONArray("Partido");//Quebra o Json no Vetor
 		
+                System.out.println("Json Voto...");
 		JSONObject vJson=new JSONObject(ArrayVoto.makeJson());
 		JSONArray jsonVoto = vJson.getJSONArray("Voto");//Quebra o Json no Vetor
 		
@@ -129,20 +144,26 @@ public class Urna {
 		json.put("Eleitor", jsonEleitor);
 		json.put("Partido", jsonPartido);
 		json.put("Voto", jsonVoto);
+                System.out.println("Json ok");
 		return json.toString();
 	}
-
+    /**
+     *  Faz login pelo arquivo passado
+     * @param Path Caminho da Foto
+     * @return Eleitor que Acabou de Logar
+     */
     public Eleitor Login(String Path) {//Logar deixa salvo o eleitor
         if (ArrayEleitor.getTotal() == 0) {
             JOptionPane.showMessageDialog(null, "Não existe Eleitor Cadastrado");
             return null;
         }
-        System.out.println("Transformando a Img em Hash");
         Senha psw = null;
         try {
+            System.out.println("Transformando a Img em Hash");
             psw = new Senha(Path);
         } catch (NoSuchAlgorithmException | IOException e) {
-            e.printStackTrace();
+             System.out.println("Erro na geração do Hash");
+             return null;
         }//Transforma a Img em Hash
 
         String hash = psw.getHash();//Salvo a Hash
@@ -161,30 +182,56 @@ public class Urna {
         this.User = eleitor;//Switch on
         return eleitor;
     }
-
+    /**
+     * Desloga da Urna
+     */
     public void Deslogar() {
         this.Logado = false;//Ter um controle de segurança
         this.User = null;//switch off
+        this.TelaVisivel=false;
         System.out.println("Deslogado");
     }
 
-    //Cria o Voto
+    /**
+     * @param User Usuario que irá votar
+     * @param candidato Usuario que está recebendo o voto
+     * @param nUrna Numero da urna que ocorreu a votação
+     * @return Se foi possivel criar o voto
+     */
     public boolean Votar(Eleitor User, Candidato candidato, int nUrna) {//Ao votar vc desloga
         if (Logado == false) {
             System.out.println("Não é possivel Votar sem estar Logado");
             System.out.println("Flag Logado=False");
+            Deslogar();
             return false;
         }
         if (this.User == null) {
             System.out.println("Não é possivel Votar sem estar Logado");
             System.out.println("User=NULL");
+            Deslogar();
             return false;
         }
-        this.ArrayVoto.CriarVoto(User, candidato, nUrna);//Criou o voto e armazenou no Array da urna
-        Deslogar();
+        try{
+            this.ArrayVoto.CriarVoto(User, candidato, nUrna);//Criou o voto e armazenou no Array da urna
+            try{ 
+                this.Send();
+            }catch(Exception e){
+                System.out.println("ERRO Urna VOTAR");
+                Deslogar();
+                return false;
+            }
+        }catch(Exception e){
+            Deslogar();
+            return false;
+        }
         return true;
     }
 
+    /**
+     * 
+     * @param NumeroCandidato Numero do candidato
+     * @return Retorna o candidato com o numero passado por argumento
+     */
     public Candidato ProcuraCandidato(String NumeroCandidato) {
         if(ArrayCandidato.getTotal()==0){
             JOptionPane.showMessageDialog(null, "Não existe Candidato cadastrado ou você esta sem internet");

@@ -71,8 +71,12 @@ public class Voto {
 	}
 	
 	public Voto(Eleitor eleitor,Candidato candidato,int NumeroUrna) {
-		this.eleitor=eleitor;
-		this.candidato=candidato;
+                if(candidato==null){
+                    this.candidato=new Candidato("Nulo", "00000", "00000000000","0", "Nulo");
+                }else{
+                    this.candidato=candidato;
+                }
+                this.eleitor=eleitor;
 		this.NumeroUrna=NumeroUrna;
 		data=new Date();
 	}

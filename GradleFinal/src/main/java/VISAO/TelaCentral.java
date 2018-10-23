@@ -194,7 +194,7 @@ public class TelaCentral extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Titulo de Eleito");
+        jLabel3.setText("Titulo de Eleitor");
 
         EleitorCampoTitulo.setText("Digite...");
         EleitorCampoTitulo.addActionListener(new java.awt.event.ActionListener() {

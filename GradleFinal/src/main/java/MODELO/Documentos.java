@@ -54,6 +54,7 @@ public class Documentos {
 		//Verifica a quantidade de caracteres
 		int indice=0;
 		if(!(tamanho==14 || tamanho==11)) {
+                        System.out.println("Cpf veio com "+cpf.length()+" caracteres");
 			validCpf=false;
 			return false;
 			//Sem pontuação tamanho é 11 digitos

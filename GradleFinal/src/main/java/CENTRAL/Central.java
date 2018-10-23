@@ -101,33 +101,6 @@ public class Central {
       
        
     }
-    /**
-     * @param Path Caminho do
-     * @return 
-   
-    public String Receive(String Path) {
-        
-        //Abre o Arquivo localizado em $Path
-        FileReader arq = null;
-        try {
-            System.out.println("Abrindo " + Path);
-            arq = new FileReader(Path);
-            BufferedReader lerArq = new BufferedReader(arq);
-            String conteudoArq = "";
-            //Passa do Arquivo para uma unica String
-            while (arq.ready()) {
-                conteudoArq += lerArq.readLine();
-            }
-            //Fecha Arquivo
-            arq.close();
-            return conteudoArq;
-        } catch (IOException e1) {
-            System.out.println("Arquivo não encontrado");
-            JOptionPane.showMessageDialog(null, "Erro ao Abrir Arquivo");
-            return null;
-        }
-    }
-    */
 
     /**
      * Retorna uma string {Nome:"Candidato",Eleitor:"NumeroDeVotos"}

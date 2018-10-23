@@ -26,8 +26,23 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
     }
     
+     /**
+     * Creates new form TelaLogin
+     */
+    public TelaLogin(Urna instancia) {
+        this.instancia=instancia;
+        // Pega Dados do Google Drive
+        System.out.println("Baixando dados da Nuvem");
+        this.instancia.Receive();
+        //Inicializando a Tela
+        System.out.println("Inicializando a urna");
+        initComponents();
+        this.setVisible(true);
+        this.instancia.setTelaVisivel(true);   
+    }
+    
     public void setTelaVisivel(boolean arg){
-        instancia.setTelaVisivel(arg);
+        this.instancia.setTelaVisivel(arg);
     }
     public boolean getTelaVisivel(){
         return instancia.getTelaVisivel();
@@ -35,20 +50,7 @@ public class TelaLogin extends javax.swing.JFrame {
     public boolean getLogado(){
         return instancia.getLogado();
     }
-    /**
-     * Creates new form TelaLogin
-     */
-    public TelaLogin(Urna instancia) {
-        this.instancia=instancia;
-        // Pega Dados do Google Drive
-        System.out.println("Baixando dados da Nuvem");
-        instancia.Receive();
-        //Inicializando a Tela
-        System.out.println("Inicializando a urna");
-        initComponents();
-        this.setVisible(true);
-        this.instancia.setTelaVisivel(true);       
-    }
+   
     
 
     /**
@@ -134,30 +136,24 @@ public class TelaLogin extends javax.swing.JFrame {
 		} else {
 			// Verifica se a senha é igual
 			System.out.println("Verificando a Senha");
+                        System.out.println(instancia);
 			Eleitor elei=instancia.Login(TextPath.getText());
-                        
 			//Se for igual chama Console.Urna
 			if (elei != null) {
                             new ConsoleUrna(instancia,elei,elei.getUrnaVotacao());
                             instancia.setTelaVisivel(false);
-                            System.out.println("Fechou");
                             this.setVisible(false);
-                            this.dispose();                                
+                            this.dispose();//CULPADO                         
 			} else {
 				JOptionPane.showMessageDialog(this, "Senha Incorreta");
 			}
 		}
     }//GEN-LAST:event_ButtonLogarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    /*
+
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -176,13 +172,13 @@ public class TelaLogin extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaLogin().setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton ButtonCarregar;
