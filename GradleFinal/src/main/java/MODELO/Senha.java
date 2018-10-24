@@ -22,9 +22,12 @@ public class Senha {
 	private Boolean Inconsistencia=false;
 	
 	/**
+         * 
 	 * Abre a Imagem e gera um Hash
 	 * @param path Caminho da Imagem
-	 */
+         * @throws NoSuchAlgorithmException ...
+         * @throws IOException  ...
+         */
 	public Senha(String path) throws NoSuchAlgorithmException, IOException {
 		System.out.println("Setando uma Senha apartir de uma imagem");
 		this.setImagem(path);

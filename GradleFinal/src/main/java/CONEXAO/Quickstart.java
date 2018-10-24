@@ -42,8 +42,8 @@ public class Quickstart {
     /**
      * Creates an authorized Credential object.
      * @param HTTP_TRANSPORT The network HTTP Transport.
-     * @return An authorized Credential object.
-     * @throws IOException If the credentials.json file cannot be found.
+     * @return An authorized Credential object. 
+     * @throws IOException If the credentials.json file cannot be found. ...
      */
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         // Load client secrets.
@@ -64,7 +64,6 @@ public class Quickstart {
      * @param service Conexao
      * @param fileID Id do arquivo
      * @return String com conteudo do arquivo
-     * @throws IOException 
      */
     public String read(Drive service,String fileID){
         String fileId = fileID;
@@ -113,8 +112,8 @@ public class Quickstart {
     /**
      * 
      * @return Conexao
-     * @throws GeneralSecurityException
-     * @throws IOException 
+     * @throws GeneralSecurityException ...
+     * @throws IOException ...
      */
    public Drive Conexao() throws GeneralSecurityException, IOException{
         final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
@@ -123,11 +122,12 @@ public class Quickstart {
                 .build();
         return service;
    }   
-   /**
-    * 
-    * @param service Conexao
-    * @throws IOException 
-    */
+  /**
+   * 
+   * @param service Conexão com Drive
+   * @param Arquivo Nome do Arquivo
+   * @param Caminho Local do Arquivo
+   */
    public void Upload(Drive service,String Arquivo,String Caminho){
         File arquivo = new File();
         arquivo.setName(Arquivo);
@@ -148,9 +148,10 @@ public class Quickstart {
    
    
    /**
-    * Excluir permanentemente um arquivo, ignorando a lixeira.
+    *  * Excluir permanentemente um arquivo, ignorando a lixeira.
     * @param service Drive instância do serviço da API.
-    * ID do arquivo ID @param do arquivo a ser excluído.
+    * @param Nome Nome do arquivo no Drive
+    * @throws IOException ...
     */
     public void Delete(Drive service,String Nome) throws IOException{
         try {
