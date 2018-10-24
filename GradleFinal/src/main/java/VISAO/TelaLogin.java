@@ -24,6 +24,7 @@ public class TelaLogin extends javax.swing.JFrame {
      */
     public TelaLogin() {
         initComponents();
+        System.out.println("Chamou o Construtor Errado");
     }
     
      /**
@@ -39,6 +40,7 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.instancia.setTelaVisivel(true);   
+        this.setTitle("Login");
     }
     
     public void setTelaVisivel(boolean arg){

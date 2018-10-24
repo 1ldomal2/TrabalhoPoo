@@ -33,6 +33,7 @@ public class TelaCentral extends javax.swing.JFrame {
     public TelaCentral(Central central) {
         this.instancia=central;
         initComponents();
+        this.setTitle("Central");
         //Ficas esteticamente bonito
         ListLabelCPF.setText("");
         ListLabelNumero.setText("");

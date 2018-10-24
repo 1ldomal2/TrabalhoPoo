@@ -5,6 +5,7 @@ import DAO.VotoDAO;
 import MODELO.Candidato;
 import MODELO.Eleitor;
 import URNA.Urna;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +27,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
 		this.User = User;//Quem esta votando	
 		//Iniciando Tela
 		initComponents();
+                this.setTitle("Urna");
 		Confirma.setEnabled(false);
                 this.setVisible(true);
 
@@ -451,7 +453,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
 			instancia.Votar(User, cand, nUrna);
 		}else {//Voto Nulo
 			System.out.println("Voto Invalido");
-			instancia.Votar(User, null, nUrna);
+                        JOptionPane.showMessageDialog(null, "Voto invalido logo não sera contabilizado");
                         
 		}
                 instancia.Send();
