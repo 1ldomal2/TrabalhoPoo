@@ -74,6 +74,13 @@ public class TelaLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        TextPath.setEnabled(false);
+        TextPath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextPathActionPerformed(evt);
+            }
+        });
+
         ButtonCarregar.setText("Carregar");
         ButtonCarregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,6 +162,10 @@ public class TelaLogin extends javax.swing.JFrame {
 			}
 		}
     }//GEN-LAST:event_ButtonLogarActionPerformed
+
+    private void TextPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextPathActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextPathActionPerformed
 
     /*
 

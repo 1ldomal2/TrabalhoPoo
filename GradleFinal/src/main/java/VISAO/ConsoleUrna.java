@@ -457,7 +457,8 @@ public class ConsoleUrna extends javax.swing.JFrame {
                         
 		}
                 instancia.Send();
-		instancia.Deslogar();
+                instancia.Deslogar();
+                new TelaLogin(instancia).setVisible(true);
 		this.dispose();
 	}// GEN-LAST:event_ConfirmaActionPerformed
 
