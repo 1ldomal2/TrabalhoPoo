@@ -299,12 +299,12 @@ public class Documentos {
 			
 			this.formated=cpf;
 		}
-		return;
 		
 	}
 	/**
 	 *@return String- Cpf sem pontuação 11digitos
 	 */	
+        @Override
 	public String toString(){
 		return noFormated;	
 	}
@@ -315,13 +315,12 @@ public class Documentos {
 		return formated;		
 	}
 	/**
+        * @param cpf String cpf formatado ou não
 	 *@return Boolean -Verifica se o cpf é igual "Tanto com pontuação ou sem pontuação'
 	 */	
-	public boolean equals(String cpf){//Verifica se é igual formatado ou não
-		if(cpf.equals(formated)||cpf.equals(noFormated)) {
-			return true;	
-		}
-		return false;
+	public boolean equals(String cpf){
+            //Verifica se é igual formatado ou não
+            		return cpf.equals(formated)||cpf.equals(noFormated);
 	}
 	
 }
