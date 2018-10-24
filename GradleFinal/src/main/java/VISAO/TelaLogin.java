@@ -52,6 +52,10 @@ public class TelaLogin extends javax.swing.JFrame {
     public boolean getLogado(){
         return instancia.getLogado();
     }
+    public Eleitor getUser(){
+        return instancia.getUser();
+                
+    }
    
     
 

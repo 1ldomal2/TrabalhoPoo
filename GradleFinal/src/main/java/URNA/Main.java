@@ -14,13 +14,13 @@ public class Main {
 		//Cria tela de Login
                 TelaLogin ins=new TelaLogin(instancia);
                 while(true){
-                    try{
+                    if(ins!=null){
                         if(ins.getTelaVisivel()==false && ins.getLogado()==false){
+                            ins=null;
                             System.out.println("Esperando Login");
                             ins=new TelaLogin(instancia);
                         }
-                    }catch(Exception evt){
-                        System.out.println("BUG");
+                    }else{
                         ins=new TelaLogin(instancia);
                     }
                 }

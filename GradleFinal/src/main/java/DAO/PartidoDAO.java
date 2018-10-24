@@ -30,7 +30,7 @@ public class PartidoDAO extends DAO {
 	}
 	
 	/**Le o Json
-	 * @param String - Json
+	 * @param Sjson - Json
 	 * @return Void  - Preenche "this.Array" de acordo com Json
 	 */
 	public void ReadJson(String Sjson) throws NoSuchAlgorithmException, JSONException, IOException {//Acho que não precisa mas é para futuras Modificações
@@ -89,7 +89,7 @@ public class PartidoDAO extends DAO {
 
 	}
 	/**Cria Eleitor e insere em 'this.array'
-	 * @param Partido - Objeto Partido
+	 * @param partido - Objeto Partido
 	 * @return Boolean -  Confirma se inseriu ou nao o partido em this this.array
 	 */
 	public boolean CriarPartido(Partido partido) {
@@ -103,7 +103,7 @@ public class PartidoDAO extends DAO {
 
 	}
 	/**Deleta Partido de 'this.array'
-	 * @param Partido - Objeto partido
+	 * @param partido - Objeto partido
 	 * @return Void
 	 */
 	public void DeletaPartito(Partido partido) {
@@ -124,7 +124,7 @@ public class PartidoDAO extends DAO {
 
 	}
 	/**Procura e retorna a partido que possui o numero 'x' em 'this.array'
-	 * @param int - Numero do partido
+	 * @param numero - Numero do partido
 	 * @return Partido - Retorona o Objeto partido presente em this.array que possui o numero 'x'
 	 */
 	public Partido ObjectNumero(int numero) {
@@ -140,16 +140,15 @@ public class PartidoDAO extends DAO {
 	}
 
 	/**Procura e retorna a partido que possui o nome 'x' em 'this.array'
-	 * @param String - Nome do partido
+	 * @param nome - Nome do partido
 	 * @return Partido - Retorona o Objeto partido presente em this.array que possui o nome 'x'
 	 */
 	public Partido ObjectNome(String nome) {
-		
 		for (int i = 0; i < Total; i++) {
 			if(Array[i]!=null) {
-				if (Array[i].getNome().equals(nome)) {
-					return Array[i];// Retorna o candidato com Numero procurado
-				}
+                            if (Array[i].getNome().equals(nome)) {
+				return Array[i];// Retorna o candidato com Numero procurado
+                            }
 			}
 		}
 		return null;// Não achou

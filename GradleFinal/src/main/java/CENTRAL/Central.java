@@ -239,7 +239,7 @@ public class Central {
         int numeroPartido = 0;
 
         //Procura Partidos pelo Nome
-        partido = pDAO.ObjectNome(CampoNumeroPartido);
+        partido = pDAO.ObjectNome(CampoNomePartido);
         if (partido != null) {//Achou com o mesmo nome
             System.out.println("Existe Partido com este nome");
             return false;

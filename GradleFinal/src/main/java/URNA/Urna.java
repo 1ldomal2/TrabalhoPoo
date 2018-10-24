@@ -42,6 +42,10 @@ public class Urna {
         this.TelaVisivel = arg;
     }
 
+    public Eleitor getUser() {
+       return this.User;
+    }
+
     public static int getTotalUrnas() {
         return TotalUrnas;
     }
