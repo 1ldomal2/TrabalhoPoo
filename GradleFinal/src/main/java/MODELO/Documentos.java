@@ -255,7 +255,7 @@ public class Documentos {
 			}		
 	}
 	/**
-	 *@return Transforma a formatação do cpf
+	 *Seta as Flags informando se esta foramtado e com oseria formatado
 	 */	
 	public void stringsCpf(){
 		String cpf ="";

@@ -32,11 +32,13 @@ public class EleitorDAO extends DAO{
 	}
 	
 	
-	
-	/**Le o Json
-	 * @param Sjson - Json
-	 * @return Void  - Preenche "this.Array" de acordo com Json
-	 */
+
+         /**Le o Json
+	 * @param Sjson - Json 
+         * @throws NoSuchAlgorithmException ...
+         * @throws JSONException ...
+         * @throws IOException ...
+         */
 	public void ReadJson(String Sjson) throws NoSuchAlgorithmException, JSONException, IOException {
 		//Cria um Objeto Json com a String passada como parametro
 		JSONObject json=new JSONObject(Sjson);
@@ -54,7 +56,6 @@ public class EleitorDAO extends DAO{
 		}
 	}
 	/**Cria o Json
-	 * @param Void
 	 * @return String - contendo o Json de "this.Array"
 	 * */
 	public String makeJson() {
@@ -98,14 +99,17 @@ public class EleitorDAO extends DAO{
 
 	}
 
-	/**Cria Eleitor e insere em 'this.array' Porem a senha é gerada apartir do path
+	
+        /**Cria Eleitor e insere em 'this.array' Porem a senha é gerada apartir do path
 	  * @param TituloEleitor -Titulo Eleitor 
 	 * @param Nome - Nome Eleitor
 	 * @param Cpf - Cpf do Eleitor 11 digitos
 	 * @param UrnaVotacao - Numero da urna de votação
 	 * @param Path - Caminha da imagem que vai gerar a hash
 	 * @return Boolean - Confirmando se criou ou nao o eleitor
-	 * */
+         * @throws NoSuchAlgorithmException ...
+         * @throws IOException ...
+         */
 	public boolean CriarEleitor(String TituloEleitor, String Nome, String Cpf, int UrnaVotacao, String Path) throws NoSuchAlgorithmException, IOException {
 		if (Total <= TAMANHO) {// Evita estourar Array
 			this.celulaVetor = new Eleitor(TituloEleitor, Nome, Cpf, UrnaVotacao, Path);
@@ -134,8 +138,7 @@ public class EleitorDAO extends DAO{
 	}
 	/**Deleta Eleitor de 'this.array'
 	 * @param eleitor - Objeto eleitor
-	 * @return Void
-	 */
+	 */ 
 	public void DeletaEleitor(Eleitor eleitor) {
 		if(eleitor==null) {//Evita erro 
 			return;

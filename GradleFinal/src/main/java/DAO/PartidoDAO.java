@@ -31,8 +31,10 @@ public class PartidoDAO extends DAO {
 	
 	/**Le o Json
 	 * @param Sjson - Json
-	 * @return Void  - Preenche "this.Array" de acordo com Json
-	 */
+         * @throws NoSuchAlgorithmException
+         * @throws JSONException
+         * @throws IOException 
+         */
 	public void ReadJson(String Sjson) throws NoSuchAlgorithmException, JSONException, IOException {//Acho que não precisa mas é para futuras Modificações
 		//Cria um Objeto Json com a String passada como parametro
 		JSONObject json=new JSONObject(Sjson);
@@ -51,7 +53,6 @@ public class PartidoDAO extends DAO {
 	}
 	
 	/**Cria o Json
-	 * @param Void
 	 * @return String - contendo o Json de "this.Array"
 	 * */
 	public String makeJson() {
@@ -102,9 +103,8 @@ public class PartidoDAO extends DAO {
 		return false;
 
 	}
-	/**Deleta Partido de 'this.array'
+	/**Implementação Futura
 	 * @param partido - Objeto partido
-	 * @return Void
 	 */
 	public void DeletaPartito(Partido partido) {
 		if(partido ==null) {//evita erro

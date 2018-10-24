@@ -27,9 +27,10 @@ public class TelaLogin extends javax.swing.JFrame {
         System.out.println("Chamou o Construtor Errado");
     }
     
-     /**
-     * Creates new form TelaLogin
-     */
+  /**
+   * 
+   * @param instancia Urna
+   */
     public TelaLogin(Urna instancia) {
         this.instancia=instancia;
         // Pega Dados do Google Drive

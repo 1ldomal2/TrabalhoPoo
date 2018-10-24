@@ -30,7 +30,6 @@ public class CandidatoDAO extends DAO{
 	
 	/**Le o Json
 	 * @param Sjson - String com Json
-	 * @return Void  - Preenche "this.Array" de acordo com Json
 	 */
 	public void ReadJson(String Sjson) {
             //Cria um Objeto Json com a String passada como parametro
@@ -51,9 +50,8 @@ public class CandidatoDAO extends DAO{
 		
 	}
 	/**Cria o Json
-	 * @param Void
 	 * @return String - contendo o Json de "this.Array"
-	 * */
+	 */
 	public String makeJson() {
 		JSONObject json=new JSONObject();//Superior
 		JSONArray candidatos=new JSONArray();
@@ -117,10 +115,8 @@ public class CandidatoDAO extends DAO{
 		return false;
 
 	}
-	
-	/**Deleta Candidato de 'this.array'
+	/**Para futuras implementações
 	 * @param candidato - Objeto candidato
-	 * @return Void
 	 */
 	public void DeletaCandidato(Candidato candidato) {
 		if(candidato ==null) {//evita erro

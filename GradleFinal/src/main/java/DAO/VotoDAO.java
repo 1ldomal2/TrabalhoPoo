@@ -9,8 +9,6 @@ import java.security.NoSuchAlgorithmException;
 import JSON.JSONArray;
 import JSON.JSONException;
 import JSON.JSONObject;
-import javax.swing.JOptionPane;
-
 /**Classe para objetos do tipo Voto, onde armazena um vetor 'this.Array' com n Votos
  * @author Lucas Mateus Fernandes
  */
@@ -50,8 +48,10 @@ public class VotoDAO extends DAO {
 	
 	/**Le o Json
 	 * @param Sjson - Json
-	 * @return Void  - Preenche "this.Array" de acordo com Json
-	 */
+         * @throws NoSuchAlgorithmException
+         * @throws JSONException
+         * @throws IOException 
+         */
 	public void ReadJson(String Sjson) throws NoSuchAlgorithmException, JSONException, IOException {//Acho que não precisa mas é para futuras Modificações
 		System.out.println("Lendo Json");
 		//Cria um Objeto Json com a String passada como parametro
@@ -74,7 +74,6 @@ public class VotoDAO extends DAO {
 	}
 	
 	/**Cria o Json
-	 * @param Void
 	 * @return String - contendo o Json de "this.Array"
 	 * */
 	public String makeJson() {
@@ -95,10 +94,9 @@ public class VotoDAO extends DAO {
 		return json.toString();
 	}
 	/**Cria o Voto e o insere em 'this.array'  É ACONSELHAVEL USAR ESTE METODO DENTRO DA URNA POIS A DATA DO VOTO É GERADA AUTOMATICAMENTE
-	 * @param Eleitor Objeto Eleitor
-	 * @param Candidato - Objeto Candidato
+	 * @param eleitor Objeto Eleitor
+	 * @param candidato - Objeto Candidato
 	 * @param numero - numero da urna
-	 * @return Boolean - Confirmando se criou ou nao o voto
 	 * */
 	public void CriarVoto(Eleitor eleitor,Candidato candidato,int numero) {
 		System.out.println("Criando Voto");
@@ -118,8 +116,7 @@ public class VotoDAO extends DAO {
 	 *@param candidato - Objeto Candidato
 	 *@param numero - numero da urna
 	 *@param time - long refente a data de criação do voto (segundos decorridos deste o inicio de 1970) 
-	 *@return Boolean - Confirmando se criou ou nao o voto
-	 * */
+         */
 	public void CriarVoto(Eleitor eleitor,Candidato candidato,int numero,long time) {
 		System.out.println("Criando Voto");
 		if (Total <= TAMANHO) {//Evita estourar Array
@@ -134,7 +131,6 @@ public class VotoDAO extends DAO {
 	}
 	/**Cria Voto e insere em 'this.array'
 	 * @param Voto - Objeto Voto
-	 * @return Boolean -  Confirma se inseriu ou nao o Voto em this this.array
 	 */
 	public void CriarVoto(Voto Voto) {
 		System.out.println("Criando Voto");
@@ -146,14 +142,16 @@ public class VotoDAO extends DAO {
 		return;
 
 	}
-
+        /**
+         * 
+         * @return Tamanho do Vetor
+         */
 	public int getTotal() {
 		return Total;
 	}
 	
-	/**Deleta Voto de 'this.array'
+	/**Implementação Futura
 	 * @param Voto - Objeto Voto
-	 * @return Void
 	 */
 	public void DeletaVoto(Voto Voto) {
 		System.out.println("Deletando Voto");
@@ -173,7 +171,7 @@ public class VotoDAO extends DAO {
 		}
 	}
 	/**Pesquisa em 'this.array' o numero de votos que o candidato 'x' recebeu 
-	 * @param Candidato - Objeto Candidato
+	 * @param candidato - Objeto Candidato
 	 * @return int - Numero de votos que o Candidato 'x' recebeu
 	 */
 	public int NVotosCandidato(Candidato candidato) {

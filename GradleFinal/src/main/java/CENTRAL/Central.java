@@ -59,10 +59,7 @@ public class Central {
 
     /**
      * Envia um Arquivo para o google Drive
-     *
-     * @param Nome Nome do Arquivo
-     * @param Path - Caminho para Salvar
-     * @return Arquivo .json com todos os dados
+     * @return Se foi possivel salvar no Drive
      */
     public boolean Send() {
         String Path = "./Eleicao.json";
