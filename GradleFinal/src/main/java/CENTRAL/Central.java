@@ -395,7 +395,8 @@ public class Central {
         if (qtdRepeticoes == 0) {
             indiceVencedores = new int[1];
         } else {
-            indiceVencedores = new int[qtdRepeticoes];
+            //quantidade que repetiu a isntancia + a propria instancia
+            indiceVencedores = new int[qtdRepeticoes+1];
         }
         
         int jaPreenchido = 0;
@@ -404,8 +405,8 @@ public class Central {
                 indiceVencedores[jaPreenchido] = i;
                 jaPreenchido++;
             }
-
         }
+        
         for (int i = 0; i < jaPreenchido; i++) {
             System.out.println(indiceVencedores[i]);
 
