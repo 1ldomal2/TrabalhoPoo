@@ -87,11 +87,12 @@ public class Eleitor {
 	}
 	
 	
-	/**Cria uma senha hash apartir da imagem do eleitor
+	/**
+         * Cria uma senha hash apartir da imagem do eleitor
 	 * @param Path - Caminho do arquivo que contem a imagem 
-         * @throws java.security.NoSuchAlgorithmException ...
-         * @throws java.io.IOException ...
-	 */
+         * @throws java.security.NoSuchAlgorithmException  ...
+         * @throws java.io.IOException  ...
+         */
 	public void setImagemSenha(String Path) throws NoSuchAlgorithmException, IOException {//Passa o caminho do arquivo
 		System.out.println("Carregando Nova Imagem/Senhha");
 		this.ImagemSenha = new Senha(Path);
@@ -129,7 +130,6 @@ public class Eleitor {
 		
 	}
 	/**
-         * /** 
 	 * Usar na Urna
 	 * Seta a hash que ativa a flag de inconsistencia
 	 * @param Hash String contendo a Hash (que vai ser lido do json

@@ -49,7 +49,7 @@ public class Senha {
 	}
 	/**
 	 * @param path Caminho da imagem
-	 * @throws IOException 
+	 * @throws IOException ...
 	 */
 	public void setImagem(String path) throws IOException{
 		

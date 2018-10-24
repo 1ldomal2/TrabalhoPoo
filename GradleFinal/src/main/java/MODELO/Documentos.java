@@ -12,7 +12,8 @@ public class Documentos {
 	private String formated="";
 	private String noFormated="";
 	
-	/**Construtor que Valida e Preencher CPF c/ e s/ Formatação
+	/**
+         * Construtor que Valida e Preencher CPF c/ e s/ Formatação
          * @param cpf String com cpf formatado ou não
          */
 	public Documentos(String cpf){
