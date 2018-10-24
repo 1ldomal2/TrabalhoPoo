@@ -20,14 +20,15 @@ public class EleitorDAO extends DAO{
 	private Eleitor celulaVetor = null;
 
 	/**Conexao com Google drive*/
+        @Override
 	public void Receive() {
 		//String json="{\"Eleitor\":[{\"UrnaVotacao\":\"1\",\"Senha\":\"956eee1761b6224b512dcb6491c0355dfe2dad05d242e5f70f97651b3d6674f3\",\"Cpf\":\"066.809.236-03\",\"TituloEleitor\":\"Titulo1\",\"Nome\":\"Nome1\"},{\"UrnaVotacao\":\"2\",\"Senha\":\"6194d7c363019ffff907f3cd33f214980106ccfdd03871defa9e6f726bfa7211\",\"Cpf\":\"066.809.236-03\",\"TituloEleitor\":\"Titulo2\",\"Nome\":\"Nome2\"}]}";
                 String  json=DownloadJson();
 		try {
 			ReadJson(json);
 		} catch (NoSuchAlgorithmException | JSONException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+                    // TODO Auto-generated catch block
+
 		}
 	}
 	
@@ -85,7 +86,9 @@ public class EleitorDAO extends DAO{
 	 * @param UrnaVotacao - Numero da urna de votação
 	 * @param Senha - Senha Hash do  do eleitor
 	 * @return Boolean - Confirmando se criou ou nao o eleitor
-	 * */
+         * @throws java.security.NoSuchAlgorithmException ...
+        * @throws java.io.IOException ...
+	*/
 	public boolean CriarEleitor(String TituloEleitor, String Nome, String Cpf, String UrnaVotacao, String Senha) throws NoSuchAlgorithmException, IOException {
 		if (Total <= TAMANHO) {// Evita estourar Array
 			this.celulaVetor = new Eleitor(TituloEleitor, Nome, Cpf, UrnaVotacao, Senha);

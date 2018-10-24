@@ -48,9 +48,9 @@ public class VotoDAO extends DAO {
 	
 	/**Le o Json
 	 * @param Sjson - Json
-         * @throws NoSuchAlgorithmException
-         * @throws JSONException
-         * @throws IOException 
+         * @throws NoSuchAlgorithmException ...
+         * @throws JSONException ...
+         * @throws IOException  ...
          */
 	public void ReadJson(String Sjson) throws NoSuchAlgorithmException, JSONException, IOException {//Acho que não precisa mas é para futuras Modificações
 		System.out.println("Lendo Json");

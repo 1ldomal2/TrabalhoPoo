@@ -89,6 +89,8 @@ public class Eleitor {
 	
 	/**Cria uma senha hash apartir da imagem do eleitor
 	 * @param Path - Caminho do arquivo que contem a imagem 
+         * @throws java.security.NoSuchAlgorithmException ...
+         * @throws java.io.IOException ...
 	 */
 	public void setImagemSenha(String Path) throws NoSuchAlgorithmException, IOException {//Passa o caminho do arquivo
 		System.out.println("Carregando Nova Imagem/Senhha");
@@ -106,10 +108,17 @@ public class Eleitor {
 	
 	
 	/** 
+         * 
 	 * Usar na Central
 	 * Passa a imagem e seta a hash automaticamente
 	 * @param ImagemSenha Local da imagem
-	 */
+         * @param TituloEleitor Titulo de Eleitor
+         * @param Nome Nome Eleitor
+         * @param Cpf String com Cpf foramtado ou não
+         * @param UrnaVotacao Numero da Urna em que o Eleitor Vota
+         * @throws NoSuchAlgorithmException ...
+         * @throws IOException ....
+         */
 	public Eleitor(String TituloEleitor,String Nome, String Cpf,int UrnaVotacao,String ImagemSenha) throws NoSuchAlgorithmException, IOException {
 		System.out.println("Criando Novo Eleitor");
 		this.TituloEleitor=TituloEleitor;
@@ -119,11 +128,18 @@ public class Eleitor {
 		this.ImagemSenha=new Senha(ImagemSenha);
 		
 	}
-	/** 
+	/**
+         * /** 
 	 * Usar na Urna
 	 * Seta a hash que ativa a flag de inconsistencia
-	 * @param Hash String contendo a Hash (que vai ser lido do json)
-	 */
+	 * @param Hash String contendo a Hash (que vai ser lido do json
+         * @param TituloEleitor Titulo de Eleitor
+         * @param Nome Nome Eleitor
+         * @param Cpf String com Cpf foramtado ou não
+         * @param UrnaVotacao Numero da Urna em que o Eleitor Vota
+         * @throws NoSuchAlgorithmException ...
+         * @throws IOException ...
+         */
 	public Eleitor(String TituloEleitor,String Nome, String Cpf,String UrnaVotacao,String Hash) throws NoSuchAlgorithmException, IOException {////Import do Json
 		Documentos cpf=new Documentos(Cpf);
 		if (cpf.getValidCpf()) {		

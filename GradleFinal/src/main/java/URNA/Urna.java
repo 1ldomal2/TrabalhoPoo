@@ -81,7 +81,7 @@ public class Urna {
     
     /**
      * Envia os dados para a nuuvem
-     * @return 
+     * @return Se foi possivel Enviar para Drive
      */
     public boolean Send() {
         System.out.println("Enviando Arquivos...");

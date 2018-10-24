@@ -12,9 +12,11 @@ public class Documentos {
 	private String formated="";
 	private String noFormated="";
 	
-	/**Construtor que Valida e Preencher CPF c/ e s/ Formatação*/	
+	/**Construtor que Valida e Preencher CPF c/ e s/ Formatação
+         * @param cpf String com cpf formatado ou não
+         */
 	public Documentos(String cpf){
-		validaCpf(cpf);
+		this.validaCpf(cpf);
 	}
 	
 	
@@ -216,8 +218,10 @@ public class Documentos {
 			
 	}
 	/**
-	 *@return String - Retorna a região do cpf de acordo com o ultimo digito antes dos digitos verificadores
-	 */	
+         * Iria Implementar um Grafico com a região que o Candidato ganhou mais votos... IRIA
+         * @param cpf String com CPF
+         * @return Região do Cpf
+         */	
 	public String regiaoCpf(String cpf) {
 		if(validCpf != true) {
 			return "Cpf Invalido";
