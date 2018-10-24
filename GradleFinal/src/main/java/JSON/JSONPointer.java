@@ -33,7 +33,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/**
+/*
  * A JSON Pointer is a simple query language defined for JSON documents by
  * <a href="https://tools.ietf.org/html/rfc6901">RFC 6901</a>.
  * 
@@ -56,7 +56,7 @@ public class JSONPointer {
     // used for URL encoding and decoding
     private static final String ENCODING = "utf-8";
 
-    /**
+    /*
      * This class allows the user to build a JSONPointer in steps, using
      * exactly one segment in each step.
      */
@@ -65,7 +65,7 @@ public class JSONPointer {
         // Segments for the eventual JSONPointer string
         private final List<String> refTokens = new ArrayList<String>();
 
-        /**
+        /*
          * Creates a {@code JSONPointer} instance using the tokens previously set using the
          * {@link #append(String)} method calls.
          */
@@ -73,7 +73,7 @@ public class JSONPointer {
             return new JSONPointer(this.refTokens);
         }
 
-        /**
+        /*
          * Adds an arbitrary token to the list of reference tokens. It can be any non-null value.
          * 
          * Unlike in the case of JSON string or URI fragment representation of JSON pointers, the
@@ -93,7 +93,7 @@ public class JSONPointer {
             return this;
         }
 
-        /**
+        /*
          * Adds an integer to the reference token list. Although not necessarily, mostly this token will
          * denote an array index. 
          * 
@@ -106,7 +106,7 @@ public class JSONPointer {
         }
     }
 
-    /**
+    /*
      * Static factory method for {@link Builder}. Example usage:
      * 
      * <pre><code>
@@ -128,7 +128,7 @@ public class JSONPointer {
     // Segments for the JSONPointer string
     private final List<String> refTokens;
 
-    /**
+    /*
      * Pre-parses and initializes a new {@code JSONPointer} instance. If you want to
      * evaluate the same JSON Pointer on different JSON documents then it is recommended
      * to keep the {@code JSONPointer} instances due to performance considerations.
@@ -192,7 +192,7 @@ public class JSONPointer {
                 .replace("\\\\", "\\");
     }
 
-    /**
+    /*
      * Evaluates this JSON Pointer on the given {@code document}. The {@code document}
      * is usually a {@link JSONObject} or a {@link JSONArray} instance, but the empty
      * JSON Pointer ({@code ""}) can be evaluated on any JSON values and in such case the
@@ -221,7 +221,7 @@ public class JSONPointer {
         return current;
     }
 
-    /**
+    /*
      * Matches a JSONArray element by ordinal position
      * @param current the JSONArray to be evaluated
      * @param indexToken the array index in string form
@@ -246,7 +246,7 @@ public class JSONPointer {
         }
     }
 
-    /**
+    /*
      * Returns a string representing the JSONPointer path value using string
      * representation
      */
@@ -259,7 +259,7 @@ public class JSONPointer {
         return rval.toString();
     }
 
-    /**
+    /*
      * Escapes path segment values to an unambiguous form.
      * The escape char to be inserted is '~'. The chars to be escaped 
      * are ~, which maps to ~0, and /, which maps to ~1. Backslashes
@@ -274,7 +274,7 @@ public class JSONPointer {
                 .replace("\"", "\\\"");
     }
 
-    /**
+    /*
      * Returns a string representing the JSONPointer path value using URI
      * fragment identifier representation
      */

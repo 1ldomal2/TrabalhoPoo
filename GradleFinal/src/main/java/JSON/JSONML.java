@@ -24,7 +24,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/**
+/*
  * This provides static methods to convert an XML text into a JSONArray or
  * JSONObject, and to covert a JSONArray or JSONObject into an XML text using
  * the JsonML transform.
@@ -33,7 +33,7 @@ SOFTWARE.
  * @version 2016-01-30
  */
 public class JSONML {
-    /**
+    /*
      * Parse XML values and store them in a JSONArray.
      * @param x       The XMLTokener containing the source string.
      * @param arrayForm true if array form, false if object form.
@@ -231,7 +231,7 @@ public class JSONML {
     }
 
 
-    /**
+    /*
      * Convert a well-formed (but not necessarily valid) XML string into a
      * JSONArray using the JsonML transform. Each XML tag is represented as
      * a JSONArray in which the first element is the tag name. If the tag has
@@ -248,7 +248,7 @@ public class JSONML {
     }
 
 
-    /**
+    /*
      * Convert a well-formed (but not necessarily valid) XML string into a
      * JSONArray using the JsonML transform. Each XML tag is represented as
      * a JSONArray in which the first element is the tag name. If the tag has
@@ -270,7 +270,7 @@ public class JSONML {
     }
 
 
-    /**
+    /*
      * Convert a well-formed (but not necessarily valid) XML string into a
      * JSONArray using the JsonML transform. Each XML tag is represented as
      * a JSONArray in which the first element is the tag name. If the tag has
@@ -292,7 +292,7 @@ public class JSONML {
     }
 
 
-    /**
+    /*
      * Convert a well-formed (but not necessarily valid) XML string into a
      * JSONArray using the JsonML transform. Each XML tag is represented as
      * a JSONArray in which the first element is the tag name. If the tag has
@@ -309,7 +309,7 @@ public class JSONML {
     }
 
 
-    /**
+    /*
      * Convert a well-formed (but not necessarily valid) XML string into a
      * JSONObject using the JsonML transform. Each XML tag is represented as
      * a JSONObject with a "tagName" property. If the tag has attributes, then
@@ -327,7 +327,7 @@ public class JSONML {
     }
     
     
-    /**
+    /*
      * Convert a well-formed (but not necessarily valid) XML string into a
      * JSONObject using the JsonML transform. Each XML tag is represented as
      * a JSONObject with a "tagName" property. If the tag has attributes, then
@@ -347,7 +347,7 @@ public class JSONML {
     }
 
     
-    /**
+    /*
      * Convert a well-formed (but not necessarily valid) XML string into a
      * JSONObject using the JsonML transform. Each XML tag is represented as
      * a JSONObject with a "tagName" property. If the tag has attributes, then
@@ -365,7 +365,7 @@ public class JSONML {
     }
 
 
-    /**
+    /*
      * Convert a well-formed (but not necessarily valid) XML string into a
      * JSONObject using the JsonML transform. Each XML tag is represented as
      * a JSONObject with a "tagName" property. If the tag has attributes, then
@@ -385,7 +385,7 @@ public class JSONML {
     }
 
 
-    /**
+    /*
      * Reverse the JSONML transformation, making an XML text from a JSONArray.
      * @param ja A JSONArray.
      * @return An XML string.
@@ -462,7 +462,7 @@ public class JSONML {
         return sb.toString();
     }
 
-    /**
+    /*
      * Reverse the JSONML transformation, making an XML text from a JSONObject.
      * The JSONObject must contain a "tagName" property. If it has children,
      * then it must have a "childNodes" property containing an array of objects.

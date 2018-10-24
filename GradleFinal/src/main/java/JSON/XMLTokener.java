@@ -26,7 +26,7 @@ SOFTWARE.
 
 import java.io.Reader;
 
-/**
+/*
  * The XMLTokener extends the JSONTokener to provide additional methods
  * for the parsing of XML texts.
  * @author JSON.org
@@ -35,7 +35,7 @@ import java.io.Reader;
 public class XMLTokener extends JSONTokener {
 
 
-   /** The table of entity values. It initially contains Character values for
+   /* The table of entity values. It initially contains Character values for
     * amp, apos, gt, lt, quot.
     */
    public static final java.util.HashMap<String, Character> entity;
@@ -49,7 +49,7 @@ public class XMLTokener extends JSONTokener {
        entity.put("quot", XML.QUOT);
    }
 
-    /**
+    /*
      * Construct an XMLTokener from a Reader.
      * @param r A source reader.
      */
@@ -57,7 +57,7 @@ public class XMLTokener extends JSONTokener {
         super(r);
     }
 
-    /**
+    /*
      * Construct an XMLTokener from a string.
      * @param s A source string.
      */
@@ -65,7 +65,7 @@ public class XMLTokener extends JSONTokener {
         super(s);
     }
 
-    /**
+    /*
      * Get the text in the CDATA block.
      * @return The string up to the <code>]]&gt;</code>.
      * @throws JSONException If the <code>]]&gt;</code> is not found.
@@ -88,7 +88,7 @@ public class XMLTokener extends JSONTokener {
     }
 
 
-    /**
+    /*
      * Get the next XML outer token, trimming whitespace. There are two kinds
      * of tokens: the '<' character which begins a markup tag, and the content
      * text between markup tags.
@@ -128,7 +128,7 @@ public class XMLTokener extends JSONTokener {
     }
 
 
-    /**
+    /*
      * Return the next entity. These entities are translated to Characters:
      *     <code>&amp;  &apos;  &gt;  &lt;  &quot;</code>.
      * @param ampersand An ampersand character.
@@ -151,7 +151,7 @@ public class XMLTokener extends JSONTokener {
         return unescapeEntity(string);
     }
     
-    /**
+    /*
      * Unescapes an XML entity encoding;
      * @param e entity (only the actual entity value, not the preceding & or ending ;
      * @return
@@ -182,7 +182,7 @@ public class XMLTokener extends JSONTokener {
     }
 
 
-    /**
+    /*
      * Returns the next XML meta token. This is used for skipping over <!...>
      * and <?...?> structures.
      * @return Syntax characters (<code>< > / = ! ?</code>) are returned as
@@ -248,7 +248,7 @@ public class XMLTokener extends JSONTokener {
     }
 
 
-    /**
+    /*
      * Get the next XML Token. These tokens are found inside of angle
      * brackets. It may be one of these characters: <code>/ > = ! ?</code> or it
      * may be a string wrapped in single quotes or double quotes, or it may be a
@@ -332,7 +332,7 @@ public class XMLTokener extends JSONTokener {
     }
 
 
-    /**
+    /*
      * Skip characters until past the requested string.
      * If it is not found, we are left at the end of the source with a result of false.
      * @param to A string to skip past.

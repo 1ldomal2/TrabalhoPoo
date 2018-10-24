@@ -28,7 +28,7 @@ import java.io.Reader;
 import java.io.StringReader;
 import java.util.Iterator;
 
-/**
+/*
  * This provides static methods to convert an XML text into a JSONObject, and to
  * covert a JSONObject into an XML text.
  * 
@@ -37,34 +37,34 @@ import java.util.Iterator;
  */
 @SuppressWarnings("boxing")
 public class XML {
-    /** The Character '&amp;'. */
+    /* The Character '&amp;'. */
     public static final Character AMP = '&';
 
-    /** The Character '''. */
+    /* The Character '''. */
     public static final Character APOS = '\'';
 
-    /** The Character '!'. */
+    /* The Character '!'. */
     public static final Character BANG = '!';
 
-    /** The Character '='. */
+    /* The Character '='. */
     public static final Character EQ = '=';
 
-    /** The Character '>'. */
+    /* The Character '>'. */
     public static final Character GT = '>';
 
-    /** The Character '&lt;'. */
+    /* The Character '&lt;'. */
     public static final Character LT = '<';
 
-    /** The Character '?'. */
+    /* The Character '?'. */
     public static final Character QUEST = '?';
 
-    /** The Character '"'. */
+    /* The Character '"'. */
     public static final Character QUOT = '"';
 
-    /** The Character '/'. */
+    /* The Character '/'. */
     public static final Character SLASH = '/';
     
-    /**
+    /*
      * Creates an iterator for navigating Code Points in a string instead of
      * characters. Once Java7 support is dropped, this can be replaced with
      * <code>
@@ -104,7 +104,7 @@ public class XML {
         };
     }
 
-    /**
+    /*
      * Replace special characters with XML escapes:
      * 
      * <pre>
@@ -151,7 +151,7 @@ public class XML {
         return sb.toString();
     }
     
-    /**
+    /*
      * @param cp code point to test
      * @return true if the code point is not valid for an XML
      */
@@ -177,7 +177,7 @@ public class XML {
         ;
     }
 
-    /**
+    /*
      * Removes XML escapes from the string.
      * 
      * @param string
@@ -208,7 +208,7 @@ public class XML {
         return sb.toString();
     }
 
-    /**
+    /*
      * Throw an exception if the string contains whitespace. Whitespace is not
      * allowed in tagNames and attributes.
      * 
@@ -229,7 +229,7 @@ public class XML {
         }
     }
 
-    /**
+    /*
      * Scan the content following the named tag, attaching it to the context.
      * 
      * @param x
@@ -399,7 +399,7 @@ public class XML {
         }
     }
     
-    /**
+    /*
      * This method is the same as {@link JSONObject#stringToValue(String)}.
      * 
      * @param string String to convert
@@ -452,7 +452,7 @@ public class XML {
         return string;
     }
 
-    /**
+    /*
      * Convert a well-formed (but not necessarily valid) XML string into a
      * JSONObject. Some information may be lost in this transformation because
      * JSON is a data format and XML is a document format. XML uses elements,
@@ -472,7 +472,7 @@ public class XML {
         return toJSONObject(string, false);
     }
 
-    /**
+    /*
      * Convert a well-formed (but not necessarily valid) XML into a
      * JSONObject. Some information may be lost in this transformation because
      * JSON is a data format and XML is a document format. XML uses elements,
@@ -491,7 +491,7 @@ public class XML {
         return toJSONObject(reader, false);
     }
 
-    /**
+    /*
      * Convert a well-formed (but not necessarily valid) XML into a
      * JSONObject. Some information may be lost in this transformation because
      * JSON is a data format and XML is a document format. XML uses elements,
@@ -523,7 +523,7 @@ public class XML {
         return jo;
     }
 
-    /**
+    /*
      * Convert a well-formed (but not necessarily valid) XML string into a
      * JSONObject. Some information may be lost in this transformation because
      * JSON is a data format and XML is a document format. XML uses elements,
@@ -548,7 +548,7 @@ public class XML {
         return toJSONObject(new StringReader(string), keepStrings);
     }
 
-    /**
+    /*
      * Convert a JSONObject into a well-formed, element-normal XML string.
      * 
      * @param object
@@ -560,7 +560,7 @@ public class XML {
         return toString(object, null);
     }
 
-    /**
+    /*
      * Convert a JSONObject into a well-formed, element-normal XML string.
      * 
      * @param object

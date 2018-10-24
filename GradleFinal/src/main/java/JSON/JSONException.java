@@ -1,16 +1,16 @@
 package JSON;
 
-/**
+/*
  * The JSONException is thrown by the JSON.org classes when things are amiss.
  *
  * @author JSON.org
  * @version 2015-12-09
  */
 public class JSONException extends RuntimeException {
-    /** Serialization ID */
+    /* Serialization ID */
     private static final long serialVersionUID = 0;
 
-    /**
+    /*
      * Constructs a JSONException with an explanatory message.
      *
      * @param message
@@ -20,7 +20,7 @@ public class JSONException extends RuntimeException {
         super(message);
     }
 
-    /**
+    /*
      * Constructs a JSONException with an explanatory message and cause.
      * 
      * @param message
@@ -32,7 +32,7 @@ public class JSONException extends RuntimeException {
         super(message, cause);
     }
 
-    /**
+    /*
      * Constructs a new JSONException with the specified cause.
      * 
      * @param cause

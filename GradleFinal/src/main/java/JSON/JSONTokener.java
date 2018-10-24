@@ -31,7 +31,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
 
-/**
+/*
  * A JSONTokener takes a source string and extracts characters and tokens from
  * it. It is used by the JSONObject and JSONArray constructors to parse
  * JSON source strings.
@@ -39,25 +39,25 @@ SOFTWARE.
  * @version 2014-05-03
  */
 public class JSONTokener {
-    /** current read character position on the current line. */
+    /* current read character position on the current line. */
     private long character;
-    /** flag to indicate if the end of the input has been found. */
+    /* flag to indicate if the end of the input has been found. */
     private boolean eof;
-    /** current read index of the input. */
+    /* current read index of the input. */
     private long index;
-    /** current line of the input. */
+    /* current line of the input. */
     private long line;
-    /** previous character read from the input. */
+    /* previous character read from the input. */
     private char previous;
-    /** Reader for the input. */
+    /* Reader for the input. */
     private final Reader reader;
-    /** flag to indicate that a previous character was requested. */
+    /* flag to indicate that a previous character was requested. */
     private boolean usePrevious;
-    /** the number of characters read in the previous line. */
+    /* the number of characters read in the previous line. */
     private long characterPreviousLine;
 
 
-    /**
+    /*
      * Construct a JSONTokener from a Reader. The caller must close the Reader.
      *
      * @param reader     A reader.
@@ -76,7 +76,7 @@ public class JSONTokener {
     }
 
 
-    /**
+    /*
      * Construct a JSONTokener from an InputStream. The caller must close the input stream.
      * @param inputStream The source.
      */
@@ -85,7 +85,7 @@ public class JSONTokener {
     }
 
 
-    /**
+    /*
      * Construct a JSONTokener from a string.
      *
      * @param s     A source string.
@@ -95,7 +95,7 @@ public class JSONTokener {
     }
 
 
-    /**
+    /*
      * Back up one character. This provides a sort of lookahead capability,
      * so that you can test for a digit or letter before attempting to parse
      * the next number or identifier.
@@ -111,7 +111,7 @@ public class JSONTokener {
         this.eof = false;
     }
 
-    /**
+    /*
      * Decrements the indexes for the {@link #back()} method based on the previous character read.
      */
     private void decrementIndexes() {
@@ -124,7 +124,7 @@ public class JSONTokener {
         }
     }
 
-    /**
+    /*
      * Get the hex value of a character (base16).
      * @param c A character between '0' and '9' or between 'A' and 'F' or
      * between 'a' and 'f'.
@@ -143,7 +143,7 @@ public class JSONTokener {
         return -1;
     }
 
-    /**
+    /*
      * Checks if the end of the input has been reached.
      *  
      * @return true if at the end of the file and we didn't step back
@@ -153,7 +153,7 @@ public class JSONTokener {
     }
 
 
-    /**
+    /*
      * Determine if the source string still contains characters that next()
      * can consume.
      * @return true if not yet at the end of the source.
@@ -183,7 +183,7 @@ public class JSONTokener {
     }
 
 
-    /**
+    /*
      * Get the next character in the source string.
      *
      * @return The next character, or 0 if past the end of the source string.
@@ -210,7 +210,7 @@ public class JSONTokener {
         return this.previous;
     }
 
-    /**
+    /*
      * Increments the internal indexes according to the previous character
      * read and the character passed as the current character.
      * @param c the current character read.
@@ -234,7 +234,7 @@ public class JSONTokener {
         }
     }
 
-    /**
+    /*
      * Consume the next character, and check that it matches a specified
      * character.
      * @param c The character to match.
@@ -254,7 +254,7 @@ public class JSONTokener {
     }
 
 
-    /**
+    /*
      * Get the next n characters.
      *
      * @param n     The number of characters to take.
@@ -282,7 +282,7 @@ public class JSONTokener {
     }
 
 
-    /**
+    /*
      * Get the next char in the string, skipping whitespace.
      * @throws JSONException Thrown if there is an error reading the source string.
      * @return  A character, or 0 if there are no more characters.
@@ -297,7 +297,7 @@ public class JSONTokener {
     }
 
 
-    /**
+    /*
      * Return the characters up to the next close quote character.
      * Backslash processing is done. The formal JSON format does not
      * allow strings in single quotes, but an implementation is allowed to
@@ -363,7 +363,7 @@ public class JSONTokener {
     }
 
 
-    /**
+    /*
      * Get the text up but not including the specified character or the
      * end of line, whichever comes first.
      * @param  delimiter A delimiter character.
@@ -386,7 +386,7 @@ public class JSONTokener {
     }
 
 
-    /**
+    /*
      * Get the text up but not including one of the specified delimiter
      * characters or the end of line, whichever comes first.
      * @param delimiters A set of delimiter characters.
@@ -411,7 +411,7 @@ public class JSONTokener {
     }
 
 
-    /**
+    /*
      * Get the next value. The value can be a Boolean, Double, Integer,
      * JSONArray, JSONObject, Long, or String, or the JSONObject.NULL object.
      * @throws JSONException If syntax error.
@@ -458,7 +458,7 @@ public class JSONTokener {
     }
 
 
-    /**
+    /*
      * Skip characters until the next character is the requested character.
      * If the requested character is not found, no characters are skipped.
      * @param to A character to skip to.
@@ -495,7 +495,7 @@ public class JSONTokener {
         return c;
     }
 
-    /**
+    /*
      * Make a JSONException to signal a syntax error.
      *
      * @param message The error message.
@@ -505,7 +505,7 @@ public class JSONTokener {
         return new JSONException(message + this.toString());
     }
 
-    /**
+    /*
      * Make a JSONException to signal a syntax error.
      *
      * @param message The error message.
@@ -516,7 +516,7 @@ public class JSONTokener {
         return new JSONException(message + this.toString(), causedBy);
     }
 
-    /**
+    /*
      * Make a printable string of this JSONTokener.
      *
      * @return " at {index} [character {character} line {line}]"
