@@ -451,12 +451,12 @@ public class ConsoleUrna extends javax.swing.JFrame {
 		if(cand != null) {
 			System.out.println("Voto Valido");
 			instancia.Votar(User, cand, nUrna);
+                        instancia.Send();
 		}else {//Voto Nulo
 			System.out.println("Voto Invalido");
                         JOptionPane.showMessageDialog(null, "Voto invalido logo não sera contabilizado");
                         
 		}
-                instancia.Send();
                 instancia.Deslogar();
                 new TelaLogin(instancia).setVisible(true);
 		this.dispose();

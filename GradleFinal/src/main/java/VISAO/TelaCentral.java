@@ -645,7 +645,7 @@ public class TelaCentral extends javax.swing.JFrame {
             candidato=instancia.CandidatoIndice(indice);//Procura Candidato criado
             if(candidato!=null){
                 ListLabelCPF.setText("CPF:"+candidato.getCpfString());
-                ListLabelNumero.setText("Numero:"+candidato.getCpf());
+                ListLabelNumero.setText("Numero:"+candidato.getNumero());
                 ListLabelNome.setText("Nome:"+candidato.getNome());
                 ListLabelNVotos.setText("Numero de Votos:"+instancia.nVotoIndice(indice));
                 Partido partido=null;

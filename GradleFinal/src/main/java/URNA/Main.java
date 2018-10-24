@@ -13,19 +13,20 @@ public class Main {
                 
 		//Cria tela de Login
                 TelaLogin ins=new TelaLogin(instancia);
+               
+                /*/Não funciona... //Tem que benzer
                 while(true){
-                //Não funciona...
-                //Tem que benzer
                     if(ins!=null){
                         if(ins.getUser()==null && ins.getTelaVisivel()==false && ins.getLogado()==false){
-                            ins=null;
                             System.out.println("Esperando Login");
+                            ins=null;
                             ins=new TelaLogin(instancia);
                         }
                     }else{
+                        System.out.println("Esperando Login");
                         ins=new TelaLogin(instancia);
                     }
-                }
+                }*/
 	}
 }
 
