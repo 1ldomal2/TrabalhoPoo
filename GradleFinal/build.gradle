@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'CENTRAL.Main'
+mainClassName = 'URNA.Main'
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 version = 'Solo'
