@@ -7,6 +7,8 @@ import java.security.NoSuchAlgorithmException;
 import JSON.JSONArray;
 import JSON.JSONException;
 import JSON.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**Classe para objetos do tipo Eleitor, onde armazena um vetor 'this.Array' com n Eleitores
@@ -16,7 +18,7 @@ public class EleitorDAO extends DAO{
 	
 	private final int TAMANHO = 50;
 	private int Total = 0;
-	public Eleitor[] Array = new Eleitor[TAMANHO];
+        private List<Eleitor> Array = new ArrayList<Eleitor>();    
 	private Eleitor celulaVetor = null;
 
 	/**Conexao com Google drive*/
@@ -67,11 +69,11 @@ public class EleitorDAO extends DAO{
 			
 			//Cria Objetos Json
 			eleitor[i]=new JSONObject();
-			eleitor[i].put("UrnaVotacao",""+Array[i].getUrnaVotacao());
-			eleitor[i].put("Senha", Array[i].getHash());
-			eleitor[i].put("Cpf", Array[i].getCpfString());
-			eleitor[i].put("TituloEleitor", Array[i].getTituloEleitor());
-			eleitor[i].put("Nome", Array[i].getNome());
+			eleitor[i].put("UrnaVotacao",""+Array.get(i).getUrnaVotacao());
+			eleitor[i].put("Senha", Array.get(i).getHash());
+			eleitor[i].put("Cpf", Array.get(i).getCpfString());
+			eleitor[i].put("TituloEleitor", Array.get(i).getTituloEleitor());
+			eleitor[i].put("Nome", Array.get(i).getNome());
 			//Adicionao Objeto Json em um vetor de Jsons
 			eleitores.put(eleitor[i]);
 		}
@@ -93,7 +95,7 @@ public class EleitorDAO extends DAO{
 		if (Total <= TAMANHO) {// Evita estourar Array
 			this.celulaVetor = new Eleitor(TituloEleitor, Nome, Cpf, UrnaVotacao, Senha);
 			if (celulaVetor != null) {// Evita "lixo" no array
-				Array[Total] = this.celulaVetor;
+                                Array.set(Total,this.celulaVetor);
 				Total++;
 				return true;
 			}
@@ -117,7 +119,7 @@ public class EleitorDAO extends DAO{
 		if (Total <= TAMANHO) {// Evita estourar Array
 			this.celulaVetor = new Eleitor(TituloEleitor, Nome, Cpf, UrnaVotacao, Path);
 			if (celulaVetor != null) {// Evita "lixo" no array
-				Array[Total] = this.celulaVetor;
+                            Array.set(Total, this.celulaVetor);
 				Total++;
 				return true;
 			}
@@ -132,33 +134,11 @@ public class EleitorDAO extends DAO{
 	public boolean CriarEleitor(Eleitor eleitor) {
 		if (Total <= TAMANHO && eleitor != null) {// Evita estourar Array e "lixo" no array
 			this.celulaVetor = eleitor;
-			Array[Total] = this.celulaVetor;
+                        Array.set(Total, this.celulaVetor);
 			Total++;
 			return true;
 		}
 		return false;
-
-	}
-	/**Deleta Eleitor de 'this.array'
-	 * @param eleitor - Objeto eleitor
-	 */ 
-	public void DeletaEleitor(Eleitor eleitor) {
-		if(eleitor==null) {//Evita erro 
-			return;
-		}
-		if (Total != 0) {
-			for (int i = 0; i < Total; i++) {
-				if(Array[i]!=null) {
-					if (Array[i] == eleitor) {
-						Array[i] = null;
-						Array[i] = Array[Total];
-						Array[Total] = null;
-						Total--;
-						return;
-					}
-				}
-			}
-		}
 
 	}
 
@@ -168,9 +148,9 @@ public class EleitorDAO extends DAO{
 	 */
 	public Eleitor ObjectTitulo(String titulo) {
 		for (int i = 0; i < Total; i++) {
-			if(Array[i]!=null) {
-				if (Array[i].getTituloEleitor().equals(titulo)) {
-					return Array[i];// Retorna o eleitor com Numero Titulo de eleitor procurado
+			if(Array.get(i)!=null) {
+				if (Array.get(i).getTituloEleitor().equals(titulo)) {
+					return Array.get(i);// Retorna o eleitor com Numero Titulo de eleitor procurado
 				}
 			}
 		}
@@ -183,9 +163,9 @@ public class EleitorDAO extends DAO{
 	 */
 	public Eleitor ObjectCpf(String cpf) {
 		for (int i = 0; i < Total; i++) {
-			if(Array[i]!=null) {
-				if (Array[i].getCpf().equals(cpf)) {
-					return Array[i];// Retorna o eleitor com cpf procurado
+			if(Array.get(i)!=null) {
+				if (Array.get(i).getCpf().equals(cpf)) {
+					return Array.get(i);// Retorna o eleitor com cpf procurado
 				}
 			}
 		}
@@ -197,9 +177,9 @@ public class EleitorDAO extends DAO{
 	 */
 	public Eleitor ObjectHash(String hash) {//SeRetorna algo diferente de null é pq Senha deu Match
 		for (int i = 0; i < Total; i++) {
-			if(Array[i]!=null) {
-				if (Array[i].getHash().equals(hash)) {
-					return Array[i];// Retorna o eleitor com cpf procurado
+			if(Array.get(i)!=null) {
+				if (Array.get(i).getHash().equals(hash)) {
+					return Array.get(i);// Retorna o eleitor com cpf procurado
 				}
 			}
 		}

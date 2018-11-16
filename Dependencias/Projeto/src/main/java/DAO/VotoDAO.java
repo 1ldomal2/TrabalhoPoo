@@ -9,13 +9,15 @@ import java.security.NoSuchAlgorithmException;
 import JSON.JSONArray;
 import JSON.JSONException;
 import JSON.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
 /**Classe para objetos do tipo Voto, onde armazena um vetor 'this.Array' com n Votos
  * @author Lucas Mateus Fernandes
  */
 public class VotoDAO extends DAO {
 	private final int TAMANHO = 50;
 	private  int Total = 0;
-	private Voto[] Array = new Voto[TAMANHO];
+        private List<Voto> Array= new ArrayList<Voto>();
 	private Voto celulaVetor = null;
 	//Quando carregar ???
 	private EleitorDAO ArrayE = null;
@@ -83,10 +85,10 @@ public class VotoDAO extends DAO {
 		for (int i = 0; i < Total; i++) {
 			voto[i]=new JSONObject();
 			//Cria Objetos Json
-			voto[i].put("CpfEleitor", Array[i].getECPF());
-			voto[i].put("CpfCandidato", Array[i].getCCPF());
-			voto[i].put("nUrna",""+Array[i].getNumeroUrna());
-			voto[i].put("Time",""+Array[i].getTime());
+			voto[i].put("CpfEleitor", Array.get(i).getECPF());
+			voto[i].put("CpfCandidato", Array.get(i).getCCPF());
+			voto[i].put("nUrna",""+Array.get(i).getNumeroUrna());
+			voto[i].put("Time",""+Array.get(i).getTime());
 			//Adicionao Objeto Json em um vetor de Jsons
 			votos.put(voto[i]);
 		}
@@ -103,7 +105,7 @@ public class VotoDAO extends DAO {
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Voto(eleitor,candidato, numero ) ;
 			if (celulaVetor != null) {//Evita "lixo" no array
-				Array[Total] = this.celulaVetor;
+                                Array.set(Total,this.celulaVetor);
 				Total++;
 			}
 		}
@@ -122,7 +124,7 @@ public class VotoDAO extends DAO {
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Voto(eleitor,candidato, numero,time) ;
 			if (celulaVetor != null) {//Evita "lixo" no array
-				Array[Total] = this.celulaVetor;
+				Array.set(Total,this.celulaVetor);
 				Total++;
 			}
 		}
@@ -136,7 +138,7 @@ public class VotoDAO extends DAO {
 		System.out.println("Criando Voto");
 		if (Total <= TAMANHO && Voto != null) {//Evita estourar Array e "lixo" no array
 			this.celulaVetor = Voto;
-			Array[Total] = this.celulaVetor;
+			 Array.set(Total,this.celulaVetor);
 			Total++;
 		}
 		return;
@@ -148,27 +150,6 @@ public class VotoDAO extends DAO {
          */
 	public int getTotal() {
 		return Total;
-	}
-	
-	/**Implementação Futura
-	 * @param Voto - Objeto Voto
-	 */
-	public void DeletaVoto(Voto Voto) {
-		System.out.println("Deletando Voto");
-		if(Voto ==null) {//evita erro
-			return;
-		}
-		if (Total != 0) {
-			for (int i = 0; i < Total; i++) {
-				if (Array[i] == Voto) {
-					Array[i] = null;
-					Array[i] = Array[Total];
-					Array[Total] = null;
-					Total--;
-					return;
-				}
-			}
-		}
 	}
 	/**Pesquisa em 'this.array' o numero de votos que o candidato 'x' recebeu 
 	 * @param candidato - Objeto Candidato
@@ -184,8 +165,8 @@ public class VotoDAO extends DAO {
 		
                 //Procura Votos do Candidato
 		for (int i = 0; i < Total; i++) {
-                    if(Array[i] != null) {//evita erro
-                        if(Array[i].getCandidato().equals(candidato)) {
+                    if(Array.get(i) != null) {//evita erro
+                        if(Array.get(i).getCandidato().equals(candidato)) {
                             nVotos++;// Conta Numero de votos no candidato "x"
                         }
                     }
@@ -197,7 +178,7 @@ public class VotoDAO extends DAO {
          * @return Voto
          */
         public Voto VotoIndice(int i){
-            return Array[i];
+            return Array.get(i);
     }
 }
 

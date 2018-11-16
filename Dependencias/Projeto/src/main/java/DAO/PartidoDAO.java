@@ -7,6 +7,8 @@ import java.security.NoSuchAlgorithmException;
 import JSON.JSONArray;
 import JSON.JSONException;
 import JSON.JSONObject;
+import java.util.ArrayList;
+import java.util.List;
 
 /**Classe para objetos do tipo Partido, onde armazena um vetor 'this.Array' com n Partidos
  * @author Lucas Mateus Fernandes
@@ -14,7 +16,7 @@ import JSON.JSONObject;
 public class PartidoDAO extends DAO {
 	private final int TAMANHO = 50;
 	public int Total = 0;
-	private Partido[] Array = new Partido[TAMANHO];
+        private List<Partido> Array = new ArrayList<Partido>();
 	private Partido celulaVetor = null;
 
 	/**Conexao com Google drive*/
@@ -63,8 +65,8 @@ public class PartidoDAO extends DAO {
 			//Instancia o Objcte
 			partido[i]=new JSONObject();
 			//Cria Objetos Json
-			partido[i].put("Nome", Array[i].getNome());
-			partido[i].put("Numero",""+Array[i].getNumero());
+			partido[i].put("Nome", Array.get(i).getNome());
+			partido[i].put("Numero",""+Array.get(i).getNumero());
 			//Adicionao Objeto Json em um vetor de Jsons
 			partidos.put(partido[i]);
 		}
@@ -81,7 +83,7 @@ public class PartidoDAO extends DAO {
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Partido(Numero, Nome ) ;
 			if (celulaVetor != null) {//Evita "lixo" no array
-				Array[Total] = this.celulaVetor;
+                            Array.set(Total, this.celulaVetor);
 				Total++;
 				return true;
 			}
@@ -96,42 +98,23 @@ public class PartidoDAO extends DAO {
 	public boolean CriarPartido(Partido partido) {
 		if (Total <= TAMANHO && partido != null) {//Evita estourar Array e "lixo" no array
 			this.celulaVetor = partido;
-			Array[Total] = this.celulaVetor;
+			Array.set(Total, this.celulaVetor);
 			Total++;
 			return true;
 		}
 		return false;
 
 	}
-	/**Implementação Futura
-	 * @param partido - Objeto partido
-	 */
-	public void DeletaPartito(Partido partido) {
-		if(partido ==null) {//evita erro
-			return;
-		}
-		if (Total != 0) {
-			for (int i = 0; i < Total; i++) {
-				if (Array[i] == partido) {
-					Array[i] = null;
-					Array[i] = Array[Total];
-					Array[Total] = null;
-					Total--;
-					return;
-				}
-			}
-		}
-
-	}
+	
 	/**Procura e retorna a partido que possui o numero 'x' em 'this.array'
 	 * @param numero - Numero do partido
 	 * @return Partido - Retorona o Objeto partido presente em this.array que possui o numero 'x'
 	 */
 	public Partido ObjectNumero(int numero) {
 		for (int i = 0; i < Total; i++) {
-			if(Array[i]!=null) {
-				if (Array[i].getNumero() == numero) {
-					return Array[i];// Retorna o candidato com Numero procurado
+			if(Array.get(i)!=null) {
+				if (Array.get(i).getNumero() == numero) {
+					return Array.get(i);// Retorna o candidato com Numero procurado
 				}
 			}
 		}
@@ -145,9 +128,9 @@ public class PartidoDAO extends DAO {
 	 */
 	public Partido ObjectNome(String nome) {
 		for (int i = 0; i < Total; i++) {
-			if(Array[i]!=null) {
-                            if (Array[i].getNome().equals(nome)) {
-				return Array[i];// Retorna o candidato com Numero procurado
+			if(Array.get(i)!=null) {
+                            if (Array.get(i).getNome().equals(nome)) {
+				return Array.get(i);// Retorna o candidato com Numero procurado
                             }
 			}
 		}

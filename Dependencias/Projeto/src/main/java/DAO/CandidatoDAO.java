@@ -7,6 +7,8 @@ import MODELO.Documentos;
 import JSON.JSONArray;
 import JSON.JSONObject;
 import com.google.api.services.drive.Drive;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 
@@ -17,7 +19,8 @@ import javax.swing.JOptionPane;
 public class CandidatoDAO extends DAO{
 	private final int TAMANHO = 50;
 	private int Total = 0;
-	private Candidato[] Array = new Candidato[TAMANHO];
+        private List<Candidato> Array = new ArrayList<Candidato>();    
+	//private Candidato[] Array = new Candidato[TAMANHO];
 	private Candidato celulaVetor = null;
 	
 	/**Conexao com Google drive*/
@@ -59,11 +62,12 @@ public class CandidatoDAO extends DAO{
 		for (int i = 0; i < Total; i++) {
 			//Cria Objetos Json
 			candidato[i]=new JSONObject();
-			candidato[i].put("Nome",Array[i].getNome());
-			candidato[i].put("Numero",""+Array[i].getNumero());//Transformando o int em string
-			candidato[i].put("Cpf",Array[i].getCpf());
-			candidato[i].put("NomePartido",Array[i].getPartido().getNome());
-			candidato[i].put("NumeroPartido",""+Array[i].getPartido().getNumero());//Transformando o int em string
+                        
+			candidato[i].put("Nome",Array.get(i).getNome());
+			candidato[i].put("Numero",""+Array.get(i).getNumero());//Transformando o int em string
+			candidato[i].put("Cpf",Array.get(i).getCpf());
+			candidato[i].put("NomePartido",Array.get(i).getPartido().getNome());
+			candidato[i].put("NumeroPartido",""+Array.get(i).getPartido().getNumero());//Transformando o int em string
 			//Adicionao Objeto Json em um vetor de Jsons
 			candidatos.put(candidato[i]);
 		}
@@ -83,7 +87,7 @@ public class CandidatoDAO extends DAO{
 		if (Total < TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Candidato(Nome, Numero, Cpf,NumeroPartido , NomePartido);
 			if (celulaVetor != null) {//Evita "lixo" no array
-				Array[Total] = this.celulaVetor;
+                            Array.set(Total,this.celulaVetor);
 				Total++;
 				return true;
 			}
@@ -94,7 +98,7 @@ public class CandidatoDAO extends DAO{
 		if (Total < TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Candidato(Nome, Numero, Cpf,Partido);
 			if (celulaVetor != null) {//Evita "lixo" no array
-				Array[Total] = this.celulaVetor;
+				 Array.set(Total,this.celulaVetor);
 				Total++;
 				return true;
 			}
@@ -108,31 +112,11 @@ public class CandidatoDAO extends DAO{
 	public boolean CriarCandidato(Candidato candidato) {
 		if (Total <= TAMANHO && candidato != null) {//Evita estourar Array e "lixo" no array
 			this.celulaVetor = candidato;
-			Array[Total] = this.celulaVetor;
+			 Array.set(Total,this.celulaVetor);
 			Total++;
 			return true;
 		}
 		return false;
-
-	}
-	/**Para futuras implementações
-	 * @param candidato - Objeto candidato
-	 */
-	public void DeletaCandidato(Candidato candidato) {
-		if(candidato ==null) {//evita erro
-			return;
-		}
-		if (Total != 0) {
-			for (int i = 0; i < Total; i++) {
-				if (Array[i] == candidato) {
-					Array[i] = null;
-					Array[i] = Array[Total];
-					Array[Total] = null;
-					Total--;
-					return;
-				}
-			}
-		}
 
 	}
 	
@@ -143,8 +127,8 @@ public class CandidatoDAO extends DAO{
 	public int intCCPF(String cpf) {
 		int contador=0;
 		for (int i = 0; i < Total; i++) {
-			if(Array[i]!=null) {
-				if (Array[i].getCpf().equals(cpf)) {
+			if(Array.get(i)!=null) {
+				if (Array.get(i).getCpf().equals(cpf)) {
 					contador++;
 				}
 			}
@@ -159,9 +143,9 @@ public class CandidatoDAO extends DAO{
 	public Candidato ObjectNumero(String numero) {
 		int num=Integer.parseInt(numero);
 		for (int i = 0; i < Total; i++) {
-			if(Array[i]!=null) {
-				if (Array[i].getNumero() == num) {
-					return Array[i];// Retorna o candidato com Numero procurado
+			if(Array.get(i)!=null) {
+				if (Array.get(i).getNumero() == num) {
+					return Array.get(i);// Retorna o candidato com Numero procurado
 				}
 			}
 		}
@@ -181,9 +165,9 @@ public class CandidatoDAO extends DAO{
 		cpf = doc.toString();// pega o sem pontuação pois em candidato fica salvo o sem pontuação
 
 		for (int i = 0; i < Total; i++) {
-			if(Array[i]!=null) {
-				if (Array[i].getCpf().equals(cpf)) {
-					return Array[i];// Retorna o candidato com Numero procurado
+			if(Array.get(i)!=null) {
+				if (Array.get(i).getCpf().equals(cpf)) {
+					return Array.get(i);// Retorna o candidato com Numero procurado
 				}
 			}
 		}
@@ -194,7 +178,7 @@ public class CandidatoDAO extends DAO{
             return Total;
         }
         public Candidato CandidatoIndice(int i){
-            return Array[i];
+            return Array.get(i);
         }  
         
         
