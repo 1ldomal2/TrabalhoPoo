@@ -137,8 +137,20 @@ public class Central {
      * @param CampoCPF CPF do candidato
      * @return se foi possivel criar o candidato
      */
-    public boolean CadastrarCandidato(String CampoPartido, String CampoNomeCandidato, String CampoNumeroCandidato, String CampoCPF) {//Passa os N Campos
-
+    public boolean CadastrarCandidato(String CampoPartido, String CampoNomeCandidato, String CampoNumeroCandidato, String CampoCPF,String CampoSigla) throws Throwable {//Passa os N Campos
+        
+                            //Verifica sigla
+                            boolean presidente=false;
+                            try {
+                                int cod = Estados.valueOf(CampoSigla).getCod();
+                                if(cod == Estados.BR.getCod()){
+                                    presidente=true;
+                                }
+                            } catch (Exception e) {
+                                //ERRO SIGLA INVALIDA
+                            }
+       
+        
         //Verificando Nome
         if (CampoNomeCandidato.length() == 0) {
             JOptionPane.showMessageDialog(null, "Nome não pode ser Nulo");
@@ -205,7 +217,7 @@ public class Central {
 
         //Procurar se ja existe algum candidato com mesmo numero
         try {
-            criado = cDAO.CriarCandidato(CampoNomeCandidato, CampoNumeroCandidato, CampoCPF, partido);
+            criado = cDAO.CriarCandidato(CampoNomeCandidato, CampoNumeroCandidato, CampoCPF, partido,CampoSigla);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao cadastrar");
         }

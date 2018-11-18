@@ -6,9 +6,14 @@ import MODELO.Candidato;
 import MODELO.Documentos;
 import JSON.JSONArray;
 import JSON.JSONObject;
+import MODELO.Deputado;
+import MODELO.Estados;
+import MODELO.Presidente;
 import com.google.api.services.drive.Drive;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
@@ -27,14 +32,18 @@ public class CandidatoDAO extends DAO{
 	public void Receive() {                
 		//String json ="{\"Candidato\":[{\"Numero\":\"11111\",\"NumeroPartido\":\"21\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome1\",\"NomePartido\":\"s1\"},{\"Numero\":\"12345\",\"NumeroPartido\":\"22\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome2\",\"NomePartido\":\"s2\"},{\"Numero\":\"00000\",\"NumeroPartido\":\"23\",\"Cpf\":\"066.809.236-03\",\"Nome\":\"Nome3\",\"NomePartido\":\"s3\"}]}";
                 String  json=DownloadJson();
-                
+
+            try {
                 ReadJson(json);
+            } catch (Throwable ex) {
+              //ERRO JSON
+            }
 	}
 	
 	/**Le o Json
 	 * @param Sjson - String com Json
 	 */
-	public void ReadJson(String Sjson) {
+	public void ReadJson(String Sjson) throws Throwable {
             //Cria um Objeto Json com a String passada como parametro
             JSONObject json=new JSONObject(Sjson);
 	
@@ -47,7 +56,14 @@ public class CandidatoDAO extends DAO{
                 JSONObject c = jsonCandidatos.getJSONObject(i);
                 
                 //Adiciona ao Vetor
-                this.CriarCandidato(c.getString("Nome"), c.getString("Numero"),c.getString("Cpf"),c.getString("NumeroPartido"),c.getString("NomePartido"));
+                    if(Estados.BR.getSigla().equals(c.getString("Sigla"))){
+                       //Se Presidente 
+                         this.CriarCandidato(c.getString("Nome"), c.getString("Numero"),c.getString("Cpf"),c.getString("NumeroPartido"),c.getString("NomePartido"),c.getString("Sigla"));
+                    }else{
+                       //Se Deputado
+                         this.CriarCandidato(c.getString("Nome"), c.getString("Numero"),c.getString("Cpf"),c.getString("NumeroPartido"),c.getString("NomePartido"),c.getString("Sigla"));
+                    }
+ 
             }
 		
 		
@@ -68,6 +84,7 @@ public class CandidatoDAO extends DAO{
 			candidato[i].put("Cpf",Array.get(i).getCpf());
 			candidato[i].put("NomePartido",Array.get(i).getPartido().getNome());
 			candidato[i].put("NumeroPartido",""+Array.get(i).getPartido().getNumero());//Transformando o int em string
+                        candidato[i].put("Sigla",""+Array.get(i).getSigla());//Transformando o int em string
 			//Adicionao Objeto Json em um vetor de Jsons
 			candidatos.put(candidato[i]);
 		}
@@ -83,8 +100,22 @@ public class CandidatoDAO extends DAO{
 	 * @return Boolean - Confirmando se criou ou nao o candidato
 	 * */
         
-	public boolean CriarCandidato(String Nome, String Numero, String Cpf, String NumeroPartido,String NomePartido) {
+	public boolean CriarCandidato(String Nome, String Numero, String Cpf, String NumeroPartido,String NomePartido,String Sigla) throws Throwable {
 		if (Total < TAMANHO) {//Evita estourar Array
+                        //Verifica se é Deputado ou presidente
+                                Integer cod=null;
+                                try {
+                                    cod=Estados.valueOf(Sigla).getCod();
+                                } catch (Exception e) {
+                                    //ERRO
+                                    return false;
+                                }
+                                if(cod==0){
+                                   this.celulaVetor = new Presidente(Nome, Numero, Cpf,NumeroPartido , NomePartido,Sigla);
+                                }else{
+                                   this.celulaVetor = new Deputado(Nome, Numero, Cpf,NumeroPartido , NomePartido,Sigla);
+                                }
+
 			this.celulaVetor = new Candidato(Nome, Numero, Cpf,NumeroPartido , NomePartido);
 			if (celulaVetor != null) {//Evita "lixo" no array
                             Array.set(Total,this.celulaVetor);
@@ -94,9 +125,22 @@ public class CandidatoDAO extends DAO{
 		}
 		return false;
 	}
-	public boolean CriarCandidato(String Nome, String Numero, String Cpf, Partido Partido) {
+	public boolean CriarCandidato(String Nome, String Numero, String Cpf, Partido Partido,String Sigla) throws Throwable {
 		if (Total < TAMANHO) {//Evita estourar Array
-			this.celulaVetor = new Candidato(Nome, Numero, Cpf,Partido);
+                        //Verifica se é Deputado ou presidente
+                            Integer cod=null;
+                            try {
+                                cod=Estados.valueOf(Sigla).getCod();
+                            } catch (Exception e) {
+                                //ERRO
+                                return false;
+                            }
+                            if(cod==0){
+                                this.celulaVetor = new Presidente(Nome, Numero, Cpf,Partido,Sigla);
+                            }else{
+                                this.celulaVetor = new Deputado(Nome, Numero, Cpf,Partido,Sigla);
+                            }
+                        
 			if (celulaVetor != null) {//Evita "lixo" no array
 				 Array.set(Total,this.celulaVetor);
 				Total++;

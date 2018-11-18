@@ -17,9 +17,10 @@ public class Presidente extends Candidato {
         super(Nome,Numero,Cpf,NumeroPartido,NomePartido);
         //Se o Cpf foi valido continua fazendo o Deputado
         if(this.getNome()!= null){
-         
             if(Sigla != Estados.BR.getSigla()){
                 this.finalize();
+            }else{
+            this.setSigla( Estados.BR.getSigla());
             }
         }
         
@@ -31,8 +32,42 @@ public class Presidente extends Candidato {
         if(this.getNome()!= null){
             if(Cod != Estados.BR.getCod()){
                 this.finalize();
+            }else{
+            this.setSigla( Estados.BR.getSigla());
             }
         }
         
     }
+
+
+
+    public Presidente(String Nome, String Numero, String Cpf, Partido Partido,int Cod) throws Throwable {// Import do
+         //Chama o construtor do pai
+        super( Nome,  Numero,  Cpf, Partido);
+        //Se o Cpf foi valido continua fazendo o Deputado
+        if(this.getNome()!= null){
+            if(Cod != Estados.BR.getCod()){
+                this.finalize();
+            }else{
+                this.setSigla( Estados.BR.getSigla());
+            }
+        }
+    }
+    
+    
+    public Presidente(String Nome, String Numero, String Cpf,Partido Partido,String Sigla) throws Throwable{
+        //Chama o construtor do pai
+        super( Nome,  Numero,  Cpf, Partido);
+        //Se o Cpf foi valido continua fazendo o Deputado
+        if(this.getNome()!= null){
+         
+            if(Sigla != Estados.BR.getSigla()){
+                this.finalize();
+            }else{
+                this.setSigla( Estados.BR.getSigla());
+            }
+        }
+        
+    }
+  
 }

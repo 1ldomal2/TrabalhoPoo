@@ -12,7 +12,16 @@ public class Candidato {
     private int Numero;
     private Documentos Cpf;
     private Partido Partido;
+    private String Sigla;
 
+      public void setSigla(String Sigla) {
+        this.Sigla = Sigla;
+    }
+
+    public String getSigla() {
+        return Sigla;
+    }
+    
     public Candidato() {
 
     }
