@@ -21,7 +21,6 @@ public class PartidoDAO extends DAO {
 
 	/**Conexao com Google drive*/
 	public void Receive() {
-		//String json="{\"Partido\":[{\"Numero\":\"1\",\"Nome\":\"Nome\"},{\"Numero\":\"2\",\"Nome\":\"Name\"}]}";
                 String  json=DownloadJson();
 		try {
 			ReadJson(json);
@@ -82,10 +81,12 @@ public class PartidoDAO extends DAO {
 	public boolean CriarPartido(String Numero, String Nome) {
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Partido(Numero, Nome ) ;
+                        System.out.println("OK");
 			if (celulaVetor != null) {//Evita "lixo" no array
-                            Array.set(Total, this.celulaVetor);
-				Total++;
-				return true;
+                            Array.add(this.celulaVetor);
+                            //Array.set(++Total, this.celulaVetor);
+                            Total++;
+                            return true;
 			}
 		}
 		return false;
@@ -98,8 +99,9 @@ public class PartidoDAO extends DAO {
 	public boolean CriarPartido(Partido partido) {
 		if (Total <= TAMANHO && partido != null) {//Evita estourar Array e "lixo" no array
 			this.celulaVetor = partido;
-			Array.set(Total, this.celulaVetor);
-			Total++;
+			Array.add(this.celulaVetor);
+                        //Array.set(++Total, this.celulaVetor);
+                        Total++;
 			return true;
 		}
 		return false;

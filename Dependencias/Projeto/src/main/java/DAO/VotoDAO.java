@@ -105,8 +105,9 @@ public class VotoDAO extends DAO {
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Voto(eleitor,candidato, numero ) ;
 			if (celulaVetor != null) {//Evita "lixo" no array
-                                Array.set(Total,this.celulaVetor);
-				Total++;
+                            Array.add(this.celulaVetor);
+                            //Array.set(++Total, this.celulaVetor);
+                            Total++;
 			}
 		}
 		return;
@@ -124,8 +125,9 @@ public class VotoDAO extends DAO {
 		if (Total <= TAMANHO) {//Evita estourar Array
 			this.celulaVetor = new Voto(eleitor,candidato, numero,time) ;
 			if (celulaVetor != null) {//Evita "lixo" no array
-				Array.set(Total,this.celulaVetor);
-				Total++;
+                            Array.add(this.celulaVetor);
+                            //Array.set(++Total, this.celulaVetor);
+                            Total++;
 			}
 		}
 		return;
@@ -138,8 +140,9 @@ public class VotoDAO extends DAO {
 		System.out.println("Criando Voto");
 		if (Total <= TAMANHO && Voto != null) {//Evita estourar Array e "lixo" no array
 			this.celulaVetor = Voto;
-			 Array.set(Total,this.celulaVetor);
-			Total++;
+			Array.add(this.celulaVetor);
+                        //Array.set(++Total, this.celulaVetor);
+                        Total++;
 		}
 		return;
 

@@ -95,9 +95,10 @@ public class EleitorDAO extends DAO{
 		if (Total <= TAMANHO) {// Evita estourar Array
 			this.celulaVetor = new Eleitor(TituloEleitor, Nome, Cpf, UrnaVotacao, Senha);
 			if (celulaVetor != null) {// Evita "lixo" no array
-                                Array.set(Total,this.celulaVetor);
-				Total++;
-				return true;
+                            Array.add(this.celulaVetor);
+                            //Array.set(++Total, this.celulaVetor);
+                            Total++;
+                            return true;
 			}
 		}
 		return false;

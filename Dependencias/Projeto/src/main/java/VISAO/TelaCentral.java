@@ -8,6 +8,8 @@ import CENTRAL.Central;
 import MODELO.*;
 import DAO.*;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
@@ -708,7 +710,11 @@ public class TelaCentral extends javax.swing.JFrame {
         String CampoCPF=CandidatoCampoCPF.getText();
         String CampoPartido=CandidatoCampoPartido.getText();
         String CampoSigla=CandidatoCampoSigla.getText();
-        validacao = instancia.CadastrarCandidato(CampoPartido, CampoNomeCandidato, CampoNumeroCandidato, CampoCPF,CampoSigla);
+        try {
+            validacao = instancia.CadastrarCandidato(CampoPartido, CampoNomeCandidato, CampoNumeroCandidato, CampoCPF,CampoSigla);
+        } catch (Throwable ex) {
+            //ERRO;
+        }
         if(validacao){
             instancia.Send();
             String DadosCandidato="Nome: "+CampoNomeCandidato+

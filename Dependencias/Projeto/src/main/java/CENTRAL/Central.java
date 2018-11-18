@@ -41,11 +41,16 @@ public class Central {
         //Carrega Dados Da ultima seção 
         try {
             pDAO.Receive();
+            System.out.println("Receive Partido");
             //Partido tem que vir antes de Candidato
             cDAO.Receive();
+            System.out.println("Receive Candidatos");
             eDAO.Receive();
+            System.out.println("Receive Eleitores");
             vDAO.Receive();//Voto tem que vir depois de eleitor e de candidato
+            System.out.println("Receive Votos");
         } catch (Exception e) {
+            //ERRO
             JOptionPane.showMessageDialog(null, "Erro Ao Baixar do Drive,Verifique sua Conexão");
         }
         nVotos = new int[50];

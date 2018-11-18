@@ -118,8 +118,9 @@ public class CandidatoDAO extends DAO{
 
 			this.celulaVetor = new Candidato(Nome, Numero, Cpf,NumeroPartido , NomePartido);
 			if (celulaVetor != null) {//Evita "lixo" no array
-                            Array.set(Total,this.celulaVetor);
-				Total++;
+                            Array.add(this.celulaVetor);
+                            //Array.set(++Total, this.celulaVetor);
+                            Total++;
 				return true;
 			}
 		}
@@ -142,9 +143,10 @@ public class CandidatoDAO extends DAO{
                             }
                         
 			if (celulaVetor != null) {//Evita "lixo" no array
-				 Array.set(Total,this.celulaVetor);
-				Total++;
-				return true;
+                            Array.add(this.celulaVetor);
+                            //Array.set(++Total, this.celulaVetor);
+                            Total++;
+                            return true;
 			}
 		}
 		return false;
