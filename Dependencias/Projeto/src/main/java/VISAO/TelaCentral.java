@@ -37,6 +37,18 @@ public class TelaCentral extends javax.swing.JFrame {
     public TelaCentral(Central central) {
         this.instancia=central;
         initComponents();
+        
+        
+        CandidatoCampoSigla.removeAllItems();
+        estado.removeAllItems();
+        
+        List<Estados> list = Arrays.asList(Estados.values());
+        for (int i = 0; i < list.size(); i++){
+            String Sigla=list.get(i).name();
+            CandidatoCampoSigla.addItem(Estados.valueOf(Sigla).getSigla());
+            estado.addItem(Estados.valueOf(Sigla).getSigla());
+        }
+        
         this.setTitle("Central");
         //Ficas esteticamente bonito
         ListLabelCPF.setText("");
@@ -160,9 +172,11 @@ public class TelaCentral extends javax.swing.JFrame {
         ListLabelNVotos = new javax.swing.JLabel();
         ListLabelSigla = new javax.swing.JLabel();
         PanelVencedor = new javax.swing.JLayeredPane();
-        resultadoTxt = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         VencedorTxt = new javax.swing.JTextArea();
+        estado = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        resultadoTxt = new javax.swing.JLabel();
 
         jLabel4.setText("jLabel1");
 
@@ -366,7 +380,7 @@ public class TelaCentral extends javax.swing.JFrame {
         PanelCandidatoLayout.setHorizontalGroup(
             PanelCandidatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelCandidatoLayout.createSequentialGroup()
-                .addContainerGap(498, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(CandidatoButaoCriar1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
             .addGroup(PanelCandidatoLayout.createSequentialGroup()
@@ -384,7 +398,7 @@ public class TelaCentral extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addComponent(CandidatoCampoCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
                         .addComponent(Candidato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(442, Short.MAX_VALUE))
         );
         PanelCandidatoLayout.setVerticalGroup(
             PanelCandidatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -610,15 +624,68 @@ public class TelaCentral extends javax.swing.JFrame {
             }
         });
 
-        resultadoTxt.setText("Vencedor?");
-
         VencedorTxt.setEditable(false);
         VencedorTxt.setColumns(20);
         VencedorTxt.setRows(5);
         jScrollPane1.setViewportView(VencedorTxt);
 
-        PanelVencedor.setLayer(resultadoTxt, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        estado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                estadoItemStateChanged(evt);
+            }
+        });
+        estado.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                estadoPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+        estado.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                estadoInputMethodTextChanged(evt);
+            }
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                estadoCaretPositionChanged(evt);
+            }
+        });
+        estado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadoActionPerformed(evt);
+            }
+        });
+        estado.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                estadoPropertyChange(evt);
+            }
+        });
+        estado.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                estadoVetoableChange(evt);
+            }
+        });
+
+        jButton1.setText("Vencedor");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        resultadoTxt.setText(".");
+
         PanelVencedor.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelVencedor.setLayer(estado, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelVencedor.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelVencedor.setLayer(resultadoTxt, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout PanelVencedorLayout = new javax.swing.GroupLayout(PanelVencedor);
         PanelVencedor.setLayout(PanelVencedorLayout);
@@ -627,19 +694,28 @@ public class TelaCentral extends javax.swing.JFrame {
             .addGroup(PanelVencedorLayout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(PanelVencedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE)
                     .addGroup(PanelVencedorLayout.createSequentialGroup()
-                        .addComponent(resultadoTxt)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE))
+                        .addGroup(PanelVencedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(resultadoTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(PanelVencedorLayout.createSequentialGroup()
+                                .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PanelVencedorLayout.setVerticalGroup(
             PanelVencedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelVencedorLayout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(92, 92, 92)
+                .addGroup(PanelVencedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(5, 5, 5)
                 .addComponent(resultadoTxt)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -660,14 +736,8 @@ public class TelaCentral extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PanelAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_PanelAncestorAdded
-        CandidatoCampoSigla.removeAllItems();
-        
-        List<Estados> list = Arrays.asList(Estados.values());
-        for (int i = 0; i < list.size(); i++){
-            String Sigla=list.get(i).name();
-             CandidatoCampoSigla.addItem(Estados.valueOf(Sigla).getSigla());
-        }
-        
+  
+       
     }//GEN-LAST:event_PanelAncestorAdded
 
     private void jList3ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList3ValueChanged
@@ -847,8 +917,52 @@ public class TelaCentral extends javax.swing.JFrame {
     }//GEN-LAST:event_PanelStateChanged
 
     private void PanelVencedorComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_PanelVencedorComponentShown
-        int [] indiceVencedores = instancia.indiceVencedores();
+        
+    }//GEN-LAST:event_PanelVencedorComponentShown
+
+    private void CandidatoCampoSiglaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CandidatoCampoSiglaActionPerformed
+
+    }//GEN-LAST:event_CandidatoCampoSiglaActionPerformed
+
+    private void estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoActionPerformed
+        
+    }//GEN-LAST:event_estadoActionPerformed
+
+    private void estadoVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_estadoVetoableChange
+       
+    }//GEN-LAST:event_estadoVetoableChange
+
+    private void estadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_estadoItemStateChanged
+      
+    }//GEN-LAST:event_estadoItemStateChanged
+
+    private void estadoInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_estadoInputMethodTextChanged
+      
+    }//GEN-LAST:event_estadoInputMethodTextChanged
+
+    private void estadoPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_estadoPopupMenuWillBecomeInvisible
+        
+        
+    }//GEN-LAST:event_estadoPopupMenuWillBecomeInvisible
+
+    private void estadoCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_estadoCaretPositionChanged
+                // TODO add your handling code here:
+    }//GEN-LAST:event_estadoCaretPositionChanged
+
+    private void estadoPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_estadoPropertyChange
+                // TODO add your handling code here:
+    }//GEN-LAST:event_estadoPropertyChange
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        
+        String SiglaEstado=estado.getItemAt(estado.getSelectedIndex());
+        int [] indiceVencedores = instancia.indiceVencedores(SiglaEstado);
         if(indiceVencedores==null){
+            resultadoTxt.setText("Não teve votos");
             return;
         }
         if(indiceVencedores.length >1){
@@ -862,12 +976,8 @@ public class TelaCentral extends javax.swing.JFrame {
             resultadoTxt.setText("Vencedor foi:");
             Candidato vencedor=instancia.CandidatoIndice(indiceVencedores[0]);
             VencedorTxt.setText("\n"+vencedor.getNome());
-        }      
-    }//GEN-LAST:event_PanelVencedorComponentShown
-
-    private void CandidatoCampoSiglaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CandidatoCampoSiglaActionPerformed
-
-    }//GEN-LAST:event_CandidatoCampoSiglaActionPerformed
+        }    
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -940,6 +1050,8 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JTextField PartidoCampoNumero;
     private javax.swing.JTable Tabela;
     private javax.swing.JTextArea VencedorTxt;
+    private javax.swing.JComboBox<String> estado;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

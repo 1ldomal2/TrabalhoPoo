@@ -53,8 +53,8 @@ public class Central {
             //ERRO
             JOptionPane.showMessageDialog(null, "Erro Ao Baixar do Drive,Verifique sua Conexão");
         }
-        nVotos = new int[50];
-        //Cria com 50 mas nao usa Todos
+        nVotos = new int[cDAO.getTotal()];
+        //Cria com o numero total de candidatos
 
         //Habilita a Tela
         tela = new TelaCentral(this);
@@ -125,6 +125,7 @@ public class Central {
         for (int i = 0; i < cDAO.getTotal(); i++) {//Pega a Quantidade de Votos de cada eleitor
             //Cria Objetos Json
             resultado[i] = new JSONObject();
+            resultado[i].put("Sigla", cDAO.CandidatoIndice(i).getSigla());
             resultado[i].put("Nome", cDAO.CandidatoIndice(i).getNome());
             resultado[i].put("Votos", "" + nVotoIndice(i));
             //Adicionao Objeto Json em um vetor de Jsons
@@ -378,7 +379,7 @@ public class Central {
     private void CalculaVotos() {
         for (int i = 0; i < cDAO.getTotal(); i++) {//Pega a Quantidade de Votos de cada eleitor
             nVotos[i] = vDAO.NVotosCandidato(cDAO.CandidatoIndice(i));
-            System.out.println(cDAO.CandidatoIndice(i).getNome() + " possui " + nVotos[i] + " votos");
+           // System.out.println("Candidato do "+cDAO.CandidatoIndice(i).getSigla()+" "+cDAO.CandidatoIndice(i).getNome() + " possui " + nVotos[i] + " votos");
         };
     }
 
@@ -400,6 +401,60 @@ public class Central {
                     qtdRepeticoes++;
                 }
             }
+        }
+        if(maior==0){//Significa que o vetor de votos está vazio
+            return null;
+        }
+        //So é necessario este for por não usar alocação dinamica
+        int[] indiceVencedores = null;
+        if (qtdRepeticoes == 0) {
+            indiceVencedores = new int[1];
+        } else {
+            //quantidade que repetiu a isntancia + a propria instancia
+            indiceVencedores = new int[qtdRepeticoes+1];
+        }
+        
+        int jaPreenchido = 0;
+        for (int i = 0; i < nVotos.length; i++) {
+            if (nVotos[i] == maior) {
+                indiceVencedores[jaPreenchido] = i;
+                jaPreenchido++;
+            }
+        }
+        
+        for (int i = 0; i < jaPreenchido; i++) {
+            System.out.println(indiceVencedores[i]);
+
+        }
+        return indiceVencedores;
+    }
+
+    
+    
+    
+    public int[] indiceVencedores(String Sigla) {
+        try {
+            Estados.valueOf(Sigla);
+        } catch (Exception e) {
+            //Erro
+            System.out.println("Sigla Incorreta");
+        }
+        
+        Resultado();
+        //Muito Procesasmento Desnecessário porem não estou usando alocamento dinamico
+        int maior = 0;// nVotos[0];
+        int qtdRepeticoes = 0;
+        for (int i = 0; i < nVotos.length; i++) {//Começa da segunda posição para evitar erro na qtd de repetição
+            if(cDAO.CandidatoIndice(i).getSigla().equals(Estados.valueOf(Sigla).getSigla())){//verifica se é do mesmo estado
+                if (nVotos[i] >= maior) {
+                    if (nVotos[i] > maior) {
+                        maior = nVotos[i];
+                        qtdRepeticoes = 0;
+                    } else {
+                        qtdRepeticoes++;
+                    }
+                }
+             }
         }
         if(maior==0){//Significa que o vetor de votos está vazio
             return null;
