@@ -5,6 +5,8 @@
  */
 package MODELO;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lucas
@@ -25,11 +27,12 @@ public class Deputado  extends Candidato{
                 this.finalize();
             }
     
-            if(estado == Estados.BR.getSigla()){//Se vier BR é presidente e não deputado Federal
+            if(estado.equals(Estados.BR.getSigla())){//Se vier BR é presidente e não deputado Federal
                 this.finalize();
-               } 
             }
             this.setSigla(estado);
+        }
+          
     
     }
     
@@ -46,11 +49,12 @@ public class Deputado  extends Candidato{
                 this.finalize();
             }
     
-            if(estado == Estados.BR.getSigla()){//Se vier BR é presidente e não deputado Federal
+            if(estado.equals(Estados.BR.getSigla())){//Se vier BR é presidente e não deputado Federal
                 this.finalize();
-               } 
             }
             this.setSigla(estado);
+        }
+           
     }
 
     public void setEstado(String estado){

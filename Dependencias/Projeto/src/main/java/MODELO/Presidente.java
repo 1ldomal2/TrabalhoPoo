@@ -16,11 +16,12 @@ public class Presidente extends Candidato {
         //Chama o construtor do pai
         super(Nome,Numero,Cpf,NumeroPartido,NomePartido);
         //Se o Cpf foi valido continua fazendo o Deputado
-        if(this.getNome()!= null){
-            if(Sigla != Estados.BR.getSigla()){
+        
+        if(!(this.getNome()== null ||this.getNome().equals("") ||this.getNome().equals(" "))){
+            if(! Sigla.equals(Estados.BR.getSigla())){
                 this.finalize();
             }else{
-            this.setSigla( Estados.BR.getSigla());
+                this.setSigla( Estados.BR.getSigla());
             }
         }
         
@@ -29,11 +30,11 @@ public class Presidente extends Candidato {
         //Chama o construtor do pai
         super(Nome,Numero,Cpf,NumeroPartido,NomePartido);
         //Se o Cpf foi valido continua fazendo o Deputado
-        if(this.getNome()!= null){
+        if(!(this.getNome()== null ||this.getNome().equals("") ||this.getNome().equals(" "))){
             if(Cod != Estados.BR.getCod()){
                 this.finalize();
             }else{
-            this.setSigla( Estados.BR.getSigla());
+                this.setSigla( Estados.BR.getSigla());
             }
         }
         
@@ -45,7 +46,7 @@ public class Presidente extends Candidato {
          //Chama o construtor do pai
         super( Nome,  Numero,  Cpf, Partido);
         //Se o Cpf foi valido continua fazendo o Deputado
-        if(this.getNome()!= null){
+        if(!(this.getNome()== null ||this.getNome().equals("") ||this.getNome().equals(" "))){
             if(Cod != Estados.BR.getCod()){
                 this.finalize();
             }else{
@@ -59,14 +60,13 @@ public class Presidente extends Candidato {
         //Chama o construtor do pai
         super( Nome,  Numero,  Cpf, Partido);
         //Se o Cpf foi valido continua fazendo o Deputado
-        if(this.getNome()!= null){
-         
-            if(Sigla != Estados.BR.getSigla()){
+        if(!(this.getNome()== null ||this.getNome().equals("") ||this.getNome().equals(" "))){
+            if(! Sigla.equals(Estados.BR.getSigla())){
                 this.finalize();
             }else{
                 this.setSigla( Estados.BR.getSigla());
             }
-        }
+        }   
         
     }
   

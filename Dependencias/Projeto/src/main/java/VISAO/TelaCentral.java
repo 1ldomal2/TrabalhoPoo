@@ -157,7 +157,7 @@ public class TelaCentral extends javax.swing.JFrame {
         ListLabelNomePartido = new javax.swing.JLabel();
         ListLabelNumero = new javax.swing.JLabel();
         ListLabelNVotos = new javax.swing.JLabel();
-        ListLabelNVotos1 = new javax.swing.JLabel();
+        ListLabelSigla = new javax.swing.JLabel();
         PanelVencedor = new javax.swing.JLayeredPane();
         resultadoTxt = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -547,7 +547,7 @@ public class TelaCentral extends javax.swing.JFrame {
 
         ListLabelNVotos.setText("Total de Votos");
 
-        ListLabelNVotos1.setText("Total de Votos");
+        ListLabelSigla.setText("Sigla");
 
         PanelResultado.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
         PanelResultado.setLayer(ListLabelNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -556,7 +556,7 @@ public class TelaCentral extends javax.swing.JFrame {
         PanelResultado.setLayer(ListLabelNomePartido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         PanelResultado.setLayer(ListLabelNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
         PanelResultado.setLayer(ListLabelNVotos, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        PanelResultado.setLayer(ListLabelNVotos1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelResultado.setLayer(ListLabelSigla, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout PanelResultadoLayout = new javax.swing.GroupLayout(PanelResultado);
         PanelResultado.setLayout(PanelResultadoLayout);
@@ -577,7 +577,7 @@ public class TelaCentral extends javax.swing.JFrame {
                             .addComponent(ListLabelNomePartido)
                             .addComponent(ListLabelNumeroPartido)
                             .addComponent(ListLabelNVotos)
-                            .addComponent(ListLabelNVotos1))
+                            .addComponent(ListLabelSigla))
                         .addContainerGap())))
         );
         PanelResultadoLayout.setVerticalGroup(
@@ -597,7 +597,7 @@ public class TelaCentral extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(ListLabelNVotos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ListLabelNVotos1)
+                .addComponent(ListLabelSigla)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -688,6 +688,8 @@ public class TelaCentral extends javax.swing.JFrame {
                 }else{
                     JOptionPane.showMessageDialog(null, "Erro Partido Invalido");
                 }
+                ListLabelSigla.setText("Sigla:"+candidato.getSigla());
+                //LUCAS
             }
         }
     }//GEN-LAST:event_jList3ValueChanged
@@ -726,7 +728,6 @@ public class TelaCentral extends javax.swing.JFrame {
         String CampoCPF=CandidatoCampoCPF.getText();
         String CampoPartido=CandidatoCampoPartido.getText();
         String CampoSigla=CandidatoCampoSigla.getItemAt(CandidatoCampoSigla.getSelectedIndex());
-        //LUCAS
         System.out.println();
         try {
             validacao = instancia.CadastrarCandidato(CampoPartido, CampoNomeCandidato, CampoNumeroCandidato, CampoCPF,CampoSigla);
@@ -924,11 +925,11 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JTextField EleitorCampoUrna;
     private javax.swing.JLabel ListLabelCPF;
     private javax.swing.JLabel ListLabelNVotos;
-    private javax.swing.JLabel ListLabelNVotos1;
     private javax.swing.JLabel ListLabelNome;
     private javax.swing.JLabel ListLabelNomePartido;
     private javax.swing.JLabel ListLabelNumero;
     private javax.swing.JLabel ListLabelNumeroPartido;
+    private javax.swing.JLabel ListLabelSigla;
     private javax.swing.JTabbedPane Panel;
     private javax.swing.JLayeredPane PanelCandidato;
     private javax.swing.JLayeredPane PanelEleitor;

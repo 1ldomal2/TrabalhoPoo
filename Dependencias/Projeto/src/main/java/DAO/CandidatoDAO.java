@@ -36,7 +36,7 @@ public class CandidatoDAO extends DAO{
             try {
                 ReadJson(json);
             } catch (Throwable ex) {
-              //ERRO JSON
+                //ERRO JSON
             }
 	}
 	
@@ -84,7 +84,7 @@ public class CandidatoDAO extends DAO{
 			candidato[i].put("Cpf",Array.get(i).getCpf());
 			candidato[i].put("NomePartido",Array.get(i).getPartido().getNome());
 			candidato[i].put("NumeroPartido",""+Array.get(i).getPartido().getNumero());//Transformando o int em string
-                        candidato[i].put("Sigla",""+Array.get(i).getSigla());//Transformando o int em string
+                        candidato[i].put("Sigla",""+Array.get(i).getSigla());
 			//Adicionao Objeto Json em um vetor de Jsons
 			candidatos.put(candidato[i]);
 		}
@@ -115,8 +115,7 @@ public class CandidatoDAO extends DAO{
                                 }else{
                                    this.celulaVetor = new Deputado(Nome, Numero, Cpf,NumeroPartido , NomePartido,Sigla);
                                 }
-
-			this.celulaVetor = new Candidato(Nome, Numero, Cpf,NumeroPartido , NomePartido);
+                                
 			if (celulaVetor != null) {//Evita "lixo" no array
                             Array.add(this.celulaVetor);
                             //Array.set(++Total, this.celulaVetor);
@@ -137,8 +136,10 @@ public class CandidatoDAO extends DAO{
                                 return false;
                             }
                             if(cod==0){
+                                System.out.println("Criando Presidente");
                                 this.celulaVetor = new Presidente(Nome, Numero, Cpf,Partido,Sigla);
                             }else{
+                                System.out.println("Criando Deputado");
                                 this.celulaVetor = new Deputado(Nome, Numero, Cpf,Partido,Sigla);
                             }
                         

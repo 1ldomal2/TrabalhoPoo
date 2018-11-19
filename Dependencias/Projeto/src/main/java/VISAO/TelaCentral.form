@@ -545,7 +545,7 @@
                                   <Component id="ListLabelNomePartido" min="-2" max="-2" attributes="0"/>
                                   <Component id="ListLabelNumeroPartido" min="-2" max="-2" attributes="0"/>
                                   <Component id="ListLabelNVotos" min="-2" max="-2" attributes="0"/>
-                                  <Component id="ListLabelNVotos1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="ListLabelSigla" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -570,7 +570,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="ListLabelNVotos" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="ListLabelNVotos1" min="-2" max="-2" attributes="0"/>
+                      <Component id="ListLabelSigla" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -635,9 +635,9 @@
                 <Property name="text" type="java.lang.String" value="Total de Votos"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="ListLabelNVotos1">
+            <Component class="javax.swing.JLabel" name="ListLabelSigla">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Total de Votos"/>
+                <Property name="text" type="java.lang.String" value="Sigla"/>
               </Properties>
             </Component>
           </SubComponents>
