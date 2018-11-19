@@ -660,7 +660,14 @@ public class TelaCentral extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PanelAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_PanelAncestorAdded
-        // TODO add your handling code here:
+        CandidatoCampoSigla.removeAllItems();
+        
+        List<Estados> list = Arrays.asList(Estados.values());
+        for (int i = 0; i < list.size(); i++){
+            String Sigla=list.get(i).name();
+             CandidatoCampoSigla.addItem(Estados.valueOf(Sigla).getSigla());
+        }
+        
     }//GEN-LAST:event_PanelAncestorAdded
 
     private void jList3ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList3ValueChanged
@@ -835,13 +842,6 @@ public class TelaCentral extends javax.swing.JFrame {
     }//GEN-LAST:event_EleitorButaoCriarActionPerformed
 
     private void PanelStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_PanelStateChanged
-        CandidatoCampoSigla.removeAllItems();
-        
-        List<Estados> list = Arrays.asList(Estados.values());
-        for (int i = 0; i < list.size(); i++){
-            String Sigla=list.get(i).name();
-             CandidatoCampoSigla.addItem(Estados.valueOf(Sigla).getSigla());
-        }
         
       
     }//GEN-LAST:event_PanelStateChanged
@@ -866,11 +866,7 @@ public class TelaCentral extends javax.swing.JFrame {
     }//GEN-LAST:event_PanelVencedorComponentShown
 
     private void CandidatoCampoSiglaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CandidatoCampoSiglaActionPerformed
-        
-        System.out.println(CandidatoCampoSigla.getItemAt(CandidatoCampoSigla.getSelectedIndex()));
-               
-                
-        
+
     }//GEN-LAST:event_CandidatoCampoSiglaActionPerformed
 
     /**
