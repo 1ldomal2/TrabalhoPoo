@@ -45,6 +45,7 @@ public class TelaCentral extends javax.swing.JFrame {
         ListLabelNVotos.setText("");
         ListLabelNomePartido.setText("");
         ListLabelNumeroPartido.setText("");
+        ListLabelSigla.setText("");
         
         //Chama os 3 Resultados
         instancia.Resultado();
