@@ -225,6 +225,9 @@ public class CandidatoDAO extends DAO{
             return Total;
         }
         public Candidato CandidatoIndice(int i){
+            if(i>=Array.size()){
+                return null;
+            }
             return Array.get(i);
         }  
         

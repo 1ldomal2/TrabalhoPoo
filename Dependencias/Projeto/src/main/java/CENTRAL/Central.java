@@ -53,7 +53,11 @@ public class Central {
             //ERRO
             JOptionPane.showMessageDialog(null, "Erro Ao Baixar do Drive,Verifique sua Conexão");
         }
-        nVotos = new int[cDAO.getTotal()];
+        if(cDAO.getTotal()==0){
+             nVotos = new int[1];
+        }else{
+            nVotos = new int[cDAO.getTotal()];
+        }
         //Cria com o numero total de candidatos
 
         //Habilita a Tela
@@ -307,7 +311,7 @@ public class Central {
             return false;
         }
         if (eDAO.ObjectTitulo(CampoTitulo) != null) {
-            JOptionPane.showMessageDialog(null, "Titul ode Eleitor ja foi cadastrado");
+            JOptionPane.showMessageDialog(null, "Titulo de Eleitor ja foi cadastrado");
             return false;
         }
 
@@ -444,17 +448,20 @@ public class Central {
         //Muito Procesasmento Desnecessário porem não estou usando alocamento dinamico
         int maior = 0;// nVotos[0];
         int qtdRepeticoes = 0;
+        
         for (int i = 0; i < nVotos.length; i++) {//Começa da segunda posição para evitar erro na qtd de repetição
-            if(cDAO.CandidatoIndice(i).getSigla().equals(Estados.valueOf(Sigla).getSigla())){//verifica se é do mesmo estado
-                if (nVotos[i] >= maior) {
-                    if (nVotos[i] > maior) {
-                        maior = nVotos[i];
-                        qtdRepeticoes = 0;
-                    } else {
-                        qtdRepeticoes++;
+            if(cDAO.CandidatoIndice(i)!=null){
+                if(cDAO.CandidatoIndice(i).getSigla().equals(Estados.valueOf(Sigla).getSigla())){//verifica se é do mesmo estado
+                    if (nVotos[i] >= maior) {
+                        if (nVotos[i] > maior) {
+                            maior = nVotos[i];
+                            qtdRepeticoes = 0;
+                        } else {
+                            qtdRepeticoes++;
+                        }
                     }
-                }
-             }
+                 }
+            }
         }
         if(maior==0){//Significa que o vetor de votos está vazio
             return null;

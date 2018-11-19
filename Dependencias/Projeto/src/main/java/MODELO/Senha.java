@@ -74,14 +74,14 @@ public class Senha {
 			while(arq.ready()){//Le Arquivo
 				conteudoArq+=lerArq.readLine();  //Concatena todo o arquivo é uma so string      	
 			}
-		} catch (IOException e){e.printStackTrace();}
+		} catch (IOException e){e.printStackTrace();System.out.println("Erro ao ler Arquivo");}
         arq.close();//Fecha Arquivo
         this.senha=conteudoArq;//transfere da variavel de escopo local para uma variavel persistente
         
 		try {
 			setHash();
 			System.out.println("Gerando Senha");
-		} catch (NoSuchAlgorithmException e) {e.printStackTrace();}
+		} catch (NoSuchAlgorithmException e) {e.printStackTrace();System.out.println("Erro ao gerar Senha");}
 	}
 
 	/**
