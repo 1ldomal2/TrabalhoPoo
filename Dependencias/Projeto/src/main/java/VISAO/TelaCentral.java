@@ -8,6 +8,8 @@ import CENTRAL.Central;
 import MODELO.*;
 import DAO.*;
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -123,6 +125,7 @@ public class TelaCentral extends javax.swing.JFrame {
         EleitorCampoUrna = new javax.swing.JTextField();
         Eleitor = new javax.swing.JLabel();
         Carregar = new javax.swing.JToggleButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         PanelCandidato = new javax.swing.JLayeredPane();
         CandidatoButaoCriar1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -230,6 +233,13 @@ public class TelaCentral extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         PanelEleitor.setLayer(EleitorButaoCriar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         PanelEleitor.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         PanelEleitor.setLayer(EleitorCampoNome, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -241,6 +251,7 @@ public class TelaCentral extends javax.swing.JFrame {
         PanelEleitor.setLayer(EleitorCampoUrna, javax.swing.JLayeredPane.DEFAULT_LAYER);
         PanelEleitor.setLayer(Eleitor, javax.swing.JLayeredPane.DEFAULT_LAYER);
         PanelEleitor.setLayer(Carregar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        PanelEleitor.setLayer(jComboBox1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout PanelEleitorLayout = new javax.swing.GroupLayout(PanelEleitor);
         PanelEleitor.setLayout(PanelEleitorLayout);
@@ -254,15 +265,18 @@ public class TelaCentral extends javax.swing.JFrame {
                         .addGroup(PanelEleitorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(EleitorCampoNome)
                             .addComponent(jLabel3)
-                            .addComponent(EleitorCampoTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                            .addComponent(EleitorCampoTitulo)
                             .addComponent(jLabel6)
-                            .addComponent(EleitorCampoUrna, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                            .addComponent(EleitorCampoUrna)
                             .addComponent(jLabel5)
-                            .addComponent(EleitorCampoCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
-                            .addComponent(Eleitor, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(EleitorCampoCPF)
+                            .addGroup(PanelEleitorLayout.createSequentialGroup()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Eleitor, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(118, 118, 118)
                         .addComponent(Carregar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelEleitorLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(EleitorButaoCriar, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -292,8 +306,10 @@ public class TelaCentral extends javax.swing.JFrame {
                         .addComponent(EleitorCampoUrna, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(Carregar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(Eleitor, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addGroup(PanelEleitorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Eleitor, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(454, Short.MAX_VALUE))
         );
 
         Panel.addTab("Eleitor", PanelEleitor);
@@ -401,7 +417,7 @@ public class TelaCentral extends javax.swing.JFrame {
                 .addComponent(CandidatoCampoSigla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Candidato, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap(405, Short.MAX_VALUE))
         );
 
         Panel.addTab("Candidato", PanelCandidato);
@@ -468,7 +484,7 @@ public class TelaCentral extends javax.swing.JFrame {
                 .addComponent(PartidoCampoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(Partido, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(255, Short.MAX_VALUE))
+                .addContainerGap(566, Short.MAX_VALUE))
         );
 
         Panel.addTab("Partido", PanelPartido);
@@ -508,7 +524,7 @@ public class TelaCentral extends javax.swing.JFrame {
         );
         PanelVotosLayout.setVerticalGroup(
             PanelVotosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
         );
 
         Panel.addTab("Tabela de Votos", PanelVotos);
@@ -568,7 +584,7 @@ public class TelaCentral extends javax.swing.JFrame {
         );
         PanelResultadoLayout.setVerticalGroup(
             PanelResultadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 830, Short.MAX_VALUE)
             .addGroup(PanelResultadoLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(ListLabelNome)
@@ -622,7 +638,7 @@ public class TelaCentral extends javax.swing.JFrame {
                 .addGap(99, 99, 99)
                 .addComponent(resultadoTxt)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -636,7 +652,7 @@ public class TelaCentral extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Panel)
+            .addComponent(Panel, javax.swing.GroupLayout.DEFAULT_SIZE, 873, Short.MAX_VALUE)
         );
 
         pack();
@@ -815,7 +831,14 @@ public class TelaCentral extends javax.swing.JFrame {
     }//GEN-LAST:event_EleitorButaoCriarActionPerformed
 
     private void PanelStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_PanelStateChanged
-
+        jComboBox1.removeAllItems();
+        
+        List<Estados> list = Arrays.asList(Estados.values());
+        for (int i = 0; i < list.size(); i++){
+            String Sigla=list.get(i).name();
+             jComboBox1.addItem(Estados.valueOf(Sigla).getSigla());
+        }
+        
       
     }//GEN-LAST:event_PanelStateChanged
 
@@ -837,6 +860,10 @@ public class TelaCentral extends javax.swing.JFrame {
             VencedorTxt.setText("\n"+vencedor.getNome());
         }      
     }//GEN-LAST:event_PanelVencedorComponentShown
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -908,6 +935,7 @@ public class TelaCentral extends javax.swing.JFrame {
     private javax.swing.JTextField PartidoCampoNumero;
     private javax.swing.JTable Tabela;
     private javax.swing.JTextArea VencedorTxt;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
