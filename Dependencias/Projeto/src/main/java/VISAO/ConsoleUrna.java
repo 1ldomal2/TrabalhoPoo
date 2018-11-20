@@ -4,6 +4,7 @@ import DAO.CandidatoDAO;
 import DAO.VotoDAO;
 import MODELO.Candidato;
 import MODELO.Eleitor;
+import MODELO.Estados;
 import URNA.Urna;
 import javax.swing.JOptionPane;
 
@@ -56,6 +57,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         ApagarNumero = new javax.swing.JButton();
         BotaoBranco = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -166,7 +168,7 @@ public class ConsoleUrna extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Nome Partido");
+        jLabel1.setText("Ambito");
 
         jLabel2.setText("Numero Partido");
 
@@ -186,6 +188,8 @@ public class ConsoleUrna extends javax.swing.JFrame {
                 BotaoBrancoActionPerformed(evt);
             }
         });
+
+        jLabel4.setText("Nome Partido");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,7 +236,8 @@ public class ConsoleUrna extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(54, 54, 54))))
         );
 
@@ -255,16 +260,21 @@ public class ConsoleUrna extends javax.swing.JFrame {
                     .addComponent(jButton5)
                     .addComponent(jButton6)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton7)
+                            .addComponent(jButton8)
+                            .addComponent(jButton9)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton0, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(BotaoBranco, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BotaoBranco, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Limpar)
@@ -284,18 +294,26 @@ public class ConsoleUrna extends javax.swing.JFrame {
                         
 			Candidato cand = instancia.ProcuraCandidato(CampoCandidato.getText());
 			if (cand == null) {// Nao há nimguem com esse numero
+                                jLabel4.setText("Ambito");
 				jLabel3.setText("Nome Candidato");
 				jLabel2.setText("Numero Partido");
 				jLabel1.setText("Nome Partido");
 				cand = null;
 				return null;
 			} else {
+                                if(Estados.valueOf(cand.getSigla()).getCod()==0){
+                                    jLabel4.setText("Presidente");
+                                }else{
+                                    jLabel4.setText("Deputado do "+cand.getSigla());
+                                }
+                                
 				jLabel3.setText(cand.getNome());
 				jLabel2.setText("" + cand.getPartido().getNumero());
 				jLabel1.setText(cand.getPartido().getNOME());
 				return cand;
 			}
 		} else {
+                        jLabel4.setText("Ambito");
 			jLabel3.setText("Nome Candidato");
 			jLabel2.setText("Numero Partido");
 			jLabel1.setText("Nome Partido");
@@ -449,17 +467,37 @@ public class ConsoleUrna extends javax.swing.JFrame {
 		Confirma.setEnabled(true);
 		Candidato cand = MostraCandidato();
 		if(cand != null) {
-			System.out.println("Voto Valido");
-			instancia.Votar(User, cand, nUrna);
-                        instancia.Send();
+			
+                        if(cand.getSigla().equals(Estados.BR.getSigla())){//Candidato presidente
+                            if(instancia.isPresidente()){
+                                JOptionPane.showMessageDialog(null, "O voto para presidente ja foi contabilizado, agora vote em um Deputado");
+                            }else{
+                                System.out.println("Voto Valido");
+                                instancia.Votar(User, cand, nUrna);
+                                instancia.Send();
+                                Limpar.doClick();
+                            }
+                        }else{
+                            if(instancia.isDeputado()){
+                                JOptionPane.showMessageDialog(null, "O voto para deputado ja foi contabilizado, agora vote em um presidente");
+                            }else{
+                                System.out.println("Voto Valido");
+                                instancia.Votar(User, cand, nUrna);
+                                instancia.Send();
+                                Limpar.doClick();                               
+                            }
+                        }
+                       
 		}else {//Voto Nulo
 			System.out.println("Voto Invalido");
                         JOptionPane.showMessageDialog(null, "Voto invalido logo não sera contabilizado");
                         
 		}
-                instancia.Deslogar();
-                new TelaLogin(instancia).setVisible(true);
-		this.dispose();
+                if(instancia.isDeputado() && instancia.isPresidente()){
+                    instancia.Deslogar();
+                    new TelaLogin(instancia).setVisible(true);
+                    this.dispose();
+                }
 	}// GEN-LAST:event_ConfirmaActionPerformed
 
 	private void CampoCandidatoMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_CampoCandidatoMouseClicked
@@ -543,5 +581,6 @@ public class ConsoleUrna extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

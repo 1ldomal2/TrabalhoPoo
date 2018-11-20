@@ -10,6 +10,7 @@ import JSON.JSONObject;
 import MODELO.Senha;
 import MODELO.Candidato;
 import MODELO.Eleitor;
+import MODELO.Estados;
 import com.google.api.services.drive.Drive;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -29,7 +30,19 @@ public class Urna {
     private boolean Logado = false;
     private boolean TelaVisivel = false;
     private Eleitor User = null;
+    //Evitar duplicidade de candidato
+    private boolean presidente=false;
 
+    public boolean isPresidente() {
+        return presidente;
+    }
+
+    public boolean isDeputado() {
+        return deputado;
+    }
+    
+    private boolean deputado=false;
+            
     public boolean getLogado() {
         return this.Logado;
     }
@@ -215,6 +228,23 @@ public class Urna {
             Deslogar();
             return false;
         }
+        //Verifica se é possivel votar neste tipo decandidato
+        if(candidato.getSigla().equals(Estados.BR.getSigla())){
+            if(this.presidente){
+                System.out.println("Ja foi votado para presidente");
+                return false;
+            }else{
+                this.presidente=true;
+            }
+        }else{
+             if(this.deputado){
+                System.out.println("Ja foi votado para deputado");
+                return false;
+            }else{
+                this.deputado=true;
+            }
+        }
+        
         try{
             this.ArrayVoto.CriarVoto(User, candidato, nUrna);//Criou o voto e armazenou no Array da urna
             try{ 

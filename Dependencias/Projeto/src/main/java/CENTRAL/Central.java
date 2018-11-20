@@ -192,7 +192,7 @@ public class Central {
             return false;
         } else {
             if (cDAO.ObjectCpf(CampoCPF) != null) {
-                JOptionPane.showMessageDialog(null, CampoNumeroCandidato + " CPF ja foi cadastrado");
+                JOptionPane.showMessageDialog(null, CampoCPF + " CPF ja foi cadastrado");
                 return false;
             }
         }

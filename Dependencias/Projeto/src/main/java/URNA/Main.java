@@ -14,7 +14,7 @@ public class Main {
 		//Cria tela de Login
                 TelaLogin ins=new TelaLogin(instancia);
                
-                /*/Não funciona... //Tem que benzer
+                
                 while(true){
                     if(ins!=null){
                         if(ins.getUser()==null && ins.getTelaVisivel()==false && ins.getLogado()==false){
@@ -26,7 +26,7 @@ public class Main {
                         System.out.println("Esperando Login");
                         ins=new TelaLogin(instancia);
                     }
-                }*/
+                }
 	}
 }
 
